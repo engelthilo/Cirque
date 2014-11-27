@@ -39,7 +39,8 @@ public class DBConnect {
         HashMap<Integer, String> movies = new HashMap<Integer, String>();
         try {
             st = getCon().createStatement();
-            String query = "SELECT * FROM movies";
+            String query = "SELECT * FROM movies ORDER by name asc";
+
             rs = st.executeQuery(query);
             while(rs.next()) {
                 int id = rs.getInt("id");
