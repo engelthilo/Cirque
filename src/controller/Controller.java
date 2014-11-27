@@ -57,6 +57,7 @@ public class Controller {
                 }
             });
         }
+
     }
 
     @FXML
@@ -106,3 +107,4 @@ public class Controller {
     }
 
 }
+
