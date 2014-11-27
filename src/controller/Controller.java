@@ -45,6 +45,7 @@ public class Controller {
     @FXML
     private void getMovies() {
         HashMap<Integer, String> curMovies = new HashMap(db.getMovies());
+
         for(Map.Entry<Integer, String> movie : curMovies.entrySet()) {
             final Button button = new Button(movie.getValue());
             showsVBox.getChildren().add(button);
@@ -57,6 +58,7 @@ public class Controller {
                 }
             });
         }
+
     }
 
     @FXML
