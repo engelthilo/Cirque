@@ -8,10 +8,7 @@ import javafx.scene.layout.*;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Controller {
 
@@ -47,7 +44,7 @@ public class Controller {
 
     @FXML
     private void getMovies() {
-        HashMap<Integer, String> curMovies = new HashMap(db.getMovies());
+        LinkedHashMap<Integer, String> curMovies = new LinkedHashMap(db.getMovies());
 
         for(Map.Entry<Integer, String> movie : curMovies.entrySet()) {
             final Button button = new Button(movie.getValue());
@@ -70,12 +67,13 @@ public class Controller {
         upper_schedule.getChildren().clear();
 
         //ArrayList<Timestamp> schedule = new ArrayList<Timestamp>(db.getMovieSchedule(movieId));
-        HashMap<Integer, Timestamp> schedule = new HashMap(db.getMovieSchedule(movieId));
+        LinkedHashMap<Integer, Timestamp> schedule = new LinkedHashMap(db.getMovieSchedule(movieId));
 
         Timestamp[][] array = new Timestamp[14][6];
         int i = -1;
         int j = 0;
         String lastShow = "";
+
         for(Map.Entry<Integer, Timestamp> show : schedule.entrySet()) {
             String newShow = new SimpleDateFormat("dd/MM").format(show.getValue());
             if(!newShow.equals(lastShow)) {
@@ -90,19 +88,11 @@ public class Controller {
             lastShow = newShow;
         }
 
-        for(i = 0; i < 6; i++) {
-            //System.out.println(array[0][i]);
-        }
         System.out.println();
         for(i = 0; i < 14; i++) {
             // her skal oprettes ny container til en ny dag
 
-            for (j = 0; j < 6; j++) {
-                System.out.println(array[i][j]);
-            }
-
-
-            /*if(array[i][0] != null) {
+            if(array[i][0] != null) {
                 TitledPane tp = new TitledPane();
                 tp.setText(new SimpleDateFormat("dd/MM").format(array[i][0]));
                 VBox vb = new VBox();
@@ -123,7 +113,7 @@ public class Controller {
                 }
                 tp.setContent(vb);
                 upper_schedule.getChildren().add(tp);
-            }*/
+            }
         }
 
     }

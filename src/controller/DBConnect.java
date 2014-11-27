@@ -3,6 +3,7 @@ package controller;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Created by frederik on 25/11/14.
@@ -35,8 +36,8 @@ public class DBConnect {
         return con;
     }
 
-    public HashMap<Integer, String> getMovies() {
-        HashMap<Integer, String> movies = new HashMap<Integer, String>();
+    public LinkedHashMap<Integer, String> getMovies() {
+        LinkedHashMap<Integer, String> movies = new LinkedHashMap<Integer, String>();
         try {
             st = getCon().createStatement();
 
@@ -54,8 +55,8 @@ public class DBConnect {
         return movies;
     }
 
-    public HashMap<Integer, Timestamp> getMovieSchedule(int movieId) {
-        HashMap<Integer, Timestamp> times = new HashMap<Integer, Timestamp>();
+    public LinkedHashMap<Integer, Timestamp> getMovieSchedule(int movieId) {
+        LinkedHashMap<Integer, Timestamp> times = new LinkedHashMap<Integer, Timestamp>();
         try {
             st = getCon().createStatement();
             String query = "SELECT * FROM shows WHERE movie_id=" + movieId + " ORDER BY time ASC";
