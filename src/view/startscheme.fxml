@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -28,7 +30,7 @@
                            </children></AnchorPane>
                       <AnchorPane fx:id="singleShowContainer" minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="295.0">
                            <children>
-                              <VBox layoutX="-7.0" prefHeight="668.0" prefWidth="699.0">
+                              <VBox layoutX="-7.0" layoutY="52.0" prefHeight="616.0" prefWidth="699.0">
                                  <children>
                                     <HBox fx:id="upper_schedule" alignment="CENTER" prefHeight="334.0" prefWidth="699.0" spacing="20.0">
                                        <VBox.margin>
@@ -37,6 +39,11 @@
                                     <HBox fx:id="lower_schedule" prefHeight="334.0" prefWidth="699.0" />
                                  </children>
                               </VBox>
+                              <Label fx:id="scheduleHeader" alignment="CENTER" layoutX="3.0" layoutY="3.0" prefHeight="49.0" prefWidth="693.0" text="Klik på en film til venstre for at vise tidspunkter">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
                            </children></AnchorPane>
                     </items>
                   </SplitPane>
@@ -46,13 +53,35 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Pane layoutX="21.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="959.0">
+                        <Pane layoutX="21.0" layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="959.0">
                            <children>
-                              <Label fx:id="movieNameLabel" layoutX="44.0" layoutY="24.0" prefHeight="25.0" prefWidth="402.0" text="movieNameLabel" />
-                              <Pane fx:id="scenePane" layoutX="40.0" layoutY="68.0" prefHeight="450.0" prefWidth="879.0" />
-                              <TextField fx:id="indPut" layoutX="44.0" layoutY="536.0" />
-                              <Button fx:id="makeResevation" layoutX="803.0" layoutY="536.0" mnemonicParsing="false" text="makeResevation" />
-                              <Label fx:id="movieTimeLabel" alignment="CENTER_RIGHT" layoutX="794.0" layoutY="24.0" prefHeight="25.0" prefWidth="125.0" text="movieTimeLabel" />
+                              <Label fx:id="movieNameLabel" layoutX="40.0" layoutY="27.0" prefHeight="46.0" prefWidth="443.0" text="movieNameLabel" underline="true">
+                                 <font>
+                                    <Font name="System Bold" size="30.0" />
+                                 </font></Label>
+                              <Pane fx:id="scenePane" layoutX="40.0" layoutY="68.0" prefHeight="521.0" prefWidth="879.0" style="-fx-background-color: #eeeeee; -fx-border-color: #cccccc;">
+                                 <children>
+                                    <Label layoutX="417.0" layoutY="6.0" text="Lærred">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children></Pane>
+                              <TextField fx:id="indPut" alignment="CENTER" layoutX="127.0" layoutY="601.0" prefHeight="26.0" prefWidth="40.0" text="1" />
+                              <Button fx:id="makeReservation" layoutX="790.0" layoutY="601.0" mnemonicParsing="false" style="-fx-background-color: #66BB6A;" text="makeReservation">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Button>
+                              <Label fx:id="movieTimeLabel" alignment="CENTER_RIGHT" layoutX="623.0" layoutY="36.0" prefHeight="25.0" prefWidth="296.0" text="movieTimeLabel">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Label>
+                              <Label layoutX="40.0" layoutY="606.0" text="Antal sæder:" />
+                              <Label fx:id="cinemaNameLabel" alignment="CENTER" layoutX="395.0" layoutY="603.0" prefHeight="16.0" prefWidth="176.0" text="cinemaNameLabel">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </Pane>
                      </children></AnchorPane>

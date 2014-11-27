@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import model.DBConnect;
+import model.buildHolder;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -14,13 +15,7 @@ import java.util.*;
 public class Controller {
 
     @FXML
-    private Pane pane1;
-
-    @FXML
     private TabPane tabPane;
-
-    @FXML
-    private SplitPane showPane;
 
     @FXML
     private VBox showsVBox;
@@ -33,6 +28,15 @@ public class Controller {
 
     @FXML
     private Label movieNameLabel;
+
+    @FXML
+    private Label scheduleHeader;
+
+    @FXML
+    private Label movieTimeLabel;
+
+    @FXML
+    private Label cinemaNameLabel;
 
     private DBConnect db;
 
@@ -57,6 +61,7 @@ public class Controller {
             button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
+                    scheduleHeader.setText("Viser forestillinger for filmen: " + movie.getValue());
                     getMovieSchedule(movie.getKey());
                 }
             });
@@ -153,8 +158,10 @@ public class Controller {
     private void buildReservationScene(int showId) {
 
         //dbcall så vi kan få information om forestillingen (hvor den vises, filmtitel osv.)
-
-        movieNameLabel.setText("Test");
+        buildHolder bh = db.getBuildSceneInfo(showId);
+        movieNameLabel.setText(bh.getMovieName());
+        movieTimeLabel.setText("Tidspunkt: " + new SimpleDateFormat("dd/MM HH:mm").format(bh.getTime()));
+        cinemaNameLabel.setText(bh.getCinemaName());
         tabPane.getSelectionModel().select(1);
     }
 
