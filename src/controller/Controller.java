@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import model.DBConnect;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -30,6 +31,9 @@ public class Controller {
     @FXML
     private HBox lower_schedule;
 
+    @FXML
+    private Label movieNameLabel;
+
     private DBConnect db;
 
     public Controller() {
@@ -54,8 +58,6 @@ public class Controller {
                 @Override
                 public void handle(MouseEvent event) {
                     getMovieSchedule(movie.getKey());
-                    System.out.println("MovieID: " + movie.getKey());
-                    System.out.println("MovieName: " + movie.getValue());
                 }
             });
         }
@@ -66,10 +68,10 @@ public class Controller {
     private void getMovieSchedule(int movieId) {
         upper_schedule.getChildren().clear();
 
-        //ArrayList<Timestamp> schedule = new ArrayList<Timestamp>(db.getMovieSchedule(movieId));
         LinkedHashMap<Integer, Timestamp> schedule = new LinkedHashMap(db.getMovieSchedule(movieId));
 
-        Timestamp[][] array = new Timestamp[14][6];
+        Timestamp[][] times = new Timestamp[14][6];
+        int[][] showIds = new int[14][6];
         int i = -1;
         int j = 0;
         String lastShow = "";
@@ -79,33 +81,37 @@ public class Controller {
             if(!newShow.equals(lastShow)) {
                 i++;
                 j = 0;
-                array[i][j] = show.getValue();
+                times[i][j] = show.getValue();
+                showIds[i][j] = show.getKey();
                 j++;
             } else {
-                array[i][j] = show.getValue();
+                times[i][j] = show.getValue();
+                showIds[i][j] = show.getKey();
                 j++;
             }
             lastShow = newShow;
         }
 
-        System.out.println();
         for(i = 0; i < 14; i++) {
             // her skal oprettes ny container til en ny dag
 
-            if(array[i][0] != null) {
+            if((times[i][0] != null) && (i<7)) {
                 TitledPane tp = new TitledPane();
-                tp.setText(new SimpleDateFormat("dd/MM").format(array[i][0]));
+                tp.setText(new SimpleDateFormat("dd/MM").format(times[i][0]));
                 VBox vb = new VBox();
+                vb.setSpacing(15);
                 for (j = 0; j < 6; j++) {
                     // her oprettes de individuelle tider for filmen den pågældende dag
 
-                    if (array[i][j] != null) {
-                        System.out.println(array[i][j]);
-                        final Button button = new Button(new SimpleDateFormat("HH:mm").format(array[i][j]));
+                    if (times[i][j] != null) {
+                        final int showId = showIds[i][j];
+                        final Button button = new Button(new SimpleDateFormat("HH:mm").format(times[i][j]));
+                        button.setPrefWidth(100); //sætter størrelse på tid-knapperne
+                        button.setPadding(new Insets(15, 15, 15, 15));
                         button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
-                                tabPane.getSelectionModel().select(1);
+                                buildReservationScene(showId);
                             }
                         });
                         vb.getChildren().add(button);
@@ -114,8 +120,42 @@ public class Controller {
                 tp.setContent(vb);
                 upper_schedule.getChildren().add(tp);
             }
+            if((times[i][0] != null) && (i>=7)) {
+                TitledPane tp = new TitledPane();
+                tp.setText(new SimpleDateFormat("dd/MM").format(times[i][0]));
+                VBox vb = new VBox();
+                vb.setSpacing(15);
+                for (j = 0; j < 6; j++) {
+                    // her oprettes de individuelle tider for filmen den pågældende dag
+
+                    if (times[i][j] != null) {
+                        final int showId = showIds[i][j];
+                        final Button button = new Button(new SimpleDateFormat("HH:mm").format(times[i][j]));
+                        button.setPrefWidth(100); //sætter størrelse på tid-knapperne
+                        button.setPadding(new Insets(15, 15, 15, 15));
+                        button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                buildReservationScene(showId);
+                            }
+                        });
+                        vb.getChildren().add(button);
+                    }
+                }
+                tp.setContent(vb);
+                lower_schedule.getChildren().add(tp);
+            }
         }
 
+    }
+
+    @FXML
+    private void buildReservationScene(int showId) {
+
+        //dbcall så vi kan få information om forestillingen (hvor den vises, filmtitel osv.)
+
+        movieNameLabel.setText("Test");
+        tabPane.getSelectionModel().select(1);
     }
 
 }
