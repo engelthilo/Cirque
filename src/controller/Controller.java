@@ -73,25 +73,33 @@ public class Controller {
         int i = -1;
         int j = 0;
         String lastShow = "";
-        for(Map.Entry<Integer, Timestamp> time : schedule.entrySet()) {
-            String newShow = new SimpleDateFormat("dd/MM").format(time.getValue());
+        for(Map.Entry<Integer, Timestamp> show : schedule.entrySet()) {
+            String newShow = new SimpleDateFormat("dd/MM").format(show.getValue());
             if(!newShow.equals(lastShow)) {
-                j = 0;
                 i++;
-                array[i][j] = time.getValue();
-                System.out.println("array[" + i + "][" + j + "] = " + newShow);
+                j = 0;
+                array[i][j] = show.getValue();
                 j++;
             } else {
-                array[i][j] = time.getValue();
-                System.out.println("array[" + i + "][" + j + "] = " + newShow);
+                array[i][j] = show.getValue();
                 j++;
             }
             lastShow = newShow;
         }
 
+        for(i = 0; i < 6; i++) {
+            //System.out.println(array[0][i]);
+        }
+        System.out.println();
         for(i = 0; i < 14; i++) {
             // her skal oprettes ny container til en ny dag
-            if(array[i][0] != null) {
+
+            for (j = 0; j < 6; j++) {
+                System.out.println(array[i][j]);
+            }
+
+
+            /*if(array[i][0] != null) {
                 TitledPane tp = new TitledPane();
                 tp.setText(new SimpleDateFormat("dd/MM").format(array[i][0]));
                 VBox vb = new VBox();
@@ -112,7 +120,7 @@ public class Controller {
                 }
                 tp.setContent(vb);
                 upper_schedule.getChildren().add(tp);
-            }
+            }*/
         }
 
     }

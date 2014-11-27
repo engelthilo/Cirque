@@ -39,7 +39,7 @@ public class DBConnect {
         HashMap<Integer, String> movies = new HashMap<Integer, String>();
         try {
             st = getCon().createStatement();
-            String query = "SELECT * FROM movies";
+            String query = "SELECT * FROM movies ORDER BY name ASC";
             rs = st.executeQuery(query);
             while(rs.next()) {
                 int id = rs.getInt("id");
@@ -56,7 +56,7 @@ public class DBConnect {
         HashMap<Integer, Timestamp> times = new HashMap<Integer, Timestamp>();
         try {
             st = getCon().createStatement();
-            String query = "SELECT * FROM shows WHERE movie_id = " + movieId + " ORDER BY time ASC";
+            String query = "SELECT * FROM shows WHERE movie_id=" + movieId + " ORDER BY time ASC";
             rs = st.executeQuery(query);
             while(rs.next()) {
                 int id = rs.getInt("id");
