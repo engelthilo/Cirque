@@ -1,0 +1,98 @@
+body{
+	background: #d8d9c4;
+}
+
+select{
+	margin-top: 5px;
+	height: 30px;
+}
+
+.container{
+	width: 904px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.navigation{
+	width: 904px;
+	height: 80px;
+	background: #b5b5b5;
+	margin: 0 auto;
+}
+.main{
+	width: 900px;
+	margin: 0 auto;
+	height:700px;
+	background: #695e3f;
+	border: 2px solid;
+
+}
+
+.selectnavigation{
+	width: 900px;
+	height: 40px;
+	background: #fff;
+	margin: 0 auto;
+}
+
+	.movie{
+		width: 297px;
+		height: 100%;
+		display:inline-block;
+	}
+
+	.date{
+		width: 295px;
+		height: 100%;
+		display:inline-block;
+		border-left: 1px solid;
+		border-right: 1px solid;
+	}
+
+	.time{
+		width: 297px;
+		height: 100%;
+		display:inline-block;
+	}
+
+.hall{
+	width: 830px;
+	border: 1px solid;
+	height: 513px;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+p#p01 {
+    margin-top: 0px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    width: 806px;
+    height: 10px;
+    margin-left: -5px;
+}
+
+.info{
+	width: 250px;
+	height: 120px;
+	border:1px solid;
+	margin-left: 34px;
+	margin-top: 8px;
+}
+
+p#p02{
+	margin: 5px;
+}
+
+.line1{
+	width: 100px;
+	height: 20px;
+	margin: 5px;
+}
+
+.red{
+	width: 20px;
+	height: 20px;
+	background: #e9152b;
+}
