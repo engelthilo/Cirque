@@ -52,14 +52,16 @@ public class DBConnect {
         return movies;
     }
 
-    public ArrayList<Timestamp> getMovieSchedule(int movieId) {
-        ArrayList<Timestamp> times = new ArrayList<Timestamp>();
+    public HashMap<Integer, Timestamp> getMovieSchedule(int movieId) {
+        HashMap<Integer, Timestamp> times = new HashMap<Integer, Timestamp>();
         try {
             st = getCon().createStatement();
-            String query = "SELECT * FROM shows WHERE movie_id = " + movieId;
+            String query = "SELECT * FROM shows WHERE movie_id = " + movieId + " ORDER BY time ASC";
             rs = st.executeQuery(query);
             while(rs.next()) {
-                times.add(rs.getTimestamp("time"));
+                int id = rs.getInt("id");
+                Timestamp timestamp = rs.getTimestamp("time");
+                times.put(id, timestamp);
             }
 
         } catch (Exception e) {

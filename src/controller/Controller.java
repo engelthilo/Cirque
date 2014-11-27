@@ -19,6 +19,9 @@ public class Controller {
     private Pane pane1;
 
     @FXML
+    private TabPane tabPane;
+
+    @FXML
     private SplitPane showPane;
 
     @FXML
@@ -57,28 +60,29 @@ public class Controller {
                 }
             });
         }
-
     }
 
     @FXML
     private void getMovieSchedule(int movieId) {
         upper_schedule.getChildren().clear();
 
-        ArrayList<Timestamp> schedule = new ArrayList<Timestamp>(db.getMovieSchedule(movieId));
+        //ArrayList<Timestamp> schedule = new ArrayList<Timestamp>(db.getMovieSchedule(movieId));
+        HashMap<Integer, Timestamp> schedule = new HashMap(db.getMovieSchedule(movieId));
+
         Timestamp[][] array = new Timestamp[14][6];
         int i = -1;
         int j = 0;
         String lastShow = "";
-        for (Timestamp time : schedule) {
-            String newShow = new SimpleDateFormat("dd/MM").format(time);
+        for(Map.Entry<Integer, Timestamp> time : schedule.entrySet()) {
+            String newShow = new SimpleDateFormat("dd/MM").format(time.getValue());
             if(!newShow.equals(lastShow)) {
                 j = 0;
                 i++;
-                array[i][j] = time;
+                array[i][j] = time.getValue();
                 System.out.println("array[" + i + "][" + j + "] = " + newShow);
                 j++;
             } else {
-                array[i][j] = time;
+                array[i][j] = time.getValue();
                 System.out.println("array[" + i + "][" + j + "] = " + newShow);
                 j++;
             }
@@ -96,7 +100,14 @@ public class Controller {
 
                     if (array[i][j] != null) {
                         System.out.println(array[i][j]);
-                        vb.getChildren().add(new Button(new SimpleDateFormat("HH:mm").format(array[i][j])));
+                        final Button button = new Button(new SimpleDateFormat("HH:mm").format(array[i][j]));
+                        button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                tabPane.getSelectionModel().select(1);
+                            }
+                        });
+                        vb.getChildren().add(button);
                     }
                 }
                 tp.setContent(vb);
@@ -107,4 +118,3 @@ public class Controller {
     }
 
 }
-

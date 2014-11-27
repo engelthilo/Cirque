@@ -8,9 +8,9 @@
 
 <Pane fx:id="pane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <children>
-      <TabPane prefHeight="700.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" prefHeight="700.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="showTabID" text="Forestillinger">
+          <Tab text="Forestillinger">
                <content>
                   <SplitPane fx:id="showPane" dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="1000.0">
                     <items>
@@ -42,12 +42,12 @@
                   </SplitPane>
                </content>
           </Tab>
-          <Tab fx:id="reservationTabID" text="Reservation">
+          <Tab text="Reservation">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
           </Tab>
-            <Tab fx:id="changeReservationTabID" text="Ret reservation">
+            <Tab text="Ret reservation">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
