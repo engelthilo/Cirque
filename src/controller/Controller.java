@@ -51,6 +51,7 @@ public class Controller {
 
         for(Map.Entry<Integer, String> movie : curMovies.entrySet()) {
             final Button button = new Button(movie.getValue());
+            button.setPrefWidth(200); //sætter størrelse på film-knapperne
             showsVBox.getChildren().add(button);
             button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                 @Override
