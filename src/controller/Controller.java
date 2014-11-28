@@ -57,6 +57,7 @@ public class Controller {
 
     private DBConnect db;
 
+
     public Controller() {
         db = new DBConnect();
     }
@@ -67,10 +68,12 @@ public class Controller {
         getMovies();
     }
 
+
     @FXML
     private void getMovies() {
         LinkedHashMap<Integer, String> curMovies = new LinkedHashMap(db.getMovies());
 
+        //For in loop that finds and creates a button for every movie in the database [[MARK]]
         for(Map.Entry<Integer, String> movie : curMovies.entrySet()) {
             final Button button = new Button(movie.getValue());
             button.setPrefWidth(200); //sætter størrelse på film-knapperne
@@ -80,6 +83,8 @@ public class Controller {
                 public void handle(MouseEvent event) {
                     scheduleHeader.setText("Viser forestillinger for filmen: " + movie.getValue());
                     getMovieSchedule(movie.getKey());
+                    //Calls the method getMovieSchedule that creates new buttons from the database
+                    //with time and date for play
                 }
             });
         }
@@ -88,17 +93,21 @@ public class Controller {
 
     @FXML
     private void getMovieSchedule(int movieId) {
+        //Reset the schedule boxes
         upper_schedule.getChildren().clear();
         lower_schedule.getChildren().clear();
 
         LinkedHashMap<Integer, Timestamp> schedule = new LinkedHashMap(db.getMovieSchedule(movieId));
 
+        //Jeg er lidt i tvivl om hvad der foregår her? Jeg forstår princippet men vil gerne have det forklaret bedre [[MARK]]
         Timestamp[][] times = new Timestamp[14][6];
         int[][] showIds = new int[14][6];
         int i = -1;
         int j = 0;
         String lastShow = "";
 
+        //Runs the schedule for the selected movie through and print out the date for them
+        //Gerne forklar skridtene lidt bedre her [[Mark]]
         for(Map.Entry<Integer, Timestamp> show : schedule.entrySet()) {
             String newShow = new SimpleDateFormat("dd/MM").format(show.getValue());
             if(!newShow.equals(lastShow)) {
