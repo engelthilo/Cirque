@@ -32,11 +32,14 @@
                            <children>
                               <VBox layoutX="-7.0" layoutY="52.0" prefHeight="616.0" prefWidth="699.0">
                                  <children>
-                                    <HBox fx:id="upper_schedule" alignment="CENTER" prefHeight="334.0" prefWidth="699.0" spacing="20.0">
+                                    <HBox fx:id="upper_schedule" alignment="CENTER" prefHeight="310.0" prefWidth="699.0">
                                        <VBox.margin>
-                                          <Insets />
+                                          <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                                        </VBox.margin></HBox>
-                                    <HBox fx:id="lower_schedule" prefHeight="334.0" prefWidth="699.0" />
+                                    <HBox fx:id="lower_schedule" prefHeight="310.0" prefWidth="699.0">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                       </VBox.margin></HBox>
                                  </children>
                               </VBox>
                               <Label fx:id="scheduleHeader" alignment="CENTER" layoutX="3.0" layoutY="3.0" prefHeight="49.0" prefWidth="693.0" text="Klik på en film til venstre for at vise tidspunkter">
@@ -55,17 +58,13 @@
                      <children>
                         <Pane layoutX="21.0" layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="959.0">
                            <children>
-                              <Label fx:id="movieNameLabel" layoutX="40.0" layoutY="27.0" prefHeight="46.0" prefWidth="443.0" text="movieNameLabel" underline="true">
+                              <Label fx:id="movieNameLabel" layoutX="40.0" layoutY="27.0" prefHeight="46.0" prefWidth="443.0" text="movieNameLabel">
                                  <font>
                                     <Font name="System Bold" size="30.0" />
                                  </font></Label>
-                              <Pane fx:id="scenePane" layoutX="40.0" layoutY="68.0" prefHeight="521.0" prefWidth="879.0" style="-fx-background-color: #eeeeee; -fx-border-color: #cccccc;">
+                              <Pane fx:id="scenePane" layoutX="40.0" layoutY="68.0" prefHeight="521.0" prefWidth="879.0" style="-fx-background-color: #dddddd; -fx-border-color: #666666;">
                                  <children>
-                                    <Label layoutX="417.0" layoutY="6.0" text="Lærred">
-                                       <font>
-                                          <Font name="System Bold" size="13.0" />
-                                       </font>
-                                    </Label>
+                                    <VBox fx:id="sceneVBox" alignment="CENTER" layoutY="2.0" prefHeight="518.0" prefWidth="879.0" />
                                  </children></Pane>
                               <TextField fx:id="indPut" alignment="CENTER" layoutX="738.0" layoutY="602.0" prefHeight="26.0" prefWidth="40.0" text="1" />
                               <Button fx:id="makeReservation" layoutX="790.0" layoutY="601.0" mnemonicParsing="false" style="-fx-background-color: #66BB6A;" text="makeReservation">
@@ -84,6 +83,11 @@
                               </Label>
                               <Label fx:id="numberOfReserved" layoutX="40.0" layoutY="607.0" prefHeight="16.0" prefWidth="244.0" text="numberOfReserved" />
                               <Label fx:id="numberOfTotal" layoutX="40.0" layoutY="630.0" prefHeight="16.0" prefWidth="244.0" text="numberOfTotal" />
+                              <Label layoutX="457.0" layoutY="42.0" text="Lærred">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </Pane>
                      </children></AnchorPane>

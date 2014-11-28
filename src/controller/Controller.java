@@ -2,9 +2,12 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import model.DBConnect;
 import model.buildHolder;
 
@@ -44,6 +47,12 @@ public class Controller {
     @FXML
     private Label numberOfTotal;
 
+    @FXML
+    private Pane scenePane;
+
+    @FXML
+    private VBox sceneVBox;
+
 
     private DBConnect db;
 
@@ -79,6 +88,7 @@ public class Controller {
     @FXML
     private void getMovieSchedule(int movieId) {
         upper_schedule.getChildren().clear();
+        lower_schedule.getChildren().clear();
 
         LinkedHashMap<Integer, Timestamp> schedule = new LinkedHashMap(db.getMovieSchedule(movieId));
 
@@ -119,7 +129,7 @@ public class Controller {
                         final int showId = showIds[i][j];
                         final Button button = new Button(new SimpleDateFormat("HH:mm").format(times[i][j]));
                         button.setPrefWidth(100); //sætter størrelse på tid-knapperne
-                        button.setPadding(new Insets(15, 15, 15, 15));
+                        button.setPadding(new Insets(10, 10, 10, 10));
                         button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
@@ -165,6 +175,7 @@ public class Controller {
     private void buildReservationScene(int showId) {
 
         //dbcall så vi kan få information om forestillingen (hvor den vises, filmtitel osv.)
+        sceneVBox.getChildren().clear();
         buildHolder bh = db.getBuildSceneInfo(showId);
         movieNameLabel.setText(bh.getMovieName());
         movieTimeLabel.setText("Tidspunkt: " + new SimpleDateFormat("dd/MM HH:mm").format(bh.getTime()));
@@ -174,6 +185,27 @@ public class Controller {
         numberOfReserved.setText("Ledige pladser: " + freeSeats);
         numberOfTotal.setText("Pladser i alt: " + totalSeats);
         tabPane.getSelectionModel().select(1);
+
+        int columns = bh.getColumns();
+        int rows = bh.getRows();
+        GridPane gp = new GridPane();
+        gp.setPrefSize(scenePane.getPrefWidth(),scenePane.getPrefHeight());
+        gp.setHgap(5);
+        gp.setVgap(5);
+        gp.setAlignment(Pos.CENTER);
+
+        for(int i = 0; i < columns; i++) {
+
+            for(int j = 0; j < rows; j++) {
+                double width = (scenePane.getWidth()-6*bh.getColumns()-6)/bh.getColumns(); // sets the width of the seat according to the cinema width
+                double height = (scenePane.getHeight()-6*bh.getRows()-6)/bh.getRows(); // sets the height of the seat according to the cinema height
+                Rectangle r = new Rectangle(width,height, Color.GREEN);
+                gp.add(r, i, j);
+            }
+
+        }
+
+        sceneVBox.getChildren().add(gp);
 
         //måske lave et gridpane som vi kan bygge sæderne i?
 
