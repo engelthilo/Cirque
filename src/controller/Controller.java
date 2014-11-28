@@ -192,14 +192,24 @@ public class Controller {
         gp.setPrefSize(scenePane.getPrefWidth(),scenePane.getPrefHeight());
         gp.setHgap(5);
         gp.setVgap(5);
-        gp.setAlignment(Pos.CENTER);
+        gp.setAlignment(Pos.CENTER); // centers the gridpane to the vbox
+        int[] reserved_x = bh.getReserved_x();
+        int[] reserved_y = bh.getReserved_y();
+        for(int i = 1; i < columns+1; i++) {
 
-        for(int i = 0; i < columns; i++) {
-
-            for(int j = 0; j < rows; j++) {
+            for(int j = 1; j < rows+1; j++) {
                 double width = (scenePane.getWidth()-6*bh.getColumns()-6)/bh.getColumns(); // sets the width of the seat according to the cinema width
                 double height = (scenePane.getHeight()-6*bh.getRows()-6)/bh.getRows(); // sets the height of the seat according to the cinema height
-                Rectangle r = new Rectangle(width,height, Color.GREEN);
+                Rectangle r = new Rectangle(width,height);
+                if((reserved_x[i] == 1) && (reserved_y[j-1] == 1)) {
+                    r.setFill(Color.RED);
+                    //r.setStyle("-fx-background-color: #F44336");
+                } else {
+                    r.setFill(Color.GREEN);
+                    //r.setStyle("-fx-background-color: #4CAF50");
+                }
+
+
                 gp.add(r, i, j);
             }
 
