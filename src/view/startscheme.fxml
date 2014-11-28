@@ -67,7 +67,7 @@
                                        </font>
                                     </Label>
                                  </children></Pane>
-                              <TextField fx:id="indPut" alignment="CENTER" layoutX="127.0" layoutY="601.0" prefHeight="26.0" prefWidth="40.0" text="1" />
+                              <TextField fx:id="indPut" alignment="CENTER" layoutX="738.0" layoutY="602.0" prefHeight="26.0" prefWidth="40.0" text="1" />
                               <Button fx:id="makeReservation" layoutX="790.0" layoutY="601.0" mnemonicParsing="false" style="-fx-background-color: #66BB6A;" text="makeReservation">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
@@ -76,12 +76,14 @@
                                  <font>
                                     <Font size="18.0" />
                                  </font></Label>
-                              <Label layoutX="40.0" layoutY="606.0" text="Antal sæder:" />
+                              <Label layoutX="651.0" layoutY="607.0" text="Antal sæder:" />
                               <Label fx:id="cinemaNameLabel" alignment="CENTER" layoutX="395.0" layoutY="603.0" prefHeight="16.0" prefWidth="176.0" text="cinemaNameLabel">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
+                              <Label fx:id="numberOfReserved" layoutX="40.0" layoutY="607.0" prefHeight="16.0" prefWidth="244.0" text="numberOfReserved" />
+                              <Label fx:id="numberOfTotal" layoutX="40.0" layoutY="630.0" prefHeight="16.0" prefWidth="244.0" text="numberOfTotal" />
                            </children>
                         </Pane>
                      </children></AnchorPane>

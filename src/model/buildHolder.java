@@ -14,6 +14,7 @@ public class buildHolder {
     private int[] reserved_x;
     private int[] reserved_y;
     private String cinemaName;
+    private int reservedNumber;
 
     public String getMovieName() {
         return movieName;
@@ -69,5 +70,13 @@ public class buildHolder {
 
     public void setCinemaName(String cinemaName) {
         this.cinemaName = cinemaName;
+    }
+
+    public int getReservedNumber() {
+        return reservedNumber;
+    }
+
+    public void setReservedNumber(int reservedNumber) {
+        this.reservedNumber = reservedNumber;
     }
 }

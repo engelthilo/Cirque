@@ -84,12 +84,15 @@ public class DBConnect {
 
             int[] x = new int[100];
             int[] y = new int[100];
+            int i = 0;
             while(rs.next()) {
                 int seat_x = rs.getInt("seat_x");
                 int seat_y = rs.getInt("seat_y");
                 x[seat_x] = 1; // if seat is reserved the value is 1 else its null
                 y[seat_y] = 1; // if seat is reserved the value is 1 else its null
+                i++;
             }
+            bh.setReservedNumber(i);
             bh.setReserved_x(x); // sets the reserved seats (x-value) to the build object
             bh.setReserved_y(y); // sets the reserved seats (y-value) to the build object
         } catch (Exception e) {

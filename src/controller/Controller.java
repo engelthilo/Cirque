@@ -38,6 +38,13 @@ public class Controller {
     @FXML
     private Label cinemaNameLabel;
 
+    @FXML
+    private Label numberOfReserved;
+
+    @FXML
+    private Label numberOfTotal;
+
+
     private DBConnect db;
 
     public Controller() {
@@ -162,7 +169,14 @@ public class Controller {
         movieNameLabel.setText(bh.getMovieName());
         movieTimeLabel.setText("Tidspunkt: " + new SimpleDateFormat("dd/MM HH:mm").format(bh.getTime()));
         cinemaNameLabel.setText(bh.getCinemaName());
+        int totalSeats = (bh.getColumns() * bh.getRows());
+        int freeSeats = totalSeats - bh.getReservedNumber();
+        numberOfReserved.setText("Ledige pladser: " + freeSeats);
+        numberOfTotal.setText("Pladser i alt: " + totalSeats);
         tabPane.getSelectionModel().select(1);
+
+        //måske lave et gridpane som vi kan bygge sæderne i?
+
     }
 
 }
