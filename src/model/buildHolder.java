@@ -1,10 +1,8 @@
 package model;
 
 import java.sql.Timestamp;
-
-/**
- * Created by frederik on 27/11/14.
- */
+//denne klasse er opbygget af metoder som henter information fra  databassen gennem DBConnect, og returnere
+//de forskellige kolonner mm's værdier til JavaFX skelettet. 
 public class buildHolder {
 
     private String movieName;

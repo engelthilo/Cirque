@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-/**
- * Created by frederik on 25/11/14.
- */
 public class DBConnect {
 
     private Connection con;
@@ -74,7 +71,7 @@ public class DBConnect {
     }
 
     public buildHolder getBuildSceneInfo(int showId) {
-        buildHolder bh = new buildHolder();
+        buildHolder bh = new buildHolder(); //skaber en buildholder - som er det "grafiske"
 
         // first lets get all reserved seats
         try {
