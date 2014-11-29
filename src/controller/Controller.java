@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -71,16 +70,16 @@ public class Controller {
 
     @FXML
     private void getMovies() {
-        LinkedHashMap<Integer, String> curMovies = new LinkedHashMap(db.getMovies()); //Holder en dobbelt - indsættelse: rækkefølge.
+        LinkedHashMap<Integer, String> curMovies = new LinkedHashMap(db.getMovies()); //Holds movieid and moviename (int og string) - LinkedHashMap da rækkefølgen er vigtig (alfabetisk)
 
-        //For in loop that finds and creates a button for every movie in the database [[MARK]]
-        for(Map.Entry<Integer, String> movie : curMovies.entrySet()) { //Loop sætter key og værdi på film - Linkedhasmap
-            final Button button = new Button(movie.getValue()); //Laver en knap med filmværdi
-            button.setPrefWidth(200); //sætter størrelse på film-knapperne
-            showsVBox.getChildren().add(button);  //henter "børn" - dvs knapperne med film
+        //For loop that finds and creates a button for every movie in the database [[MARK]]
+        for(Map.Entry<Integer, String> movie : curMovies.entrySet()) { //Loops through the linkedhasmap på film
+            final Button button = new Button(movie.getValue()); //creates a button with text of the movie
+            button.setPrefWidth(200); //sets the width of the buttons
+            showsVBox.getChildren().add(button);  //gets the actual container of the element that holds the buttons and apply the newly created button
             button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                 @Override
-                public void handle(MouseEvent event) { //når der bliver klikket med musen på en af filmknapperne
+                public void handle(MouseEvent event) { //event when clicked on the created button
                     scheduleHeader.setText("Viser forestillinger for filmen: " + movie.getValue());
                     getMovieSchedule(movie.getKey()); //henter data om shows fra databasen
                     //Calls the method getMovieSchedule that creates new buttons from the database
@@ -92,13 +91,12 @@ public class Controller {
     }
 
     @FXML
-    private void getMovieSchedule(int movieId) { //henter spilletider for film fra databasen via movieID
+    private void getMovieSchedule(int movieId) { //gets times for a given movie from its movie id
         //Reset the schedule boxes
-        upper_schedule.getChildren().clear(); //henter 7 dage (0-6) med tidnpunker ind på upper_scheule
-        lower_schedule.getChildren().clear(); //henter 7 dage (7-13) med tidspunker ind på lower_schedule
+        upper_schedule.getChildren().clear(); //clears the container for elements
+        lower_schedule.getChildren().clear(); //clears the container for elements
 
-        LinkedHashMap<Integer, Timestamp> schedule = new LinkedHashMap(db.getMovieSchedule(movieId));
-        //henter filmspilletiderne mm ind i et linkedhasmap
+        LinkedHashMap<Integer, Timestamp> schedule = new LinkedHashMap(db.getMovieSchedule(movieId)); // sets the times into a linkedhashmap (showid as key (int) and timestamp as value (timestamp)
 
         //Jeg er lidt i tvivl om hvad der foregår her? Jeg forstår princippet men vil gerne have det forklaret bedre [[MARK]]
         Timestamp[][] times = new Timestamp[14][6]; //sætter tiderne fra databsen i rækkefølge efter tid.
