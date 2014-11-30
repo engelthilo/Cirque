@@ -153,7 +153,7 @@ public class Controller {
             }
 
             //samme som oppe over - bare for lower_schedule og dagene fra 7-13
-            if((times[i][0] != null) && (i>=7)) {
+            if((times[i][0] != null) && (i>=7) && (i<14)) {
                 TitledPane tp = new TitledPane();
                 tp.setText(new SimpleDateFormat("dd/MM").format(times[i][0]));
                 VBox vb = new VBox();
@@ -197,27 +197,25 @@ public class Controller {
         numberOfTotal.setText("Pladser i alt: " + totalSeats); //viser antal af sædder i den pågældende sal
         tabPane.getSelectionModel().select(1); //sætter det ind under "fane" nr 2.
 
-        int columns = bh.getColumns(); //henter kolonner i den pågældende sal
-        int rows = bh.getRows(); //henter rækker i den pågældende sal
+        int columns = bh.getColumns(); //henter kolonner/bredden i den pågældende sal
+        int rows = bh.getRows(); //henter rækker/længden i den pågældende sal
         GridPane gp = new GridPane(); //skaber et gridpane som kolonner og rækker kan opbevares i.
-        gp.setPrefSize(scenePane.getPrefWidth(),scenePane.getPrefHeight()); //sætter gridpane til samme str som det scenePane den ligger inden i.
-        gp.setHgap(5); //sætter mellemrum mellem sædderne på horizontalt led
-        gp.setVgap(5); //sætter mellemrum mellem sædderne på vertikalt ved.
+        gp.setPrefSize(scenePane.getWidth()-5,scenePane.getHeight()-10); //sætter gridpane til samme str som det scenePane den ligger inden i.
+        gp.setHgap(6); //sætter mellemrum mellem sædderne på horizontalt led
+        gp.setVgap(6); //sætter mellemrum mellem sædderne på vertikalt ved.
         gp.setAlignment(Pos.CENTER); // centers the gridpane to the vbox
         int[] reserved_x = bh.getReserved_x(); //henter information om reseveret sædder på x's plads.
         int[] reserved_y = bh.getReserved_y(); //henter information om reseveret sædder på y's plads.
         for(int i = 1; i < columns+1; i++) { //laver en forloppe der kører kolonerne igennem
 
             for(int j = 1; j < rows+1; j++) { //forlopp der kører rækkerne igennem
-                double width = (scenePane.getWidth()-6*bh.getColumns()-6)/bh.getColumns(); // sets the width of the seat according to the cinema width
-                double height = (scenePane.getHeight()-6*bh.getRows()-6)/bh.getRows(); // sets the height of the seat according to the cinema height
+                double width = (scenePane.getWidth()-8*bh.getColumns()-8)/bh.getColumns(); // sets the width of the seat according to the cinema width
+                double height = (scenePane.getHeight()-8*bh.getRows()-8)/bh.getRows(); // sets the height of the seat according to the cinema height
                 Rectangle r = new Rectangle(width,height); //laver sædderne som firkanter
                 if((reserved_x[i] == 1) && (reserved_y[j-1] == 1)) { //hvis sædderne er reseveret bliver de røde
-                    r.setFill(Color.RED);
-                    //r.setStyle("-fx-background-color: #F44336");
+                    r.setFill(Color.web("#E53935")); //hvis de er reseveret bliver de røde
                 } else {
-                    r.setFill(Color.GREEN); //hvis de ikke er reseveret bliver de grønne
-                    //r.setStyle("-fx-background-color: #4CAF50");
+                    r.setFill(Color.web("#43A047")); //hvis de ikke er reseveret bliver de grønne
                 }
 
 
@@ -227,6 +225,7 @@ public class Controller {
         }
 
         sceneVBox.getChildren().add(gp); //sætter gridpane ind i sceneVBox
+
 
     }
 

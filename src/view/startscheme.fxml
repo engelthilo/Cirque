@@ -64,7 +64,10 @@
                                  </font></Label>
                               <Pane fx:id="scenePane" layoutX="40.0" layoutY="68.0" prefHeight="521.0" prefWidth="879.0" style="-fx-background-color: #dddddd; -fx-border-color: #666666;">
                                  <children>
-                                    <VBox fx:id="sceneVBox" alignment="CENTER" layoutY="2.0" prefHeight="518.0" prefWidth="879.0" />
+                                    <VBox fx:id="sceneVBox" alignment="CENTER" prefHeight="522.0" prefWidth="879.0">
+                                       <padding>
+                                          <Insets bottom="20.0" left="15.0" right="20.0" top="15.0" />
+                                       </padding></VBox>
                                  </children></Pane>
                               <TextField fx:id="indPut" alignment="CENTER" layoutX="738.0" layoutY="602.0" prefHeight="26.0" prefWidth="40.0" text="1" />
                               <Button fx:id="makeReservation" layoutX="790.0" layoutY="601.0" mnemonicParsing="false" style="-fx-background-color: #66BB6A;" text="makeReservation">
