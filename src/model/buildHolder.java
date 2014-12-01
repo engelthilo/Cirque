@@ -9,8 +9,6 @@ public class buildHolder {
     private Timestamp time;
     private int columns;
     private int rows;
-    private String[] reserved_x;
-    private String[] reserved_y;
     private String cinemaName;
     private int reservedNumber;
     private int showId;
@@ -46,22 +44,6 @@ public class buildHolder {
 
     public void setTime(Timestamp time) {
         this.time = time;
-    }
-
-    public String[] getReserved_x() {
-        return reserved_x;
-    }
-
-    public void setReserved_x(String[] reserved_x) {
-        this.reserved_x = reserved_x;
-    }
-
-    public String[] getReserved_y() {
-        return reserved_y;
-    }
-
-    public void setReserved_y(String[] reserved_y) {
-        this.reserved_y = reserved_y;
     }
 
     public String getCinemaName() {

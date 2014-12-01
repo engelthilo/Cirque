@@ -229,43 +229,22 @@ public class Controller {
                 final Rectangle r = new Rectangle(width,height); //laver sædderne som firkanter
                 int x = i;
                 int y = j;
-                String seatStr = x + ":" + y;
 
-                if(resSeat[i][j] != null) {
-                    if(resSeat[i][j]) {
-                        r.setFill(Color.web("#E53935")); //hvis sæderne er reseveret bliver de røde
+                if(resSeat[i][j] != null) { // if current entity in array isnt null
+                    if(resSeat[i][j]) { // if a seat is reserved we made its boolean true
+                        r.setFill(Color.web("#E53935")); //sets the red color of a reserved seat
                     }
                 } else {
-                    r.setFill(Color.web("#43A047")); //hvis de ikke er reseveret bliver de grønne
+                    r.setFill(Color.web("#43A047")); //sets the green color of a available seat
 
                     // funktion ved klik på ledigt sæde
                     r.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
                             addSeatToOrder(r, x, y);
-                        }
+                        } // function to run when an available seat is clicked
                     });
                 }
-
-
-                /*
-                if(reserved_x[i] != null && reserved_y[j] != null) {
-                    if ((reserved_x[i].contentEquals(seatStr)) || (reserved_y[j].contentEquals(seatStr))) {
-
-                        r.setFill(Color.web("#43A047")); //hvis de ikke er reseveret bliver de grønne
-
-                        // funktion ved klik på ledigt sæde
-                        r.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent event) {
-                                addSeatToOrder(r, x, y);
-                            }
-                        });
-
-                    } else {
-                        r.setFill(Color.web("#E53935")); //hvis sæderne er reseveret bliver de røde
-                    }
-                }*/
 
                 gp.add(r, i, j); //tilføj til gridpane: r= firkanterne, i=fælterne på x-aksen og j= felterne på y-aksen
             }
@@ -281,38 +260,32 @@ public class Controller {
 
         // add to current order
         if(r.getFill().toString().contains("0x43a047ff")) { // if the seat is color code green
-            r.setFill(Color.web("#039BE5"));
-            System.out.println("Seat at: " + x + ":" + y + " is added to order");
-            String seatString = (x + ":" + y);
-            seatsInOrder.add(seatString);
+            r.setFill(Color.web("#039BE5")); // sets color to blue
+            String seatString = (x + ":" + y); // seatString 3:3 etc.
+            seatsInOrder.add(seatString); // adds seatString to array
         } else if(r.getFill().toString().contains("0x039be5ff")) { // if the seat is color code blue
-            r.setFill(Color.web("#43A047"));
-            System.out.println("Seat at: " + x + ":" + y + " is removed from order");
-            String seatString = (x + ":" + y);
-            seatsInOrder.remove(seatString);
+            r.setFill(Color.web("#43A047")); // set color to green
+            String seatString = (x + ":" + y); // seatString 3:3 etc.
+            seatsInOrder.remove(seatString); // removes seatString from array
         }
 
     }
 
     @FXML
     private void makeReservation() throws Exception{
-        System.out.println();
-        System.out.println("Following seats are in the order: ");
-        for(String seat : seatsInOrder) {
-            String[] seatInfo = seat.split(":");
-            System.out.println("x:" + seatInfo[0] + " y:" + seatInfo[1]);
-        }
 
-        if(!customerName.getText().isEmpty() && !customerPhone.getText().isEmpty()) {
-            String name = customerName.getText();
-            String phone = customerPhone.getText();
+        if(!customerName.getText().isEmpty() && !customerPhone.getText().isEmpty() && seatsInOrder.size()>0) { // if customer name and phone has been entered and at least one seat has been chosen
+            String name = customerName.getText(); // gets the name of the customer from the textfield
+            String phone = customerPhone.getText(); // gets the phonenumber of the customer from the textfield
 
+
+            // if a reservation is completely inserted it will return true
             if(db.insertReservation(seatsInOrder, bh.getShowId(), customerName.getText(), customerPhone.getText())) {
                 System.out.println("Bestillingen er gennemført.");
-                seatsInOrder.clear();
-                customerName.clear();
-                customerPhone.clear();
-                buildReservationScene(bh.getShowId());
+                seatsInOrder.clear(); // removes the chosen seats from the array
+                customerName.clear(); // clears the textfield
+                customerPhone.clear(); // clears the textfield
+                buildReservationScene(bh.getShowId()); // builds an updated scene so that the new reservated seats are now available to pick
             } else {
                 System.out.println("Der er sket en fejl - prøv igen!");
             }

@@ -79,23 +79,16 @@ public class DBConnect {
             String query = "SELECT seat_x, seat_y FROM reservationlines, reservations WHERE reservationlines.reservation_id = reservations.id AND reservations.show_id = " + showId;
             rs = st.executeQuery(query);
 
-            String[] x = new String[100];
-            String[] y = new String[100];
             Boolean[][] resSeat = new Boolean[100][100];
             int i = 0;
             while(rs.next()) {
-                int seat_x = rs.getInt("seat_x");
-                int seat_y = rs.getInt("seat_y");
-                resSeat[seat_x][seat_y] = true;
-                String seatString = seat_x + ":" + seat_y;
-                x[seat_x] = seatString; // if seat is reserved the value is 1 else its null
-                y[seat_y] = seatString; // if seat is reserved the value is 1 else its null
+                int seat_x = rs.getInt("seat_x"); //gets the x-value of a reserved seat
+                int seat_y = rs.getInt("seat_y"); // gets the y-value of a reserved seat
+                resSeat[seat_x][seat_y] = true; // like resSeat[3][4] is true if reserved seat: 3:4
                 i++;
             }
-            bh.setReservedNumber(i);
-            bh.setResSeat(resSeat);
-            bh.setReserved_x(x); // sets the reserved seats (x-value) to the build object
-            bh.setReserved_y(y); // sets the reserved seats (y-value) to the build object
+            bh.setReservedNumber(i); // sets the number of reserved seats into the buildholder
+            bh.setResSeat(resSeat); // sets the reserved seat-array into the buildholder (object)
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
@@ -107,11 +100,11 @@ public class DBConnect {
             rs = st.executeQuery(query);
 
             while(rs.next()) {
-                bh.setTime(rs.getTimestamp("time"));
-                bh.setColumns(rs.getInt("columns"));
-                bh.setRows(rs.getInt("rows"));
-                bh.setMovieName(rs.getString("movie_name"));
-                bh.setCinemaName(rs.getString("cinema_name"));
+                bh.setTime(rs.getTimestamp("time")); // gets and sets the time of a given show
+                bh.setColumns(rs.getInt("columns")); // gets and sets the width of the cinema
+                bh.setRows(rs.getInt("rows")); // gets and sets the height of the cinema
+                bh.setMovieName(rs.getString("movie_name")); // gets and sets the moviename of the show
+                bh.setCinemaName(rs.getString("cinema_name")); // gets the cinema name (sal navn)
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
@@ -123,16 +116,18 @@ public class DBConnect {
     public Boolean insertReservation(ArrayList<String> seats, int showId, String customerName, String customerPhone) {
         try {
             st = getCon().createStatement();
+            // simple insert statement where the order details with customer name and phone is inserted with a given showid
             String query = "INSERT INTO reservations (show_id, customer_name, customer_phone) VALUES ('" + showId + "', '" + customerName + "', '" + customerPhone + "')";
             st.executeUpdate(query);
-            rs = st.executeQuery("select last_insert_id() as last_id from reservations");
+            rs = st.executeQuery("select last_insert_id() as last_id from reservations"); // gets the last inserted reservation so that we can bind the seats to that reservation
             String lastid = "";
             if (rs.next()) {
-                lastid = rs.getString(1);
+                lastid = rs.getString(1); // simply gets the last id
             }
 
+            //time to insert the seats of an order - just looping through them and inserting (binded with the latest id in reservations)
             for(String seat : seats) {
-                String[] seatInfo = seat.split(":");
+                String[] seatInfo = seat.split(":"); // here we split the string since it is like 3:3 or 9:17 so that we can get the x-value and the y-value seperated. They are now stored in an array with index 0 being the x-value and index 1 being the y-value
                 query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + lastid + "', '" + seatInfo[0] + "', '" + seatInfo[1] + "')";
                 st.executeUpdate(query);
             }
