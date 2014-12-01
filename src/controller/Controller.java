@@ -20,6 +20,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+
 public class Controller {
 
     @FXML
@@ -82,7 +83,7 @@ public class Controller {
 
 
     @FXML
-    private void getMovies() {
+    protected void getMovies() {
         LinkedHashMap<Integer, String> curMovies = new LinkedHashMap(db.getMovies()); //Holds movieid and moviename (int og string) - LinkedHashMap da rækkefølgen er vigtig (alfabetisk)
 
         //For loop that finds and creates a button for every movie in the database [[MARK]]
@@ -100,7 +101,6 @@ public class Controller {
                 }
             });
         }
-
     }
 
     @FXML
