@@ -9,10 +9,12 @@ public class buildHolder {
     private Timestamp time;
     private int columns;
     private int rows;
-    private int[] reserved_x;
-    private int[] reserved_y;
+    private String[] reserved_x;
+    private String[] reserved_y;
     private String cinemaName;
     private int reservedNumber;
+    private int showId;
+    private Boolean[][] resSeat;
 
     public String getMovieName() {
         return movieName;
@@ -46,19 +48,19 @@ public class buildHolder {
         this.time = time;
     }
 
-    public int[] getReserved_x() {
+    public String[] getReserved_x() {
         return reserved_x;
     }
 
-    public void setReserved_x(int[] reserved_x) {
+    public void setReserved_x(String[] reserved_x) {
         this.reserved_x = reserved_x;
     }
 
-    public int[] getReserved_y() {
+    public String[] getReserved_y() {
         return reserved_y;
     }
 
-    public void setReserved_y(int[] reserved_y) {
+    public void setReserved_y(String[] reserved_y) {
         this.reserved_y = reserved_y;
     }
 
@@ -76,5 +78,21 @@ public class buildHolder {
 
     public void setReservedNumber(int reservedNumber) {
         this.reservedNumber = reservedNumber;
+    }
+
+    public int getShowId() {
+        return showId;
+    }
+
+    public void setShowId(int showId) {
+        this.showId = showId;
+    }
+
+    public Boolean[][] getResSeat() {
+        return resSeat;
+    }
+
+    public void setResSeat(Boolean[][] resSeat) {
+        this.resSeat = resSeat;
     }
 }

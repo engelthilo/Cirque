@@ -1,13 +1,18 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.DBConnect;
 import model.buildHolder;
 
@@ -53,9 +58,17 @@ public class Controller {
     @FXML
     private VBox sceneVBox;
 
+    @FXML
+    private TextField customerName;
+
+    @FXML
+    private TextField customerPhone;
 
     private DBConnect db;
 
+    private ArrayList<String> seatsInOrder;
+
+    private buildHolder bh;
 
     public Controller() {
         db = new DBConnect();
@@ -185,9 +198,11 @@ public class Controller {
     @FXML
     private void buildReservationScene(int showId) { //denne metode bygger reservationScene for den pågældende film
 
+        seatsInOrder = new ArrayList<String>(); // initalizing the arraylist that will contain the seat(s) that has been clicked
+
         //dbcall så vi kan få information om forestillingen (hvor den vises, filmtitel osv.)
         sceneVBox.getChildren().clear(); //henter sædderne ind på sceneVBox - hvad gør clear??
-        buildHolder bh = db.getBuildSceneInfo(showId); //lægger infor om den enkelte films sceneopbygning ind i buildHolder
+        bh = db.getBuildSceneInfo(showId); //lægger infor om den enkelte films sceneopbygning ind i buildHolder
         movieNameLabel.setText(bh.getMovieName()); //sætter navnet på den pågældende film ind på movieNameLabel
         movieTimeLabel.setText("Tidspunkt: " + new SimpleDateFormat("dd/MM HH:mm").format(bh.getTime())); //viser tidspunkt for det show man ahr valgt
         cinemaNameLabel.setText(bh.getCinemaName()); //sætter navn på den pågældende sal
@@ -195,7 +210,6 @@ public class Controller {
         int freeSeats = totalSeats - bh.getReservedNumber(); //regner antal af frie sædder ud.
         numberOfReserved.setText("Ledige pladser: " + freeSeats); //viser antal frie sædder i den pågældende sal
         numberOfTotal.setText("Pladser i alt: " + totalSeats); //viser antal af sædder i den pågældende sal
-        tabPane.getSelectionModel().select(1); //sætter det ind under "fane" nr 2.
 
         int columns = bh.getColumns(); //henter kolonner/bredden i den pågældende sal
         int rows = bh.getRows(); //henter rækker/længden i den pågældende sal
@@ -204,20 +218,54 @@ public class Controller {
         gp.setHgap(6); //sætter mellemrum mellem sædderne på horizontalt led
         gp.setVgap(6); //sætter mellemrum mellem sædderne på vertikalt ved.
         gp.setAlignment(Pos.CENTER); // centers the gridpane to the vbox
-        int[] reserved_x = bh.getReserved_x(); //henter information om reseveret sædder på x's plads.
-        int[] reserved_y = bh.getReserved_y(); //henter information om reseveret sædder på y's plads.
+        String[] reserved_x = bh.getReserved_x(); //henter information om reseveret sædder på x's plads.
+        String[] reserved_y = bh.getReserved_y(); //henter information om reseveret sædder på y's plads.
+        Boolean[][] resSeat = bh.getResSeat();
         for(int i = 1; i < columns+1; i++) { //laver en forloppe der kører kolonerne igennem
 
             for(int j = 1; j < rows+1; j++) { //forlopp der kører rækkerne igennem
                 double width = (scenePane.getWidth()-8*bh.getColumns()-8)/bh.getColumns(); // sets the width of the seat according to the cinema width
                 double height = (scenePane.getHeight()-8*bh.getRows()-8)/bh.getRows(); // sets the height of the seat according to the cinema height
-                Rectangle r = new Rectangle(width,height); //laver sædderne som firkanter
-                if((reserved_x[i] == 1) && (reserved_y[j-1] == 1)) { //hvis sædderne er reseveret bliver de røde
-                    r.setFill(Color.web("#E53935")); //hvis de er reseveret bliver de røde
+                final Rectangle r = new Rectangle(width,height); //laver sædderne som firkanter
+                int x = i;
+                int y = j;
+                String seatStr = x + ":" + y;
+
+                if(resSeat[i][j] != null) {
+                    if(resSeat[i][j]) {
+                        r.setFill(Color.web("#E53935")); //hvis sæderne er reseveret bliver de røde
+                    }
                 } else {
                     r.setFill(Color.web("#43A047")); //hvis de ikke er reseveret bliver de grønne
+
+                    // funktion ved klik på ledigt sæde
+                    r.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            addSeatToOrder(r, x, y);
+                        }
+                    });
                 }
 
+
+                /*
+                if(reserved_x[i] != null && reserved_y[j] != null) {
+                    if ((reserved_x[i].contentEquals(seatStr)) || (reserved_y[j].contentEquals(seatStr))) {
+
+                        r.setFill(Color.web("#43A047")); //hvis de ikke er reseveret bliver de grønne
+
+                        // funktion ved klik på ledigt sæde
+                        r.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                addSeatToOrder(r, x, y);
+                            }
+                        });
+
+                    } else {
+                        r.setFill(Color.web("#E53935")); //hvis sæderne er reseveret bliver de røde
+                    }
+                }*/
 
                 gp.add(r, i, j); //tilføj til gridpane: r= firkanterne, i=fælterne på x-aksen og j= felterne på y-aksen
             }
@@ -225,7 +273,50 @@ public class Controller {
         }
 
         sceneVBox.getChildren().add(gp); //sætter gridpane ind i sceneVBox
+        tabPane.getSelectionModel().select(1); //sætter det ind under "fane" nr 2.
 
+    }
+
+    private void addSeatToOrder(final Rectangle r, int x, int y) {
+
+        // add to current order
+        if(r.getFill().toString().contains("0x43a047ff")) { // if the seat is color code green
+            r.setFill(Color.web("#039BE5"));
+            System.out.println("Seat at: " + x + ":" + y + " is added to order");
+            String seatString = (x + ":" + y);
+            seatsInOrder.add(seatString);
+        } else if(r.getFill().toString().contains("0x039be5ff")) { // if the seat is color code blue
+            r.setFill(Color.web("#43A047"));
+            System.out.println("Seat at: " + x + ":" + y + " is removed from order");
+            String seatString = (x + ":" + y);
+            seatsInOrder.remove(seatString);
+        }
+
+    }
+
+    @FXML
+    private void makeReservation() throws Exception{
+        System.out.println();
+        System.out.println("Following seats are in the order: ");
+        for(String seat : seatsInOrder) {
+            String[] seatInfo = seat.split(":");
+            System.out.println("x:" + seatInfo[0] + " y:" + seatInfo[1]);
+        }
+
+        if(!customerName.getText().isEmpty() && !customerPhone.getText().isEmpty()) {
+            String name = customerName.getText();
+            String phone = customerPhone.getText();
+
+            if(db.insertReservation(seatsInOrder, bh.getShowId(), customerName.getText(), customerPhone.getText())) {
+                System.out.println("Bestillingen er gennemført.");
+                seatsInOrder.clear();
+                customerName.clear();
+                customerPhone.clear();
+                buildReservationScene(bh.getShowId());
+            } else {
+                System.out.println("Der er sket en fejl - prøv igen!");
+            }
+        }
 
     }
 

@@ -69,8 +69,7 @@
                                           <Insets bottom="20.0" left="15.0" right="20.0" top="15.0" />
                                        </padding></VBox>
                                  </children></Pane>
-                              <TextField fx:id="indPut" alignment="CENTER" layoutX="738.0" layoutY="602.0" prefHeight="26.0" prefWidth="40.0" text="1" />
-                              <Button fx:id="makeReservation" layoutX="790.0" layoutY="601.0" mnemonicParsing="false" style="-fx-background-color: #66BB6A;" text="makeReservation">
+                              <Button fx:id="makeReservation" layoutX="771.0" layoutY="597.0" mnemonicParsing="false" onMouseClicked="#makeReservation" prefHeight="52.0" prefWidth="143.0" style="-fx-background-color: #66BB6A;" text="Fuldfør reservation">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font></Button>
@@ -78,7 +77,6 @@
                                  <font>
                                     <Font size="18.0" />
                                  </font></Label>
-                              <Label layoutX="651.0" layoutY="607.0" text="Antal sæder:" />
                               <Label fx:id="cinemaNameLabel" alignment="CENTER" layoutX="395.0" layoutY="603.0" prefHeight="16.0" prefWidth="176.0" text="cinemaNameLabel">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -91,6 +89,8 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
+                              <TextField fx:id="customerName" layoutX="598.0" layoutY="597.0" prefHeight="16.0" promptText="Navn" />
+                              <TextField fx:id="customerPhone" layoutX="598.0" layoutY="624.0" prefHeight="16.0" promptText="Telefonnummer" />
                            </children>
                         </Pane>
                      </children></AnchorPane>

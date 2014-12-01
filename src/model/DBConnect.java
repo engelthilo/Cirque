@@ -79,17 +79,21 @@ public class DBConnect {
             String query = "SELECT seat_x, seat_y FROM reservationlines, reservations WHERE reservationlines.reservation_id = reservations.id AND reservations.show_id = " + showId;
             rs = st.executeQuery(query);
 
-            int[] x = new int[100];
-            int[] y = new int[100];
+            String[] x = new String[100];
+            String[] y = new String[100];
+            Boolean[][] resSeat = new Boolean[100][100];
             int i = 0;
             while(rs.next()) {
                 int seat_x = rs.getInt("seat_x");
                 int seat_y = rs.getInt("seat_y");
-                x[seat_x] = 1; // if seat is reserved the value is 1 else its null
-                y[seat_y] = 1; // if seat is reserved the value is 1 else its null
+                resSeat[seat_x][seat_y] = true;
+                String seatString = seat_x + ":" + seat_y;
+                x[seat_x] = seatString; // if seat is reserved the value is 1 else its null
+                y[seat_y] = seatString; // if seat is reserved the value is 1 else its null
                 i++;
             }
             bh.setReservedNumber(i);
+            bh.setResSeat(resSeat);
             bh.setReserved_x(x); // sets the reserved seats (x-value) to the build object
             bh.setReserved_y(y); // sets the reserved seats (y-value) to the build object
         } catch (Exception e) {
@@ -112,7 +116,33 @@ public class DBConnect {
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
+        bh.setShowId(showId);
         return bh;
+    }
+
+    public Boolean insertReservation(ArrayList<String> seats, int showId, String customerName, String customerPhone) {
+        try {
+            st = getCon().createStatement();
+            String query = "INSERT INTO reservations (show_id, customer_name, customer_phone) VALUES ('" + showId + "', '" + customerName + "', '" + customerPhone + "')";
+            st.executeUpdate(query);
+            rs = st.executeQuery("select last_insert_id() as last_id from reservations");
+            String lastid = "";
+            if (rs.next()) {
+                lastid = rs.getString(1);
+            }
+
+            for(String seat : seats) {
+                String[] seatInfo = seat.split(":");
+                query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + lastid + "', '" + seatInfo[0] + "', '" + seatInfo[1] + "')";
+                st.executeUpdate(query);
+            }
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+            return false;
+        }
     }
 
 }
