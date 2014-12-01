@@ -218,8 +218,6 @@ public class Controller {
         gp.setHgap(6); //sætter mellemrum mellem sædderne på horizontalt led
         gp.setVgap(6); //sætter mellemrum mellem sædderne på vertikalt ved.
         gp.setAlignment(Pos.CENTER); // centers the gridpane to the vbox
-        String[] reserved_x = bh.getReserved_x(); //henter information om reseveret sædder på x's plads.
-        String[] reserved_y = bh.getReserved_y(); //henter information om reseveret sædder på y's plads.
         Boolean[][] resSeat = bh.getResSeat();
         for(int i = 1; i < columns+1; i++) { //laver en forloppe der kører kolonerne igennem
 
