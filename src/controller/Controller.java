@@ -298,7 +298,7 @@ public class Controller {
         }
         else {
             System.out.println("Orderen kan ikke færdiggøres");
-            newPopUp("Stuff");
+            newPopUp("Du skal lige huske at vælge navn,\ntelefon nr \nsamt antal sæder");
         }
 
 
@@ -311,14 +311,27 @@ public class Controller {
     }
 
     private void newPopUp(String text) {
-        final Button button = new Button("OK");
-        button.relocate(250,70);
         Stage dialog = new Stage();
         dialog.initStyle(StageStyle.UTILITY);
+
+        final Button button = new Button("OK");
+        button.relocate(250,70);
+        button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>(){
+                                     @Override
+                                     public void handle(MouseEvent event) {
+                                         dialog.close();
+                                     }
+                                 });
+
+        final Label label = new Label(text);
+        label.relocate(10,10);
+        label.setPrefSize(250,70);
+        //label.textAlignmentProperty()
+
         Pane pane = new Pane();
         pane.setPrefWidth(300);
         pane.setPrefHeight(100);
-        pane.getChildren().add(button);
+        pane.getChildren().addAll(button,label);
         Scene scene = new Scene(pane);
         dialog.setScene(scene);
         dialog.show();
