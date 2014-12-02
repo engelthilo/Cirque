@@ -316,6 +316,7 @@ public class Controller {
 
             // if a reservation is completely inserted it will return true
             if(db.insertReservation(seatsInOrder, bh.getShowId(), customerName.getText(), customerPhone.getText())) {
+                newPopUp("Bestillingen er gennemført");
                 System.out.println("Bestillingen er gennemført.");
                 seatsInOrder.clear(); // removes the chosen seats from the array
                 customerName.clear(); // clears the textfield
