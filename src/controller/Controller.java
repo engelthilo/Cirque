@@ -16,9 +16,11 @@ import javafx.stage.Stage;
 import model.DBConnect;
 import model.buildHolder;
 
+import javax.xml.soap.Text;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
 
 
 public class Controller {
@@ -286,11 +288,21 @@ public class Controller {
                 buildReservationScene(bh.getShowId()); // builds an updated scene so that the new reservated seats are now available to pick
             } else {
                 System.out.println("Der er sket en fejl - prøv igen!");
+                /*
+                Dialogs.create()
+                        .owner(SchoolManagement2.stage1)
+                        .title("Information Dialog")
+                        .masthead("Look, an Information Dialog")
+                        .message("I have a great message for you!")
+                        .showInformation();
+                        */
             }
         }
-        else{
-            System.out.println("Husk at skrive navn, telefon nr og vælge ét sæde");
-        }
+
+
+    }
+
+    private void newPopUp(String message){
 
     }
 
