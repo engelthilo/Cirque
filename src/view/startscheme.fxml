@@ -89,8 +89,8 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="customerName" layoutX="598.0" layoutY="597.0" prefHeight="16.0" promptText="Navn" />
-                              <TextField fx:id="customerPhone" layoutX="598.0" layoutY="624.0" prefHeight="16.0" promptText="Telefonnummer" />
+                              <TextField fx:id="customerName" layoutX="192.0" layoutY="597.0" prefHeight="16.0" promptText="Navn" />
+                              <TextField fx:id="customerPhone" layoutX="192.0" layoutY="624.0" prefHeight="16.0" promptText="Telefonnummer" />
                            </children>
                         </Pane>
                      </children></AnchorPane>

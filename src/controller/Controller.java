@@ -283,6 +283,9 @@ public class Controller {
                 System.out.println("Der er sket en fejl - prøv igen!");
             }
         }
+        else{
+            System.out.println("Husk at skrive navn, telefon nr og vælge ét sæde");
+        }
 
     }
 
