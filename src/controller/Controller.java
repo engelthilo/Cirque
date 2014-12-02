@@ -302,13 +302,13 @@ public class Controller {
 
     @FXML
     private void getReservations() {
-        test();
+        test("");
         reservationList.getItems().add("Interstellar 19/01 10:00");
     }
 
     private void test(String text) {
         Stage dialog = new Stage();
-        dialog.initStyle(StageStyle.UTILITY);
+        dialog.initStyle(StageStyle.UNIFIED);
         Pane pane = new Pane();
         pane.setPrefWidth(300);
         pane.setPrefHeight(100);
