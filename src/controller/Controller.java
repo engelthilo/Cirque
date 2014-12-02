@@ -16,7 +16,6 @@ import javafx.stage.StageStyle;
 import model.DBConnect;
 import model.buildHolder;
 
-import javax.xml.soap.Text;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -314,8 +313,8 @@ public class Controller {
 
     @FXML
     private void getReservations() {
-        test();
-        reservationList.getItems().add("Interstellar 19/01 10:00");
+        //test();
+        //reservationList.getItems().add("Interstellar 19/01 10:00");
     }
 
     private void test(String text) {
