@@ -270,7 +270,7 @@ public class Controller {
     @FXML
     private void makeReservation() throws Exception{
 
-        if(!customerName.getText().isEmpty() && !customerPhone.getText().isEmpty() && seatsInOrder.size()>0) { // if customer name and phone has been entered and at least one seat has been chosen
+        if(!customerName.getText().isEmpty() && !customerPhone.getText().isEmpty() && seatsInOrder.size()>0 && customerPhone.getLength() == 8) { // if customer name and phone has been entered and at least one seat has been chosen
             String name = customerName.getText(); // gets the name of the customer from the textfield
             String phone = customerPhone.getText(); // gets the phonenumber of the customer from the textfield
 
