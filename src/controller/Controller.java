@@ -60,6 +60,9 @@ public class Controller {
     @FXML
     private TextField customerPhone;
 
+    @FXML
+    private Pane overfillPane;
+
     private DBConnect db;
 
     private ArrayList<String> seatsInOrder;
@@ -192,7 +195,7 @@ public class Controller {
 
     @FXML
     private void buildReservationScene(int showId) { //denne metode bygger reservationScene for den pågældende film
-
+        overfillPane.toBack();
         seatsInOrder = new ArrayList<String>(); // initalizing the arraylist that will contain the seat(s) that has been clicked
 
         //dbcall så vi kan få information om forestillingen (hvor den vises, filmtitel osv.)
