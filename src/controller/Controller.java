@@ -1,12 +1,14 @@
 package controller;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -80,6 +82,8 @@ public class Controller {
     private ArrayList<String> seatsInOrder;
 
     private buildHolder bh;
+
+    private Boolean dragMouse;
 
     public Controller() {
         db = new DBConnect();
@@ -208,6 +212,7 @@ public class Controller {
     @FXML
     private void buildReservationScene(int showId) { //denne metode bygger reservationScene for den pågældende film
         overfillPane.toBack();
+        dragMouse = false;
         seatsInOrder = new ArrayList<String>(); // initalizing the arraylist that will contain the seat(s) that has been clicked
 
         //dbcall så vi kan få information om forestillingen (hvor den vises, filmtitel osv.)
@@ -244,6 +249,28 @@ public class Controller {
                     }
                 } else {
                     r.setFill(Color.web("#43A047")); //sets the green color of a available seat
+
+
+                    // when starting to drag
+                    r.setOnDragDetected(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            Dragboard db = r.startDragAndDrop(TransferMode.MOVE); // start dragndrop
+                            ClipboardContent cc = new ClipboardContent(); // creates new clipboardcontent which is normally used to hold a value
+                            cc.putString(""); // this is just to obtain the dragndrop function. we do not set the value to anything since we do not transfer value between the seats
+                            db.setContent(cc); // binds the clipboardcontent to the dragboard since it's needed
+                            db.setDragView(new Image("dragndrop.png")); // normally the dragview would be a reflection of the item dragged (the seat in this case) but we just want to select seats by holding down the mousebutton
+                        }
+                    });
+
+                    // when dragging over a seat
+                    r.setOnDragEntered(new EventHandler<DragEvent>() {
+                        @Override
+                        public void handle(DragEvent event) {
+                            addSeatToOrder(r, x, y);
+                        }
+                    });
+
 
                     // funktion ved klik på ledigt sæde
                     r.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
