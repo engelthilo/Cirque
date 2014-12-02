@@ -312,7 +312,6 @@ public class Controller {
 
     private void newPopUp(String text) {
         Stage dialog = new Stage();
-<<<<<<< HEAD
         dialog.initStyle(StageStyle.UTILITY);
 
         final Button button = new Button("OK");
@@ -329,9 +328,8 @@ public class Controller {
         label.setPrefSize(250,70);
         //label.textAlignmentProperty()
 
-=======
+
         dialog.initStyle(StageStyle.UNIFIED);
->>>>>>> 3fd0f531a4285d4597a66947989c8c796e99ae0d
         Pane pane = new Pane();
         pane.setPrefWidth(300);
         pane.setPrefHeight(100);
