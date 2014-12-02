@@ -4,10 +4,8 @@ package test;
 import controller.Controller;
 import model.DBConnect;
 import org.junit.Test;
-import sun.awt.image.ImageWatched;
 import static org.junit.Assert.assertEquals;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
