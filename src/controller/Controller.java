@@ -72,6 +72,9 @@ public class Controller {
     @FXML
     private ListView reservationList;
 
+    @FXML
+    private TextField phoneNumber;
+
     private DBConnect db;
 
     private ArrayList<String> seatsInOrder;
@@ -307,7 +310,13 @@ public class Controller {
 
     @FXML
     private void getReservations() {
-        reservationList.getItems().add("Interstellar 19/01 10:00");
+        //reservationList.getItems().add("Interstellar 19/01 10:00");
+        String number = phoneNumber.getText();
+        LinkedHashMap<Integer, String> reservations = new LinkedHashMap(db.getReservations(number));
+        for(Map.Entry<Integer, String> reservation : reservations.entrySet()) {
+            reservationList.getItems().add(reservation.getValue());
+        }
+
     }
 
     private void newPopUp(String text) {
@@ -331,6 +340,9 @@ public class Controller {
 
         dialog.initStyle(StageStyle.UNIFIED);
         Pane pane = new Pane();
+        pane.setPrefWidth(300);
+        pane.setPrefHeight(100);
+        pane.getChildren().addAll(button, label);
         pane.setPrefWidth(320);
         pane.setPrefHeight(120);
         VBox vbox = new VBox();

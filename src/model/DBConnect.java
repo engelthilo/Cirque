@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -145,12 +146,16 @@ public class DBConnect {
         LinkedHashMap<Integer, String> reservations = new LinkedHashMap<Integer, String>();
         try {
             st = getCon().createStatement();
-            String query = "SELECT time, movie_name, cinema_name, FROM reservations WHERE movie_id=" + phoneNumber + " ORDER BY time ASC";
+            String query = "SELECT shows.id, time, movie_name, cinema_name, reservations.id, customer_name FROM reservations, cinemas, movies, shows WHERE reservations.customer_phone='" + phoneNumber + "' AND reservations.show_id = shows.id AND shows.movie_id = movies.id AND shows.cinema_id = cinemas.id";
             rs = st.executeQuery(query);
             while(rs.next()) {
-                //int id = rs.getInt("id");
-                //Timestamp timestamp = rs.getTimestamp("time");
-                //reservations.put(id, timestamp);
+                String movieName = rs.getString("movie_name");
+                String customerName = rs.getString("customer_name");
+                String cinemaName = rs.getString("cinema_name");
+                Timestamp timestamp = rs.getTimestamp("time");
+                int id = rs.getInt("shows.id");
+                String resString = movieName + "   " + new SimpleDateFormat("dd/MM HH:mm").format(timestamp);
+                reservations.put(id, resString);
             }
 
         } catch (Exception e) {
