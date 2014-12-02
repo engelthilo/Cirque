@@ -5,6 +5,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import model.DBConnect;
 import model.buildHolder;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -21,6 +23,7 @@ public class DBConnectTest {
     private Connection con;
     private Statement st;
     private ResultSet rs;
+    private String lastid;
 
     private DBConnect dbConnect;
 
@@ -63,7 +66,7 @@ public class DBConnectTest {
             rs = st.executeQuery(query);
             Timestamp tmstmp = new Timestamp(0);
             while (rs.next()) {
-                //System.out.println("Id eksisterer"); //id 4 eksisterer ikke
+                System.out.println("Id eksisterer"); //id 4 eksisterer ikke
                 assertTrue(tmstmp.getTime() < rs.getTimestamp("time").getTime());
                 if (rs.getTimestamp("time").getTime() > tmstmp.getTime()) {
                     tmstmp = rs.getTimestamp("time");
@@ -106,4 +109,50 @@ public class DBConnectTest {
         }
 
     }
+
+    //tester om reservationer der bliver lavet, gemmes i databasen
+    @Test
+    public void testInsertReservation(){
+        lastid = "";
+        try {
+            st = con.createStatement();
+            String query = "INSERT INTO reservations (show_id, customer_name, customer_phone) VALUES (120, 'Amanda', '26802103')";
+            st.executeUpdate(query);
+            rs = st.executeQuery("select last_insert_id() as last_id from reservations");
+            if (rs.next()) {
+                lastid = rs.getString(1);
+            }
+            query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + lastid + "', 1, 2)";
+                st.executeUpdate(query);
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+
+        }
+        try {
+            rs = st.executeQuery("SELECT reservations.id, seat_x, seat_y FROM reservations, reservationlines WHERE reservationlines.reservation_id = reservations.id AND show_id = '120' AND customer_name = 'Amanda' AND customer_phone = '26802103'");
+            while(rs.next()){
+                assertEquals(rs.getString("id"), (lastid));
+                assertEquals(rs.getInt("seat_x"), 1);
+                assertEquals(rs.getInt("seat_y"), 2);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+            }
+
+        }
+    //sletter den reservation vi har lavet ovenfor.
+    @After
+    public void deleteReservation() {
+        try {
+            st = con.createStatement();
+            String query = "DELETE FROM reservations WHERE id = '" + lastid + "'";
+            st.executeUpdate(query);
+            query = "DELETE FROM reservationlines WHERE reservation_id = '" + lastid + "'";
+            st.executeUpdate(query);
+        } catch (Exception e){
+            System.out.println("Error: " + e);
+        }
+    }
+
 }
