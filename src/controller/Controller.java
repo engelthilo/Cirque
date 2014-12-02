@@ -316,11 +316,12 @@ public class Controller {
 
         final Button button = new Button("OK");
         button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>(){
-                                     @Override
-                                     public void handle(MouseEvent event) {
-                                         dialog.close();
-                                     }
-                                 });
+
+            @Override
+            public void handle(MouseEvent event) {
+                dialog.close();
+            }
+        });
 
         final Label label = new Label(text);
         label.setPrefSize(300,70);
