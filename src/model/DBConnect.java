@@ -73,7 +73,24 @@ public class DBConnect {
     public buildHolder getBuildSceneInfo(int showId) {
         buildHolder bh = new buildHolder(); //skaber en buildholder - som er det "grafiske"
 
-        // first lets get all reserved seats
+        // first lets get the rest of the info needed to build the cinema
+        try {
+            st = getCon().createStatement();
+            String query = "SELECT time, movie_name, cinema_name, columns, rows FROM shows, movies, cinemas WHERE cinemas.id = shows.cinema_id AND movies.id = shows.movie_id AND shows.id = " + showId;
+            rs = st.executeQuery(query);
+
+            while(rs.next()) {
+                bh.setTime(rs.getTimestamp("time")); // gets and sets the time of a given show
+                bh.setColumns(rs.getInt("columns")); // gets and sets the width of the cinema
+                bh.setRows(rs.getInt("rows")); // gets and sets the height of the cinema
+                bh.setMovieName(rs.getString("movie_name")); // gets and sets the moviename of the show
+                bh.setCinemaName(rs.getString("cinema_name")); // gets the cinema name (sal navn)
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+
+        // next lets get all reserved seats
         try {
             st = getCon().createStatement();
             String query = "SELECT seat_x, seat_y FROM reservationlines, reservations WHERE reservationlines.reservation_id = reservations.id AND reservations.show_id = " + showId;
@@ -93,22 +110,6 @@ public class DBConnect {
             System.out.println("Error: " + e);
         }
 
-        // next lets get the rest of the info needed to build the cinema
-        try {
-            st = getCon().createStatement();
-            String query = "SELECT time, movie_name, cinema_name, columns, rows FROM shows, movies, cinemas WHERE cinemas.id = shows.cinema_id AND movies.id = shows.movie_id AND shows.id = " + showId;
-            rs = st.executeQuery(query);
-
-            while(rs.next()) {
-                bh.setTime(rs.getTimestamp("time")); // gets and sets the time of a given show
-                bh.setColumns(rs.getInt("columns")); // gets and sets the width of the cinema
-                bh.setRows(rs.getInt("rows")); // gets and sets the height of the cinema
-                bh.setMovieName(rs.getString("movie_name")); // gets and sets the moviename of the show
-                bh.setCinemaName(rs.getString("cinema_name")); // gets the cinema name (sal navn)
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-        }
         bh.setShowId(showId);
         return bh;
     }
@@ -138,6 +139,24 @@ public class DBConnect {
             System.out.println("Error: " + e);
             return false;
         }
+    }
+
+    public LinkedHashMap<Integer, String> getReservations(String phoneNumber) {
+        LinkedHashMap<Integer, String> reservations = new LinkedHashMap<Integer, String>();
+        try {
+            st = getCon().createStatement();
+            String query = "SELECT time, movie_name, cinema_name, FROM reservations WHERE movie_id=" + phoneNumber + " ORDER BY time ASC";
+            rs = st.executeQuery(query);
+            while(rs.next()) {
+                //int id = rs.getInt("id");
+                //Timestamp timestamp = rs.getTimestamp("time");
+                //reservations.put(id, timestamp);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        return reservations;
     }
 
 }
