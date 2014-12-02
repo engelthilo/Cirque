@@ -66,7 +66,7 @@ public class DBConnectTest {
             rs = st.executeQuery(query);
             Timestamp tmstmp = new Timestamp(0);
             while (rs.next()) {
-                //System.out.println("Id eksisterer"); //id 4 eksisterer ikke
+                System.out.println("Id eksisterer"); //id 4 eksisterer ikke
                 assertTrue(tmstmp.getTime() < rs.getTimestamp("time").getTime());
                 if (rs.getTimestamp("time").getTime() > tmstmp.getTime()) {
                     tmstmp = rs.getTimestamp("time");
@@ -116,13 +116,13 @@ public class DBConnectTest {
         lastid = "";
         try {
             st = con.createStatement();
-            String query = "INSERT INTO reservations (show_id, customer_name, customer_phone) VALUES ('120', 'Amanda', '26802103')";
+            String query = "INSERT INTO reservations (show_id, customer_name, customer_phone) VALUES (120, 'Amanda', '26802103')";
             st.executeUpdate(query);
             rs = st.executeQuery("select last_insert_id() as last_id from reservations");
             if (rs.next()) {
                 lastid = rs.getString(1);
             }
-            query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + lastid + "', '1', '2')";
+            query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + lastid + "', 1, 2)";
                 st.executeUpdate(query);
 
         } catch (Exception e) {
@@ -141,7 +141,7 @@ public class DBConnectTest {
             }
 
         }
-    //sletter den reservation vi har lavet ovenfor. 
+    //sletter den reservation vi har lavet ovenfor.
     @After
     public void deleteReservation() {
         try {
