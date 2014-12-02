@@ -1,18 +1,18 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Modality;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.DBConnect;
 import model.buildHolder;
 
@@ -66,6 +66,12 @@ public class Controller {
 
     @FXML
     private TextField customerPhone;
+
+    @FXML
+    private Pane overfillPane;
+
+    @FXML
+    private ListView reservationList;
 
     private DBConnect db;
 
@@ -199,7 +205,7 @@ public class Controller {
 
     @FXML
     private void buildReservationScene(int showId) { //denne metode bygger reservationScene for den pågældende film
-
+        overfillPane.toBack();
         seatsInOrder = new ArrayList<String>(); // initalizing the arraylist that will contain the seat(s) that has been clicked
 
         //dbcall så vi kan få information om forestillingen (hvor den vises, filmtitel osv.)
@@ -274,7 +280,7 @@ public class Controller {
     @FXML
     private void makeReservation() throws Exception{
 
-        if(!customerName.getText().isEmpty() && !customerPhone.getText().isEmpty() && seatsInOrder.size()>0) { // if customer name and phone has been entered and at least one seat has been chosen
+        if(!customerName.getText().isEmpty() && !customerPhone.getText().isEmpty() && seatsInOrder.size()>0 && customerPhone.getLength() == 8) { // if customer name and phone has been entered and at least one seat has been chosen
             String name = customerName.getText(); // gets the name of the customer from the textfield
             String phone = customerPhone.getText(); // gets the phonenumber of the customer from the textfield
 
@@ -304,6 +310,23 @@ public class Controller {
 
     private void newPopUp(String message){
 
+    }
+
+    @FXML
+    private void getReservations() {
+        test();
+        reservationList.getItems().add("Interstellar 19/01 10:00");
+    }
+
+    private void test(String text) {
+        Stage dialog = new Stage();
+        dialog.initStyle(StageStyle.UTILITY);
+        Pane pane = new Pane();
+        pane.setPrefWidth(300);
+        pane.setPrefHeight(100);
+        Scene scene = new Scene(pane);
+        dialog.setScene(scene);
+        dialog.show();
     }
 
 }
