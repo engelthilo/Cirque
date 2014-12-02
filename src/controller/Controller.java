@@ -3,11 +3,16 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.DBConnect;
 import model.buildHolder;
 
@@ -62,6 +67,9 @@ public class Controller {
 
     @FXML
     private Pane overfillPane;
+
+    @FXML
+    private ListView reservationList;
 
     private DBConnect db;
 
@@ -290,6 +298,23 @@ public class Controller {
             System.out.println("Husk at skrive navn, telefon nr og vælge ét sæde");
         }
 
+    }
+
+    @FXML
+    private void getReservations() {
+        test();
+        reservationList.getItems().add("Interstellar 19/01 10:00");
+    }
+
+    private void test(String text) {
+        Stage dialog = new Stage();
+        dialog.initStyle(StageStyle.UTILITY);
+        Pane pane = new Pane();
+        pane.setPrefWidth(300);
+        pane.setPrefHeight(100);
+        Scene scene = new Scene(pane);
+        dialog.setScene(scene);
+        dialog.show();
     }
 
 }

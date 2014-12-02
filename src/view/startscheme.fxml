@@ -112,7 +112,25 @@
           </Tab>
             <Tab text="Ret reservation">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="179.0" layoutY="134.0" prefHeight="667.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <VBox layoutX="3.0" layoutY="1.0" prefHeight="665.0" prefWidth="994.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <Label text="Telefonnummer:" />
+                                          <TextField />
+                                          <Button mnemonicParsing="false" onMouseClicked="#getReservations" text="Tjek reservationer" />
+                                       </children>
+                                    </HBox>
+                                    <ListView fx:id="reservationList" prefHeight="566.0" prefWidth="994.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
+                     </children></AnchorPane>
               </content>
             </Tab>
         </tabs>
