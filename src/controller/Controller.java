@@ -316,8 +316,8 @@ public class Controller {
 
     @FXML
     private void makeReservation() throws Exception{
-
-        if(!customerName.getText().isEmpty() && !customerPhone.getText().isEmpty() && seatsInOrder.size()>0 && customerPhone.getLength() == 8) { // if customer name and phone has been entered and at least one seat has been chosen
+        // if customer name and phone has been entered and at least one seat has been chosen
+        if(!customerName.getText().isEmpty() && !customerPhone.getText().isEmpty() && seatsInOrder.size()>0 && customerPhone.getLength() == 8) {
             String name = customerName.getText(); // gets the name of the customer from the textfield
             String phone = customerPhone.getText(); // gets the phonenumber of the customer from the textfield
 
@@ -362,11 +362,10 @@ public class Controller {
         for(Map.Entry<Integer, String> reservation : reservations.entrySet()) {
             reservationList.getItems().addAll(reservation.getValue());
             reservationList.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
                 @Override
                 public void handle(MouseEvent event) {
                     if (event.getClickCount() == 2) {
-                        //buildReservationScene(reservation.getKey());
+                        buildEditReservationView(reservationList.getSelectionModel().getSelectedItem().toString());
                         System.out.println("clicked on " + reservationList.getSelectionModel().getSelectedItem());
                     }
                 }
@@ -375,12 +374,39 @@ public class Controller {
 
     }
 
-    private void buildEditReservationView(int reservationID){
+    private void buildEditReservationView(String reservationID){
         Stage editReservationView = new Stage();
         editReservationView.initStyle(StageStyle.UTILITY);
 
-        //final Label
+        VBox vbox = new VBox();
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(10,10,10,10));
+        vbox.setSpacing(5);
+        vbox.setPrefSize(900,600);
 
+
+        final Label reservationIDLabel = new Label(reservationID);
+        final Button editButton = new Button("Rediger reservation");
+        final Button deleteButton = new Button("Slet reservation");
+        deleteButton.setLayoutX(10);
+        deleteButton.setLayoutY(10);
+        editButton.setLayoutX(750);
+        editButton.setLayoutY(10);
+
+        Pane buttonContainer = new Pane();
+        buttonContainer.setPrefSize(900,50);
+
+        buttonContainer.getChildren().addAll(deleteButton,editButton);
+        vbox.getChildren().addAll(reservationIDLabel, buttonContainer);
+
+        Pane pane = new Pane();
+        pane.setPrefSize(920,620);
+        pane.getChildren().add(vbox);
+
+
+        Scene scene = new Scene(pane);
+        editReservationView.setScene(scene);
+        editReservationView.show();
     }
 
     private void newPopUp(String text) {
@@ -399,14 +425,10 @@ public class Controller {
         final Label label = new Label(text);
         label.setPrefSize(300,70);
         label.setAlignment(Pos.CENTER);
-        //label.textAlignmentProperty()
 
 
         dialog.initStyle(StageStyle.UNIFIED);
         Pane pane = new Pane();
-        pane.setPrefWidth(300);
-        pane.setPrefHeight(100);
-        pane.getChildren().addAll(button, label);
         pane.setPrefWidth(320);
         pane.setPrefHeight(120);
         VBox vbox = new VBox();
