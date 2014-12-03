@@ -153,7 +153,7 @@ public class DBConnect {
                 String customerName = rs.getString("customer_name");
                 String cinemaName = rs.getString("cinema_name");
                 Timestamp timestamp = rs.getTimestamp("time");
-                int id = rs.getInt("shows.id");
+                int id = rs.getInt("reservations.id");
                 String resString = movieName + "   " + new SimpleDateFormat("dd/MM HH:mm").format(timestamp);
                 reservations.put(id, resString);
             }

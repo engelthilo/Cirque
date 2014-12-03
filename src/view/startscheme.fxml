@@ -121,7 +121,7 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                        <children>
                                           <Label text="Telefonnummer:" />
-                                          <TextField fx:id="phoneNumber" />
+                                          <TextField fx:id="phoneNumber" onKeyPressed="#enterToCheck" />
                                           <Button mnemonicParsing="false" onMouseClicked="#getReservations" text="Tjek reservationer" />
                                        </children>
                                     </HBox>
