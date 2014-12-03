@@ -1,5 +1,6 @@
 package test;
 
+import controller.Controller;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -154,5 +155,24 @@ public class DBConnectTest {
             System.out.println("Error: " + e);
         }
     }
+
+        @Test
+        public void testInputReservation() {
+            try {
+                st = con.createStatement();
+                String query = "INSERT INTO reservations (show_id, customer_name, customer_phone) VALUES (120, 'Markus', '28966506')";
+                st.executeUpdate(query);
+                rs = st.executeQuery("select last_insert_id() as last_id from reservations");
+                if (rs.next()) {
+                    lastid = rs.getString(1);
+                }
+                query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + lastid + "', 2, 2)";
+                st.executeUpdate(query);
+            } catch (Exception e) {
+                System.out.println("Error: " + e);
+
+        }
+
+                //3. test om der kommer liste ud ved enter - for det nummer - hvis ikke fail
 
 }

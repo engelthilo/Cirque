@@ -442,5 +442,8 @@ public class Controller {
         dialog.show();
     }
 
+    public javafx.scene.control.TextField getPhoneNumber() {
+        return phoneNumber;
+    }
 
 }
