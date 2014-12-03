@@ -22,10 +22,14 @@ public class DBConnect {
         }
 
     }
-
+    /**
+     * Input: None
+     * Method: Gets the current connection. If it doesn't exists/is invalid a new one is created.
+     * Returns: A valid connection
+     */
     private Connection getCon() {
         try {
-            if(!con.isValid(3)) {
+            if(!con.isValid(30)) {
                 con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/kaffeklubben", "kaffeklubben", "kp8473moxa");
             }
         } catch (Exception e) {
@@ -34,6 +38,11 @@ public class DBConnect {
         return con;
     }
 
+    /**
+     * Input: None
+     * Method: Gets all the movies that exists in the database
+     * Returns: Linkedhashmap with the movie id(int) as key and the movie name(string) as value
+     */
     public LinkedHashMap<Integer, String> getMovies() {
         LinkedHashMap<Integer, String> movies = new LinkedHashMap<Integer, String>();
         try {
@@ -53,6 +62,11 @@ public class DBConnect {
         return movies;
     }
 
+    /**
+     * Input: (int) movieId
+     * Method: Gets times from every show(forestilling) a given movie(movieid) has. Sorted by time ascending
+     * Returns: Linkedhashmap with the show id(int) as key and the time(timestamp) as value
+     */
     public LinkedHashMap<Integer, Timestamp> getMovieSchedule(int movieId) {
         LinkedHashMap<Integer, Timestamp> times = new LinkedHashMap<Integer, Timestamp>();
         try {
@@ -71,8 +85,13 @@ public class DBConnect {
         return times;
     }
 
+    /**
+     * Input: (int) int with the showid
+     * Method: Gets information about the given show (showid) and sets it into an object that holds information like time of the show, the width of the cinema, the height of the cinema, the movie name, the cinema name, it also returns a boolean multidimensional array with the reserved seats like [2][5] = true
+     * Returns: buildHolder with all the information about the show. Can be accessed like bh.getTime(), bh.getColumns, bh.getRows, bh.getMovieName, bh.getCinemaName, bh.getResSeat <- this is the reserved seats in multidimensional array
+     */
     public buildHolder getBuildSceneInfo(int showId) {
-        buildHolder bh = new buildHolder(); //skaber en buildholder - som er det "grafiske"
+        buildHolder bh = new buildHolder(); //skaber en buildholder - som holder alle informationer som vi bruger senere til at bygge scenen
 
         // first lets get the rest of the info needed to build the cinema
         try {
@@ -115,6 +134,11 @@ public class DBConnect {
         return bh;
     }
 
+    /**
+     * Input: (ArrayList, int, String, String) arraylist with the reserved seats, int with the showid, string with the customer name, string with the customer phone number
+     * Method: Inserts a reservation into the database
+     * Returns: True if the reservation gets inserted. False if the reservation fails to get inserted.
+     */
     public Boolean insertReservation(ArrayList<String> seats, int showId, String customerName, String customerPhone) {
         try {
             st = getCon().createStatement();
@@ -142,6 +166,12 @@ public class DBConnect {
         }
     }
 
+
+    /**
+     * Input: (String) phone number.
+     * Method: Finds all the reservations for a defined phone number
+     * Returns: A linkedhashmap with the reservation id as key (int) and a generated string with information about the reservation (movie, time etc.)
+     */
     public LinkedHashMap<Integer, String> getReservations(String phoneNumber) {
         LinkedHashMap<Integer, String> reservations = new LinkedHashMap<Integer, String>();
         try {
