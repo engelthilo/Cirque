@@ -54,7 +54,7 @@ public class Controller {
     private Label numberOfReserved;
 
     @FXML
-    private Label numberOfTotal;
+    private Label numberOfSelectedSeats;
 
     @FXML
     private Pane scenePane;
@@ -84,6 +84,8 @@ public class Controller {
     private buildHolder bh;
 
     private Boolean dragMouse;
+
+    private int intChosenSeats;
 
     public Controller() {
         db = new DBConnect();
@@ -223,8 +225,8 @@ public class Controller {
         cinemaNameLabel.setText(bh.getCinemaName()); //sætter navn på den pågældende sal
         int totalSeats = (bh.getColumns() * bh.getRows()); //regner antalet af total antal sædder i salen ud.
         int freeSeats = totalSeats - bh.getReservedNumber(); //regner antal af frie sædder ud.
-        numberOfReserved.setText("Ledige pladser: " + freeSeats); //viser antal frie sædder i den pågældende sal
-        numberOfTotal.setText("Pladser i alt: " + totalSeats); //viser antal af sædder i den pågældende sal
+        numberOfReserved.setText("Ledige pladser: " + freeSeats + " (I alt: " + totalSeats + ")"); //viser antal frie sædder i den pågældende sal
+        numberOfSelectedSeats.setText("Valgte pladser: 0"); // viser antallet af valgte sæder
 
         int columns = bh.getColumns(); //henter kolonner/bredden i den pågældende sal
         int rows = bh.getRows(); //henter rækker/længden i den pågældende sal
@@ -298,10 +300,15 @@ public class Controller {
             r.setFill(Color.web("#039BE5")); // sets color to blue
             String seatString = (x + ":" + y); // seatString 3:3 etc.
             seatsInOrder.add(seatString); // adds seatString to array
+            intChosenSeats++;
+            numberOfSelectedSeats.setText("Valgte pladser: " + intChosenSeats); // viser antallet af valgte sæder
+
         } else if(r.getFill().toString().contains("0x039be5ff")) { // if the seat is color code blue
             r.setFill(Color.web("#43A047")); // set color to green
             String seatString = (x + ":" + y); // seatString 3:3 etc.
             seatsInOrder.remove(seatString); // removes seatString from array
+            intChosenSeats--;
+            numberOfSelectedSeats.setText("Valgte pladser: " + intChosenSeats); // viser antallet af valgte sæder
         }
 
     }
