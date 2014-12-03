@@ -118,7 +118,8 @@ public class Controller {
     }
 
     @FXML
-    private void getMovieSchedule(int movieId) { //gets times for a given movie from its movie id
+    private void getMovieSchedule(int movieId) {
+        //gets times for a given movie from its movie id
         //Reset the schedule boxes
         upper_schedule.getChildren().clear(); //clears the container for elements
         lower_schedule.getChildren().clear(); //clears the container for elements
@@ -335,15 +336,43 @@ public class Controller {
 
     }
 
+    //Method to call getReservations() method when pressed enter
+    @FXML
+    public void enterToCheck(KeyEvent event){
+        if (event.getCode() == KeyCode.ENTER) {
+            getReservations();
+        }
+    }
+
 
     @FXML
     private void getReservations() {
         //reservationList.getItems().add("Interstellar 19/01 10:00");
+        //final Button button = new Button("Rediger");
+        reservationList.getItems().clear();
         String number = phoneNumber.getText();
         LinkedHashMap<Integer, String> reservations = new LinkedHashMap(db.getReservations(number));
         for(Map.Entry<Integer, String> reservation : reservations.entrySet()) {
-            reservationList.getItems().add(reservation.getValue());
+            reservationList.getItems().addAll(reservation.getValue());
+            reservationList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent event) {
+                    if (event.getClickCount() == 2) {
+                        //buildReservationScene(reservation.getKey());
+                        System.out.println("clicked on " + reservationList.getSelectionModel().getSelectedItem());
+                    }
+                }
+            });
         }
+
+    }
+
+    private void buildEditReservationView(int reservationID){
+        Stage editReservationView = new Stage();
+        editReservationView.initStyle(StageStyle.UTILITY);
+
+        //final Label
 
     }
 
