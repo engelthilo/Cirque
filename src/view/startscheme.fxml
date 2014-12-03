@@ -56,6 +56,20 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
+                        <Pane fx:id="overfillPane" prefHeight="667.0" prefWidth="1000.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="357.0" layoutY="309.0" text="Du har ikke valgt nogen forestilling!">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="373.0" layoutY="339.0" text="Klik &quot;Forestillinger&quot; og vælg en film">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
                         <Pane layoutX="21.0" layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Label fx:id="movieNameLabel" layoutX="40.0" layoutY="27.0" prefHeight="46.0" prefWidth="443.0" text="movieNameLabel">
@@ -83,28 +97,14 @@
                                  </font>
                               </Label>
                               <Label fx:id="numberOfReserved" layoutX="40.0" layoutY="607.0" prefHeight="16.0" prefWidth="244.0" text="numberOfReserved" />
-                              <Label fx:id="numberOfTotal" layoutX="40.0" layoutY="630.0" prefHeight="16.0" prefWidth="244.0" text="numberOfTotal" />
+                              <Label fx:id="numberOfSelectedSeats" layoutX="40.0" layoutY="630.0" prefHeight="16.0" prefWidth="244.0" text="numberOfSelectedSeats" />
                               <Label layoutX="457.0" layoutY="42.0" text="Lærred">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="customerName" layoutX="192.0" layoutY="597.0" prefHeight="16.0" promptText="Navn" />
-                              <TextField fx:id="customerPhone" layoutX="192.0" layoutY="624.0" prefHeight="16.0" promptText="Telefonnummer" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="overfillPane" prefHeight="667.0" prefWidth="1000.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <Label layoutX="357.0" layoutY="309.0" text="Du har ikke valgt nogen forestilling!">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="373.0" layoutY="339.0" text="Klik &quot;Forestillinger&quot; og vælg en film">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
+                              <TextField fx:id="customerName" layoutX="602.0" layoutY="597.0" prefHeight="16.0" promptText="Navn" />
+                              <TextField fx:id="customerPhone" layoutX="602.0" layoutY="624.0" prefHeight="16.0" promptText="Telefonnummer" />
                            </children>
                         </Pane>
                      </children></AnchorPane>
