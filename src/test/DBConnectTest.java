@@ -25,6 +25,7 @@ public class DBConnectTest {
     private Statement st;
     private ResultSet rs;
     private String lastid;
+    private String lastid1;
 
     private DBConnect dbConnect;
 
@@ -117,7 +118,7 @@ public class DBConnectTest {
         lastid = "";
         try {
             st = con.createStatement();
-            String query = "INSERT INTO reservations (show_id, customer_name, customer_phone) VALUES (120, 'Amanda', '26802103')";
+            String query = "INSERT INTO reservations (show_id, customer_name, customer_phone) VALUES (109, 'Amanda', '26802103')";
             st.executeUpdate(query);
             rs = st.executeQuery("select last_insert_id() as last_id from reservations");
             if (rs.next()) {
@@ -156,7 +157,14 @@ public class DBConnectTest {
             System.out.println("Error: " + e);
         }
     }
+    //Denne test tester om der kommer en liste ud når man har reserveret for et bestemt nummer.
+    @Test
+    public void testInputReservation() {
+        LinkedHashMap<Integer, String> reservations = dbConnect.getReservations("11223344");
+        assertTrue(reservations.isEmpty());
+        lastid1 = "";
 
+<<<<<<< HEAD
     @Test
     public void testInputReservation() {
         try {
@@ -171,9 +179,31 @@ public class DBConnectTest {
             st.executeUpdate(query);
         } catch (Exception e) {
             System.out.println("Error: " + e);
+=======
+            try {
+                st = con.createStatement();
+                String query = "INSERT INTO reservations (show_id, customer_name, customer_phone) VALUES (109, 'Markus', '11223344')";
+                st.executeUpdate(query);
+                rs = st.executeQuery("select last_insert_id() as last_id from reservations");
+                if (rs.next()) {
+                    lastid1 = rs.getString(1);
+                }
+                query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + lastid1 + "', 2, 2)";
+                st.executeUpdate(query);
+>>>>>>> 1999bd183954a6e4a96a244172fc802a58139682
 
-        }
+                } catch (Exception e) {
+                System.out.println("Error: " + e);
+            }
+            System.out.println(lastid1);
+            reservations = dbConnect.getReservations("11223344");
+            System.out.println(reservations.size());
+            //assertTrue(reservations.size() == 1);
 
+<<<<<<< HEAD
         //3. test om der kommer liste ud ved enter - for det nummer - hvis ikke fail
+=======
+                //3. test om der kommer liste ud ved enter - for det nummer - hvis ikke fail
+>>>>>>> 1999bd183954a6e4a96a244172fc802a58139682
     }
 }

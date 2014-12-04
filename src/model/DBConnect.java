@@ -223,4 +223,31 @@ public class DBConnect {
         return null;
     }
 
+    /**
+     * Input: (int) reservation ID.
+     * Method: Finds the showid for a given reservation
+     * Returns: An integer with the showid
+     */
+    public int getShowIdFromResId(int reservationId) {
+
+        int showId = 0;
+
+        try {
+            st = getCon().createStatement();
+            String query = "SELECT shows.id FROM shows, reservations WHERE reservations.show_id = shows.id AND reservations.id = " + reservationId;
+            rs = st.executeQuery(query);
+
+            while(rs.next()) {
+                showId = rs.getInt("id"); //gets the x-value of a reserved seat
+            }
+
+            return showId;
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+
+        return 0;
+    }
+
 }
