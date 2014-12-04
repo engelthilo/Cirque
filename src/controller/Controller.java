@@ -374,7 +374,7 @@ public class Controller {
 
     }
 
-    private void buildEditReservationView(String reservationID){
+    private void buildEditReservationView(String reservationID, int showId){
         Stage editReservationView = new Stage();
         editReservationView.initStyle(StageStyle.UTILITY);
 
@@ -396,8 +396,11 @@ public class Controller {
         Pane buttonContainer = new Pane();
         buttonContainer.setPrefSize(900,50);
 
+        sceneVBox.getChildren().clear(); //henter sædderne ind på sceneVBox - hvad gør clear??
+        bh = db.getBuildSceneInfo(showId); //lægger infor om den enkelte films sceneopbygning ind i buildHolder
+
         buttonContainer.getChildren().addAll(deleteButton,editButton);
-        vbox.getChildren().addAll(reservationIDLabel, buttonContainer);
+        vbox.getChildren().addAll(reservationIDLabel, sceneVBox,buttonContainer);
 
         Pane pane = new Pane();
         pane.setPrefSize(920,620);
