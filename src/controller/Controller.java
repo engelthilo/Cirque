@@ -384,6 +384,9 @@ public class Controller {
         vbox.setSpacing(5);
         vbox.setPrefSize(900,600);
 
+        VBox editVBox = new VBox();
+        editVBox.setAlignment(Pos.CENTER);
+
 
         final Label reservationIDLabel = new Label(reservationString);
         final Button editButton = new Button("Rediger reservation");
@@ -397,9 +400,50 @@ public class Controller {
         buttonContainer.setPrefSize(900,50);
 
 
+        bh = db.getBuildSceneInfo(db.getShowIdFromResId(reservationID)); //lægger infor om den enkelte films sceneopbygning ind i buildHolder
+
+        int columns = bh.getColumns(); //henter kolonner/bredden i den pågældende sal
+        int rows = bh.getRows(); //henter rækker/længden i den pågældende sal
+        GridPane gp = new GridPane(); //skaber et gridpane som kolonner og rækker kan opbevares i.
+        gp.setPrefSize(vbox.getWidth()-5,500-10); //sætter gridpane til samme str som det scenePane den ligger inden i.
+        gp.setHgap(6); //sætter mellemrum mellem sædderne på horizontalt led
+        gp.setVgap(6); //sætter mellemrum mellem sædderne på vertikalt ved.
+        gp.setAlignment(Pos.CENTER); // centers the gridpane to the vbox
+        Boolean[][] resSeat = bh.getResSeat();
+
+        Boolean[][] editResSeat = db.getResSeat(reservationID); //Get the reserved seats for the specifik reservation id
+
+        for(int i = 1; i < columns+1; i++) { //laver en forloppe der kører kolonerne igennem
+
+            for (int j = 1; j < rows + 1; j++) { //forlopp der kører rækkerne igennem
+                double width = (vbox.getWidth() - 8 * bh.getColumns() - 8) / bh.getColumns(); // sets the width of the seat according to the cinema width
+                double height = (500 - 8 * bh.getRows() - 8) / bh.getRows(); // sets the height of the seat according to the cinema height
+                final Rectangle r = new Rectangle(width, height); //laver sædderne som firkanter
+                int x = i;
+                int y = j;
+
+                if (resSeat[i][j] != null) { // if current entity in array isnt null
+                    if (resSeat[i][j] && !editResSeat[i][j]) { // if a seat is reserved we made its boolean true
+                        r.setFill(Color.web("#E53935")); //sets the red color of a reserved seat
+                    }
+                }
+                else if (editResSeat[i][j]){
+                    r.setFill(Color.web("#039BE5"));
+                }
+                else {
+                    r.setFill(Color.web("#43A047")); //sets the green color of a available seat
+                }
+
+                gp.add(r,i,j);
+            }
+
+
+        }
+
+        editVBox.getChildren().add(gp); //sætter gridpane ind i sceneVBox
 
         buttonContainer.getChildren().addAll(deleteButton,editButton);
-        vbox.getChildren().addAll(reservationIDLabel, sceneVBox,buttonContainer);
+        vbox.getChildren().addAll(reservationIDLabel, sceneVBox ,buttonContainer);
 
         Pane pane = new Pane();
         pane.setPrefSize(920,620);

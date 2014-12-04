@@ -1,5 +1,4 @@
 package test;
-
 import controller.Controller;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -12,26 +11,21 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import model.DBConnect;
-
-
 import java.sql.*;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 public class DBConnectTest {
     private Connection con;
     private Statement st;
     private ResultSet rs;
     private String lastid;
     private String lastid1;
-
     private DBConnect dbConnect;
 
     public DBConnectTest() {
         dbConnect = new DBConnect();
-
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/kaffeklubben", "kaffeklubben", "kp8473moxa");
@@ -55,7 +49,6 @@ public class DBConnectTest {
         expected.put(9, "Dumb and Dumber To");
         expected.put(10, "Nightcrawler");
         expected.put(11, "Jurrasic World");
-
         assertEquals(expected, dbConnect.getMovies());
     }
 
@@ -74,28 +67,23 @@ public class DBConnectTest {
                     tmstmp = rs.getTimestamp("time");
                 }
             }
-
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
-
     }
 
     @Test
     public void testReservedSetColor() {
         DBConnect dbcon = new DBConnect();
         buildHolder bh = dbcon.getBuildSceneInfo(109);
-
         Boolean[][] resSeat = bh.getResSeat();
         for (int i = 1; i < 31; i++) {
-
             for (int j = 1; j < 21; j++) {
                 double width = (879 - 8 * bh.getColumns() - 8) / bh.getColumns();
                 double height = (521 - 8 * bh.getRows() - 8) / bh.getRows();
                 final Rectangle r = new Rectangle(width, height);
                 int x = i;
                 int y = j;
-
                 if (resSeat[i][j] != null) {
                     if (resSeat[i][j]) {
                         r.setFill(Color.web("#E53935"));
@@ -107,9 +95,7 @@ public class DBConnectTest {
                     assertTrue(r.getFill().toString().equals("0xe53935ff"));
                 }
             }
-
         }
-
     }
 
     //tester om reservationer der bliver lavet, gemmes i databasen
@@ -126,10 +112,8 @@ public class DBConnectTest {
             }
             query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + lastid + "', 1, 2)";
             st.executeUpdate(query);
-
         } catch (Exception e) {
             System.out.println("Error: " + e);
-
         }
         try {
             rs = st.executeQuery("SELECT reservations.id, seat_x, seat_y FROM reservations, reservationlines WHERE reservationlines.reservation_id = reservations.id AND show_id = '120' AND customer_name = 'Amanda' AND customer_phone = '26802103'");
@@ -141,7 +125,6 @@ public class DBConnectTest {
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
-
     }
 
     //sletter den reservation vi har lavet ovenfor.
@@ -157,53 +140,42 @@ public class DBConnectTest {
             System.out.println("Error: " + e);
         }
     }
+
     //Denne test tester om der kommer en liste ud når man har reserveret for et bestemt nummer.
     @Test
     public void testInputReservation() {
         LinkedHashMap<Integer, String> reservations = dbConnect.getReservations("11223344");
         assertTrue(reservations.isEmpty());
         lastid1 = "";
-
-<<<<<<< HEAD
-    @Test
-    public void testInputReservation() {
         try {
             st = con.createStatement();
-            String query = "INSERT INTO reservations (show_id, customer_name, customer_phone) VALUES (120, 'Markus', '28966506')";
+            String query = "INSERT INTO reservations (show_id, customer_name, customer_phone) VALUES (109, 'Markus', '11223344')";
             st.executeUpdate(query);
             rs = st.executeQuery("select last_insert_id() as last_id from reservations");
             if (rs.next()) {
-                lastid = rs.getString(1);
+                lastid1 = rs.getString(1);
             }
-            query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + lastid + "', 2, 2)";
+            query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + lastid1 + "', 2, 2)";
             st.executeUpdate(query);
         } catch (Exception e) {
             System.out.println("Error: " + e);
-=======
-            try {
-                st = con.createStatement();
-                String query = "INSERT INTO reservations (show_id, customer_name, customer_phone) VALUES (109, 'Markus', '11223344')";
-                st.executeUpdate(query);
-                rs = st.executeQuery("select last_insert_id() as last_id from reservations");
-                if (rs.next()) {
-                    lastid1 = rs.getString(1);
-                }
-                query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + lastid1 + "', 2, 2)";
-                st.executeUpdate(query);
->>>>>>> 1999bd183954a6e4a96a244172fc802a58139682
+        }
+        System.out.println(lastid1);
+        reservations = dbConnect.getReservations("11223344");
+        assertTrue(reservations.size() == 1);
+//3. test om der kommer liste ud ved enter - for det nummer - hvis ikke fail
+    }
 
-                } catch (Exception e) {
-                System.out.println("Error: " + e);
-            }
-            System.out.println(lastid1);
-            reservations = dbConnect.getReservations("11223344");
-            System.out.println(reservations.size());
-            //assertTrue(reservations.size() == 1);
-
-<<<<<<< HEAD
-        //3. test om der kommer liste ud ved enter - for det nummer - hvis ikke fail
-=======
-                //3. test om der kommer liste ud ved enter - for det nummer - hvis ikke fail
->>>>>>> 1999bd183954a6e4a96a244172fc802a58139682
+    @After
+    public void deleteInputReservation() {
+        try {
+            st = con.createStatement();
+            String query = "DELETE FROM reservations WHERE id = '" + lastid1 + "'";
+            st.executeUpdate(query);
+            query = "DELETE FROM reservationlines WHERE reservation_id = '" + lastid + "'";
+            st.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
     }
 }
