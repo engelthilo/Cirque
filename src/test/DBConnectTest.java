@@ -189,7 +189,7 @@ public class DBConnectTest {
             st = con.createStatement();
             String query = "DELETE FROM reservations WHERE id = '" + lastid1 + "'";
             st.executeUpdate(query);
-            query = "DELETE FROM reservationlines WHERE reservation_id = '" + lastid + "'";
+            query = "DELETE FROM reservationlines WHERE reservation_id = '" + lastid1 + "'";
             st.executeUpdate(query);
         } catch (Exception e){
             System.out.println("Error: " + e);
