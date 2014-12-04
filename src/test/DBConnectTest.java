@@ -179,9 +179,20 @@ public class DBConnectTest {
             }
             System.out.println(lastid1);
             reservations = dbConnect.getReservations("11223344");
-            System.out.println(reservations.size());
-            //assertTrue(reservations.size() == 1);
+            assertTrue(reservations.size() == 1);
 
                 //3. test om der kommer liste ud ved enter - for det nummer - hvis ikke fail
+    }
+    @After
+    public void deleteInputReservation() {
+        try {
+            st = con.createStatement();
+            String query = "DELETE FROM reservations WHERE id = '" + lastid1 + "'";
+            st.executeUpdate(query);
+            query = "DELETE FROM reservationlines WHERE reservation_id = '" + lastid + "'";
+            st.executeUpdate(query);
+        } catch (Exception e){
+            System.out.println("Error: " + e);
+        }
     }
 }
