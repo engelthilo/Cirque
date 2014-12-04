@@ -77,4 +77,5 @@ public class buildHolder {
     public void setResSeat(Boolean[][] resSeat) {
         this.resSeat = resSeat;
     }
+
 }

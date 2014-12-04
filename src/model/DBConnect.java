@@ -194,4 +194,33 @@ public class DBConnect {
         return reservations;
     }
 
+    /**
+     * Input: (int) reservation.
+     * Method: Finds all the seats in a reservation
+     * Returns: A boolean multidimensionalarray (Boolean[][]) with x being the first value and y being the second like x=5:y=3 is Boolean[5][3]
+     */
+    public Boolean[][] getResSeat(int reservationId) {
+
+        try {
+            st = getCon().createStatement();
+            String query = "SELECT seat_x, seat_y FROM reservationlines, reservations WHERE reservationlines.reservation_id = reservations.id AND reservations.id = " + reservationId;
+            rs = st.executeQuery(query);
+
+            Boolean[][] resSeat = new Boolean[100][100];
+
+            while(rs.next()) {
+                int seat_x = rs.getInt("seat_x"); //gets the x-value of a reserved seat
+                int seat_y = rs.getInt("seat_y"); // gets the y-value of a reserved seat
+                resSeat[seat_x][seat_y] = true; // like resSeat[3][4] is true if reserved seat: 3:4
+            }
+
+            return resSeat;
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+
+        return null;
+    }
+
 }
