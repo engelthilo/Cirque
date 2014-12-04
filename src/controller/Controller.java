@@ -365,7 +365,7 @@ public class Controller {
                 @Override
                 public void handle(MouseEvent event) {
                     if (event.getClickCount() == 2) {
-                        buildEditReservationView(reservationList.getSelectionModel().getSelectedItem().toString());
+                        buildEditReservationView(reservationList.getSelectionModel().getSelectedItem().toString(),reservation.getKey());
                         System.out.println("clicked on " + reservationList.getSelectionModel().getSelectedItem());
                     }
                 }
@@ -374,7 +374,7 @@ public class Controller {
 
     }
 
-    private void buildEditReservationView(String reservationID, int showId){
+    private void buildEditReservationView(String reservationString, int reservationID){
         Stage editReservationView = new Stage();
         editReservationView.initStyle(StageStyle.UTILITY);
 
@@ -385,7 +385,7 @@ public class Controller {
         vbox.setPrefSize(900,600);
 
 
-        final Label reservationIDLabel = new Label(reservationID);
+        final Label reservationIDLabel = new Label(reservationString);
         final Button editButton = new Button("Rediger reservation");
         final Button deleteButton = new Button("Slet reservation");
         deleteButton.setLayoutX(10);
@@ -396,8 +396,7 @@ public class Controller {
         Pane buttonContainer = new Pane();
         buttonContainer.setPrefSize(900,50);
 
-        sceneVBox.getChildren().clear(); //henter sædderne ind på sceneVBox - hvad gør clear??
-        bh = db.getBuildSceneInfo(showId); //lægger infor om den enkelte films sceneopbygning ind i buildHolder
+
 
         buttonContainer.getChildren().addAll(deleteButton,editButton);
         vbox.getChildren().addAll(reservationIDLabel, sceneVBox,buttonContainer);
