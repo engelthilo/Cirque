@@ -19,13 +19,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 
-    public class DBConnectTest {
-        private Connection con;
-        private Statement st;
-        private ResultSet rs;
-        private String lastid;
-        private String lastid1;
-        private DBConnect dbConnect;
+public class DBConnectTest {
+    private Connection con;
+    private Statement st;
+    private ResultSet rs;
+    private String lastid;
+    private String lastid1;
+    private DBConnect dbConnect;
 
     public DBConnectTest() {
         dbConnect = new DBConnect();
@@ -62,7 +62,7 @@ import java.util.Map;
             rs = st.executeQuery(query);
             Timestamp tmstmp = new Timestamp(0);
             while (rs.next()) {
-                System.out.println("Id eksisterer"); //id 4 eksisterer ikke
+                //System.out.println("Id eksisterer"); //id 4 eksisterer ikke
                 assertTrue(tmstmp.getTime() < rs.getTimestamp("time").getTime());
                 if (rs.getTimestamp("time").getTime() > tmstmp.getTime()) {
                     tmstmp = rs.getTimestamp("time");
@@ -142,8 +142,8 @@ import java.util.Map;
     //Denne test tester om der kommer en liste ud når man har reserveret for et bestemt nummer.
     @Test
     public void testInputReservation() {
-        LinkedHashMap<Integer, HBox> reservations = dbConnect.getReservations("11223344");
-        assertTrue(reservations.isEmpty());
+        LinkedHashMap<Integer, HBox> reservations = new LinkedHashMap(dbConnect.getReservations("11223344"));
+        assertTrue(reservations.size() == 0);
         lastid1 = "";
         try {
             st = con.createStatement();
@@ -159,10 +159,10 @@ import java.util.Map;
             System.out.println("Error: " + e);
         }
         System.out.println(lastid1);
-        reservations = dbConnect.getReservations("11223344");
-        assertTrue(reservations.size() == 1);
+        LinkedHashMap<Integer, HBox> newReservation = new LinkedHashMap(dbConnect.getReservations("11223344"));
+        assertTrue(newReservation.size() >= 1);
 
-    //sletter indput til databasen som blev lavet opover.
+        //sletter indput til databasen som blev lavet opover.
     }
     @After
     public void deleteInputReservation() {
