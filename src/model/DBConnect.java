@@ -72,9 +72,11 @@ public class DBConnect {
      */
     public LinkedHashMap<Integer, Timestamp> getMovieSchedule(int movieId) {
         LinkedHashMap<Integer, Timestamp> times = new LinkedHashMap<Integer, Timestamp>();
+        java.util.Date date= new java.util.Date();
+        Timestamp timeNow = new Timestamp(date.getTime());
         try {
             st = getCon().createStatement();
-            String query = "SELECT * FROM shows WHERE movie_id=" + movieId + " ORDER BY time ASC";
+            String query = "SELECT * FROM shows WHERE movie_id=" + movieId + " AND time > '" + timeNow + "' ORDER BY time ASC";
             rs = st.executeQuery(query);
             while(rs.next()) {
                 int id = rs.getInt("id");

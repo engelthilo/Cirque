@@ -69,7 +69,7 @@
                                           <Insets bottom="20.0" left="15.0" right="20.0" top="15.0" />
                                        </padding></VBox>
                                  </children></Pane>
-                              <Button fx:id="makeReservation" layoutX="771.0" layoutY="597.0" mnemonicParsing="false" onMouseClicked="#makeReservation" prefHeight="52.0" prefWidth="143.0" style="-fx-background-color: #66BB6A;" text="Fuldfør reservation">
+                              <Button fx:id="makeReservation" layoutX="771.0" layoutY="597.0" mnemonicParsing="false" onMouseClicked="#makeReservation" prefHeight="52.0" prefWidth="143.0" style="-fx-background-color: #66BB6A; -fx-cursor: hand;" text="Fuldfør reservation">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font></Button>

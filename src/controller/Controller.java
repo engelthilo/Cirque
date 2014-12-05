@@ -422,10 +422,14 @@ public class Controller {
 
         Button editButton = new Button("Rediger reservation");
         Button deleteButton = new Button("Slet reservation");
-        deleteButton.setLayoutX(10);
+
+        deleteButton.setLayoutX(25);
         deleteButton.setLayoutY(10);
-        editButton.setLayoutX(750);
+        deleteButton.setStyle("-fx-background-color: #E53935; -fx-font-weight: bold; -fx-cursor: hand");
+
+        editButton.setLayoutX(720);
         editButton.setLayoutY(10);
+        editButton.setStyle("-fx-background-color: #66BB6A; -fx-font-weight: bold; -fx-cursor: hand");
 
         editButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
