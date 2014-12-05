@@ -1,5 +1,8 @@
 package model;
 
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -172,20 +175,25 @@ public class DBConnect {
      * Method: Finds all the reservations for a defined phone number
      * Returns: A linkedhashmap with the reservation id as key (int) and a generated string with information about the reservation (movie, time etc.)
      */
-    public LinkedHashMap<Integer, String> getReservations(String phoneNumber) {
-        LinkedHashMap<Integer, String> reservations = new LinkedHashMap<Integer, String>();
+    public LinkedHashMap<Integer, HBox> getReservations(String phoneNumber) {
+        LinkedHashMap<Integer, HBox> reservations = new LinkedHashMap<Integer, HBox>();
         try {
             st = getCon().createStatement();
             String query = "SELECT shows.id, time, movie_name, cinema_name, reservations.id, customer_name FROM reservations, cinemas, movies, shows WHERE reservations.customer_phone='" + phoneNumber + "' AND reservations.show_id = shows.id AND shows.movie_id = movies.id AND shows.cinema_id = cinemas.id";
             rs = st.executeQuery(query);
             while(rs.next()) {
-                String movieName = rs.getString("movie_name");
-                String customerName = rs.getString("customer_name");
-                String cinemaName = rs.getString("cinema_name");
-                Timestamp timestamp = rs.getTimestamp("time");
                 int id = rs.getInt("reservations.id");
-                String resString = movieName + "   " + new SimpleDateFormat("dd/MM HH:mm").format(timestamp);
-                reservations.put(id, resString);
+                HBox hbox = new HBox(50);
+                Label movieName = new Label(rs.getString("movie_name"));
+                Label cinemaName = new Label(rs.getString("cinema_name"));
+                Label customerName = new Label(rs.getString("customer_name"));
+                Label timeStamp = new Label(new SimpleDateFormat("dd/MM HH:mm").format(rs.getTimestamp("time")));
+                movieName.setPrefWidth(150);
+                cinemaName.setPrefWidth(150);
+                customerName.setPrefWidth(150);
+                timeStamp.setPrefWidth(150);
+                hbox.getChildren().addAll(movieName, timeStamp, cinemaName, customerName);
+                reservations.put(id, hbox);
             }
 
         } catch (Exception e) {
@@ -248,6 +256,62 @@ public class DBConnect {
         }
 
         return 0;
+    }
+
+    /**
+     * Input: (ArrayList<String>, ArrayList<String>, int) first arraylist being the oldreserved seats, second arraylist being the new reserved seats, int being the id of the reservation
+     * Method: Updates an order with new seats (first deleting old seats and then inserting new seats
+     * Returns: Boolean - true if inserted correctly and false if not
+     */
+    public Boolean updateReservation(ArrayList<String> oldSeats, ArrayList<String> newSeats, int reservationId) {
+        try {
+            // first we delete the old reservated seats
+            for(String seat : oldSeats) {
+                String[] seatInfo = seat.split(":"); // here we split the string since it is like 3:3 or 9:17 so that we can get the x-value and the y-value seperated. They are now stored in an array with index 0 being the x-value and index 1 being the y-value
+                String query = "DELETE FROM reservationlines WHERE reservation_id = '" + reservationId + "' AND seat_x = '" + seatInfo[0] + "' AND seat_y = '" + seatInfo[1] + "'";
+                st.executeUpdate(query);
+            }
+
+            // then we insert the new reservated seats
+            for(String seat : newSeats) {
+                String[] seatInfo = seat.split(":"); // here we split the string since it is like 3:3 or 9:17 so that we can get the x-value and the y-value seperated. They are now stored in an array with index 0 being the x-value and index 1 being the y-value
+                String query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + reservationId + "', '" + seatInfo[0] + "', '" + seatInfo[1] + "')";
+                st.executeUpdate(query);
+            }
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+
+        return false;
+    }
+
+    /**
+     * Input: (ArrayList<String>, int) arraylist being the seats to delete, the int being the id of the reservation
+     * Method: Deletes the seats from the reservationlines table and the reservation itself from the reservations table
+     * Returns: Boolean - true if deleted correctly and false if not
+     */
+    public Boolean deleteReservation(ArrayList<String> oldSeats, int reservationId) {
+        try {
+            // deleting all the seats
+            for(String seat : oldSeats) {
+                String[] seatInfo = seat.split(":"); // here we split the string since it is like 3:3 or 9:17 so that we can get the x-value and the y-value seperated. They are now stored in an array with index 0 being the x-value and index 1 being the y-value
+                String query = "DELETE FROM reservationlines WHERE reservation_id = '" + reservationId + "' AND seat_x = '" + seatInfo[0] + "' AND seat_y = '" + seatInfo[1] + "'";
+                st.executeUpdate(query);
+            }
+            // deleting the reservation itself
+            String query = "DELETE FROM reservations WHERE id = '" + reservationId + "'";
+            st.executeUpdate(query);
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+
+        return false;
     }
 
 }

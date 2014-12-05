@@ -83,7 +83,11 @@ public class Controller {
 
     private buildHolder bh;
 
-    private Boolean dragMouse;
+    private ArrayList<String> oldSeats;
+
+    private ArrayList<String> newSeats;
+
+    private Stage editReservationView;
 
     private int intChosenSeats;
 
@@ -215,7 +219,6 @@ public class Controller {
     @FXML
     private void buildReservationScene(int showId) { //denne metode bygger reservationScene for den pågældende film
         overfillPane.toBack();
-        dragMouse = false;
         seatsInOrder = new ArrayList<String>(); // initalizing the arraylist that will contain the seat(s) that has been clicked
 
         //dbcall så vi kan få information om forestillingen (hvor den vises, filmtitel osv.)
@@ -315,7 +318,7 @@ public class Controller {
     }
 
     @FXML
-    private void makeReservation() throws Exception{
+    private void makeReservation() throws Exception {
         // if customer name and phone has been entered and at least one seat has been chosen
         if(!customerName.getText().isEmpty() && !customerPhone.getText().isEmpty() && seatsInOrder.size()>0 && customerPhone.getLength() == 8) {
             String name = customerName.getText(); // gets the name of the customer from the textfield
@@ -343,9 +346,21 @@ public class Controller {
 
     }
 
-    //Method to call getReservations() method when pressed enter
+    //Method to call makeReservation() when pressed enter in name or phone number field
     @FXML
-    public void enterToCheck(KeyEvent event){
+    public void reservationCheckEnter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                makeReservation();
+            } catch (Exception e) {
+                System.out.println("Error:e" + e);
+            }
+        }
+    }
+
+    //Method to call getReservations() when pressed enter in phone number textfield
+    @FXML
+    public void editCheckEnter(KeyEvent event){
         if (event.getCode() == KeyCode.ENTER) {
             getReservations();
         }
@@ -354,28 +369,40 @@ public class Controller {
 
     @FXML
     private void getReservations() {
-        //reservationList.getItems().add("Interstellar 19/01 10:00");
-        //final Button button = new Button("Rediger");
         reservationList.getItems().clear();
+        HBox topHbox = new HBox(50);
+        topHbox.setStyle("-fx-font-weight: bold; -fx-font-size: 16px; -fx-border-width: 2px; -fx-border-color: transparent transparent black transparent;");
+        Label movieName = new Label("Film");
+        Label cinemaName = new Label("Sal");
+        Label customerName = new Label("Kundenavn");
+        Label timeStamp = new Label("Tidspunkt");
+        movieName.setPrefWidth(150);
+        cinemaName.setPrefWidth(150);
+        customerName.setPrefWidth(150);
+        timeStamp.setPrefWidth(150);
+        topHbox.getChildren().addAll(movieName, timeStamp, cinemaName, customerName);
+        reservationList.getItems().add(topHbox);
+
         String number = phoneNumber.getText();
-        LinkedHashMap<Integer, String> reservations = new LinkedHashMap(db.getReservations(number));
-        for(Map.Entry<Integer, String> reservation : reservations.entrySet()) {
-            final Label reservationId = new Label(reservation.getValue());
-            reservationId.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
+        LinkedHashMap<Integer, HBox> reservations = new LinkedHashMap(db.getReservations(number));
+        for(Map.Entry<Integer, HBox> reservation : reservations.entrySet()) {
+            HBox hbox = new HBox(reservation.getValue());
+            hbox.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
                     if (event.getClickCount() == 2) {
-                        buildEditReservationView(reservation.getValue(), reservation.getKey());
+                        buildEditReservationView(reservation.getKey());
                     }
                 }
             });
-            reservationList.getItems().add(reservationId);
+
+            reservationList.getItems().add(hbox);
         }
 
     }
 
-    private void buildEditReservationView(String reservationString, int reservationID){
-        Stage editReservationView = new Stage();
+    private void buildEditReservationView(int reservationID){
+        editReservationView = new Stage();
         editReservationView.initStyle(StageStyle.UTILITY);
 
         Pane pane = new Pane();
@@ -391,9 +418,6 @@ public class Controller {
         editVBox.setAlignment(Pos.CENTER);
         editVBox.setPrefSize(900,500);
 
-        Label reservationIDLabel = new Label(reservationString);
-        vbox.getChildren().add(reservationIDLabel);
-
         Pane buttonContainer = new Pane();
         buttonContainer.setPrefSize(900,50);
 
@@ -404,9 +428,27 @@ public class Controller {
         editButton.setLayoutX(750);
         editButton.setLayoutY(10);
 
+        editButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                updateReservation(reservationID);
+            }
+        });
+
+        deleteButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                deleteReservation(reservationID);
+            }
+        });
+
         buttonContainer.getChildren().addAll(deleteButton,editButton);
 
         bh = db.getBuildSceneInfo(db.getShowIdFromResId(reservationID)); //lægger infor om den enkelte films sceneopbygning ind i buildHolder
+
+        Label editReservationLabel = new Label(bh.getMovieName() + " - " + new SimpleDateFormat("dd/MM HH:mm").format(bh.getTime()));
+        editReservationLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        vbox.getChildren().add(editReservationLabel);
 
         int columns = bh.getColumns(); //henter kolonner/bredden i den pågældende sal
         int rows = bh.getRows(); //henter rækker/længden i den pågældende sal
@@ -418,6 +460,8 @@ public class Controller {
         Boolean[][] resSeat = bh.getResSeat();
 
         Boolean[][] editResSeat = db.getResSeat(reservationID); //Get the reserved seats for the specifik reservation id
+        oldSeats = new ArrayList<String>();
+        newSeats = new ArrayList<String>();
 
         for(int i = 1; i < columns+1; i++) { //laver en forloppe der kører kolonerne igennem
 
@@ -428,16 +472,86 @@ public class Controller {
                 int x = i;
                 int y = j;
 
+                String seatString = "";
+
                 if (resSeat[i][j] != null) { // if current entity in array isnt null
                     if (resSeat[i][j] && editResSeat[i][j] == null) { // if a seat is reserved we made its boolean true
                         r.setFill(Color.web("#E53935")); //sets the red color of a reserved seat
                     } else if (editResSeat[i][j] != null){
                         if(editResSeat[i][j]) {
+                            seatString = x + ":" + y;
+                            oldSeats.add(seatString);
+                            newSeats.add(seatString);
                             r.setFill(Color.web("#039BE5"));
+
+                            /** DRAG FUNCTION FOR BLUE SEATS STARTS HERE */
+                            // when starting to drag
+                            r.setOnDragDetected(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    Dragboard db = r.startDragAndDrop(TransferMode.MOVE); // start dragndrop
+                                    ClipboardContent cc = new ClipboardContent(); // creates new clipboardcontent which is normally used to hold a value
+                                    cc.putString(""); // this is just to obtain the dragndrop function. we do not set the value to anything since we do not transfer value between the seats
+                                    db.setContent(cc); // binds the clipboardcontent to the dragboard since it's needed
+                                    db.setDragView(new Image("dragndrop.png")); // normally the dragview would be a reflection of the item dragged (the seat in this case) but we just want to select seats by holding down the mousebutton
+                                }
+                            });
+
+                            // when dragging over a seat
+                            r.setOnDragEntered(new EventHandler<DragEvent>() {
+                                @Override
+                                public void handle(DragEvent event) {
+                                    addToEditSeatOrder(r, x, y);
+                                }
+                            });
+
+
+                            // funktion ved klik på ledigt sæde
+                            r.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    addToEditSeatOrder(r, x, y);
+                                } // function to run when an available seat is clicked
+                            });
+
+                            /** DRAG FUNCTION FOR BLUE SEATS ENDS HERE */
                         }
                     }
                 }  else {
                     r.setFill(Color.web("#43A047")); //sets the green color of a available seat
+
+                    /** DRAG FUNCTION FOR GREEN SEATS STARTS HERE */
+                    // when starting to drag
+                    r.setOnDragDetected(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            Dragboard db = r.startDragAndDrop(TransferMode.MOVE); // start dragndrop
+                            ClipboardContent cc = new ClipboardContent(); // creates new clipboardcontent which is normally used to hold a value
+                            cc.putString(""); // this is just to obtain the dragndrop function. we do not set the value to anything since we do not transfer value between the seats
+                            db.setContent(cc); // binds the clipboardcontent to the dragboard since it's needed
+                            db.setDragView(new Image("dragndrop.png")); // normally the dragview would be a reflection of the item dragged (the seat in this case) but we just want to select seats by holding down the mousebutton
+                        }
+                    });
+
+                    // when dragging over a seat
+                    r.setOnDragEntered(new EventHandler<DragEvent>() {
+                        @Override
+                        public void handle(DragEvent event) {
+                            addToEditSeatOrder(r, x, y);
+                        }
+                    });
+
+
+                    // funktion ved klik på ledigt sæde
+                    r.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            addToEditSeatOrder(r, x, y);
+                        } // function to run when an available seat is clicked
+                    });
+
+                    /** DRAG FUNCTION FOR GREEN SEATS ENDS HERE */
+
                 }
 
                 gp.add(r,i,j);
@@ -457,11 +571,46 @@ public class Controller {
         editReservationView.show();
     }
 
+    private void addToEditSeatOrder(Rectangle r, int x, int y) {
+        // add to current order (edit order)
+        if(r.getFill().toString().contains("0x43a047ff")) { // if the seat is color code green
+            r.setFill(Color.web("#039BE5")); // sets color to blue
+            String seatString = (x + ":" + y); // seatString 3:3 etc.
+            newSeats.add(seatString); // adds seatString to array
+        } else if(r.getFill().toString().contains("0x039be5ff")) { // if the seat is color code blue
+            r.setFill(Color.web("#43A047")); // set color to green
+            String seatString = (x + ":" + y); // seatString 3:3 etc.
+            newSeats.remove(seatString); // removes seatString from array
+        }
+    }
+
+    private void updateReservation(int reservationID) {
+        if(db.updateReservation(oldSeats, newSeats, reservationID)) {
+            newPopUp("Reservationen er rettet!");
+            editReservationView.close();
+            getReservations();
+        } else {
+            newPopUp("Der er sket en fejl!\nReservationen kunne ikke rettes. \nLuk vinduet og prøv igen.");
+        }
+    }
+
+    private void deleteReservation(int reservationID) {
+        if(db.deleteReservation(oldSeats, reservationID)) {
+            newPopUp("Reservationen er slettet!");
+            editReservationView.close();
+            getReservations();
+        } else {
+            newPopUp("Der er sket en fejl!\nReservationen kunne ikke slettes. \nLuk vinduet og prøv igen.");
+        }
+    }
+
+
     private void newPopUp(String text) {
         Stage dialog = new Stage();
         dialog.initStyle(StageStyle.UTILITY);
 
         final Button button = new Button("OK");
+        button.requestFocus();
         button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>(){
 
             @Override

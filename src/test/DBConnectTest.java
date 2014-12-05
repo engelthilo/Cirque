@@ -1,6 +1,7 @@
 package test;
 import controller.Controller;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import model.DBConnect;
@@ -137,7 +138,7 @@ System.out.println("Error: " + e);
 //Denne test tester om der kommer en liste ud når man har reserveret for et bestemt nummer.
 @Test
 public void testInputReservation() {
-LinkedHashMap<Integer, String> reservations = dbConnect.getReservations("11223344");
+LinkedHashMap<Integer, HBox> reservations = dbConnect.getReservations("11223344");
 assertTrue(reservations.isEmpty());
 lastid1 = "";
 try {
