@@ -177,12 +177,12 @@ public class DBConnect {
      */
     public LinkedHashMap<Integer, HBox> getReservations(String phoneNumber) {
         LinkedHashMap<Integer, HBox> reservations = new LinkedHashMap<Integer, HBox>();
-        HBox hbox = new HBox(50);
         try {
             st = getCon().createStatement();
             String query = "SELECT shows.id, time, movie_name, cinema_name, reservations.id, customer_name FROM reservations, cinemas, movies, shows WHERE reservations.customer_phone='" + phoneNumber + "' AND reservations.show_id = shows.id AND shows.movie_id = movies.id AND shows.cinema_id = cinemas.id";
             rs = st.executeQuery(query);
             while(rs.next()) {
+                HBox hbox = new HBox(50);
                 int id = rs.getInt("reservations.id");
                 Label movieName = new Label(rs.getString("movie_name"));
                 Label cinemaName = new Label(rs.getString("cinema_name"));
