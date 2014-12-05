@@ -366,7 +366,6 @@ public class Controller {
         }
     }
 
-
     @FXML
     private void getReservations() {
         reservationList.getItems().clear();

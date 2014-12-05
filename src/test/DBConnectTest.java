@@ -1,33 +1,28 @@
 package test;
-import controller.Controller;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import model.DBConnect;
 import model.buildHolder;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import model.DBConnect;
 import java.sql.*;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 
 public class DBConnectTest {
     private Connection con;
     private Statement st;
     private ResultSet rs;
     private String lastid;
-    private String lastid1;
+    private int lastid1;
     private DBConnect dbConnect;
 
     public DBConnectTest() {
+
         dbConnect = new DBConnect();
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -141,40 +136,34 @@ public class DBConnectTest {
     }
     //Denne test tester om der kommer en liste ud når man har reserveret for et bestemt nummer.
     @Test
-    public void testInputReservation() {
-        LinkedHashMap<Integer, HBox> reservations = new LinkedHashMap(dbConnect.getReservations("11223344"));
-        assertTrue(reservations.size() == 0);
-        lastid1 = "";
+    public void testGetReservation() {
+        Boolean reservations = dbConnect.getBooleanReservations("11223344");
+        assertTrue(!reservations);
+        ArrayList<String> seats = new ArrayList<String>();
+        seats.add("2:2");
+        String customerName = "Markus";
+        String phoneNumber = "11223344";
+        int showId = 109;
+        dbConnect.insertReservation(seats, showId, customerName, phoneNumber);
+        reservations = dbConnect.getBooleanReservations("11223344");
+        assertTrue(reservations);
         try {
-            st = con.createStatement();
-            String query = "INSERT INTO reservations (show_id, customer_name, customer_phone) VALUES (109, 'Markus', '11223344')";
-            st.executeUpdate(query);
-            rs = st.executeQuery("select last_insert_id() as last_id from reservations");
+            rs = st.executeQuery("SELECT id FROM reservations ORDER BY id DESC LIMIT 1");
             if (rs.next()) {
-                lastid1 = rs.getString(1);
+                lastid1 = rs.getInt(1);
             }
-            query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + lastid1 + "', 2, 2)";
-            st.executeUpdate(query);
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
-        System.out.println(lastid1);
-        LinkedHashMap<Integer, HBox> newReservation = new LinkedHashMap(dbConnect.getReservations("11223344"));
-        assertTrue(newReservation.size() >= 1);
-
-        //sletter indput til databasen som blev lavet opover.
     }
+
+    //sletter indput til databasen som blev lavet opover.
     @After
     public void deleteInputReservation() {
-        try {
-            st = con.createStatement();
-            String query = "DELETE FROM reservations WHERE id = '" + lastid1 + "'";
-            st.executeUpdate(query);
-            query = "DELETE FROM reservationlines WHERE reservation_id = '" + lastid1 + "'";
-            st.executeUpdate(query);
-        } catch (Exception e){
-            System.out.println("Error: " + e);
-        }
+        ArrayList<String> oldSeats = new ArrayList<String>();
+        oldSeats.add("2:2");
+        dbConnect.deleteReservation(oldSeats, lastid1);
+
     }
 
 }

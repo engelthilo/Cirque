@@ -314,4 +314,19 @@ public class DBConnect {
         return false;
     }
 
+    public Boolean getBooleanReservations(String phoneNumber) {
+        try {
+            st = getCon().createStatement();
+            String query = "SELECT shows.id, time, movie_name, cinema_name, reservations.id, customer_name FROM reservations, cinemas, movies, shows WHERE reservations.customer_phone='" + phoneNumber + "' AND reservations.show_id = shows.id AND shows.movie_id = movies.id AND shows.cinema_id = cinemas.id";
+            rs = st.executeQuery(query);
+            while(rs.next()) {
+                return true;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        return false;
+    }
+
 }
