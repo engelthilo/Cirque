@@ -289,8 +289,8 @@ public class Controller {
                     r.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
-                            addSeatToOrder(r, x, y);
                             dragColorCheck = r.getFill().toString();
+                            addSeatToOrder(r, x, y);
                         } // function to run when an available seat is clicked
                     });
                 }
