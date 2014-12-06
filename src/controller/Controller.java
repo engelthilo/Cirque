@@ -223,6 +223,7 @@ public class Controller {
     private void buildReservationScene(int showId) { //denne metode bygger reservationScene for den pågældende film
         overfillPane.toBack();
         seatsInOrder = new ArrayList<String>(); // initalizing the arraylist that will contain the seat(s) that has been clicked
+        intChosenSeats = 0;
 
         //dbcall så vi kan få information om forestillingen (hvor den vises, filmtitel osv.)
         sceneVBox.getChildren().clear(); //henter sædderne ind på sceneVBox - hvad gør clear??
