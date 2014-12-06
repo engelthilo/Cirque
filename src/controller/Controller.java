@@ -77,6 +77,9 @@ public class Controller {
     @FXML
     private TextField phoneNumber;
 
+    @FXML
+    private Pane editReservationTopPane;
+
     private DBConnect db;
 
     private ArrayList<String> seatsInOrder;
@@ -369,18 +372,7 @@ public class Controller {
     @FXML
     private void getReservations() {
         reservationList.getItems().clear();
-        HBox topHbox = new HBox(50);
-        topHbox.setStyle("-fx-font-weight: bold; -fx-font-size: 16px; -fx-border-width: 2px; -fx-border-color: transparent transparent black transparent;");
-        Label movieName = new Label("Film");
-        Label cinemaName = new Label("Sal");
-        Label customerName = new Label("Kundenavn");
-        Label timeStamp = new Label("Tidspunkt");
-        movieName.setPrefWidth(150);
-        cinemaName.setPrefWidth(150);
-        customerName.setPrefWidth(150);
-        timeStamp.setPrefWidth(150);
-        topHbox.getChildren().addAll(movieName, timeStamp, cinemaName, customerName);
-        reservationList.getItems().add(topHbox);
+        editReservationTopPane.setOpacity(1);
 
         String number = phoneNumber.getText();
         LinkedHashMap<Integer, HBox> reservations = new LinkedHashMap(db.getReservations(number));
@@ -396,6 +388,10 @@ public class Controller {
             });
 
             reservationList.getItems().add(hbox);
+        }
+
+        if(reservations.size()==0) {
+            reservationList.getItems().add("Der blev ikke fundet nogen reservationer på det ønskede nummer");
         }
 
     }

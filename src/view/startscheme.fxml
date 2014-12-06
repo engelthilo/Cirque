@@ -118,14 +118,38 @@
                            <children>
                               <VBox layoutX="3.0" layoutY="1.0" prefHeight="665.0" prefWidth="994.0">
                                  <children>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                    <HBox alignment="CENTER" prefHeight="59.0" prefWidth="994.0" spacing="20.0">
                                        <children>
                                           <Label text="Telefonnummer:" />
                                           <TextField fx:id="phoneNumber" onKeyPressed="#editCheckEnter" />
                                           <Button mnemonicParsing="false" onMouseClicked="#getReservations" text="Tjek reservationer" />
                                        </children>
                                     </HBox>
-                                    <ListView fx:id="reservationList" prefHeight="566.0" prefWidth="994.0" />
+                                    <Pane fx:id="editReservationTopPane" opacity="0.0" prefHeight="34.0" prefWidth="994.0" style="-fx-border-width: 2px; -fx-border-color: transparent transparent black transparent;">
+                                       <children>
+                                          <Label layoutX="8.0" layoutY="13.0" prefHeight="16.0" prefWidth="250.0" text="Film">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="258.0" layoutY="13.0" prefHeight="16.0" prefWidth="200.0" text="Tidspunkt">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="458.0" layoutY="13.0" prefHeight="16.0" prefWidth="200.0" text="Sal">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="658.0" layoutY="13.0" prefHeight="16.0" prefWidth="200.0" text="Kundenavn">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                    <ListView fx:id="reservationList" prefHeight="551.0" prefWidth="994.0" />
                                  </children>
                               </VBox>
                            </children>

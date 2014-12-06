@@ -179,9 +179,11 @@ public class DBConnect {
      */
     public LinkedHashMap<Integer, HBox> getReservations(String phoneNumber) {
         LinkedHashMap<Integer, HBox> reservations = new LinkedHashMap<Integer, HBox>();
+        java.util.Date date= new java.util.Date();
+        Timestamp timeNow = new Timestamp(date.getTime());
         try {
             st = getCon().createStatement();
-            String query = "SELECT shows.id, time, movie_name, cinema_name, reservations.id, customer_name FROM reservations, cinemas, movies, shows WHERE reservations.customer_phone='" + phoneNumber + "' AND reservations.show_id = shows.id AND shows.movie_id = movies.id AND shows.cinema_id = cinemas.id";
+            String query = "SELECT shows.id, time, movie_name, cinema_name, reservations.id, customer_name FROM reservations, cinemas, movies, shows WHERE reservations.customer_phone='" + phoneNumber + "' AND reservations.show_id = shows.id AND shows.movie_id = movies.id AND shows.cinema_id = cinemas.id AND shows.time > '" + timeNow + "'";
             rs = st.executeQuery(query);
             while(rs.next()) {
                 HBox hbox = new HBox(50);
@@ -190,9 +192,9 @@ public class DBConnect {
                 Label cinemaName = new Label(rs.getString("cinema_name"));
                 Label customerName = new Label(rs.getString("customer_name"));
                 Label timeStamp = new Label(new SimpleDateFormat("dd/MM HH:mm").format(rs.getTimestamp("time")));
-                movieName.setPrefWidth(150);
+                movieName.setPrefWidth(200);
                 cinemaName.setPrefWidth(150);
-                customerName.setPrefWidth(150);
+                customerName.setPrefWidth(200);
                 timeStamp.setPrefWidth(150);
                 hbox.getChildren().addAll(movieName, timeStamp, cinemaName, customerName);
                 reservations.put(id, hbox);
