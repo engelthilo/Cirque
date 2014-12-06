@@ -94,6 +94,8 @@ public class Controller {
 
     private int intChosenSeats;
 
+    private String dragColorCheck;
+
     public Controller() {
         db = new DBConnect();
     }
@@ -270,6 +272,7 @@ public class Controller {
                             cc.putString(""); // this is just to obtain the dragndrop function. we do not set the value to anything since we do not transfer value between the seats
                             db.setContent(cc); // binds the clipboardcontent to the dragboard since it's needed
                             db.setDragView(new Image("dragndrop.png")); // normally the dragview would be a reflection of the item dragged (the seat in this case) but we just want to select seats by holding down the mousebutton
+                            dragColorCheck = r.getFill().toString();
                         }
                     });
 
@@ -287,6 +290,7 @@ public class Controller {
                         @Override
                         public void handle(MouseEvent event) {
                             addSeatToOrder(r, x, y);
+                            dragColorCheck = r.getFill().toString();
                         } // function to run when an available seat is clicked
                     });
                 }
@@ -304,14 +308,14 @@ public class Controller {
     private void addSeatToOrder(final Rectangle r, int x, int y) {
 
         // add to current order
-        if(r.getFill().toString().contains("0x43a047ff")) { // if the seat is color code green
+        if(r.getFill().toString().contains("0x43a047ff") && dragColorCheck.equals("0x43a047ff")) { // if the seat is color code green
             r.setFill(Color.web("#039BE5")); // sets color to blue
             String seatString = (x + ":" + y); // seatString 3:3 etc.
             seatsInOrder.add(seatString); // adds seatString to array
             intChosenSeats++;
             numberOfSelectedSeats.setText("Valgte pladser: " + intChosenSeats); // viser antallet af valgte sæder
 
-        } else if(r.getFill().toString().contains("0x039be5ff")) { // if the seat is color code blue
+        } else if(r.getFill().toString().contains("0x039be5ff") && dragColorCheck.equals("0x039be5ff")) { // if the seat is color code blue
             r.setFill(Color.web("#43A047")); // set color to green
             String seatString = (x + ":" + y); // seatString 3:3 etc.
             seatsInOrder.remove(seatString); // removes seatString from array
