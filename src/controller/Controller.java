@@ -252,16 +252,19 @@ public class Controller {
                 double width = (scenePane.getWidth()-8*bh.getColumns()-8)/bh.getColumns(); // sets the width of the seat according to the cinema width
                 double height = (scenePane.getHeight()-8*bh.getRows()-8)/bh.getRows(); // sets the height of the seat according to the cinema height
                 final Rectangle r = new Rectangle(width,height); //laver sædderne som firkanter
+                r.setArcWidth(6);
+                r.setArcHeight(6);
                 int x = i;
                 int y = j;
 
                 if(resSeat[i][j] != null) { // if current entity in array isnt null
                     if(resSeat[i][j]) { // if a seat is reserved we made its boolean true
                         r.setFill(Color.web("#E53935")); //sets the red color of a reserved seat
+                        //r.setStroke(Color.web("#000000"));
                     }
                 } else {
                     r.setFill(Color.web("#43A047")); //sets the green color of a available seat
-
+                    //r.setStroke(Color.web("#000000"));
 
                     // when starting to drag
                     r.setOnDragDetected(new EventHandler<MouseEvent>() {
@@ -273,6 +276,7 @@ public class Controller {
                             db.setContent(cc); // binds the clipboardcontent to the dragboard since it's needed
                             db.setDragView(new Image("dragndrop.png")); // normally the dragview would be a reflection of the item dragged (the seat in this case) but we just want to select seats by holding down the mousebutton
                             dragColorCheck = r.getFill().toString();
+                            addSeatToOrder(r, x, y);
                         }
                     });
 
@@ -473,6 +477,8 @@ public class Controller {
                 double width = (895 - 8 * bh.getColumns() - 8) / bh.getColumns(); // sets the width of the seat according to the cinema width
                 double height = (500 - 8 * bh.getRows() - 8) / bh.getRows(); // sets the height of the seat according to the cinema height
                 final Rectangle r = new Rectangle(width, height); //laver sædderne som firkanter
+                r.setArcWidth(6);
+                r.setArcHeight(6);
                 int x = i;
                 int y = j;
 
@@ -498,6 +504,8 @@ public class Controller {
                                     cc.putString(""); // this is just to obtain the dragndrop function. we do not set the value to anything since we do not transfer value between the seats
                                     db.setContent(cc); // binds the clipboardcontent to the dragboard since it's needed
                                     db.setDragView(new Image("dragndrop.png")); // normally the dragview would be a reflection of the item dragged (the seat in this case) but we just want to select seats by holding down the mousebutton
+                                    dragColorCheck = r.getFill().toString();
+                                    addToEditSeatOrder(r, x, y);
                                 }
                             });
 
@@ -514,6 +522,7 @@ public class Controller {
                             r.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                                 @Override
                                 public void handle(MouseEvent event) {
+                                    dragColorCheck = r.getFill().toString();
                                     addToEditSeatOrder(r, x, y);
                                 } // function to run when an available seat is clicked
                             });
@@ -534,6 +543,8 @@ public class Controller {
                             cc.putString(""); // this is just to obtain the dragndrop function. we do not set the value to anything since we do not transfer value between the seats
                             db.setContent(cc); // binds the clipboardcontent to the dragboard since it's needed
                             db.setDragView(new Image("dragndrop.png")); // normally the dragview would be a reflection of the item dragged (the seat in this case) but we just want to select seats by holding down the mousebutton
+                            dragColorCheck = r.getFill().toString();
+                            addToEditSeatOrder(r, x, y);
                         }
                     });
 
@@ -550,6 +561,7 @@ public class Controller {
                     r.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
+                            dragColorCheck = r.getFill().toString();
                             addToEditSeatOrder(r, x, y);
                         } // function to run when an available seat is clicked
                     });
@@ -577,11 +589,11 @@ public class Controller {
 
     private void addToEditSeatOrder(Rectangle r, int x, int y) {
         // add to current order (edit order)
-        if(r.getFill().toString().contains("0x43a047ff")) { // if the seat is color code green
+        if(r.getFill().toString().contains("0x43a047ff") && dragColorCheck.equals("0x43a047ff")) { // if the seat is color code green
             r.setFill(Color.web("#039BE5")); // sets color to blue
             String seatString = (x + ":" + y); // seatString 3:3 etc.
             newSeats.add(seatString); // adds seatString to array
-        } else if(r.getFill().toString().contains("0x039be5ff")) { // if the seat is color code blue
+        } else if(r.getFill().toString().contains("0x039be5ff") && dragColorCheck.equals("0x039be5ff")) { // if the seat is color code blue
             r.setFill(Color.web("#43A047")); // set color to green
             String seatString = (x + ":" + y); // seatString 3:3 etc.
             newSeats.remove(seatString); // removes seatString from array
