@@ -119,10 +119,12 @@ public class Controller {
      */
     @FXML
     private void requestPhoneNumber(){
+        //Observe which tab is selected.
         tabPane.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Tab>() {
                     @Override
                     public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                        //If ''Ret reservation'' is clicked, do a Platform.runLater and inside this call phoneNumber.requestFocus()
                         if (tabPane.getSelectionModel().isSelected(2)){ //
                             System.out.println("Så er den valgt");
                             Platform.runLater(new Runnable() {
