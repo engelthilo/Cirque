@@ -1,5 +1,8 @@
 package controller;
 
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -28,6 +31,7 @@ public class Controller {
 
     @FXML
     private TabPane tabPane;
+
 
     @FXML
     private VBox showsVBox;
@@ -103,9 +107,39 @@ public class Controller {
 
     @FXML
     private void initialize() {
+        requestPhoneNumber();
         getMovies();
+
     }
 
+    /**
+     * Input: Nothing
+     * Action: When ''Ret reservation'' is selected put focus on phoneNumber textfield
+     * Output: Nothing
+     */
+    @FXML
+    private void requestPhoneNumber(){
+        tabPane.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<Tab>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                        if (tabPane.getSelectionModel().isSelected(2)){ //
+                            System.out.println("Så er den valgt");
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    phoneNumber.requestFocus();
+                                }
+                            });
+
+
+                        }
+
+
+                    }
+                }
+        );
+    }
 
     @FXML
     protected void getMovies() {
