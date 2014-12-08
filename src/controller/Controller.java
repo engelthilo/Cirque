@@ -242,9 +242,9 @@ public class Controller {
         int rows = bh.getRows(); //henter rækker/længden i den pågældende sal
         GridPane gp = new GridPane(); //skaber et gridpane som kolonner og rækker kan opbevares i.
         gp.setPrefSize(scenePane.getWidth()-5,scenePane.getHeight()-10); //sætter gridpane til samme str som det scenePane den ligger inden i.
-        gp.setHgap(6); //sætter mellemrum mellem sædderne på horizontalt led
-        gp.setVgap(6); //sætter mellemrum mellem sædderne på vertikalt ved.
         gp.setAlignment(Pos.CENTER); // centers the gridpane to the vbox
+        gp.setStyle("-fx-padding: 3; -fx-hgap: 4; -fx-vgap: 4;");
+        gp.setSnapToPixel(false);
         Boolean[][] resSeat = bh.getResSeat();
         for(int i = 1; i < columns+1; i++) { //laver en forloppe der kører kolonerne igennem
 
@@ -260,11 +260,9 @@ public class Controller {
                 if(resSeat[i][j] != null) { // if current entity in array isnt null
                     if(resSeat[i][j]) { // if a seat is reserved we made its boolean true
                         r.setFill(Color.web("#E53935")); //sets the red color of a reserved seat
-                        //r.setStroke(Color.web("#000000"));
                     }
                 } else {
                     r.setFill(Color.web("#43A047")); //sets the green color of a available seat
-                    //r.setStroke(Color.web("#000000"));
 
                     // when starting to drag
                     r.setOnDragDetected(new EventHandler<MouseEvent>() {
@@ -605,6 +603,7 @@ public class Controller {
             newPopUp("Reservationen er rettet!");
             editReservationView.close();
             getReservations();
+            overfillPane.toFront();
         } else {
             newPopUp("Der er sket en fejl!\nReservationen kunne ikke rettes. \nLuk vinduet og prøv igen.");
         }
@@ -615,6 +614,7 @@ public class Controller {
             newPopUp("Reservationen er slettet!");
             editReservationView.close();
             getReservations();
+            overfillPane.toFront();
         } else {
             newPopUp("Der er sket en fejl!\nReservationen kunne ikke slettes. \nLuk vinduet og prøv igen.");
         }
