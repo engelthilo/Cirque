@@ -277,21 +277,21 @@ public class Controller {
         int columns = bh.getColumns(); //henter kolonner/bredden i den pågældende sal
         int rows = bh.getRows(); //henter rækker/længden i den pågældende sal
         GridPane gp = new GridPane(); //skaber et gridpane som kolonner og rækker kan opbevares i.
-        gp.setPrefSize(scenePane.getWidth()-5,scenePane.getHeight()-10); //sætter gridpane til samme str som det scenePane den ligger inden i.
+        gp.setPrefSize(879,522); //sætter gridpane til samme str som det scenePane den ligger inden i.
         gp.setAlignment(Pos.CENTER); // centers the gridpane to the vbox
-        gp.setStyle("-fx-padding: 3; -fx-hgap: 4; -fx-vgap: 4;");
-        gp.setSnapToPixel(false);
         Boolean[][] resSeat = bh.getResSeat();
         for(int i = 1; i < columns+1; i++) { //laver en forloppe der kører kolonerne igennem
 
             for(int j = 1; j < rows+1; j++) { //forlopp der kører rækkerne igennem
-                double width = (scenePane.getWidth()-8*bh.getColumns()-8)/bh.getColumns(); // sets the width of the seat according to the cinema width
-                double height = (scenePane.getHeight()-8*bh.getRows()-8)/bh.getRows(); // sets the height of the seat according to the cinema height
+                double width = 870/bh.getColumns()-5;
+                double height = 515/bh.getRows()-5;
                 final Rectangle r = new Rectangle(width,height); //laver sædderne som firkanter
                 r.setArcWidth(6);
                 r.setArcHeight(6);
                 int x = i;
                 int y = j;
+                r.setStroke(Color.TRANSPARENT);
+                r.setStrokeWidth(5);
 
                 if(resSeat[i][j] != null) { // if current entity in array isnt null
                     if(resSeat[i][j]) { // if a seat is reserved we made its boolean true
@@ -444,7 +444,7 @@ public class Controller {
         editReservationView.initStyle(StageStyle.UTILITY);
 
         Pane pane = new Pane();
-        pane.setPrefSize(920,620);
+        pane.setPrefSize(900,620);
 
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
@@ -462,13 +462,13 @@ public class Controller {
         Button editButton = new Button("Rediger reservation");
         Button deleteButton = new Button("Slet reservation");
 
-        deleteButton.setLayoutX(25);
+        deleteButton.setLayoutX(5);
         deleteButton.setLayoutY(10);
-        deleteButton.setStyle("-fx-background-color: #E53935; -fx-font-weight: bold; -fx-cursor: hand");
+        deleteButton.setStyle("-fx-background-color: #E53935; -fx-font-weight: bold; -fx-cursor: hand;");
 
-        editButton.setLayoutX(720);
+        editButton.setLayoutX(735);
         editButton.setLayoutY(10);
-        editButton.setStyle("-fx-background-color: #66BB6A; -fx-font-weight: bold; -fx-cursor: hand");
+        editButton.setStyle("-fx-background-color: #66BB6A; -fx-font-weight: bold; -fx-cursor: hand;");
 
         editButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -495,9 +495,7 @@ public class Controller {
         int columns = bh.getColumns(); //henter kolonner/bredden i den pågældende sal
         int rows = bh.getRows(); //henter rækker/længden i den pågældende sal
         GridPane gp = new GridPane(); //skaber et gridpane som kolonner og rækker kan opbevares i.
-        gp.setPrefSize(895, 490); //sætter gridpane til samme str som det scenePane den ligger inden i.
-        gp.setHgap(6); //sætter mellemrum mellem sædderne på horizontalt led
-        gp.setVgap(6); //sætter mellemrum mellem sædderne på vertikalt ved.
+        gp.setPrefSize(900, 500); //sætter gridpane til samme str som det scenePane den ligger inden i.
         gp.setAlignment(Pos.CENTER); // centers the gridpane to the vbox
         Boolean[][] resSeat = bh.getResSeat();
 
@@ -508,11 +506,14 @@ public class Controller {
         for(int i = 1; i < columns+1; i++) { //laver en forloppe der kører kolonerne igennem
 
             for (int j = 1; j < rows + 1; j++) { //forlopp der kører rækkerne igennem
-                double width = (895 - 8 * bh.getColumns() - 8) / bh.getColumns(); // sets the width of the seat according to the cinema width
-                double height = (500 - 8 * bh.getRows() - 8) / bh.getRows(); // sets the height of the seat according to the cinema height
+                double width = 885/bh.getColumns()-5;
+                double height = 490/bh.getRows()-5;
+
                 final Rectangle r = new Rectangle(width, height); //laver sædderne som firkanter
                 r.setArcWidth(6);
                 r.setArcHeight(6);
+                r.setStroke(Color.TRANSPARENT);
+                r.setStrokeWidth(5);
                 int x = i;
                 int y = j;
 
