@@ -11,6 +11,8 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("view/startscheme.fxml"));
         primaryStage.setTitle("BioBookingSystem");
         primaryStage.setScene(new Scene(root, 1000, 700));
+        primaryStage.setMinHeight(700);
+        primaryStage.setMinWidth(1000);
         primaryStage.show();
     }
 
