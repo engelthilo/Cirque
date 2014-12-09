@@ -14,42 +14,47 @@
          <content>
             <SplitPane fx:id="showPane" dividerPositions="0.29797979797979796" minHeight="670.0" minWidth="1000.0" prefHeight="670.0" prefWidth="1000.0">
                <items>
-                  <AnchorPane fx:id="allShowsContainer" minHeight="0.0" minWidth="0.0" prefHeight="368.0" prefWidth="224.0">
+                  <TilePane alignment="TOP_CENTER" maxWidth="295.0" minHeight="670.0" minWidth="295.0" prefHeight="670.0" prefWidth="295.0">
                      <children>
-                        <VBox fx:id="showsVBox" alignment="CENTER" layoutY="-1.0" prefHeight="669.0" prefWidth="295.0" spacing="25.0">
+                        <VBox alignment="TOP_CENTER" maxWidth="295.0" minHeight="670.0" minWidth="295.0" prefHeight="670.0" prefWidth="295.0">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="44.0" prefWidth="294.0" text="FILM" textAlignment="CENTER">
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="100.0" maxWidth="295.0" minHeight="100.0" minWidth="295.0" prefHeight="100.0" prefWidth="295.0" style="-fx-border-color: transparent transparent #333333 transparent;" text="FILM" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="36.0" />
                                  </font>
                               </Label>
+                              <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="580.0" prefWidth="295.0" style="-fx-background-color: transparent;">
+                                 <content>
+                                    <VBox fx:id="showsVBox" alignment="TOP_CENTER" prefHeight="531.0" prefWidth="295.0" spacing="25.0">
+                                       <padding>
+                                          <Insets bottom="25.0" top="25.0" />
+                                       </padding>
+                                    </VBox>
+                                 </content>
+                              </ScrollPane>
                            </children>
                         </VBox>
                      </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="singleShowContainer" minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="295.0">
+                  </TilePane>
+                  <TilePane alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <VBox layoutX="-7.0" layoutY="52.0" prefHeight="616.0" prefWidth="699.0">
+                        <Pane prefHeight="670.0" prefWidth="697.0">
                            <children>
-                              <HBox fx:id="upper_schedule" alignment="CENTER" prefHeight="310.0" prefWidth="699.0">
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox fx:id="lower_schedule" prefHeight="310.0" prefWidth="699.0">
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                                 </VBox.margin>
-                              </HBox>
+                              <VBox layoutY="44.0" prefHeight="624.0" prefWidth="699.0">
+                                 <children>
+                                    <HBox fx:id="upper_schedule" alignment="CENTER" prefHeight="310.0" prefWidth="699.0" />
+                                    <HBox fx:id="lower_schedule" prefHeight="310.0" prefWidth="699.0" />
+                                 </children>
+                              </VBox>
+                              <Label fx:id="scheduleHeader" alignment="CENTER" prefHeight="49.0" prefWidth="693.0" text="Klik på en film til venstre for at vise tidspunkter">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
                            </children>
-                        </VBox>
-                        <Label fx:id="scheduleHeader" alignment="CENTER" layoutX="3.0" layoutY="3.0" prefHeight="49.0" prefWidth="693.0" text="Klik på en film til venstre for at vise tidspunkter">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
+                        </Pane>
                      </children>
-                  </AnchorPane>
+                  </TilePane>
                </items>
             </SplitPane>
          </content>

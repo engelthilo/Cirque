@@ -10,9 +10,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("view/startscheme.fxml"));
         primaryStage.setTitle("BioBookingSystem");
-        primaryStage.setScene(new Scene(root, 1000, 700));
-        primaryStage.setMinHeight(700);
-        primaryStage.setMinWidth(1000);
+        primaryStage.setScene(new Scene(root, 1010, 710));
+        primaryStage.setMinHeight(740);
+        primaryStage.setMinWidth(1010);
         primaryStage.show();
     }
 
