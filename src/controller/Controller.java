@@ -464,7 +464,7 @@ public class Controller {
 
         deleteButton.setLayoutX(5);
         deleteButton.setLayoutY(10);
-        deleteButton.setStyle("-fx-background-color: #E53935; -fx-font-weight: bold; -fx-cursor: hand;");
+        deleteButton.setStyle("-fx-background-color: #e53935; -fx-font-weight: bold; -fx-cursor: hand;");
 
         editButton.setLayoutX(735);
         editButton.setLayoutY(10);
