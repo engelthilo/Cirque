@@ -343,13 +343,19 @@ public class Controller {
             for (int j = 1; j < bh.getRows() + 1; j++) {
                 Label lbl = new Label(abcString.charAt(j-1) + "");
                 lbl.setAlignment(Pos.CENTER);
+                lbl.setPadding(new Insets(0,6,0,0));
                 gp.add(lbl, 0, j);
             }
             Label lbl = new Label(i + "");
             lbl.setMinWidth(870 / (bh.getColumns() + 1));
             lbl.setAlignment(Pos.CENTER);
+            lbl.setPadding(new Insets(0,0,6,0));
             gp.add(lbl, i, 0);
         }
+
+        Label centerFix = new Label("");
+        centerFix.setMinWidth(20);
+        gp.add(centerFix, bh.getColumns()+2, 1);
 
         sceneVBox.getChildren().add(gp); //sætter gridpane ind i sceneVBox
         tabPane.getSelectionModel().select(1); //sætter det ind under "fane" nr 2.
