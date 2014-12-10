@@ -405,7 +405,7 @@ public class Controller {
         }
         else {
             System.out.println("Orderen kan ikke færdiggøres");
-            newPopUp("Reservationen kan ikke udføres. \nFelterne navn og telfonnummer skal være udfyldt. \nDesuden skal du vælge sæder");
+            newPopUp("Reservationen kan ikke udføres.\nFelterne navn og telefonnummer skal være udfyldt.\nDesuden skal du vælge sæder");
         }
 
 
@@ -461,6 +461,7 @@ public class Controller {
     private void buildEditReservationView(int reservationID){
         editReservationView = new Stage();
         editReservationView.initStyle(StageStyle.UTILITY);
+        editReservationView.setResizable(false);
 
         Pane pane = new Pane();
         pane.setPrefSize(900,620);
@@ -481,11 +482,11 @@ public class Controller {
         Button editButton = new Button("Rediger reservation");
         Button deleteButton = new Button("Slet reservation");
 
-        deleteButton.setLayoutX(5);
+        deleteButton.setLayoutX(22);
         deleteButton.setLayoutY(10);
         deleteButton.setStyle("-fx-background-color: #e53935; -fx-font-weight: bold; -fx-cursor: hand;");
 
-        editButton.setLayoutX(735);
+        editButton.setLayoutX(716);
         editButton.setLayoutY(10);
         editButton.setStyle("-fx-background-color: #66BB6A; -fx-font-weight: bold; -fx-cursor: hand;");
 
@@ -525,8 +526,8 @@ public class Controller {
         for(int i = 1; i < columns+1; i++) { //laver en forloppe der kører kolonerne igennem
 
             for (int j = 1; j < rows + 1; j++) { //forlopp der kører rækkerne igennem
-                double width = 885/bh.getColumns()-5;
-                double height = 490/bh.getRows()-5;
+                double width = 885/(bh.getColumns()+1)-5;
+                double height = 490/(bh.getRows()+1)-5;
 
                 final Rectangle r = new Rectangle(width, height); //laver sædderne som firkanter
                 r.setArcWidth(6);
@@ -629,6 +630,26 @@ public class Controller {
 
 
         }
+
+        String abcString = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
+
+        for(int i = 1; i < bh.getColumns()+1; i++) {
+            for (int j = 1; j < bh.getRows() + 1; j++) {
+                Label lbl = new Label(abcString.charAt(j-1) + "");
+                lbl.setAlignment(Pos.CENTER);
+                lbl.setPadding(new Insets(0,6,0,0));
+                gp.add(lbl, 0, j);
+            }
+            Label lbl = new Label(i + "");
+            lbl.setMinWidth(870 / (bh.getColumns() + 1));
+            lbl.setAlignment(Pos.CENTER);
+            lbl.setPadding(new Insets(0,0,6,0));
+            gp.add(lbl, i, 0);
+        }
+
+        Label centerFix = new Label("");
+        centerFix.setMinWidth(20);
+        gp.add(centerFix, bh.getColumns()+2, 1);
 
         editVBox.getChildren().add(gp); //sætter gridpane ind i sceneVBox
 
