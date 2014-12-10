@@ -283,8 +283,8 @@ public class Controller {
         for(int i = 1; i < columns+1; i++) { //laver en forloppe der kører kolonerne igennem
 
             for(int j = 1; j < rows+1; j++) { //forlopp der kører rækkerne igennem
-                double width = 870/bh.getColumns()-5;
-                double height = 515/bh.getRows()-5;
+                double width = 870/(bh.getColumns()+1)-5;
+                double height = 515/(bh.getRows()+1)-5;
                 final Rectangle r = new Rectangle(width,height); //laver sædderne som firkanter
                 r.setArcWidth(6);
                 r.setArcHeight(6);
@@ -332,10 +332,23 @@ public class Controller {
                         } // function to run when an available seat is clicked
                     });
                 }
-
                 gp.add(r, i, j); //tilføj til gridpane: r= firkanterne, i=fælterne på x-aksen og j= felterne på y-aksen
             }
 
+        }
+
+        String abcString = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
+
+        for(int i = 1; i < bh.getColumns()+1; i++) {
+            for (int j = 1; j < bh.getRows() + 1; j++) {
+                Label lbl = new Label(abcString.charAt(j-1) + "");
+                lbl.setAlignment(Pos.CENTER);
+                gp.add(lbl, 0, j);
+            }
+            Label lbl = new Label(i + "");
+            lbl.setMinWidth(870 / (bh.getColumns() + 1));
+            lbl.setAlignment(Pos.CENTER);
+            gp.add(lbl, i, 0);
         }
 
         sceneVBox.getChildren().add(gp); //sætter gridpane ind i sceneVBox
@@ -691,5 +704,5 @@ public class Controller {
         dialog.setScene(scene);
         dialog.show();
     }
-    
+
 }
