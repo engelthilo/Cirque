@@ -100,7 +100,7 @@ Efter at have valgt film, vælger brugeren tidspunktet, som kunden ønsker at re
 
 \begin{picture}
 
-\includegraphics[width=.700\textwidth, center]{3.png}
+\includegraphics[width=250pt]{3.png}
 
 \end{picture}
 \begin{center}
@@ -109,96 +109,76 @@ Efter at have valgt film, vælger brugeren tidspunktet, som kunden ønsker at re
 
 Når sæderne er valgt skrives kundens navn og telefonnummer ind i tekstfelterne nederst i højre hjørne. Afslutningsvist trykkes der på knappen \emph{Fuldfør reservation}. 
 
-Hvis kunden fortryder sin bestilling eller har ændringer til en eksisterende bestilling, så klikker brugeren på tabben \emph{Ret reservation} i toppen af programmet. Brugeren bliver taget til et vindue hvor kundens telefonnummer skal indtastes. Når telefonnummeret er indtastet og der er trykket på Enter-tasten eller på \emph{Tjek reservationer}-knappen, så vises en liste nedenunder med de reservationer som kunden har tilknyttet til sit telefonnummer. Der vises kun reservationer for forestillinger som ikke er blevet vist - gamle reservationer vises altså ikke. Brugeren dobbeltklikker på den reservation der skal rettes og et nyt vindue åbner som ligner reservationsvinduet. De optagede sæder er røde, de ledige er grønne og de sæder som er tilknyttet til den pågældende reservation vises som blå. Brugeren kan tilføje eller slette sæder. Et valgt er blåt og markeringen fjernes ved at klikke på sædet igen. Når ændringen til reservationen er valgt, så klikker brugeren på \emph{Rediger reservation}. Skal reservationen derimod slettes helt, så klikker brugeren på \emph{Slet reservation}.
+Hvis kunden fortryder sin bestilling eller har ændringer til en eksisterende bestilling, så klikker brugeren på tabben \emph{Ret reservation} i toppen af programmet. Brugeren bliver taget til et vindue hvor kundens telefonnummer skal indtastes. Når telefonnummeret er indtastet og der er trykket på Enter-tasten eller på \emph{Tjek reservationer}-knappen, så vises en liste nedenunder med de reservationer som kunden har tilknyttet til sit telefonnummer. \\
+
+\begin{picture}
+
+\includegraphics[width=250pt]{4.png}
+
+\end{picture}
+\begin{center}
+\tiny Figure 3. Forestillinger-vinduet før og efter en film er valgt
+\end{center}
+
+Der vises kun reservationer for forestillinger som ikke er blevet vist - gamle reservationer vises altså ikke. Brugeren dobbeltklikker på den reservation der skal rettes og et nyt vindue åbner som ligner reservationsvinduet. \\
+
+\begin{picture}
+
+\includegraphics[width=250pt]{5.png}
+
+\end{picture}
+\begin{center}
+\tiny Figure 4. Vinduet hvor brugeren retter sin reservation
+\end{center}
+
+De optagede sæder er røde, de ledige er grønne og de sæder som er tilknyttet til den pågældende reservation vises som blå. Brugeren kan tilføje eller slette sæder. Et valgt er blåt og markeringen fjernes ved at klikke på sædet igen. Når ændringen til reservationen er valgt, så klikker brugeren på \emph{Rediger reservation}. Skal reservationen derimod slettes helt, så klikker brugeren på \emph{Slet reservation}.
 
 \subsection{Begrænsninger}
 \subsection{Fejlmeddelelser}
 \section{Eksempel}
 
-\clearpage
-\chapter{Problemanalyse}
+\chapter{Teknisk Analyse}
+\section{Model View Controller}
 
-\chapter{Løsning}
-\section{Teknisk Analyse}
-\subsection{Kommentarsystem}
+\subsection{Moduler}
+Programmet har 2 klasser: DBConnect og buildHolder.
+DBConnect foretager alt der har med databasen at gøre. Dette er eksempelvis databaseforespørgsler hvor alle film returneres i et LinkedHashMap, hvor data såsom reservationer, salstørrelse mv. for en given forestilling hentes, hvor data såsom reservationer indsættes eller opdateres i databasen. Den væsentligste del af DBConnect-klassen må være funktionen getCon, der sørger for at der er en gyldig forbindelse til databasen. 
+buildHolder er et objekt hvor data for en given forestilling lagres. Der bruges getters og setters, så de data der lagres også kan hentes efterfølgende. buildHolder objektet bruges efterfølgende til at bygge reservationssalen med data som filmnavn, tidspunkt for forestillingen, størrelsen på salen (rows/columns), reserverede sæder mv. 
 
+Det er controlleren der gør brug af disse objekter, når data skal visualiseres og altså fremvises for brugeren.
 
-\subsection{Crowd-sourcet}
+\subsection{Datastrukturer}
 
-\subsection{Single Page Application}
+\subsection{Algoritmer}
 
-\subsection{Backend}
+\section{Brugergrænsedesign}
 
-\subsection{Programmeringssprog}
-\begin{itemize}
-\item 
-\item 
-\item 
-\item 
-\item 
-\end{itemize}
+%\begin{itemize}
+%\item 
+%\item 
+%\item 
+%\item 
+%\item 
+%\end{itemize}
 
-\subsection{White- og Blackbox testing}
-
-\subsection{Application Programming Interface(API)}
-\clearpage
-\section{Design}
-
-\subsection{Index side}
-
-\subsection{Værkforum}
-
-
-
-\subsection{Zoomfuktion}
-
-
-\section{Teknisk beskrivelse}
-\subsection{Flowchart}
-
-\subsection{Data}
-\begin{itemize}
-\item 
-\item
-\item 
-\begin{itemize}
-\item 
-\item 
-\end{itemize}
-\end{itemize}
-
-\subsection{Arkitektur}
-\begin{itemize}
-\item 
-\item 
-\end{itemize}
-
-\subsection{Brugergrænseflade}
-\subsubsection{Lyttere}
-
-\subsubsection{Komponenter}
 
 
 \subsection{Begrænsninger}
 
 \chapter{Afprøvning}
 
-\begin{enumerate}
-\item 
-\item 
-\item 
-\item
+\section{Brugerafprøvning}
 
-\end{enumerate}
+\section{Unitet}
 
-\chapter{Brugervejledning}
-\section{Eksempel}
+\section{Afprøvnings konklusion}
 
-\section{Brugsscenarie}
 
 \chapter{Konklusion}
 
 \chapter{Litteratur}
+
+\chapter{Bilag}
 
 \end{document}
 

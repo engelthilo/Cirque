@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.11.26)  11 DEC 2014 13:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.11.26)  11 DEC 2014 13:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -683,11 +683,7 @@ followed by the required stuff, so I'm ignoring it.
 File: 3.png Graphic file (type png)
  <use 3.png>
 Package pdftex.def Info: 3.png used on input line 103.
-(pdftex.def)             Requested size: 252.6989pt x 191.93143pt.
-
-Overfull \hbox (29.38873pt too wide) in paragraph at lines 103--104
-[][] 
- []
+(pdftex.def)             Requested size: 250.0pt x 189.88454pt.
 
 ./Rapport.tex:105: Extra }, or forgotten \endgroup.
 \endpicture ->\egroup 
@@ -728,51 +724,163 @@ Such glue doesn't belong there---it allows a paragraph
 of any length to fit on one line. But it's safe to proceed,
 since the offensive shrinkability has been made finite.
 
-[10 <./3.png>]
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--113
+
+ []
+
+./Rapport.tex:115: Use of \pictur@ doesn't match its definition.
+<argument> \par 
+                
+l.115 
+      
+If you say, e.g., `\def\a1{...}', then you must always
+put `1' after `\a', since control sequence names are
+made up of letters only. The macro here has not been
+followed by the required stuff, so I'm ignoring it.
+
+<4.png, id=82, 684.5575pt x 519.9425pt>
+File: 4.png Graphic file (type png)
+ <use 4.png>
+Package pdftex.def Info: 4.png used on input line 116.
+(pdftex.def)             Requested size: 250.0pt x 189.88454pt.
+
+./Rapport.tex:118: Extra }, or forgotten \endgroup.
+\endpicture ->\egroup 
+                      \hss \egroup \ht \@picbox \@picht \dp \@picbox \z@ \mb...
+l.118 \end{picture}
+                   
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./Rapport.tex:118: Extra }, or forgotten \endgroup.
+\endpicture ->\egroup \hss \egroup 
+                                   \ht \@picbox \@picht \dp \@picbox \z@ \mb...
+l.118 \end{picture}
+                   
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./Rapport.tex:119: Infinite glue shrinkage found in a paragraph.
+\@trivlist ...epadd \partopsep \else \unskip \par 
+                                                  \fi \if@inlabel \@noparite...
+l.119 \begin{center}
+                    
+The paragraph just ended includes some glue that has
+infinite shrinkability, e.g., `\hskip 0pt minus 1fil'.
+Such glue doesn't belong there---it allows a paragraph
+of any length to fit on one line. But it's safe to proceed,
+since the offensive shrinkability has been made finite.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--124
+
+ []
+
+
+Underfull \vbox (badness 2990) has occurred while \output is active []
+
+ [10 <./3.png> <./4.png>]
+./Rapport.tex:126: Use of \pictur@ doesn't match its definition.
+<argument> \par 
+                
+l.126 
+      
+If you say, e.g., `\def\a1{...}', then you must always
+put `1' after `\a', since control sequence names are
+made up of letters only. The macro here has not been
+followed by the required stuff, so I'm ignoring it.
+
+<5.png, id=89, 724.7075pt x 519.9425pt>
+File: 5.png Graphic file (type png)
+ <use 5.png>
+Package pdftex.def Info: 5.png used on input line 127.
+(pdftex.def)             Requested size: 250.0pt x 179.35655pt.
+
+./Rapport.tex:129: Extra }, or forgotten \endgroup.
+\endpicture ->\egroup 
+                      \hss \egroup \ht \@picbox \@picht \dp \@picbox \z@ \mb...
+l.129 \end{picture}
+                   
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./Rapport.tex:129: Extra }, or forgotten \endgroup.
+\endpicture ->\egroup \hss \egroup 
+                                   \ht \@picbox \@picht \dp \@picbox \z@ \mb...
+l.129 \end{picture}
+                   
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./Rapport.tex:130: Infinite glue shrinkage found in a paragraph.
+\@trivlist ...epadd \partopsep \else \unskip \par 
+                                                  \fi \if@inlabel \@noparite...
+l.130 \begin{center}
+                    
+The paragraph just ended includes some glue that has
+infinite shrinkability, e.g., `\hskip 0pt minus 1fil'.
+Such glue doesn't belong there---it allows a paragraph
+of any length to fit on one line. But it's safe to proceed,
+since the offensive shrinkability has been made finite.
+
+[11 <./5.png>]
 Kapitel 5.
-[11
+[12
 
 
 ]
 Kapitel 6.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 135.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 163.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 135.
- [12
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 163.
+ [13
 
-] [13
+] [14
 
 ]
 Kapitel 7.
-[14
-
-]
-Kapitel 8.
 [15
 
 ]
-Kapitel 9.
+Kapitel 8.
 [16
 
 ]
-Kapitel 10.
+Kapitel 9.
 [17
+
+]
+Kapitel 10.
+[18
 
 ]
 (/Users/amandaengelthilo/Dropbox/SWU/1. semester/GRPRO/Kaffeklubben/Rapport/.te
 xpadtmp/Rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 5203 strings out of 493117
- 74600 string characters out of 6135432
+ 5213 strings out of 493117
+ 74688 string characters out of 6135432
  161601 words of memory out of 5000000
- 8557 multiletter control sequences out of 15000+600000
+ 8565 multiletter control sequences out of 15000+600000
  5870 words of font info for 21 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,18n,50p,1152b,521s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 40i,18n,50p,1026b,521s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsf
@@ -782,10 +890,10 @@ nts/cm/cmr5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsl10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmsy10.pfb>
 Output written on "/Users/amandaengelthilo/Dropbox/SWU/1. semester/GRPRO/Kaffek
-lubben/Rapport/.texpadtmp/Rapport.pdf" (20 pages, 4773326 bytes).
+lubben/Rapport/.texpadtmp/Rapport.pdf" (21 pages, 4847031 bytes).
 PDF statistics:
- 134 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
+ 141 PDF objects out of 1000 (max. 8388607)
+ 81 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
