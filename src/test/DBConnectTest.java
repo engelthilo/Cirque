@@ -1,5 +1,4 @@
 package test;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import model.DBConnect;
@@ -67,13 +66,14 @@ public class DBConnectTest {
             System.out.println("Error: " + e);
         }
     }
+    //denne test tjekker om et reserveret sæde for farven rød
     @Test
     public void testReservedSetColor() {
         DBConnect dbcon = new DBConnect();
         buildHolder bh = dbcon.getBuildSceneInfo(109);
         Boolean[][] resSeat = bh.getResSeat();
-        for(int i = 1; i < 31; i++) {
-            for(int j = 1; j < 21; j++) {
+        for(int i = 1; i < 31; i++) { //hvorfor 31?
+            for(int j = 1; j < 21; j++) { //hvorfor 21?
                 double width = (879-8*bh.getColumns()-8)/bh.getColumns();
                 double height = (521-8*bh.getRows()-8)/bh.getRows();
                 final Rectangle r = new Rectangle(width,height);
@@ -93,8 +93,9 @@ public class DBConnectTest {
         }
     }
     //tester om reservationer der bliver lavet, gemmes i databasen
+    /*
     @Test
-    public void testInsertReservation(){
+    public void testInsetReservation(){
         lastid = "";
         try {
             st = con.createStatement();
@@ -110,7 +111,8 @@ public class DBConnectTest {
             System.out.println("Error: " + e);
         }
         try {
-            rs = st.executeQuery("SELECT reservations.id, seat_x, seat_y FROM reservations, reservationlines WHERE reservationlines.reservation_id = reservations.id AND show_id = '120' AND customer_name = 'Amanda' AND customer_phone = '26802103'");
+            rs = st.executeQuery("SELECT reservations.id, seat_x, seat_y FROM reservations, reservationlines WHERE reservationlines.reservation_id" +
+                    " = reservations.id AND show_id = '120' AND customer_name = 'Amanda' AND customer_phone = '26802103'");
             while(rs.next()){
                 assertEquals(rs.getString("id"), (lastid));
                 assertEquals(rs.getInt("seat_x"), 1);
@@ -118,8 +120,15 @@ public class DBConnectTest {
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
-            System.out.println("hej4");
         }
+    }
+    */
+    public void testInsertReservation(){
+        ArrayList<String> seats = new ArrayList<String>();
+        seats.add("1:2");
+        dbConnect.insertReservation(seats, 100, "John", "12345678");
+        String query = "select last_insert_id() as last_id from reservations";
+
     }
     //sletter den reservation vi har lavet ovenfor.
     @After

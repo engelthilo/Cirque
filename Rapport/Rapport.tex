@@ -165,13 +165,25 @@ Det er controlleren der gør brug af disse objekter, når data skal visualiseres
 
 \subsection{Begrænsninger}
 
+
 \chapter{Afprøvning}
 
 \section{Brugerafprøvning}
 
 \section{Unitet}
+Vores klasse \emph{DBConnectTest} er en testklasse indeholdende unitets. Den primære funktion for for disse test er at teste om vores programtekst snakker rigtigt sammen med databasen. 
 
-\section{Afprøvnings konklusion}
+Testen \emph{testGetMovies()} tester om film og ide passer sammen. Dette gøres ved at vi giver testen et forventet uddata, som er bestemte id's tilknyttet bestemte film. Når testen kører, testes derfor om det forventede uddata passer overens med det faktiske uddata. 
+
+\emph{testTimeStamp()} tjekker hvorvidt en given films forestillinger bliver sorteret korrekt efter tid. Det gøres ved at lave et while-loop som kører igennem alle tidspunkterne og tjekker om det nuværende timestamp er lavere end det foregående.
+
+For at tjekke om et reserveret sæde vise med rød farve, og dermed ikke har nogle funktioner. Sædernes funktioner er nemlig tilknyttet deres farve, således at de røde sæder ikke er mulige er klikke på. \emph{testReservedSetColor()} henter et reserveret sæde og derefter sætter dens farve ligmed den forventede røde farve. 
+
+\emph{testInsetReservation()} tester om metoden \emph{InsetReservation()}
+
+
+
+\section{Resultat}
 
 
 \chapter{Konklusion}
