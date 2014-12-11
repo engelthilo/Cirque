@@ -333,4 +333,21 @@ public class DBConnect {
         return false;
     }
 
+    /**
+     * Input: None
+     * Method: Gets the id of the last inserted reservation
+     * Returns: Integer - corresponding the last inserted reservation id in the reservations table
+     */
+    public int getLastReservationId() {
+        try {
+            rs = st.executeQuery("SELECT id FROM reservations ORDER BY id DESC LIMIT 1");
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        return 0;
+    }
+
 }
