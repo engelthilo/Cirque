@@ -38,20 +38,21 @@ In this report we address our workgroups attempt at designing a digital solution
 Det problemområde vi har arbejdet med i forbindelse med vores projekt, er udviklingen af et softwaresystem til brug for en ekspedient der betjener en billetluge i en biograf. Det område der skulle dækkes var reservation både når kunden stod foran billetlugen, samt når kunden ringede ind på telefon. Vores løsning skulle håndtere   ekspedientens arbejdsopgaver i sådanne situationer. Løsningen skal derfor fokusere udelukkende på reservationer, og ikke salg. 
 
 \section{Problemstilling}
+Den overordnede problemstilling som vores program besvarer, er hvordan man udviklinger et simpelt, brugervenligt og databasebaseret softwaresystem til brug for en ekspident i en billetluge. 
 
 \subsection{Krav til programmet}
-Af krav til porgrammet kan nævnes at der i forbindelse med reservationerne skal oplyses navn eller anden identitet på kunden. Vi har i vores program valgt at den centrale inforamtion omkring brugeren er dennes telefonnummer. Det har vi gjort af den grund af flere kunder godt kan have samme navn, men at ens telefonnummer er unikt.  
+Af krav til porgrammet kan nævnes at der i forbindelse med reservationerne skal oplyses navn eller anden identitet på kunden. Vi har i vores program valgt at den centrale information omkring brugeren er dennes telefonnummer. Det har vi gjort af den grund af flere kunder godt kan have samme navn, men at ens telefonnummer er unikt.  
 
-Derudover skal biografen indeholde flere sale, og sende flere forskellige forestillinger i løber af dagen. Salenes størrese, antal pladser mm, skal fremgå af databsen frem for at være indkodet i selve programteksten. Derfor har vi istædet for at skrive data ind i programteksten, valgt at lave en speciel klasse til at hente data fra databasen. 
+Derudover skal biografen indeholde flere sale, og sende flere forskellige forestillinger i løbet af dagen. Salenes størrelse, antal pladser mm. skal fremgå af databasen frem for at være indkodet i selve programteksten. Derfor har vi i stedet for at skrive data ind i programteksten, valgt at lave en speciel klasse til at hente data fra databasen. 
 
 Det samme er gældende for de enkelte forestillinger, der derfor også bliver gemt i databasen.
 
-\subsection{Brugerscenario}
-Når ekspedienten åbner vores biobooking-system vil der på venstre side af vinduet vare oplistet de film der spilledes i biografen i øjeblikket. Klikker ekspedienten på en af disse film vil der på højre side af vinduet vise sig de tilhørende spilletider til den valgte film. Klikker ekspedienten derimod ikke på noget, vil der til stå følgene tekst \emph{Klik på en film til venstre for at vise tidspunkter}. Øverst oppe i vinduet vil man se tre faner: \emph{Forestillinger, Reservation og Ret reservation}. Man kan godt navigere mellem fanerne, men har man ikke først valgt film og tidspunkt vil \emph{Reservation} være ubrugelige.
+\subsection{Brugerscenario} - skal laves om
+Når ekspedienten åbner vores biobooking-system vil der på venstre side af vinduet være oplistet de film der spilles i biografen i øjeblikket. Klikker ekspedienten på en af disse film vil der på højre side af vinduet vise sig de tilhørende spilletider til den valgte film. Klikker ekspedienten derimod ikke på noget, vil der stå følgene tekst \emph{Klik på en film til venstre for at vise tidspunkter}. Øverst oppe i vinduet vil man se tre faner: \emph{Forestillinger, Reservation og Ret reservation}. Man kan godt navigere mellem fanerne, men har man ikke først valgt film og tidspunkt vil \emph{Reservation} være ubrugelige.
  
-Efter at ekspedienten har valgt en film og en spilletid vil systemet automatisk skifte videre til den næste fane: \emph{Reservation}. Her kan ekspedienten vælge fri mellem de ledige sæder. Dette gøres ved at ekspedienten enten klikker enkeltvis på de grønne sæder, eller ved at trække musen over de ønskede sæder. De valgte sæder vil nu blive blå, så ekspedienten kan se hvilke der er valgt. Er sæderne tilfredsstillende skal ekspedienten skive navn samt telefonnummer på kunden ind i et informationsfelt nedernst til højre på siden. Nederst på siden ses i venstre hjørne antallet af sæder i alt, samt det ledige antal sæder. Dette kan ekspedienten også se på det grafiske billede over biografsalen, da de allerede reserverede sæder er røde, samt umulige at vælge for reservation. Efter kundens information er indtastet og ekspedienten har klikket på \emph{Fuldfør reservation} knappen kommer et pop-up vindue op, hvor der står skrevet: \emph{Bestillingen er gennemførst}.
+Efter at ekspedienten har valgt en film og en spilletid vil systemet automatisk skifte videre til den næste fane: \emph{Reservation}. Her kan ekspedienten vælge frit mellem de ledige sæder. Dette gøres ved at ekspedienten enten klikker enkeltvis på de grønne sæder, eller ved at trække musen over de ønskede sæder. De valgte sæder vil nu blive blå, så ekspedienten kan se hvilke der er valgt. Er sæderne tilfredsstillende skal ekspedienten skrive navn samt telefonnummer på kunden ind i et informationsfelt nedernst til højre på siden. Nedderst på siden ses i venstre hjørne antallet af sæder i alt, samt det ledige antal sæder. Dette kan ekspedienten også se på det grafiske billede over biografsalen, da de allerede reserverede sæder er røde, samt umulige at vælge for reservation. Efter kundens information er indtastet og ekspedienten har klikket på \emph{Fuldfør reservation} kommer et pop-up vindue op, hvor der står skrevet: \emph{Bestillingen er gennemført}.
 
-Ønsker den pågældende kunde derimod at ændre eller slette en reservation, skal ekspedienten klikke sig ind på den sidste fane: \emph{Ret reservation}. På denne side finder ekspedienten øverst opppe et indput felt hvor kundens telefonnumer skal indtastes. Når ekspedienten har klikket enter vil kundens reservation(er) dukke op nedenfor i en pæn liste. Ekspedienten kan så klikke på den reservation som kunden ønsker ændret. Nu føres ekspedienten tilbage til \emph{Reservation} fanen, men de sæder tilknyttet den pågældende reservation ses nu med blåt frem for rødt. Ekspedienten kan således tilføje eller fjerne sæder ved at klikke på sæder med musem og derefter klikke på \emph{Ret reservation} knappen. Ønsker kunden helt at slette reservationen kan dette lade sig gøre ved at klikke på \emph{Slet reservation} knappen. 
+Ønsker den pågældende kunde derimod at ændre eller slette en reservation, skal ekspedienten klikke sig ind på den sidste fane: \emph{Ret reservation}. På denne side finder ekspedienten øverst oppe et input felt hvor kundens telefonnumer skal indtastes. Når ekspedienten har klikket enter vil kundens reservation(er) dukke op nedenfor i en pæn liste. Ekspedienten kan så klikke på den reservation som kunden ønsker ændret. Nu føres ekspedienten til en popup \emph{Reservation} side, hvor de sæder tilknyttet den pågældende reservation nu ses med blåt. Ekspedienten kan således tilføje eller fjerne sæder ved at klikke på sæder med musen og derefter klikke på \emph{Ret reservation}. Ønsker kunden helt at slette reservationen kan dette lade sig gøre ved at klikke på \emph{Slet reservation}. 
 
 \subsection{Systemdesign}
 
@@ -59,8 +60,14 @@ Efter at ekspedienten har valgt en film og en spilletid vil systemet automatisk 
 
 \chapter{Problemanalyse}
 \section{Vores løsning}
+Den overordnede problemstilling som vi har valgt at fokusere på at løse er hvordan man udvikler et simpelt og implecit program som er brugervenligt og med så lidt data som muligt i selve programkoden.
+
+
+Vores program løser problemstilligen ved at have alt information omkring forestillinger, sale, film og reservationer gemt i en database. Dette gør selve programteksen simpel og nem at ændre i, og vi har på den måde undgået for meget kodeduplikering. For at opfylde ønsket om brugervenlighed har vi valgt at vise størstedelen af programmet i ét vindue, hvor brugeren så nemt kan navigere mellem de forskellige muligheder programmet har. 
+
 
 \subsection{Alternative løsninger}
+An alternativ måde at løse problemstillingen på ville være at fokusere på andre måder at booke billetter på. Vi har valgt at man først skal vælge film, derefter tid og sæder. Man kunne have valgt at gøre det muligt for brugeren at vælge data eller tid før valg af film. Vi har blot valgt den løsning vi syntes var mest brugervenlig. En anden mulighed er at man kunne have lavet en liste der viste \emph{alle} forestillinger sorteret efter spilletid - uden at tage hensyn til sortering i forhold til film. Denne mulighed syntes vi designmæssigt ville fungere meget rodet. Derudover kunne vi have valgt at gemme vores reservationer i programkoden frem for i databasen. Vi diskuterede dette i begyndelsen af projektet, men fandt det for besværligt at arbejde med, da det ville kræve støre mængder kode, fylde mere plads samt resultere i at vores program formentlig ville brugere længere tid på at compille og kører. 
 
 \section{Databasedesign}
 
@@ -79,10 +86,17 @@ Efter at ekspedienten har valgt en film og en spilletid vil systemet automatisk 
 
 
 \chapter{Brugervejledning}
-\section{Programmet - hvordan fungere det}
+\section{Programmet}
+Programmet er bygget på med 3 tabs i toppen. Forestillinger, Reservation og Ret reservation. Når programmet åbnes starter brugeren i Forestillinger-vinduet og der vises en liste i venstre side med de film som kører i biografen. Brugeren klikker på den film, som kunden ønsker at reservere billetter til. Når en film vælges bliver tiderne for filmforestillinger vist for den pågældende film. 
+
+Klikker ekspedienten derimod ikke på noget, vil der stå følgene tekst \emph{Klik på en film til venstre for at vise tidspunkter}, og har man ikke først valgt film og tidspunkt vil \emph{Reservation} være ubrugelige.
+
+Efter at have valgt film, vælger brugeren tidspunktet, som kunden ønsker at reservere til. Når en forestilling vælges bliver brugeren videreført til næste tab - altså reservation. Her vises et vindue med firkanter som illustrerer sæderne i biografen. Ledige sæder er illustreret som en grøn firkant og optagede sæder er illustreret som røde sæder. Brugeren klikker på de sæder som kunden ønsker at reservere - brugeren kan desuden holde musen nede og hive musen over de sæder som skal vælges. De valgte sæder skifter farve til blå og brugeren kan se hvor mange sæder vedkommende har markeret nederst i venstre hjørne. Når sæderne er valgt skrives kundens navn og telefonnummer ind i tekstfelterne nederst i højre hjørne. Afslutningsvist trykkes der på knappen \emph{Fuldfør reservation}. 
+
+Hvis kunden fortryder sin bestilling eller har ændringer til en eksisterende bestilling, så klikker brugeren på tabben \emph{Ret reservation} i toppen af programmet. Brugeren bliver taget til et vindue hvor kundens telefonnummer skal indtastes. Når telefonnummeret er indtastet og der er trykket på Enter-tasten eller på \emph{Tjek reservationer}-knappen, så vises en liste nedenunder med de reservationer som kunden har tilknyttet til sit telefonnummer. Der vises kun reservationer for forestillinger som ikke er blevet vist - gamle reservationer vises altså ikke. Brugeren dobbeltklikker på den reservation der skal rettes og et nyt vindue åbner som ligner reservationsvinduet. De optagede sæder er røde, de ledige er grønne og de sæder som er tilknyttet til den pågældende reservation vises som blå. Brugeren kan tilføje eller slette sæder. Et valgt er blåt og markeringen fjernes ved at klikke på sædet igen. Når ændringen til reservationen er valgt, så klikker brugeren på \emph{Rediger reservation}. Skal reservationen derimod slettes helt, så klikker brugeren på \emph{Slet reservation}.
 
 \subsection{Begrænsninger}
-\subsection{Fejlmeddelsesr}
+\subsection{Fejlmeddelelser}
 \section{Eksempel}
 
 \clearpage
