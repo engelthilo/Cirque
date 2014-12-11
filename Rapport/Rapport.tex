@@ -55,7 +55,7 @@ Efter at ekspedienten har valgt en film og en spilletid vil systemet automatisk 
 Ønsker den pågældende kunde derimod at ændre eller slette en reservation, skal ekspedienten klikke sig ind på den sidste fane: \emph{Ret reservation}. På denne side finder ekspedienten øverst oppe et input felt hvor kundens telefonnumer skal indtastes. Når ekspedienten har klikket enter vil kundens reservation(er) dukke op nedenfor i en pæn liste. Ekspedienten kan så klikke på den reservation som kunden ønsker ændret. Nu føres ekspedienten til en popup \emph{Reservation} side, hvor de sæder tilknyttet den pågældende reservation nu ses med blåt. Ekspedienten kan således tilføje eller fjerne sæder ved at klikke på sæder med musen og derefter klikke på \emph{Ret reservation}. Ønsker kunden helt at slette reservationen kan dette lade sig gøre ved at klikke på \emph{Slet reservation}. 
 
 \subsection{Systemdesign}
-
+Vores system er overordnet baseret på data fra databasen. Systemet generer layout ud fra forskellige data i databasen. Dette indebærer bl.a. hvilke film der er i film-tabellen, hvilke forestillinger der er tilknyttet til en given film, hvilke reservationer der er tilknyttet en given forestilling, hvilke reservationer der er tilknyttet et givent telefonnummer mv. Programmet er delt op, så mest mulig databehandling foretages hos klienten/brugeren. Dette indebærer objekter med informationer om de forskellige forestillinger, arrays med valgte sæder mv. Databaseforespørgsler er lavet så omfattende som muligt, så der udføres så få forespørgsler som muligt og data gemmes i objekter og arrays eller bliver benyttet med det samme i den grafiske fremstilling af programmet som eksempelvis ved generering af film-knapper. 
 
 
 \chapter{Problemanalyse}
@@ -70,28 +70,37 @@ Vores program løser problemstilligen ved at have alt information omkring forest
 An alternativ måde at løse problemstillingen på ville være at fokusere på andre måder at booke billetter på. Vi har valgt at man først skal vælge film, derefter tid og sæder. Man kunne have valgt at gøre det muligt for brugeren at vælge data eller tid før valg af film. Vi har blot valgt den løsning vi syntes var mest brugervenlig. En anden mulighed er at man kunne have lavet en liste der viste \emph{alle} forestillinger sorteret efter spilletid - uden at tage hensyn til sortering i forhold til film. Denne mulighed syntes vi designmæssigt ville fungere meget rodet. Derudover kunne vi have valgt at gemme vores reservationer i programkoden frem for i databasen. Vi diskuterede dette i begyndelsen af projektet, men fandt det for besværligt at arbejde med, da det ville kræve støre mængder kode, fylde mere plads samt resultere i at vores program formentlig ville brugere længere tid på at compille og kører. 
 
 \section{Databasedesign}
+En af de to overordnede tabeller i vores database er \emph{cinemas} som indeholder information omkring vores biografsale. Dette omfatter salens navn, id, antal rækker og antal sæder i hver række. Vores sæder er ikke repræsenteret som en tabel i vores database, men derimod gemt som et 2 dimentionelt array. 
 
+Den anden vigtige tabel er \emph{movies} som indeholder inforamtion omkring de film der går i biografen. Det eneste inforamtion denne tabel holder er navn og id.
 
-%\begin{picture}
+I begge tabel er det, det pågældende id som fungerer som nøgle. Altså sal\_id og movie\_id.  
 
-%\includegraphics[width=300pt]{minverva.png}
-
-%\end{picture}
-%\begin{center}
-%\tiny Figure 1. Minerva modellen
-%\linebreak
-%\linebreak
-%\linebreak
-%\end{center}
+De to tabeller \emph{movie} og \emph{cinema} bliver koblet sammen i tabellen \emph{show}. Her bruges deres nøgler til at sammensætte de foreskellige forestillinger som vores biograf kan vise. I \emph{shows} tilføjes så et nyt ide til de enkelte forestillinger samt et timestamp - som er det tidspunkt forestillingen skal begynde.
 
 
 \chapter{Brugervejledning}
 \section{Programmet}
-Programmet er bygget på med 3 tabs i toppen. Forestillinger, Reservation og Ret reservation. Når programmet åbnes starter brugeren i Forestillinger-vinduet og der vises en liste i venstre side med de film som kører i biografen. Brugeren klikker på den film, som kunden ønsker at reservere billetter til. Når en film vælges bliver tiderne for filmforestillinger vist for den pågældende film. 
+Programmet er designet med 3 tabs i toppen. \emph{Forestillinger, Reservation og Ret reservation}. Når programmet åbnes starter brugeren i \emph{Forestillinger-vinduet} og der vises en liste i venstre side med de film som kører i biografen. Brugeren klikker på den film, som kunden ønsker at reservere billetter til. Når en film vælges bliver tiderne for filmforestillinger vist for den pågældende film. \\
+
+
+\begin{picture}
+
+\includegraphics[width=150pt]{1.png}
+\includegraphics[width=150pt]{2.png}
+
+\end{picture}
+\begin{center}
+\tiny Figure 1. Forestillinger-vinduet før og efter en film er valgt
+\end{center}
 
 Klikker ekspedienten derimod ikke på noget, vil der stå følgene tekst \emph{Klik på en film til venstre for at vise tidspunkter}, og har man ikke først valgt film og tidspunkt vil \emph{Reservation} være ubrugelige.
 
-Efter at have valgt film, vælger brugeren tidspunktet, som kunden ønsker at reservere til. Når en forestilling vælges bliver brugeren videreført til næste tab - altså reservation. Her vises et vindue med firkanter som illustrerer sæderne i biografen. Ledige sæder er illustreret som en grøn firkant og optagede sæder er illustreret som røde sæder. Brugeren klikker på de sæder som kunden ønsker at reservere - brugeren kan desuden holde musen nede og hive musen over de sæder som skal vælges. De valgte sæder skifter farve til blå og brugeren kan se hvor mange sæder vedkommende har markeret nederst i venstre hjørne. Når sæderne er valgt skrives kundens navn og telefonnummer ind i tekstfelterne nederst i højre hjørne. Afslutningsvist trykkes der på knappen \emph{Fuldfør reservation}. 
+Efter at have valgt film, vælger brugeren tidspunktet, som kunden ønsker at reservere til. Når en forestilling vælges bliver brugeren videreført til næste tab - altså reservation. Her vises et vindue med firkanter som illustrerer sæderne i biografen. Ledige sæder er illustreret som en grøn firkant og optagede sæder er illustreret som røde sæder. Brugeren klikker på de sæder som kunden ønsker at reservere - brugeren kan desuden holde musen nede og hive musen over de sæder som skal vælges. De valgte sæder skifter farve til blå og brugeren kan se hvor mange sæder vedkommende har markeret nederst i venstre hjørne. 
+
+
+
+Når sæderne er valgt skrives kundens navn og telefonnummer ind i tekstfelterne nederst i højre hjørne. Afslutningsvist trykkes der på knappen \emph{Fuldfør reservation}. 
 
 Hvis kunden fortryder sin bestilling eller har ændringer til en eksisterende bestilling, så klikker brugeren på tabben \emph{Ret reservation} i toppen af programmet. Brugeren bliver taget til et vindue hvor kundens telefonnummer skal indtastes. Når telefonnummeret er indtastet og der er trykket på Enter-tasten eller på \emph{Tjek reservationer}-knappen, så vises en liste nedenunder med de reservationer som kunden har tilknyttet til sit telefonnummer. Der vises kun reservationer for forestillinger som ikke er blevet vist - gamle reservationer vises altså ikke. Brugeren dobbeltklikker på den reservation der skal rettes og et nyt vindue åbner som ligner reservationsvinduet. De optagede sæder er røde, de ledige er grønne og de sæder som er tilknyttet til den pågældende reservation vises som blå. Brugeren kan tilføje eller slette sæder. Et valgt er blåt og markeringen fjernes ved at klikke på sædet igen. Når ændringen til reservationen er valgt, så klikker brugeren på \emph{Rediger reservation}. Skal reservationen derimod slettes helt, så klikker brugeren på \emph{Slet reservation}.
 
