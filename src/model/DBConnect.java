@@ -150,11 +150,8 @@ public class DBConnect {
             // simple insert statement where the order details with customer name and phone is inserted with a given showid
             String query = "INSERT INTO reservations (show_id, customer_name, customer_phone) VALUES ('" + showId + "', '" + customerName + "', '" + customerPhone + "')";
             st.executeUpdate(query);
-            rs = st.executeQuery("select last_insert_id() as last_id from reservations"); // gets the last inserted reservation so that we can bind the seats to that reservation
-            String lastid = "";
-            if (rs.next()) {
-                lastid = rs.getString(1); // simply gets the last id
-            }
+
+            String lastid = getLastReservationId() + "";
 
             //time to insert the seats of an order - just looping through them and inserting (binded with the latest id in reservations)
             for(String seat : seats) {
