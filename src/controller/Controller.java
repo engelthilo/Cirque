@@ -143,37 +143,43 @@ public class Controller {
         );
     }
 
+    /**
+     * Input: Movies
+     * Acion: Creates a button for every movie and calls the method getMovieSchedule
+     * Output: Buttons with movie names
+     */
     @FXML
     protected void getMovies() {
-        LinkedHashMap<Integer, String> curMovies = new LinkedHashMap(db.getMovies()); //Holds movieid and moviename (int og string) - LinkedHashMap da rækkefølgen er vigtig (alfabetisk)
+        LinkedHashMap<Integer, String> curMovies = new LinkedHashMap(db.getMovies());
 
         //For loop that finds and creates a button for every movie in the database [[MARK]]
-        for(Map.Entry<Integer, String> movie : curMovies.entrySet()) { //Loops through the linkedhasmap på film
-            final Button button = new Button(movie.getValue()); //creates a button with text of the movie
-            button.setPrefWidth(200); //sets the width of the buttons
-            showsVBox.getChildren().add(button);  //gets the actual container of the element that holds the buttons and apply the newly created button
+        for(Map.Entry<Integer, String> movie : curMovies.entrySet()) {
+            final Button button = new Button(movie.getValue());
+            button.setPrefWidth(200);
+            showsVBox.getChildren().add(button);
             button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) { //event when clicked on the created button
                     scheduleHeader.setText("Viser forestillinger for filmen: " + movie.getValue());
                     getMovieSchedule(movie.getKey()); //henter data om shows fra databasen
-                    //Calls the method getMovieSchedule that creates new buttons from the database
-                    //with time and date for play
                 }
             });
         }
     }
 
+    /**
+     * Input:Time of movies - Timestamps
+     * Action: gets times for a given movie from its movie id
+     * Output:
+     */
     @FXML
     private void getMovieSchedule(int movieId) {
-        //gets times for a given movie from its movie id
-        //Reset the schedule boxes
-        upper_schedule.getChildren().clear(); //clears the container for elements
-        lower_schedule.getChildren().clear(); //clears the container for elements
+        upper_schedule.getChildren().clear();
+        lower_schedule.getChildren().clear();
 
-        LinkedHashMap<Integer, Timestamp> schedule = new LinkedHashMap(db.getMovieSchedule(movieId)); // sets the times into a linkedhashmap (showid as key (int) and timestamp as value (timestamp)
+        LinkedHashMap<Integer, Timestamp> schedule = new LinkedHashMap(db.getMovieSchedule(movieId));
 
-        //Jeg er lidt i tvivl om hvad der foregår her? Jeg forstår princippet men vil gerne have det forklaret bedre [[MARK]]
+        //puts the timestamps in 
         Timestamp[][] times = new Timestamp[14][6]; //sætter tiderne fra databsen i rækkefølge efter tid.
         int[][] showIds = new int[14][6];  //14 står for 14 dage - 6 for de 6 shows der bliver vist pr dag pr sal.
         int i = -1; //starter ved -1 fordi vi vil starte ved nr. 0. i er datoen

@@ -8,7 +8,36 @@
 \usepackage{csquotes}
 \usepackage[nottoc]{tocbibind}
 \addto{\captionsdanish}{\renewcommand{\abstractname}{Abstract}}
+\setlength{\parindent}{4em}
+\usepackage{listings}
+\usepackage{color}
 
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\usepackage[
+top    = 2.75cm,
+bottom = 2.75cm,
+left   = 3.00cm,
+right  = 3.00cm]{geometry}
 
 \begin{document}
 \begin{titlepage}
@@ -23,15 +52,11 @@
  
 \baselineskip= 15pt
 
-\begin{abstract}
+\title{Forord}
+Den rapport er udarbejdet i December 2014 i et fire ugers projekt på IT-Universitetet i København under vejledning af Jesper Madsen.
+I projektet udviklede vi et softwaresystem til booking i biografer skrevet i Java. Programmet har til opgave at skulle assisterer en ekspedient i personens arbejdsopgaver der har med kundehenveldelser af gøre, f.eks: Book nye pladser eller slette en tidligere bestilling. Programmet skal ikke kunne håndtere salg.
 
-In this report we address our workgroups attempt at designing a digital solution for broadening the audience for both the digital and physical offerings, that Statens Museum for Kunst(SMK) provides. We use a multitude of idea generation techniques, to arrive at a product, and then interviews with SMK. We propose an enhanced web-presence, for image viewing and discussion, based on feedback from SMK and visits to the museum. The report concludes with the proposal of a system in which users can comment and interact with the different artworks on the website.
-
-\end{abstract}
-\clearpage
 \tableofcontents
-\chapter{Forord}
-
 
 \chapter{Indledning}
 \section{Baggrund}
@@ -59,15 +84,34 @@ Vores system er overordnet baseret på data fra databasen. Systemet generer layo
 
 
 \chapter{Problemanalyse}
+
 \section{Vores løsning}
-Den overordnede problemstilling som vi har valgt at fokusere på at løse er hvordan man udvikler et simpelt og implecit program som er brugervenligt og med så lidt data som muligt i selve programkoden.
+Den overordnede problemstilling vi har valgt at fokusere på, er hvordan man udvikler et simpelt og implecit program der både og brugervenligt og hvor databasen opbevarer det meste data. 
+
+Vores program løser problemstilligen ved at have alt information omkring forestillinger, sale, film og reservationer gemt i en database. Dette gør selve koden nem at vedligeholde, og vi har på den måde undgået unødvendig kodeduplikering. For at opfylde ønsket om brugervenlighed har vi valgt at vise programmet i ét vindue, hvor brugeren så nemt kan navigere, ved hjælp af tabs, imellem de forskellige funktionaliteter programmet har.
+
+\subsection{Build Reservation}
+En af de større udfordringer, som man også har kunne tackle på en masse forskellige måder, var når biografsalen skulle bygges grafisk. Den primære metode vi brugte her var buildReservationScene(int showID) i vores Controller.java class. Alt informationen omkring biografsalen får vi fra vores database, dette bliver behandlet i metoden, her er det bl.a. det forskellige labels der bliver sat (cinemaNameLabel, movienameLabel etc). Med informationen fra databasen kører vi et for-loop der kører igennem kolonerne, og inden i for loopet kører der endnu et for-loop der kører sæderne igennem for hver kolonne. Det er rimelig lige til og i højgrad den bedste måde vi kunne komme på at gøre det. Sæderne bliver grafisk vist som firkanter, her kunne man godt have lavet det som knapper. Vi valgte at bruge Ractangle objekter fordi det var nemt at manupulere det udseende vi gerne ville give dem uden at vi behøvede at gå på kompromis med funktionaliteten.
+\clearpage
+
+for(Antal kolonner)\{\par
+{for(Antal rækker på kolonne)\{}\par
+\hspace{2cm}if(Sæde er reserveret)\{\par
+\hspace{3cm}Gør sæde rød\par
+\hspace{2cm}\}\par
+\hspace{2cm}else\{\par
+\hspace{3cm}gør sæde grøn\par
+\hspace{2cm}\}\par
+	\}\\
+\}\\
 
 
-Vores program løser problemstilligen ved at have alt information omkring forestillinger, sale, film og reservationer gemt i en database. Dette gør selve programteksen simpel og nem at ændre i, og vi har på den måde undgået for meget kodeduplikering. For at opfylde ønsket om brugervenlighed har vi valgt at vise størstedelen af programmet i ét vindue, hvor brugeren så nemt kan navigere mellem de forskellige muligheder programmet har. 
+
+Til sidst er der måden du reserverer flere pladser. En oplagt mulighed ville være at have en dropdown menu i bunden af vinduet, der, når den klikkes, viser en liste fra med tal fra 1 til antallet af frie sæder (hvis der er nogle frie sæder tilbage). Denne mulighed er ganske fin, vi besluttede os dog for at gå med noget mere interaktivt hvor ekspedienten blot skal trække musen henover de sæder der skal vælges for at vælge dem. Dette er en feature der gør det nemmere for ekspedienten at vælge en masse sæder på engang og samtidig super fleksibelt. 
 
 
 \subsection{Alternative løsninger}
-An alternativ måde at løse problemstillingen på ville være at fokusere på andre måder at booke billetter på. Vi har valgt at man først skal vælge film, derefter tid og sæder. Man kunne have valgt at gøre det muligt for brugeren at vælge data eller tid før valg af film. Vi har blot valgt den løsning vi syntes var mest brugervenlig. En anden mulighed er at man kunne have lavet en liste der viste \emph{alle} forestillinger sorteret efter spilletid - uden at tage hensyn til sortering i forhold til film. Denne mulighed syntes vi designmæssigt ville fungere meget rodet. Derudover kunne vi have valgt at gemme vores reservationer i programkoden frem for i databasen. Vi diskuterede dette i begyndelsen af projektet, men fandt det for besværligt at arbejde med, da det ville kræve støre mængder kode, fylde mere plads samt resultere i at vores program formentlig ville brugere længere tid på at compille og kører. 
+An alternativ måde at løse problemstillingen på ville være at fokusere på andre måder at booke billetter på. Vi har valgt at man først skal vælge film, derefter tid og til sidst sæder. Man kunne have valgt at gøre det muligt for brugeren at vælge dato eller tid før valg af film. Vi har dog valgt den løsning vi syntes var mest brugervenlig. En anden mulighed er at man kunne have lavet en liste der viste \emph{alle} forestillinger sorteret efter spilletid - uden at tage hensyn til sortering i forhold til film. Denne mulighed syntes vi designmæssigt ville fungere meget rodet. Derudover kunne vi have valgt at gemme vores reservationer i programkoden frem for i databasen. Vi diskuterede dette i begyndelsen af projektet, men fandt det for besværligt at arbejde med, da det ville kræve større mængder kode, fylde mere plads samt resultere i at vores program formentlig ville bruge længere tid på at compille og køre.
 
 \section{Databasedesign}
 En af de to overordnede tabeller i vores database er \emph{cinemas} som indeholder information omkring vores biografsale. Dette omfatter salens navn, id, antal rækker og antal sæder i hver række. Vores sæder er ikke repræsenteret som en tabel i vores database, men derimod gemt som et 2 dimentionelt array. 
@@ -84,56 +128,46 @@ De to tabeller \emph{movie} og \emph{cinema} bliver koblet sammen i tabellen \em
 Programmet er designet med 3 tabs i toppen. \emph{Forestillinger, Reservation og Ret reservation}. Når programmet åbnes starter brugeren i \emph{Forestillinger-vinduet} og der vises en liste i venstre side med de film som kører i biografen. Brugeren klikker på den film, som kunden ønsker at reservere billetter til. Når en film vælges bliver tiderne for filmforestillinger vist for den pågældende film. \\
 
 
-\begin{picture}
+\begin{figure}[h]
+\centering
+\includegraphics[width=200pt]{1.png}
+\includegraphics[width=200pt]{2.png}
+\caption{Forestillinger-vinduet før og efter en film er valgt}
+\end{figure}
 
-\includegraphics[width=150pt]{1.png}
-\includegraphics[width=150pt]{2.png}
 
-\end{picture}
-\begin{center}
-\tiny Figure 1. Forestillinger-vinduet før og efter en film er valgt
-\end{center}
 
 Klikker ekspedienten derimod ikke på noget, vil der stå følgene tekst \emph{Klik på en film til venstre for at vise tidspunkter}, og har man ikke først valgt film og tidspunkt vil \emph{Reservation} være ubrugelige.
 
 Efter at have valgt film, vælger brugeren tidspunktet, som kunden ønsker at reservere til. Når en forestilling vælges bliver brugeren videreført til næste tab - altså reservation. Her vises et vindue med firkanter som illustrerer sæderne i biografen. Ledige sæder er illustreret som en grøn firkant og optagede sæder er illustreret som røde sæder. Brugeren klikker på de sæder som kunden ønsker at reservere - brugeren kan desuden holde musen nede og hive musen over de sæder som skal vælges. De valgte sæder skifter farve til blå og brugeren kan se hvor mange sæder vedkommende har markeret nederst i venstre hjørne. 
 
-\begin{picture}
-
-\includegraphics[width=250pt]{3.png}
-
-\end{picture}
-\begin{center}
-\tiny Figure 2. Biograf sal med reserverede sæder i rødt, samt sæder brugeren er ved at reservere i blå
-\end{center}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=250pt]{3.png}
+    \caption{Biograf sal med reserverede og valgte sæder}
+\end{figure}
 
 Når sæderne er valgt skrives kundens navn og telefonnummer ind i tekstfelterne nederst i højre hjørne. Afslutningsvist trykkes der på knappen \emph{Fuldfør reservation}. 
 
-<<<<<<< HEAD
-Hvis kunden fortryder sin bestilling eller har ændringer til en eksisterende bestilling, så klikker brugeren på tabben \emph{Ret reservation} i toppen af programmet. Brugeren bliver taget til et vindue hvor kundens telefonnummer skal indtastes. Når telefonnummeret er indtastet og der er trykket på Enter-tasten eller på \emph{Tjek reservationer}-knappen, så vises en liste nedenunder med de reservationer som kunden har tilknyttet til sit telefonnummer. Der vises kun reservationer for forestillinger som ikke er blevet vist - gamle reservationer vises altså ikke. Brugeren dobbeltklikker på den reservation der skal rettes og et nyt vindue åbner som ligner reservationsvinduet. De optagede sæder er røde, de ledige er grønne og de sæder som er tilknyttet til den pågældende reservation vises som blå. Brugeren kan tilføje eller slette sæder. Et valgt er blåt og markeringen fjernes ved at klikke på sædet igen. Når ændringen til reservationen er valgt, så klikker brugeren på \emph{Rediger reservation}. Skal reservationen derimod slettes helt, så klikker brugeren på \emph{Slet reservation}.styffff
-=======
+Hvis kunden fortryder sin bestilling eller har ændringer til en eksisterende bestilling, så klikker brugeren på tabben \emph{Ret reservation} i toppen af programmet. Brugeren bliver taget til et vindue hvor kundens telefonnummer skal indtastes. Når telefonnummeret er indtastet og der er trykket på Enter-tasten eller på \emph{Tjek reservationer}-knappen, så vises en liste nedenunder med de reservationer som kunden har tilknyttet til sit telefonnummer. Der vises kun reservationer for forestillinger som ikke er blevet vist - gamle reservationer vises altså ikke. Brugeren dobbeltklikker på den reservation der skal rettes og et nyt vindue åbner som ligner reservationsvinduet. De optagede sæder er røde, de ledige er grønne og de sæder som er tilknyttet til den pågældende reservation vises som blå. Brugeren kan tilføje eller slette sæder. Et valgt er blåt og markeringen fjernes ved at klikke på sædet igen. Når ændringen til reservationen er valgt, så klikker brugeren på \emph{Rediger reservation}. Skal reservationen derimod slettes helt, så klikker brugeren på \emph{Slet reservation}.
+
 Hvis kunden fortryder sin bestilling eller har ændringer til en eksisterende bestilling, så klikker brugeren på tabben \emph{Ret reservation} i toppen af programmet. Brugeren bliver taget til et vindue hvor kundens telefonnummer skal indtastes. Når telefonnummeret er indtastet og der er trykket på Enter-tasten eller på \emph{Tjek reservationer}-knappen, så vises en liste nedenunder med de reservationer som kunden har tilknyttet til sit telefonnummer. \\
->>>>>>> ef25a562ca38edd3c851bfc283f11a238cb2f839
 
-\begin{picture}
-
+\begin{figure}[h]
+\centering
 \includegraphics[width=250pt]{4.png}
+\caption{Forestillinger-vinduet før og efter en film er valgt}
+\end{figure}
 
-\end{picture}
-\begin{center}
-\tiny Figure 3. Forestillinger-vinduet før og efter en film er valgt
-\end{center}
 
 Der vises kun reservationer for forestillinger som ikke er blevet vist - gamle reservationer vises altså ikke. Brugeren dobbeltklikker på den reservation der skal rettes og et nyt vindue åbner som ligner reservationsvinduet. \\
 
-\begin{picture}
-
+\begin{figure}[h]
+\centering
 \includegraphics[width=250pt]{5.png}
+\caption{Vinduet hvor brugeren retter sin reservation}
+\end{figure}
 
-\end{picture}
-\begin{center}
-\tiny Figure 4. Vinduet hvor brugeren retter sin reservation
-\end{center}
 
 De optagede sæder er røde, de ledige er grønne og de sæder som er tilknyttet til den pågældende reservation vises som blå. Brugeren kan tilføje eller slette sæder. Et valgt er blåt og markeringen fjernes ved at klikke på sædet igen. Når ændringen til reservationen er valgt, så klikker brugeren på \emph{Rediger reservation}. Skal reservationen derimod slettes helt, så klikker brugeren på \emph{Slet reservation}.
 
@@ -147,24 +181,55 @@ De optagede sæder er røde, de ledige er grønne og de sæder som er tilknyttet
 \subsection{Moduler}
 Programmet har 2 klasser: DBConnect og buildHolder.
 DBConnect foretager alt der har med databasen at gøre. Dette er eksempelvis databaseforespørgsler hvor alle film returneres i et LinkedHashMap, hvor data såsom reservationer, salstørrelse mv. for en given forestilling hentes, hvor data såsom reservationer indsættes eller opdateres i databasen. Den væsentligste del af DBConnect-klassen må være funktionen getCon, der sørger for at der er en gyldig forbindelse til databasen. 
-buildHolder er et objekt hvor data for en given forestilling lagres. Der bruges getters og setters, så de data der lagres også kan hentes efterfølgende. buildHolder objektet bruges efterfølgende til at bygge reservationssalen med data som filmnavn, tidspunkt for forestillingen, størrelsen på salen (rows/columns), reserverede sæder mv. 
 
-Det er controlleren der gør brug af disse objekter, når data skal visualiseres og altså fremvises for brugeren.
+\begin{lstlisting}
+private Connection getCon() {
+   try {
+       if(!con.isValid(30)) {
+           con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306
+           /kaffeklubben", "kaffeklubben", "pass");
+       }
+   } catch (Exception e) {
+       System.out.println("Error: " + e);
+   }
+   return con;
+}
+\end{lstlisting}
+\linebreak
+
+En anden klasse er \emph{buildHolder}. Et \emph{buildHolder}-objekt lagrer data for en given forestilling. Der bruges getters og setters, så de data der lagres også kan hentes efterfølgende. buildHolder objektet bruges efterfølgende til at bygge reservationssalen med data som filmnavn, tidspunkt for forestillingen, størrelsen på salen (rows/columns), reserverede sæder mv. 
+
+Det er \emph{controlleren} der gør brug af disse objekter, når data skal visualiseres og altså fremvises for brugeren.
 
 \subsection{Datastrukturer}
 
 \subsection{Algoritmer}
+Når et DBConnect objekt initialiseres bliver der oprettet og gemt en connection til databasen i et felt. Funktionen \emph{getCon} tester om denne forbindelse stadig er gyldig. Hvis den ikke er gyldig, så oprettes der en ny gyldig forbindelse og denne returneres. Derved kan forbindelsen eksempelvis kaldes som \emph{getCon().createStatement();} og altid bruge en gyldig forbindelse.
+
+\emph{getMovies} tager ingen parametre og returnerer et LinkedHashMap med filmens id som key og filmens navn som value. Sorteret alfabetisk efter filmnavn (A-Z).
+
+\emph{getMovieSchedule} tager film id som parameter og returnerer et LinkedHashMap med show id som \emph{key} og tidspunktet for forestillingen (timestamp) som \emph{value}. Data er hentet fra databasen med en sql-query hvor film id’et er det ene \emph{where}-parameter og tiden for forestillingen er større/senere end det nuværende tidspunkt. Hele forespørgslen er sorteret med den nærmeste forestilling først - altså \emph{time} ASC. 
+
+\emph{getBuildSceneInfo} tager et forestillings id som parameter og laver et \emph{buildHolder} objekt med information om forestillingen. Først hentes generelt information såsom filmnavn, tidspunkt for forestillingen, størrelsen på salen (højde og bredde) m.fl. Efterfølgende hentes alle de reserverede sæder til den pågældende forestilling. Disse reservationer gemmes i et multidimensional array \emph{[x][y]} af typen \emph{Boolean}, hvor værdien i det ydre array er x-koordinaten til sædet og værdien i det indre array er y-koordinaten. Et reserveret sæde sættes til at være \emph{true} på sædets plads - eksempelvis vil sæde 5:7 være \emph{[5][7] = true}, hvis det er reserveret. 
+
+\emph{insertReservation} er den metode, som sørger for at de valgte sæder og tilknyttede kundeinformationer indsættes i databasen. Der tages fire parametre: en \emph{ArrayList} af typen string med sæderne, en \emph{Integer} med forestillingens id, en \emph{String} med kundens navn og ligeledes en med kundens telefonnummer. Sæderne gemmes som string med et kolon som splitter mellem sædets \emph{x-} og \emph{y-værdi} fx 5:8.
+
+Først indsættes kundens navn, telefonnummer og forestillingens id i tabellen \emph{reservations}. Derefter køres funktionen \emph{getLastReservationId}, som returnerer senest indsatte reservations id. Dette id skal nemlig bruges til at linke de valgte sæder med reservationen. Dernæst løbes vores \emph{ArrayList} igennem for at indsætte hvert sæde i reservation ind i vores database. 
+\begin{lstlisting}
+for(String seat : seats) {
+    query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + lastid + "', '" + seatInfo[0] + "', '" + seatInfo[1] + "')";
+  
+}
+\end{lstlisting}
+
+Koden ovenfor illustrerer hvordan vi indsætter seat i databasen. Vores sæde-string skal splittes op, så vi kan indsætte en x-værdi og en y-værdi i databasen. Man splitter vores string op i et \emph{string-array} hvor index 0 er alt tekst før første kolon. Index 1 er alt tekst før andet kolon osv. 
+\begin{lstlisting}
+String[] seatInfo = seat.split(":");
+\end{lstlisting}
+Derved kan vi nu tilgå vores x-værdi som \emph{seatInfo[0]} og vores y-værdi som \emph{seatInfo[1]}. Hvis hele metoden forløber fejlfrit, så returneres der boolean true. Hvis der forekommer en \emph{exception} så returneres false. 
+
 
 \section{Brugergrænsedesign}
-
-%\begin{itemize}
-%\item 
-%\item 
-%\item 
-%\item 
-%\item 
-%\end{itemize}
-
 
 
 \subsection{Begrænsninger}
@@ -174,8 +239,8 @@ Det er controlleren der gør brug af disse objekter, når data skal visualiseres
 
 \section{Brugerafprøvning}
 
-\section{Unitet}
-Vores klasse \emph{DBConnectTest} er en testklasse indeholdende unitets. Den primære funktion for for disse test er at teste om vores programtekst snakker rigtigt sammen med databasen. 
+\section{Unit test}
+Vores klasse \emph{DBConnectTest} er en testklasse indeholdende tets. Den primære funktion for for disse test er at teste om vores programtekst snakker rigtigt sammen med databasen. Fordi vi primært tester koden i relation til databasen er det ikke rene unit test vi udfører. Faktisk er det det man kalder integration tests. Integration test er test der bruger en database, et netwærk eller et andet eksternt system som fx en mailserver. Typisk for en integration test er også at den udfører I/O. I vores tilfælde tager vores tests input fra en database og udskriver et grafisk output til skræmmen. \linebreak
 
 Testen \emph{testGetMovies()} tester om film og ide passer sammen. Dette gøres ved at vi giver testen et forventet uddata, som er bestemte id's tilknyttet bestemte film. Når testen kører, testes derfor om det forventede uddata passer overens med det faktiske uddata. 
 
@@ -183,8 +248,21 @@ Testen \emph{testGetMovies()} tester om film og ide passer sammen. Dette gøres 
 
 For at tjekke om et reserveret sæde vise med rød farve, og dermed ikke har nogle funktioner. Sædernes funktioner er nemlig tilknyttet deres farve, således at de røde sæder ikke er mulige er klikke på. \emph{testReservedSetColor()} henter et reserveret sæde og derefter sætter dens farve ligmed den forventede røde farve. 
 
-\emph{testInsetReservation()} tester om metoden \emph{InsetReservation()}
+\emph{testInsertReservation()} tester om metoden \emph{InsertReservation()} rent faktisk opretter en reservation. \\
+\clearpage
+\begin{lstlisting}
+ @Test
+    public void testInsertReservation(){
+        ArrayList<String> seats = new ArrayList<String>();
+        seats.add("1:2");
+        dbConnect.insertReservation(seats, 120, "Amanda", "26802103");
+        dbConnect.getLastReservationId();
+\end{lstlisting} 
+Ovenfor ses en del af testmetoden \emph{testInsertReservation}. I metoden begynder vi med at oprette en ArrayList til sæder, og herefter indsætter vi et sædet i Array'et som har plads [1:2]. Tredje linje kalder \emph{insertReservation} metoden fra \emph{dbConnect} klasse, og giver metoden de værdier den skal bruge for at oprette en reservation. Den sidste linje i \emph{testInsertReservation} bruger metoden \emph{getLastReservation} metoden, igen fra \emph{dbConnect}, til at hente det sidste oprette reservations id - som er den reservation vi lige har oprettet i linjen ovenover. 
 
+Den sidste testmetode \emph{testGetReservation} tester metoden \emph{getReservation}. Dette gøres ved at testen først tjekker om en reservation med telefonnumeret \emph{11223344} eksistere, og returner \emph{true} hvis reservationen \emph{ikke} eksisterer. Herefter opretter testen selv en reservation under det samme telefonnummer, og til sidst tjekker testen igen om der eksisterer en reservation med det givne telefonnumer. Denne gang skal testen returnere \emph{true} hvis der \emph{eksisterer} en reservation. 
+
+Både \emph{testInsertReservation} og \emph{testGetReservation} har en \emph{@After} test, som sletter de reservationer der bliver lavet i de to tests. Dette gøres ved at \emph{@After} kalder \emph{deleteReservation} fra \emph{dbConnect}.
 
 
 \section{Resultat}
@@ -193,6 +271,8 @@ For at tjekke om et reserveret sæde vise med rød farve, og dermed ikke har nog
 \chapter{Konklusion}
 
 \chapter{Litteratur}
+
+\listoffigures
 
 \chapter{Bilag}
 
