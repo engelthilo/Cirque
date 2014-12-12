@@ -121,7 +121,7 @@ public class DBConnect {
             String query = "SELECT seat_x, seat_y FROM reservationlines, reservations WHERE reservationlines.reservation_id = reservations.id AND reservations.show_id = " + showId;
             rs = st.executeQuery(query);
 
-            Boolean[][] resSeat = new Boolean[100][100];
+            Boolean[][] resSeat = new Boolean[bh.getColumns()+1][bh.getRows()+1];
             int i = 0;
             while(rs.next()) {
                 int seat_x = rs.getInt("seat_x"); //gets the x-value of a reserved seat
@@ -208,14 +208,14 @@ public class DBConnect {
      * Method: Finds all the seats in a reservation
      * Returns: A boolean multidimensionalarray (Boolean[][]) with x being the first value and y being the second like x=5:y=3 is Boolean[5][3]
      */
-    public Boolean[][] getResSeat(int reservationId) {
+    public Boolean[][] getResSeat(int reservationId, buildHolder bh) {
 
         try {
             st = getCon().createStatement();
             String query = "SELECT seat_x, seat_y FROM reservationlines, reservations WHERE reservationlines.reservation_id = reservations.id AND reservations.id = " + reservationId;
             rs = st.executeQuery(query);
 
-            Boolean[][] resSeat = new Boolean[100][100];
+            Boolean[][] resSeat = new Boolean[bh.getColumns()+1][bh.getRows()+1];
 
             while(rs.next()) {
                 int seat_x = rs.getInt("seat_x"); //gets the x-value of a reserved seat
@@ -294,17 +294,12 @@ public class DBConnect {
      * Method: Deletes the seats from the reservationlines table and the reservation itself from the reservations table
      * Returns: Boolean - true if deleted correctly and false if not
      */
-    public Boolean deleteReservation(ArrayList<String> oldSeats, int reservationId) {
+    public Boolean deleteReservation(int reservationId) {
         try {
             // deleting all the seats
-            for(String seat : oldSeats) {
-                String[] seatInfo = seat.split(":"); // here we split the string since it is like 3:3 or 9:17 so that we can get the x-value and the y-value seperated. They are now stored in an array with index 0 being the x-value and index 1 being the y-value
-                String query = "DELETE FROM reservationlines WHERE reservation_id = '" + reservationId + "' AND seat_x = '" + seatInfo[0] + "' AND seat_y = '" + seatInfo[1] + "'";
-                st.executeUpdate(query);
-            }
+            st.executeUpdate("DELETE FROM reservationlines WHERE reservation_id = '" + reservationId + "'");
             // deleting the reservation itself
-            String query = "DELETE FROM reservations WHERE id = '" + reservationId + "'";
-            st.executeUpdate(query);
+            st.executeUpdate("DELETE FROM reservations WHERE id = '" + reservationId + "'");
 
             return true;
 

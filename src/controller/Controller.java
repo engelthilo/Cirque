@@ -126,7 +126,6 @@ public class Controller {
                     public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
                         //If ''Ret reservation'' is clicked, do a Platform.runLater and inside this call phoneNumber.requestFocus()
                         if (tabPane.getSelectionModel().isSelected(2)){ //
-                            System.out.println("Så er den valgt");
                             Platform.runLater(new Runnable() {
                                 @Override
                                 public void run() {
@@ -519,7 +518,7 @@ public class Controller {
         gp.setAlignment(Pos.CENTER); // centers the gridpane to the vbox
         Boolean[][] resSeat = bh.getResSeat();
 
-        Boolean[][] editResSeat = db.getResSeat(reservationID); //Get the reserved seats for the specifik reservation id
+        Boolean[][] editResSeat = db.getResSeat(reservationID, bh); //Get the reserved seats for the specifik reservation id
         oldSeats = new ArrayList<String>();
         newSeats = new ArrayList<String>();
 
@@ -687,7 +686,7 @@ public class Controller {
     }
 
     private void deleteReservation(int reservationID) {
-        if(db.deleteReservation(oldSeats, reservationID)) {
+        if(db.deleteReservation(reservationID)) {
             newPopUp("Reservationen er slettet!");
             editReservationView.close();
             getReservations();
