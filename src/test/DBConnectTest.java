@@ -118,9 +118,7 @@ public class DBConnectTest {
     //sletter den reservation vi har lavet ovenfor.
     @After
     public void deleteReservationtest() {
-        ArrayList<String> oldSeats = new ArrayList<String>();
-        oldSeats.add("1:2");
-        dbConnect.deleteReservation(oldSeats, lastid);
+        dbConnect.deleteReservation(lastid);
 
     }
     
@@ -150,9 +148,7 @@ public class DBConnectTest {
     //sletter indput til databasen som blev lavet opover.
     @After
     public void deleteInputReservation() {
-        ArrayList<String> oldSeats = new ArrayList<String>();
-        oldSeats.add("2:2");
-        dbConnect.deleteReservation(oldSeats, lastid1);
+        dbConnect.deleteReservation(lastid1);
 
     }
 
