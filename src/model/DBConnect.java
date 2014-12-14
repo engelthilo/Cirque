@@ -30,7 +30,7 @@ public class DBConnect {
      * Method: Gets the current connection. If it doesn't exists/is invalid a new one is created.
      * Returns: A valid connection
      */
-    private Connection getCon() {
+    public Connection getCon() {
         try {
             if(!con.isValid(30)) {
                 con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/kaffeklubben", "kaffeklubben", "kp8473moxa");
