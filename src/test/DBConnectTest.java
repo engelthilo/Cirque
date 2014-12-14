@@ -2,6 +2,7 @@ package test;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import model.DBConnect;
+import model.DBConnectSub;
 import model.buildHolder;
 import org.junit.After;
 import org.junit.Test;
@@ -18,14 +19,14 @@ public class DBConnectTest {
     private ResultSet rs;
     private int lastid;
     private int lastid1;
-    private DBConnect dbConnect;
+    private DBConnectSub dbConnectSub;
 
     public DBConnectTest() {
 
-        dbConnect = new DBConnect();
+        dbConnectSub = new DBConnectSub();
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/kaffeklubben", "kaffeklubben", "kp8473moxa");
+            con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/KaffeklubbenTest", "Kaffekluben2", "kp8473moxa");
             st = con.createStatement();
         } catch (Exception e) {
             System.out.println("Error:" + e);
@@ -45,7 +46,7 @@ public class DBConnectTest {
         expected.put(9, "Dumb and Dumber To");
         expected.put(10, "Nightcrawler");
         expected.put(11, "Jurrasic World");
-        assertEquals(expected, dbConnect.getMovies());
+        assertEquals(expected, dbConnectSub.getMovies());
     }
     //denne test tjekker tidspunkterne på film nr 1 virker - 1 kan udskiftes med andre id's. Virker stadig.
     @Test
@@ -97,8 +98,8 @@ public class DBConnectTest {
     public void testInsertReservation(){
         ArrayList<String> seats = new ArrayList<String>();
         seats.add("1:2");
-        dbConnect.insertReservation(seats, 1, "Amanda", "26802103");
-        dbConnect.getLastReservationId();
+        dbConnectSub.insertReservation(seats, 1, "Amanda", "26802103");
+        dbConnectSub.getLastReservationId();
 
         try {
             rs = st.executeQuery("SELECT reservations.id, seat_x, seat_y FROM reservations, reservationlines WHERE reservationlines.reservation_id" +
@@ -125,15 +126,15 @@ public class DBConnectTest {
     //Denne test tester om der kommer en liste ud når man har reserveret for et bestemt nummer.
     @Test
     public void testGetReservation() {
-        Boolean reservations = dbConnect.getBooleanReservations("11223344");
+        Boolean reservations = dbConnectSub.getBooleanReservations("11223344");
 //        assertTrue(!reservations);
         ArrayList<String> seats = new ArrayList<String>();
         seats.add("2:2");
         String customerName = "Markus";
         String phoneNumber = "11223344";
         int showId = 109;
-        dbConnect.insertReservation(seats, showId, customerName, phoneNumber);
-        reservations = dbConnect.getBooleanReservations("11223344");
+        dbConnectSub.insertReservation(seats, showId, customerName, phoneNumber);
+        reservations = dbConnectSub.getBooleanReservations("11223344");
         assertTrue(reservations);
         try {
             rs = st.executeQuery("SELECT id FROM reservations ORDER BY id DESC LIMIT 1");
@@ -146,10 +147,10 @@ public class DBConnectTest {
     }
 
     //sletter indput til databasen som blev lavet opover.
-    @After
+    /*@After
     public void deleteInputReservation() {
-        dbConnect.deleteReservation(lastid1);
+        dbConnectSub.deleteReservation(lastid1);
 
-    }
+    }*/
 
 }
