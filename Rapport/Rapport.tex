@@ -1,4 +1,4 @@
-\documentclass[final]{rapport1}
+\documentclass[final]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[export]{adjustbox} 
 \usepackage{pdfpages}
@@ -10,6 +10,7 @@
 \addto{\captionsdanish}{\renewcommand{\abstractname}{Abstract}}
 \setlength{\parindent}{4em}
 \usepackage{listings}
+\usepackage{minted}
 \usepackage{color}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -38,6 +39,9 @@ top    = 2.75cm,
 bottom = 2.75cm,
 left   = 3.00cm,
 right  = 3.00cm]{geometry}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
 
 \begin{document}
 \begin{titlepage}
@@ -92,18 +96,18 @@ Vores program løser problemstilligen ved at have alt information omkring forest
 
 \subsection{Build Reservation}
 En af de større udfordringer, som man også har kunne tackle på en masse forskellige måder, var når biografsalen skulle bygges grafisk. Den primære metode vi brugte her var buildReservationScene(int showID) i vores Controller.java class. Alt informationen omkring biografsalen får vi fra vores database, dette bliver behandlet i metoden, her er det bl.a. det forskellige labels der bliver sat (cinemaNameLabel, movienameLabel etc). Med informationen fra databasen kører vi et for-loop der kører igennem kolonerne, og inden i for loopet kører der endnu et for-loop der kører sæderne igennem for hver kolonne. Det er rimelig lige til og i højgrad den bedste måde vi kunne komme på at gøre det. Sæderne bliver grafisk vist som firkanter, her kunne man godt have lavet det som knapper. Vi valgte at bruge Ractangle objekter fordi det var nemt at manupulere det udseende vi gerne ville give dem uden at vi behøvede at gå på kompromis med funktionaliteten.
-\clearpage
 
-for(Antal kolonner)\{\par
-{for(Antal rækker på kolonne)\{}\par
-\hspace{2cm}if(Sæde er reserveret)\{\par
-\hspace{3cm}Gør sæde rød\par
-\hspace{2cm}\}\par
-\hspace{2cm}else\{\par
-\hspace{3cm}gør sæde grøn\par
-\hspace{2cm}\}\par
-	\}\\
-\}\\
+\begin{minted}{java}
+for(number of colloms){
+    for(number of rows){
+        if(seats are reservated){
+            make seats red
+        } else {
+            make seats green
+        }
+    }
+}
+\end{minted}
 
 
 
@@ -116,9 +120,7 @@ An alternativ måde at løse problemstillingen på ville være at fokusere på a
 \section{Databasedesign}
 En af de to overordnede tabeller i vores database er \emph{cinemas} som indeholder information omkring vores biografsale. Dette omfatter salens navn, id, antal rækker og antal sæder i hver række. Vores sæder er ikke repræsenteret som en tabel i vores database, men derimod gemt som et 2 dimentionelt array. 
 
-Den anden vigtige tabel er \emph{movies} som indeholder inforamtion omkring de film der går i biografen. Det eneste inforamtion denne tabel holder er navn og id.
-
-I begge tabel er det, det pågældende id som fungerer som nøgle. Altså sal\_id og movie\_id.  
+Den anden vigtige tabel er \emph{movies} som indeholder inforamtion omkring de film der går i biografen. Det eneste inforamtion denne tabel holder er navn og id. I begge tabel er det, det pågældende id som fungerer som nøgle. Altså sal\_id og movie\_id.  
 
 De to tabeller \emph{movie} og \emph{cinema} bliver koblet sammen i tabellen \emph{show}. Her bruges deres nøgler til at sammensætte de foreskellige forestillinger som vores biograf kan vise. I \emph{shows} tilføjes så et nyt ide til de enkelte forestillinger samt et timestamp - som er det tidspunkt forestillingen skal begynde.
 
@@ -151,8 +153,7 @@ Når sæderne er valgt skrives kundens navn og telefonnummer ind i tekstfelterne
 
 Hvis kunden fortryder sin bestilling eller har ændringer til en eksisterende bestilling, så klikker brugeren på tabben \emph{Ret reservation} i toppen af programmet. Brugeren bliver taget til et vindue hvor kundens telefonnummer skal indtastes. Når telefonnummeret er indtastet og der er trykket på Enter-tasten eller på \emph{Tjek reservationer}-knappen, så vises en liste nedenunder med de reservationer som kunden har tilknyttet til sit telefonnummer. Der vises kun reservationer for forestillinger som ikke er blevet vist - gamle reservationer vises altså ikke. Brugeren dobbeltklikker på den reservation der skal rettes og et nyt vindue åbner som ligner reservationsvinduet. De optagede sæder er røde, de ledige er grønne og de sæder som er tilknyttet til den pågældende reservation vises som blå. Brugeren kan tilføje eller slette sæder. Et valgt er blåt og markeringen fjernes ved at klikke på sædet igen. Når ændringen til reservationen er valgt, så klikker brugeren på \emph{Rediger reservation}. Skal reservationen derimod slettes helt, så klikker brugeren på \emph{Slet reservation}.
 
-Hvis kunden fortryder sin bestilling eller har ændringer til en eksisterende bestilling, så klikker brugeren på tabben \emph{Ret reservation} i toppen af programmet. Brugeren bliver taget til et vindue hvor kundens telefonnummer skal indtastes. Når telefonnummeret er indtastet og der er trykket på Enter-tasten eller på \emph{Tjek reservationer}-knappen, så vises en liste nedenunder med de reservationer som kunden har tilknyttet til sit telefonnummer. \\
-
+Hvis kunden fortryder sin bestilling eller har ændringer til en eksisterende bestilling, så klikker brugeren på tabben \emph{Ret reservation} i toppen af programmet. Brugeren bliver taget til et vindue hvor kundens telefonnummer skal indtastes. Når telefonnummeret er indtastet og der er trykket på Enter-tasten eller på \emph{Tjek reservationer}-knappen, så vises en liste nedenunder med de reservationer som kunden har tilknyttet til sit telefonnummer. \clearpage
 \begin{figure}[h]
 \centering
 \includegraphics[width=250pt]{4.png}
@@ -168,7 +169,6 @@ Der vises kun reservationer for forestillinger som ikke er blevet vist - gamle r
 \caption{Vinduet hvor brugeren retter sin reservation}
 \end{figure}
 
-
 De optagede sæder er røde, de ledige er grønne og de sæder som er tilknyttet til den pågældende reservation vises som blå. Brugeren kan tilføje eller slette sæder. Et valgt er blåt og markeringen fjernes ved at klikke på sædet igen. Når ændringen til reservationen er valgt, så klikker brugeren på \emph{Rediger reservation}. Skal reservationen derimod slettes helt, så klikker brugeren på \emph{Slet reservation}.
 
 \subsection{Begrænsninger}
@@ -177,12 +177,13 @@ De optagede sæder er røde, de ledige er grønne og de sæder som er tilknyttet
 
 \chapter{Teknisk Analyse}
 \section{Model View Controller}
+Vi har brugt Model-View-Controller (fork. MVC) til at adskille vores database (model), vores controller og vores buildholder (view) fra hinanden. Dette gør vores programkode mere overskuelig og nemmere at veligeholde.
 
 \subsection{Moduler}
 Programmet har 2 klasser: DBConnect og buildHolder.
 DBConnect foretager alt der har med databasen at gøre. Dette er eksempelvis databaseforespørgsler hvor alle film returneres i et LinkedHashMap, hvor data såsom reservationer, salstørrelse mv. for en given forestilling hentes, hvor data såsom reservationer indsættes eller opdateres i databasen. Den væsentligste del af DBConnect-klassen må være funktionen getCon, der sørger for at der er en gyldig forbindelse til databasen. 
 
-\begin{lstlisting}
+\begin{minted}{java}
 private Connection getCon() {
    try {
        if(!con.isValid(30)) {
@@ -194,7 +195,7 @@ private Connection getCon() {
    }
    return con;
 }
-\end{lstlisting}
+\end{minted}
 \linebreak
 
 En anden klasse er \emph{buildHolder}. Et \emph{buildHolder}-objekt lagrer data for en given forestilling. Der bruges getters og setters, så de data der lagres også kan hentes efterfølgende. buildHolder objektet bruges efterfølgende til at bygge reservationssalen med data som filmnavn, tidspunkt for forestillingen, størrelsen på salen (rows/columns), reserverede sæder mv. 
@@ -228,9 +229,32 @@ String[] seatInfo = seat.split(":");
 \end{lstlisting}
 Derved kan vi nu tilgå vores x-værdi som \emph{seatInfo[0]} og vores y-værdi som \emph{seatInfo[1]}. Hvis hele metoden forløber fejlfrit, så returneres der boolean true. Hvis der forekommer en \emph{exception} så returneres false. 
 
+\emph{getReservations} henter alle reservationer tilhørende et telefonnummer. Parametret er altså et telefonnummer og metoden returnerer et LinkedHashMap med reservations id som \emph{key} og en \emph{HBox} med informationer om forestillingen som \emph{value}. Databaseforespørgslen henter kun fremtidige reservationer - altså reservationer til forestillinger som endnu ikke er vist. Denne metode bliver brugt til at liste alle fremtidige reservationer op for en kunde, så de enten kan rettes eller slettes. 
+
+\emph{getResSeat} bruges til at bygge den sal, hvor en reservation kan rettes eller slettes. Den tager to parametre. Det ene er reservations id’et og det andet er et buildHolder objekt. Reservations id’et er essentielt, da de reserverede sæder er bundet op på dette. BuildHolder objektet bruges til at bygge det multidimensionelle array som returneres, da vi skal bruge salens bredde og højde (columns/rows). 
+
+\begin{lstlisting}
+Boolean[][] resSeat = new
+Boolean[bh.getColumns()+1][bh.getRows()+1];
+\end{lstlisting}
+
+Vi ligger 1 til, da sæderne starter med 1 og et array starter med index 0. På den måde undgår vi en \emph{NullPointerException}, da salen ellers vil prøve et tilgå et felt uden for vores array - også kaldet \emph{ArrayIndexOutOfBoundsException}. 
+Et optaget sæde vil returnere værdien true og et ledigt sæde false. Dette tjekker vi når vi looper igennem salens højde og bredde, som bliver gjort i vores controller, der også bygger den grafiske sal som er det vi ser. 
+
+\emph{getShowIdFromResId} er en forholdsvis simpel metode. Den tager et reservations id som parameter og laver ud fra dette en databaseforespørgsel og finder derved ud af hvilken forestilling det pågældende reservations id tilhører. Dette forestillings id returneres som en int. På den måde kan vi sætte et buildHolder objekt op med det rette informationer, når en forestilling skal redigeres eller slettes. Metoden returnerer 0 hvis der ikke er fundet nogen forestilling til det pågældende reservations id. 
+
+\emph{updateReservation} opdaterer en reservation. Der tages tre parametre: to \emph{ArrayLists} af typen \emph{String} og et reservations id af typen \emph{int}. Den første arrayliste er de gamle reserverede sæder og den anden arrayliste er de nye reserverede sæder. Først slettes de gamle sæder og derefter indsættes sæderne fra den redigerede og dermed nye reservation. Hvis opdateringen af reservationen forløber uden fejl, så returnerer metoden \emph{true} ellers returnerer metoden \emph{false}. 
+
+\emph{deleteReservation} sletter en reservation og dertilhørende sæder fra databasen. Metoden har et parameter som er reservations id af typen \emph{int}. Da sæderne står er linket til dette reservations id, kan vi bare fjerne alle rækkerne i tabellen med reserverede sæder ud fra et givent reservations id. Først fjernes reserverede sæder og afslutningsvist fjernes selve ordren med kundenavn, telefonnummer og forestillings id. 
+
+
 
 \section{Brugergrænsedesign}
+\subsection{Forestillinger}
 
+\subsection{Reservation}
+
+\subsection{Ret reservation}
 
 \subsection{Begrænsninger}
 
@@ -249,15 +273,15 @@ Testen \emph{testGetMovies()} tester om film og ide passer sammen. Dette gøres 
 For at tjekke om et reserveret sæde vise med rød farve, og dermed ikke har nogle funktioner. Sædernes funktioner er nemlig tilknyttet deres farve, således at de røde sæder ikke er mulige er klikke på. \emph{testReservedSetColor()} henter et reserveret sæde og derefter sætter dens farve ligmed den forventede røde farve. 
 
 \emph{testInsertReservation()} tester om metoden \emph{InsertReservation()} rent faktisk opretter en reservation. \\
-\clearpage
-\begin{lstlisting}
+\begin{minted}{java}
  @Test
     public void testInsertReservation(){
         ArrayList<String> seats = new ArrayList<String>();
         seats.add("1:2");
         dbConnect.insertReservation(seats, 120, "Amanda", "26802103");
         dbConnect.getLastReservationId();
-\end{lstlisting} 
+\end{minted}
+ 
 Ovenfor ses en del af testmetoden \emph{testInsertReservation}. I metoden begynder vi med at oprette en ArrayList til sæder, og herefter indsætter vi et sædet i Array'et som har plads [1:2]. Tredje linje kalder \emph{insertReservation} metoden fra \emph{dbConnect} klasse, og giver metoden de værdier den skal bruge for at oprette en reservation. Den sidste linje i \emph{testInsertReservation} bruger metoden \emph{getLastReservation} metoden, igen fra \emph{dbConnect}, til at hente det sidste oprette reservations id - som er den reservation vi lige har oprettet i linjen ovenover. 
 
 Den sidste testmetode \emph{testGetReservation} tester metoden \emph{getReservation}. Dette gøres ved at testen først tjekker om en reservation med telefonnumeret \emph{11223344} eksistere, og returner \emph{true} hvis reservationen \emph{ikke} eksisterer. Herefter opretter testen selv en reservation under det samme telefonnummer, og til sidst tjekker testen igen om der eksisterer en reservation med det givne telefonnumer. Denne gang skal testen returnere \emph{true} hvis der \emph{eksisterer} en reservation. 
@@ -274,7 +298,12 @@ Både \emph{testInsertReservation} og \emph{testGetReservation} har en \emph{@Af
 
 \listoffigures
 
-\chapter{Bilag}
+\begin{appendix}
+
+\chapter{Tests}
+\inputminted{java}{../src/test/DBConnectTest.java}
+
+\end{appendix}
 
 \end{document}
 
