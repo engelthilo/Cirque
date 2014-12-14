@@ -11,8 +11,6 @@ public class DBConnectSub extends DBConnect{
     private Statement st;
     private ResultSet rs;
 
-<<<<<<< HEAD
-
     public DBConnectSub() {
 
         try {
@@ -23,20 +21,6 @@ public class DBConnectSub extends DBConnect{
             System.out.println("Error:" + e);
         }
     }
-
-}
-=======
-
-    public DBConnectSub() {
-        //Så skal du bare skrive SQL databse site (altså ''mysql://mysql.itu.dk:3306/kaffeklubben'' brugernavn (kaffeklubben) og kodeord (kp8473moxa
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/kaffeklubben", "kaffeklubben", "kp8473moxa");
-            st = con.createStatement();
-        } catch (Exception e) {
-            System.out.println("Error:" + e);
-        }
-    }
     
 }
->>>>>>> refs/remotes/origin/master
+
