@@ -6,7 +6,6 @@ import javafx.scene.layout.HBox;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class DBConnect {
@@ -264,14 +263,10 @@ public class DBConnect {
      * Method: Updates an order with new seats (first deleting old seats and then inserting new seats
      * Returns: Boolean - true if inserted correctly and false if not
      */
-    public Boolean updateReservation(ArrayList<String> oldSeats, ArrayList<String> newSeats, int reservationId) {
+    public Boolean updateReservation(ArrayList<String> newSeats, int reservationId) {
         try {
             // first we delete the old reservated seats
-            for(String seat : oldSeats) {
-                String[] seatInfo = seat.split(":"); // here we split the string since it is like 3:3 or 9:17 so that we can get the x-value and the y-value seperated. They are now stored in an array with index 0 being the x-value and index 1 being the y-value
-                String query = "DELETE FROM reservationlines WHERE reservation_id = '" + reservationId + "' AND seat_x = '" + seatInfo[0] + "' AND seat_y = '" + seatInfo[1] + "'";
-                st.executeUpdate(query);
-            }
+            st.executeUpdate("DELETE FROM reservationlines WHERE reservation_id = '" + reservationId + "'");
 
             // then we insert the new reservated seats
             for(String seat : newSeats) {

@@ -7,7 +7,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -15,12 +14,10 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.DBConnect;
 import model.buildHolder;
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -31,7 +28,6 @@ public class Controller {
 
     @FXML
     private TabPane tabPane;
-
 
     @FXML
     private VBox showsVBox;
@@ -90,8 +86,6 @@ public class Controller {
 
     private buildHolder bh;
 
-    private ArrayList<String> oldSeats;
-
     private ArrayList<String> newSeats;
 
     private Stage editReservationView;
@@ -120,7 +114,7 @@ public class Controller {
     @FXML
     private void requestPhoneNumber(){
         //Observe which tab is selected.
-        tabPane.getSelectionModel().selectedItemProperty().addListener(
+        tabPane.getSelectionModel().selectedItemProperty().addListener (
                 new ChangeListener<Tab>() {
                     @Override
                     public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
@@ -398,18 +392,15 @@ public class Controller {
             // if a reservation is completely inserted it will return true
             if(db.insertReservation(seatsInOrder, bh.getShowId(), customerName.getText(), customerPhone.getText())) {
                 newPopUp("Bestillingen er gennemført");
-                System.out.println("Bestillingen er gennemført.");
                 seatsInOrder.clear(); // removes the chosen seats from the array
                 customerName.clear(); // clears the textfield
                 customerPhone.clear(); // clears the textfield
                 buildReservationScene(bh.getShowId()); // builds an updated scene so that the new reservated seats are now available to pick
             } else {
-                System.out.println("Der er sket en fejl - prøv igen!");
-
+                newPopUp("Der er sket en fejl!\nPrøv igen");
             }
         }
         else {
-            System.out.println("Orderen kan ikke færdiggøres");
             newPopUp("Reservationen kan ikke udføres.\nFelterne navn og telefonnummer skal være udfyldt.\nDesuden skal du vælge sæder");
         }
 
@@ -423,7 +414,7 @@ public class Controller {
             try {
                 makeReservation();
             } catch (Exception e) {
-                System.out.println("Error:e" + e);
+                catchPopUp(e);
             }
         }
     }
@@ -525,7 +516,6 @@ public class Controller {
         Boolean[][] resSeat = bh.getResSeat();
 
         Boolean[][] editResSeat = db.getResSeat(reservationID, bh); //Get the reserved seats for the specifik reservation id
-        oldSeats = new ArrayList<String>();
         newSeats = new ArrayList<String>();
 
         for(int i = 1; i < columns+1; i++) { //laver en forloppe der kører kolonerne igennem
@@ -550,7 +540,6 @@ public class Controller {
                     } else if (editResSeat[i][j] != null){
                         if(editResSeat[i][j]) {
                             seatString = x + ":" + y;
-                            oldSeats.add(seatString);
                             newSeats.add(seatString);
                             r.setFill(Color.web("#039BE5"));
 
@@ -681,7 +670,7 @@ public class Controller {
     }
 
     private void updateReservation(int reservationID) {
-        if(db.updateReservation(oldSeats, newSeats, reservationID)) {
+        if(db.updateReservation(newSeats, reservationID)) {
             newPopUp("Reservationen er rettet!");
             editReservationView.close();
             getReservations();
@@ -710,7 +699,6 @@ public class Controller {
         final Button button = new Button("OK");
         button.requestFocus();
         button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>(){
-
             @Override
             public void handle(MouseEvent event) {
                 dialog.close();
@@ -735,6 +723,10 @@ public class Controller {
         Scene scene = new Scene(pane);
         dialog.setScene(scene);
         dialog.show();
+    }
+
+    public void catchPopUp(Exception e) {
+        newPopUp("Der er opstået en fejl.\nFejl: " + e);
     }
 
 }

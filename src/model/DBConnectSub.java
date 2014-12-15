@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class DBConnectSub extends DBConnect{
+public class DBConnectSub extends DBConnect {
     private Connection con;
     private Statement st;
     private ResultSet rs;
