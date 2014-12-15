@@ -76,12 +76,8 @@ Derudover skal biografen indeholde flere sale, og sende flere forskellige forest
 
 Det samme er gældende for de enkelte forestillinger, der derfor også bliver gemt i databasen.
 
-\subsection{Brugerscenario} - skal laves om
-Når ekspedienten åbner vores biobooking-system vil der på venstre side af vinduet være oplistet de film der spilles i biografen i øjeblikket. Klikker ekspedienten på en af disse film vil der på højre side af vinduet vise sig de tilhørende spilletider til den valgte film. Klikker ekspedienten derimod ikke på noget, vil der stå følgene tekst \emph{Klik på en film til venstre for at vise tidspunkter}. Øverst oppe i vinduet vil man se tre faner: \emph{Forestillinger, Reservation og Ret reservation}. Man kan godt navigere mellem fanerne, men har man ikke først valgt film og tidspunkt vil \emph{Reservation} være ubrugelige.
- 
-Efter at ekspedienten har valgt en film og en spilletid vil systemet automatisk skifte videre til den næste fane: \emph{Reservation}. Her kan ekspedienten vælge frit mellem de ledige sæder. Dette gøres ved at ekspedienten enten klikker enkeltvis på de grønne sæder, eller ved at trække musen over de ønskede sæder. De valgte sæder vil nu blive blå, så ekspedienten kan se hvilke der er valgt. Er sæderne tilfredsstillende skal ekspedienten skrive navn samt telefonnummer på kunden ind i et informationsfelt nedernst til højre på siden. Nedderst på siden ses i venstre hjørne antallet af sæder i alt, samt det ledige antal sæder. Dette kan ekspedienten også se på det grafiske billede over biografsalen, da de allerede reserverede sæder er røde, samt umulige at vælge for reservation. Efter kundens information er indtastet og ekspedienten har klikket på \emph{Fuldfør reservation} kommer et pop-up vindue op, hvor der står skrevet: \emph{Bestillingen er gennemført}.
-
-Ønsker den pågældende kunde derimod at ændre eller slette en reservation, skal ekspedienten klikke sig ind på den sidste fane: \emph{Ret reservation}. På denne side finder ekspedienten øverst oppe et input felt hvor kundens telefonnumer skal indtastes. Når ekspedienten har klikket enter vil kundens reservation(er) dukke op nedenfor i en pæn liste. Ekspedienten kan så klikke på den reservation som kunden ønsker ændret. Nu føres ekspedienten til en popup \emph{Reservation} side, hvor de sæder tilknyttet den pågældende reservation nu ses med blåt. Ekspedienten kan således tilføje eller fjerne sæder ved at klikke på sæder med musen og derefter klikke på \emph{Ret reservation}. Ønsker kunden helt at slette reservationen kan dette lade sig gøre ved at klikke på \emph{Slet reservation}. 
+\subsection{Brugerscenario}
+Signe er ekspidient i en minibiograf og bruger biobooking til at reserverer biletter til kunder. Hun tænder systemet når hun møder på arbejde. Dagens første kunde optræder lidt over 10. Kunden ønsker at booke tre billetter til Fury kl 17.30 den 19 Januar 2015. Signe klikker den filmknap hvordpå der står skrevet \emph{Fury}. Herefter klikker hun på knappen med tiden \emph{17.30} som står under datoen \emph{19/1}. Signe spørger nu kunden hvor i salen kunden ønsker sine billetter. Kunden siger \emph{ca. midt i salen}. Signe vælger sæde \emph{9, 10 og 11} på række \emph{F}, og viser det på skærmen til kunden. Kunden er tilfreds, så Signe spørge kunde om det navn og telefonnumer reservationen skal laves i. Efter at have indtastet kundens informationer klikker Signe på \emph{Fuldfør reservation}. 
 
 \subsection{Systemdesign}
 Vores system er overordnet baseret på data fra databasen. Systemet generer layout ud fra forskellige data i databasen. Dette indebærer bl.a. hvilke film der er i film-tabellen, hvilke forestillinger der er tilknyttet til en given film, hvilke reservationer der er tilknyttet en given forestilling, hvilke reservationer der er tilknyttet et givent telefonnummer mv. Programmet er delt op, så mest mulig databehandling foretages hos klienten/brugeren. Dette indebærer objekter med informationer om de forskellige forestillinger, arrays med valgte sæder mv. Databaseforespørgsler er lavet så omfattende som muligt, så der udføres så få forespørgsler som muligt og data gemmes i objekter og arrays eller bliver benyttet med det samme i den grafiske fremstilling af programmet som eksempelvis ved generering af film-knapper. 
@@ -202,12 +198,8 @@ En anden klasse er \emph{buildHolder}. Et \emph{buildHolder}-objekt lagrer data 
 
 Det er \emph{controlleren} der gør brug af disse objekter, når data skal visualiseres og altså fremvises for brugeren.
 
-\subsection{Datastrukturer}
-
 \subsection{Algoritmer}
-Når et DBConnect objekt initialiseres bliver der oprettet og gemt en connection til databasen i et felt. Funktionen \emph{getCon} tester om denne forbindelse stadig er gyldig. Hvis den ikke er gyldig, så oprettes der en ny gyldig forbindelse og denne returneres. Derved kan forbindelsen eksempelvis kaldes som \emph{getCon().createStatement();} og altid bruge en gyldig forbindelse.
-
-\emph{getMovies} tager ingen parametre og returnerer et LinkedHashMap med filmens id som key og filmens navn som value. Sorteret alfabetisk efter filmnavn (A-Z).
+Når et DBConnect objekt initialiseres bliver der oprettet og gemt en connection til databasen i et felt. Funktionen \emph{getCon} tester om denne forbindelse stadig er gyldig. Hvis den ikke er gyldig, så oprettes der en ny gyldig forbindelse og denne returneres. Derved kan forbindelsen eksempelvis kaldes som \emph{getCon().createStatement();} og altid bruge en gyldig forbindelse. \emph{getMovies} tager ingen parametre og returnerer et LinkedHashMap med filmens id som key og filmens navn som value. Sorteret alfabetisk efter filmnavn (A-Z).
 
 \emph{getMovieSchedule} tager film id som parameter og returnerer et LinkedHashMap med show id som \emph{key} og tidspunktet for forestillingen (timestamp) som \emph{value}. Data er hentet fra databasen med en sql-query hvor film id’et er det ene \emph{where}-parameter og tiden for forestillingen er større/senere end det nuværende tidspunkt. Hele forespørgslen er sorteret med den nærmeste forestilling først - altså \emph{time} ASC. 
 
@@ -262,9 +254,12 @@ Et optaget sæde vil returnere værdien true og et ledigt sæde false. Dette tje
 \chapter{Afprøvning}
 
 \section{Brugerafprøvning}
+Vi har valgt at lave vores testing af programmets JavaFx-baserede brugergrænseflade som manuel brugerafprøvning. Den beskrevne fremgangsmåde i brugervejledningen er den tilsigtede måde brugeren skal forstå og bruge programmet.
+Brugeren havde ingen problemer med at reservere en forestilling, og det tog heller lang tid før brugeren havde funget ud af at rette eller slette i reservationen. Vores bruger prøvede at indtaste bogstaver istedet for sit telefonnummer, men vores system reagerede som forventet på fejlen og et popup-vindue med en fejlmeddelelse dukkede frem. Det eneste uoverenstemmelse med hvad vi havde forventet, var at brugeren ikke opdagede at man kunne trække musen hen over sæderne for at markere flere sæder.  
 
 \section{Unit test}
-Vores klasse \emph{DBConnectTest} er en testklasse indeholdende tets. Den primære funktion for for disse test er at teste om vores programtekst snakker rigtigt sammen med databasen. Fordi vi primært tester koden i relation til databasen er det ikke rene unit test vi udfører. Faktisk er det det man kalder integration tests. Integration test er test der bruger en database, et netwærk eller et andet eksternt system som fx en mailserver. Typisk for en integration test er også at den udfører I/O. I vores tilfælde tager vores tests input fra en database og udskriver et grafisk output til skræmmen. \linebreak
+Vores klasse \emph{DBConnectTest} er en testklasse og indeholdende derfor udelukkende tets. Den primære funktion for for disse test er at teste om vores programtekst snakker rigtigt sammen med databasen. vi har oprettet en testdatabase, som indeholder de samme tabeller som vores oprindelige database. Testdatabasens tabeller er dog tomme, og bruges kun til test. 
+Fordi vi primært tester koden i relation til databasen er det ikke rene unit test vi udfører. Faktisk er det det man kalder integration tests. Integration test er test der bruger en database, et netwærk eller et andet eksternt system som fx en mailserver. Typisk for en integration test er også at den udfører I/O. I vores tilfælde tager vores tests input fra en database og udskriver et grafisk output til skræmmen. \linebreak
 
 Testen \emph{testGetMovies()} tester om film og ide passer sammen. Dette gøres ved at vi giver testen et forventet uddata, som er bestemte id's tilknyttet bestemte film. Når testen kører, testes derfor om det forventede uddata passer overens med det faktiske uddata. 
 
@@ -290,9 +285,10 @@ Både \emph{testInsertReservation} og \emph{testGetReservation} har en \emph{@Af
 
 
 \section{Resultat}
-
+Ud fra brugerafprøvningen kom vi frem til den konklusion at vores brugergrænseflade fungere som forventet. Vores indtryk fra brugeren er at programmets design er rimelig nemt at overskue, og simpelt at bruge. Gennem vore unit test har vi tjekket at databasen fungerer optimalt og at reservationer bliver lavet og gemt rigtigt. Konklusionen ud fra vores forskellige tests er derfor at vores program fungere som vi har tænkt det. 
 
 \chapter{Konklusion}
+Gennem Java har vi opbygget et simpelt program der bygger på \emph{Model View Controller}. Vores \emph{Model}, som er vores brugergrænseflade, er skabt primært i JavaFx, og der har designmæssigt være fokus på brugervenlighed. 
 
 \chapter{Litteratur}
 

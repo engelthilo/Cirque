@@ -11,10 +11,7 @@ public class DBConnectSub extends DBConnect{
     private Statement st;
     private ResultSet rs;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 1d186ca1318bfcc399b840eedb7a3f7a767d2aaa
     public DBConnectSub() {
 
         try {
@@ -25,9 +22,7 @@ public class DBConnectSub extends DBConnect{
             System.out.println("Error:" + e);
         }
     }
-<<<<<<< HEAD
-    
-=======
+
 
     public Connection getCon(){
         try {
@@ -40,6 +35,5 @@ public class DBConnectSub extends DBConnect{
         return con;
     }
 
->>>>>>> 1d186ca1318bfcc399b840eedb7a3f7a767d2aaa
 }
 

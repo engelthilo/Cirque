@@ -26,7 +26,8 @@ public class DBConnectTest {
         dbConnectSub = new DBConnectSub();
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/KaffeklubbenTest", "Kaffekluben2", "kp8473moxa");
+            con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/KaffeklubbenTest",
+                    "Kaffekluben2", "kp8473moxa");
             st = con.createStatement();
         } catch (Exception e) {
             System.out.println("Error:" + e);
@@ -36,19 +37,21 @@ public class DBConnectTest {
     @Test
     public void testGetMovies() {
         Map<Integer, String> expected = new LinkedHashMap<>();
-        expected.put(1, "Interstellar");
-        expected.put(2, "Fury");
         expected.put(3, "Antboy");
-        expected.put(5, "Mockingjay");
-        expected.put(6, "Dommeren");
         expected.put(7, "Bryllupskaos");
-        expected.put(8, "Guardians of the Galaxy");
+        expected.put(6, "Dommeren");
         expected.put(9, "Dumb and Dumber To");
-        expected.put(10, "Nightcrawler");
+        expected.put(2, "Fury");
+        expected.put(8, "Guardians of the Galaxy");
+        expected.put(1, "Interstellar");
         expected.put(11, "Jurrasic World");
+        expected.put(5, "Mockingjay");
+        expected.put(10, "Nightcrawler");
+
         assertEquals(expected, dbConnectSub.getMovies());
     }
-    //denne test tjekker tidspunkterne på film nr 1 virker - 1 kan udskiftes med andre id's. Virker stadig.
+    //denne test tjekker tidspunkterne på film nr 1 virker - 1 kan udskiftes med andre id's.
+    // Virker stadig.
     @Test
     public void testTimeStamp() throws SQLException {
         try {
@@ -102,8 +105,10 @@ public class DBConnectTest {
         dbConnectSub.getLastReservationId();
 
         try {
-            rs = st.executeQuery("SELECT reservations.id, seat_x, seat_y FROM reservations, reservationlines WHERE reservationlines.reservation_id" +
-                    " = reservations.id AND show_id = '1' AND customer_name = 'Amanda' AND customer_phone = '26802103'");
+            rs = st.executeQuery("SELECT reservations.id, seat_x, seat_y FROM reservations," +
+                    " reservationlines WHERE reservationlines.reservation_id" +
+                    " = reservations.id AND show_id = '1' AND customer_name = 'Amanda'" +
+                    " AND customer_phone = '26802103'");
             while(rs.next()){
                 lastid = rs.getInt(1);
                 System.out.print(lastid);
@@ -117,11 +122,10 @@ public class DBConnectTest {
 
     }
     //sletter den reservation vi har lavet ovenfor.
-    /*@After
+    @After
     public void deleteReservationtest() {
-        dbConnect.deleteReservation(lastid);
-
-    }*/
+        dbConnectSub.deleteReservation(lastid);
+    }
 
     //Denne test tester om der kommer en liste ud når man har reserveret for et bestemt nummer.
     @Test
@@ -147,10 +151,9 @@ public class DBConnectTest {
     }
 
     //sletter indput til databasen som blev lavet opover.
-    /*@After
+    @After
     public void deleteInputReservation() {
         dbConnectSub.deleteReservation(lastid1);
-
-    }*/
+    }
 
 }
