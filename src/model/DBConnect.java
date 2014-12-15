@@ -14,11 +14,12 @@ public class DBConnect {
     private Statement st;
     private ResultSet rs;
 
+
+    // This is the constructor
     public DBConnect() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/kaffeklubben", "kaffeklubben", "kp8473moxa");
-            st = con.createStatement();
+            Class.forName("com.mysql.jdbc.Driver"); // gets the mysql.jar driver
+            con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/kaffeklubben", "kaffeklubben", "kp8473moxa"); // sets up a connection and stores it in the variable con
         } catch (Exception e) {
             System.out.println("Error:" + e);
         }
@@ -26,12 +27,12 @@ public class DBConnect {
     }
     /**
      * Input: None
-     * Method: Gets the current connection. If it doesn't exists/is invalid a new one is created.
+     * Method: Gets the current connection. If it doesn't exists/is invalid a new one is created. Parameter is seconds to wait for timeout
      * Returns: A valid connection
      */
     public Connection getCon() {
         try {
-            if(!con.isValid(30)) {
+            if(!con.isValid(30)) { // isValid takes seconds to wait for timeout as parameter
                 con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/kaffeklubben", "kaffeklubben", "kp8473moxa");
             }
         } catch (Exception e) {
@@ -46,14 +47,14 @@ public class DBConnect {
      * Returns: Linkedhashmap with the movie id(int) as key and the movie name(string) as value
      */
     public LinkedHashMap<Integer, String> getMovies() {
-        LinkedHashMap<Integer, String> movies = new LinkedHashMap<Integer, String>();
+        LinkedHashMap<Integer, String> movies = new LinkedHashMap<Integer, String>(); //new linkedhashmap with movie id as key and movie name as value
         try {
-            st = getCon().createStatement();
+            st = getCon().createStatement(); // prepares the connection for a sql statement
 
-            String query = "SELECT * FROM movies ORDER BY movie_name ASC";
+            String query = "SELECT * FROM movies ORDER BY movie_name ASC"; // gets all movies in alphabetic order
 
             rs = st.executeQuery(query);
-            while(rs.next()) {
+            while(rs.next()) { // looping through the rows in the resultset
                 int id = rs.getInt("id");
                 String movieName = rs.getString("movie_name");
                 movies.put(id, movieName);
@@ -71,11 +72,11 @@ public class DBConnect {
      */
     public LinkedHashMap<Integer, Timestamp> getMovieSchedule(int movieId) {
         LinkedHashMap<Integer, Timestamp> times = new LinkedHashMap<Integer, Timestamp>();
-        java.util.Date date= new java.util.Date();
-        Timestamp timeNow = new Timestamp(date.getTime());
+        java.util.Date date = new java.util.Date(); // initializes a data object
+        Timestamp timeNow = new Timestamp(date.getTime()); // creates a timestamp from the date object method getTime we just created above
         try {
             st = getCon().createStatement();
-            String query = "SELECT * FROM shows WHERE movie_id=" + movieId + " AND time > '" + timeNow + "' ORDER BY time ASC";
+            String query = "SELECT * FROM shows WHERE movie_id=" + movieId + " AND time > '" + timeNow + "' ORDER BY time ASC"; // gets all shows for a specific movie where time of the show is in the future. Results are ordered by time ascending
             rs = st.executeQuery(query);
             while(rs.next()) {
                 int id = rs.getInt("id");
@@ -174,26 +175,26 @@ public class DBConnect {
      * Returns: A linkedhashmap with the reservation id as key (int) and a generated string with information about the reservation (movie, time etc.)
      */
     public LinkedHashMap<Integer, HBox> getReservations(String phoneNumber) {
-        LinkedHashMap<Integer, HBox> reservations = new LinkedHashMap<Integer, HBox>();
-        java.util.Date date= new java.util.Date();
-        Timestamp timeNow = new Timestamp(date.getTime());
+        LinkedHashMap<Integer, HBox> reservations = new LinkedHashMap<Integer, HBox>(); // creates a linkedhashmap that stores the id of the reservation and some information about the reservation such as customer name, movie name, time etc.
+        java.util.Date date= new java.util.Date(); // initializes a data object
+        Timestamp timeNow = new Timestamp(date.getTime()); // creates a timestamp from the date object method getTime we just created above
         try {
             st = getCon().createStatement();
             String query = "SELECT shows.id, time, movie_name, cinema_name, reservations.id, customer_name FROM reservations, cinemas, movies, shows WHERE reservations.customer_phone='" + phoneNumber + "' AND reservations.show_id = shows.id AND shows.movie_id = movies.id AND shows.cinema_id = cinemas.id AND shows.time > '" + timeNow + "'";
             rs = st.executeQuery(query);
             while(rs.next()) {
-                HBox hbox = new HBox(50);
+                HBox hbox = new HBox(50); // creates a hbox that we can click on in the listview with the data
                 int id = rs.getInt("reservations.id");
-                Label movieName = new Label(rs.getString("movie_name"));
-                Label cinemaName = new Label(rs.getString("cinema_name"));
-                Label customerName = new Label(rs.getString("customer_name"));
-                Label timeStamp = new Label(new SimpleDateFormat("dd/MM HH:mm").format(rs.getTimestamp("time")));
-                movieName.setPrefWidth(200);
-                cinemaName.setPrefWidth(150);
-                customerName.setPrefWidth(200);
-                timeStamp.setPrefWidth(150);
-                hbox.getChildren().addAll(movieName, timeStamp, cinemaName, customerName);
-                reservations.put(id, hbox);
+                Label movieName = new Label(rs.getString("movie_name")); // creates a new label with the movie name
+                Label cinemaName = new Label(rs.getString("cinema_name")); // creates a new label with the name of the cinema
+                Label customerName = new Label(rs.getString("customer_name")); // creates a new label with the name of the customer
+                Label timeStamp = new Label(new SimpleDateFormat("dd/MM HH:mm").format(rs.getTimestamp("time"))); // creates a new label with the time of the show
+                movieName.setPrefWidth(200); // sets width of the label
+                cinemaName.setPrefWidth(150); // sets width of the label
+                customerName.setPrefWidth(200); // sets width of the label
+                timeStamp.setPrefWidth(150); // sets width of the label
+                hbox.getChildren().addAll(movieName, timeStamp, cinemaName, customerName); // adds the labels to the hbox
+                reservations.put(id, hbox); // adds the hbox with reservation information and the reservation id to the linkedhashmap
             }
 
         } catch (Exception e) {
@@ -214,7 +215,7 @@ public class DBConnect {
             String query = "SELECT seat_x, seat_y FROM reservationlines, reservations WHERE reservationlines.reservation_id = reservations.id AND reservations.id = " + reservationId;
             rs = st.executeQuery(query);
 
-            Boolean[][] resSeat = new Boolean[bh.getColumns()+1][bh.getRows()+1];
+            Boolean[][] resSeat = new Boolean[bh.getColumns()+1][bh.getRows()+1]; // multidimensional array is based on 0-index. therefore we add 1 to the lenght
 
             while(rs.next()) {
                 int seat_x = rs.getInt("seat_x"); //gets the x-value of a reserved seat
@@ -305,6 +306,11 @@ public class DBConnect {
         return false;
     }
 
+    /**
+     * Input: String with the phone number of the reservation
+     * Method: Finds all the reservations for a specific phone number
+     * Returns: Boolean - true if any reservation is found and false if not
+     */
     public Boolean getBooleanReservations(String phoneNumber) {
         try {
             st = getCon().createStatement();
