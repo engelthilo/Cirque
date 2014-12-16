@@ -63,7 +63,7 @@ right  = 3.00cm]{geometry}
 \baselineskip= 15pt
 
 \title{Forord}
-Den rapport er udarbejdet i December 2014 i et fire ugers projekt på IT-Universitetet i København under vejledning af Jesper Madsen.
+Denne rapport er udarbejdet i December 2014 i et fire ugers projekt på IT-Universitetet i København under vejledning af Jesper Madsen.
 I projektet udviklede vi et softwaresystem til booking i biografer skrevet i Java. Programmet har til opgave at skulle assisterer en ekspedient i personens arbejdsopgaver der har med kundehenveldelser af gøre, f.eks: Book nye pladser eller slette en tidligere bestilling. Programmet skal ikke kunne håndtere salg.
 
 \tableofcontents
@@ -73,17 +73,38 @@ I projektet udviklede vi et softwaresystem til booking i biografer skrevet i Jav
 Det problemområde vi har arbejdet med i forbindelse med vores projekt, er udviklingen af et softwaresystem til brug for en ekspedient der betjener en billetluge i en biograf. Det område der skulle dækkes var reservation både når kunden stod foran billetlugen, samt når kunden ringede ind på telefon. Vores løsning skulle håndtere   ekspedientens arbejdsopgaver i sådanne situationer. Løsningen skal derfor fokusere udelukkende på reservationer, og ikke salg. 
 
 \section{Problemstilling}
-Den overordnede problemstilling som vores program besvarer, er hvordan man udviklinger et simpelt, brugervenligt og databasebaseret softwaresystem til brug for en ekspident i en billetluge. 
+Den overordnede problemstilling som vores program besvarer, er hvordan man udvikler et simpelt, brugervenligt og databasebaseret softwaresystem til brug for en ekspedient i en mindre biografs billetluge. 
 
 \subsection{Krav til programmet}
-Af krav til porgrammet kan nævnes at der i forbindelse med reservationerne skal oplyses navn eller anden identitet på kunden. Vi har i vores program valgt at den centrale information omkring brugeren er dennes telefonnummer. Det har vi gjort af den grund af flere kunder godt kan have samme navn, men at ens telefonnummer er unikt.  
+Af krav til programmet [\cite{opg}] kan nævnes at der i forbindelse med reservationerne skal oplyses navn eller anden identitet på kunden. Vi har i vores program valgt at den centrale information omkring brugeren er dennes telefonnummer. Det har vi gjort af den grund af flere kunder godt kan have samme navn, men at ens telefonnummer er unikt.  
 
-Derudover skal biografen indeholde flere sale, og sende flere forskellige forestillinger i løbet af dagen. Salenes størrelse, antal pladser mm. skal fremgå af databasen frem for at være indkodet i selve programteksten. Derfor har vi i stedet for at skrive data ind i programteksten, valgt at lave en speciel klasse til at hente data fra databasen. 
+Derudover skal biografen indeholde flere sale, og sende flere forskellige forestillinger i løbet af dagen. Salenes størrelse, antal pladser mm. skal fremgå af databasen frem for at være indkodet i selve programteksten. Derfor har vi i stedet for at skrive data ind i programteksten, valgt at lave en speciel klasse til at hente data fra databasen. Det samme er gældende for de enkelte forestillinger, der derfor også bliver gemt i databasen.
+\\
+\\
+Kravene er oplistet nedenfor
 
-Det samme er gældende for de enkelte forestillinger, der derfor også bliver gemt i databasen.
+\begin{itemize}
+\item Reserverings process
+
+\begin{itemize}
+\item vælge forestillinger, herunder dato, tid, film og sal
+\item vælge pladser
+\item vise optaget og ikke optaget pladser
+\item bestille pladser
+\item afbestille pladser
+\item vis ''Dine sæder''
+\end{itemize}
+
+\item Kigge process
+\begin{itemize}
+\item se film der går
+\item se tider
+
+\end{itemize}
+\end{itemize}
 
 \subsection{Brugerscenario}
-Signe er ekspidient i en minibiograf og bruger biobooking til at reserverer biletter til kunder. Hun tænder systemet når hun møder på arbejde. Dagens første kunde optræder lidt over 10. Kunden ønsker at booke tre billetter til Fury kl 17.30 den 19 Januar 2015. Signe klikker den filmknap hvordpå der står skrevet \emph{Fury}. Herefter klikker hun på knappen med tiden \emph{17.30} som står under datoen \emph{19/1}. Signe spørger nu kunden hvor i salen kunden ønsker sine billetter. Kunden siger \emph{ca. midt i salen}. Signe vælger sæde \emph{9, 10 og 11} på række \emph{F}, og viser det på skærmen til kunden. Kunden er tilfreds, så Signe spørge kunde om det navn og telefonnumer reservationen skal laves i. Efter at have indtastet kundens informationer klikker Signe på \emph{Fuldfør reservation}. 
+Signe er ekspedient i en mindre biograf og bruger \emph{biobooking} til at reserverer biletter til kunder. Hun tænder systemet når hun møder på arbejde. Dagens første kunde optræder lidt over kl. 10. Kunden ønsker at booke tre billetter til Fury kl 17.30 den 19. Januar 2015. Signe klikker på den filmknap hvordpå navnet\emph{Fury} optræder. Herefter klikker hun på knappen med tiden \emph{17.30} som står under datoen \emph{19/1}. Signe spørger nu kunden hvor i salen kunden ønsker sine pladser. Kunden siger \emph{ca. midt i salen}. Signe vælger sæde \emph{9, 10 og 11} på række \emph{F}, og viser det på skærmen til kunden. Kunden er tilfreds, så Signe spørger kunde om hvilket navn og telefonnumer reservationen skal laves i. Efter at have indtastet kundens informationer klikker Signe på \emph{Fuldfør reservation}. Kunden tager hjem og opdager, at der er kommet en tilmelding mere til biografturen hun tidligere bookede billetter til. Derfor ringer vedkommende ind til biografen og får fat på ekspedienten Signe. Signe klikker på \emph{Ret reservation} og indtaster kundens telefonnummer. Signe får nu vist en liste med alle reservationer for det pågældende nummer til forestillinger som endnu ikke har været vist. Derefter vælger Signe den pågældende reservation som skal redigeres. Kunden fortæller Signe, at der kommer en ekstra deltager til arrangementet, så de skal have et sæde mere tilføjet til reservationen - de bliver altså fire personer i stedet for tre. Signe kan se de allerede valgte sæder markeret med blå og kan desuden se, at sædet til højre for de reserverede sæder er reserveret til en anden kunde. Heldigvis er der ledigt til venstre, så der klikker Signe og tilføjer derved et ekstra sæde til reservationen. Nu er der fire blå sæder og Signe afslutter redigeringen ved at klikke på \emph{Rediger reservation}. Så er reservationen rettet og kunden er tilfreds med den service vedkommende har fået.
 
 \subsection{Systemdesign}
 Vores system er overordnet baseret på data fra databasen. Systemet generer layout ud fra forskellige data i databasen. Dette indebærer bl.a. hvilke film der er i film-tabellen, hvilke forestillinger der er tilknyttet til en given film, hvilke reservationer der er tilknyttet en given forestilling, hvilke reservationer der er tilknyttet et givent telefonnummer mv. Programmet er delt op, så mest mulig databehandling foretages hos klienten/brugeren. Dette indebærer objekter med informationer om de forskellige forestillinger, arrays med valgte sæder mv. Databaseforespørgsler er lavet så omfattende som muligt, så der udføres så få forespørgsler som muligt og data gemmes i objekter og arrays eller bliver benyttet med det samme i den grafiske fremstilling af programmet som eksempelvis ved generering af film-knapper. 
@@ -92,16 +113,16 @@ Vores system er overordnet baseret på data fra databasen. Systemet generer layo
 \chapter{Problemanalyse}
 
 \section{Vores løsning}
-Den overordnede problemstilling vi har valgt at fokusere på, er hvordan man udvikler et simpelt og implecit program der både og brugervenligt og hvor databasen opbevarer det meste data. 
+Den overordnede problemstilling vi har valgt at fokusere på, er hvordan man udvikler et simpelt og implicit program der både og brugervenligt og hvor databasen opbevarer det meste data. 
 
-Vores program løser problemstilligen ved at have alt information omkring forestillinger, sale, film og reservationer gemt i en database. Dette gør selve koden nem at vedligeholde, og vi har på den måde undgået unødvendig kodeduplikering. For at opfylde ønsket om brugervenlighed har vi valgt at vise programmet i ét vindue, hvor brugeren så nemt kan navigere, ved hjælp af tabs, imellem de forskellige funktionaliteter programmet har.
+Vores program løser problemstilligen ved at have alt information omkring forestillinger, sale, film og reservationer gemt i en database. Dette gør selve koden og databasen nem at vedligeholde, og vi har på den måde undgået unødvendig kodeduplikering [\cite{GRPRO8}]. For at opfylde ønsket om brugervenlighed har vi valgt at vise programmet i ét vindue, hvor brugeren nemt kan navigere, ved hjælp af tabs, imellem de forskellige funktionaliteter programmet har.
 
 \subsection{Build Reservation}
-En af de større udfordringer, som man også har kunne tackle på en masse forskellige måder, var når biografsalen skulle bygges grafisk. Den primære metode vi brugte her var buildReservationScene(int showID) i vores Controller.java class. Alt informationen omkring biografsalen får vi fra vores database, dette bliver behandlet i metoden, her er det bl.a. det forskellige labels der bliver sat (cinemaNameLabel, movienameLabel etc). Med informationen fra databasen kører vi et for-loop der kører igennem kolonerne, og inden i for loopet kører der endnu et for-loop der kører sæderne igennem for hver kolonne. Det er rimelig lige til og i højgrad den bedste måde vi kunne komme på at gøre det. Sæderne bliver grafisk vist som firkanter, her kunne man godt have lavet det som knapper. Vi valgte at bruge Ractangle objekter fordi det var nemt at manupulere det udseende vi gerne ville give dem uden at vi behøvede at gå på kompromis med funktionaliteten.
+En af de større udfordringer, som man også har kunne tackle på en masse forskellige måder, var når biografsalen skulle bygges op rent grafisk. Den primære metode vi brugte her var \emph{buildReservationScene(int showID)} i vores \emph{controller.java} class. Alt informationen omkring biografsalen får vi fra vores database, dette bliver behandlet i metoden, her er det bl.a. de forskellige labels der bliver sat (cinemaNameLabel, movienameLabel etc.) Med informationen fra databasen kører vi et for-loop der kører igennem rækkerne, og inden i for loopet kører der endnu et for-loop der kører sæderne igennem for hver kolonne. Det er rimelig lige til og i højgrad den bedste måde vi kunne komme på at gøre det. Koden nedenfor viser hvordan det er lavet. 
 
 \begin{minted}{java}
-for(number of colloms){
-    for(number of rows){
+for(number of rows){
+    for(number of collums){
         if(seats are reservated){
             make seats red
         } else {
@@ -111,13 +132,12 @@ for(number of colloms){
 }
 \end{minted}
 
+Sæderne bliver grafisk vist som firkanter, her kunne man godt have lavet det som knapper. Vi valgte at bruge rectangle objekter fordi det var nemt at manipulere det udseende vi gerne ville give dem uden at vi behøvede at gå på kompromis med funktionaliteten.
 
-
-Til sidst er der måden du reserverer flere pladser. En oplagt mulighed ville være at have en dropdown menu i bunden af vinduet, der, når den klikkes, viser en liste fra med tal fra 1 til antallet af frie sæder (hvis der er nogle frie sæder tilbage). Denne mulighed er ganske fin, vi besluttede os dog for at gå med noget mere interaktivt hvor ekspedienten blot skal trække musen henover de sæder der skal vælges for at vælge dem. Dette er en feature der gør det nemmere for ekspedienten at vælge en masse sæder på engang og samtidig super fleksibelt. 
-
+Til sidst er der måden hvorved du reserverer flere pladser. En oplagt mulighed ville være at have en dropdown menu i bunden af vinduet, der, når den klikkes, viser en liste fra med tal fra 1 til antallet af frie sæder (hvis der er nogle frie sæder tilbage). Denne mulighed er ganske fin, vi besluttede os dog for at gå med noget mere interaktivt hvor ekspedienten blot skal trække musen henover de sæder der skal vælges for at vælge dem. Dette er en feature der gør det nemmere for ekspedienten at vælge en masse sæder på engang og samtidig super fleksibelt, hvis en reservation eksempelvis skal deles op på flere rækker. 
 
 \subsection{Alternative løsninger}
-An alternativ måde at løse problemstillingen på ville være at fokusere på andre måder at booke billetter på. Vi har valgt at man først skal vælge film, derefter tid og til sidst sæder. Man kunne have valgt at gøre det muligt for brugeren at vælge dato eller tid før valg af film. Vi har dog valgt den løsning vi syntes var mest brugervenlig. En anden mulighed er at man kunne have lavet en liste der viste \emph{alle} forestillinger sorteret efter spilletid - uden at tage hensyn til sortering i forhold til film. Denne mulighed syntes vi designmæssigt ville fungere meget rodet. Derudover kunne vi have valgt at gemme vores reservationer i programkoden frem for i databasen. Vi diskuterede dette i begyndelsen af projektet, men fandt det for besværligt at arbejde med, da det ville kræve større mængder kode, fylde mere plads samt resultere i at vores program formentlig ville bruge længere tid på at compille og køre.
+En alternativ måde at løse problemstillingen på ville være at fokusere på andre måder at booke billetter på. Vi har valgt at man først skal vælge film, derefter tid og tilsidst sæder. Man kunne have valgt at gøre det muligt for brugeren at vælge dato eller tid før valg af film. Vi har dog valgt den løsning vi syntes var mest brugervenlig. En anden mulighed er at man kunne have lavet en liste der viste \emph{alle} forestillinger sorteret efter spilletid - uden at tage hensyn til sortering i forhold til film. Denne mulighed syntes vi designmæssigt ville fungere meget rodet og ikke intuitiv på nogen måde. Derudover kunne vi have valgt at gemme vores reservationer i programkoden frem for i databasen. Vi diskuterede dette i begyndelsen af projektet, men fandt det for besværligt at arbejde med, da det ville kræve større mængder kode, fylde mere plads samt resultere i at vores program formentlig ville bruge længere tid på at compille og køre. Derudover er det langt mere hensigtsmæssigt at vedligeholde og rette data sådom reservationer i en database fremfor i en evt. teksfil. Desuden ville en tekstfil med reservationer eller anden programdata kræve forskellige rettigheder affængig af operativsystemmet. Dette problem er slet ikke aktuelt i vores løsning, da alt sammen ligger i databasen. 
 
 \section{Databasedesign}
 En af de to overordnede tabeller i vores database er \emph{cinemas} som indeholder information omkring vores biografsale. Dette omfatter salens navn, id, antal rækker og antal sæder i hver række. Vores sæder er ikke repræsenteret som en tabel i vores database, men derimod gemt som et 2 dimentionelt array. 
@@ -175,7 +195,7 @@ De optagede sæder er røde, de ledige er grønne og de sæder som er tilknyttet
 
 \chapter{Teknisk Analyse}
 \section{Model View Controller}
-Vi har brugt Model-View-Controller (fork. MVC) til at adskille vores database (model), vores controller og vores buildholder (view) fra hinanden. Dette gør vores programkode mere overskuelig og nemmere at veligeholde.
+Vi har brugt Model-View-Controller (fork. MVC) til at adskille vores database og buildholder (model), vores controller og vores JavaFx brugergrænseflade (view) fra hinanden. Dette gør vores programkode mere overskuelig og nemmere at vedligeholde.
 
 \subsection{Moduler}
 Programmet har 2 klasser: DBConnect og buildHolder.
@@ -194,14 +214,13 @@ private Connection getCon() {
    return con;
 }
 \end{minted}
-\linebreak
 
 En anden klasse er \emph{buildHolder}. Et \emph{buildHolder}-objekt lagrer data for en given forestilling. Der bruges getters og setters, så de data der lagres også kan hentes efterfølgende. \emph{buildHolder} objektet bruges efterfølgende til at bygge reservationssalen med data som filmnavn, tidspunkt for forestillingen, størrelsen på salen (rows/columns), reserverede sæder mv. 
 
 Det er \emph{controlleren} der gør brug af disse objekter, når data skal visualiseres og altså fremvises for brugeren.
 
 \subsection{Algoritmer}
-Når et DBConnect objekt initialiseres bliver der oprettet og gemt en connection til databasen i et felt. Funktionen \emph{getCon} tester om denne forbindelse stadig er gyldig. Hvis den ikke er gyldig, så oprettes der en ny gyldig forbindelse og denne returneres. Derved kan forbindelsen eksempelvis kaldes som \emph{getCon().createStatement();} og altid bruge en gyldig forbindelse \cite{blueJ}. \emph{getMovies} tager ingen parametre og returnerer et LinkedHashMap med filmens id som key og filmens navn som value. Sorteret alfabetisk efter filmnavn (A-Z).
+Når et DBConnect objekt initialiseres bliver der oprettet og gemt en connection til databasen i et felt. Funktionen \emph{getCon} tester om denne forbindelse stadig er gyldig. Hvis den ikke er gyldig, så oprettes der en ny gyldig forbindelse og denne returneres. Derved kan forbindelsen eksempelvis kaldes som \emph{getCon().createStatement();} og altid bruge en gyldig forbindelse. \emph{getMovies} tager ingen parametre og returnerer et LinkedHashMap med filmens id som key og filmens navn som value. Sorteret alfabetisk efter filmnavn (A-Z).
 
 \emph{getMovieSchedule} tager film id som parameter og returnerer et LinkedHashMap med show id som \emph{key} og tidspunktet for forestillingen (timestamp) som \emph{value}. Data er hentet fra databasen med en sql-query hvor film id’et er det ene \emph{where}-parameter og tiden for forestillingen er større/senere end det nuværende tidspunkt. Hele forespørgslen er sorteret med den nærmeste forestilling først - altså \emph{time} ASC. 
 
@@ -218,20 +237,22 @@ for(String seat : seats) {
 }
 \end{minted}
 
-Koden ovenfor illustrerer hvordan vi indsætter seat i databasen. Vores sæde-string skal splittes op, så vi kan indsætte en x-værdi og en y-værdi i databasen. Man splitter vores string op i et \emph{string-array} hvor index 0 er alt tekst før første kolon. Index 1 er alt tekst før andet kolon osv. \\
+Koden ovenfor illustrerer hvordan vi indsætter seat i databasen. Vores sæde-string skal splittes op, så vi kan indsætte en x-værdi og en y-værdi i databasen. Man splitter vores string op i et \emph{string-array} hvor index 0 er alt tekst før første kolon. Index 1 er alt tekst før andet kolon osv.
+
 \begin{minted}{java}
 String[] seatInfo = seat.split(":");
-\end{minted}\\
+\end{minted}
+
 Derved kan vi nu tilgå vores x-værdi som \emph{seatInfo[0]} og vores y-værdi som \emph{seatInfo[1]}. Hvis hele metoden forløber fejlfrit, så returneres der boolean true. Hvis der forekommer en \emph{exception} så returneres false. 
 
 \emph{getReservations} henter alle reservationer tilhørende et telefonnummer. Parametret er altså et telefonnummer og metoden returnerer et LinkedHashMap med reservations id som \emph{key} og en \emph{HBox} med informationer om forestillingen som \emph{value}. Databaseforespørgslen henter kun fremtidige reservationer - altså reservationer til forestillinger som endnu ikke er vist. Denne metode bliver brugt til at liste alle fremtidige reservationer op for en kunde, så de enten kan rettes eller slettes. 
 
-\emph{getResSeat} bruges til at bygge den sal, hvor en reservation kan rettes eller slettes. Den tager to parametre. Det ene er reservations id’et og det andet er et buildHolder objekt. Reservations id’et er essentielt, da de reserverede sæder er bundet op på dette. BuildHolder objektet bruges til at bygge det multidimensionelle array som returneres, da vi skal bruge salens bredde og højde (columns/rows). \\
+\emph{getResSeat} bruges til at bygge den sal, hvor en reservation kan rettes eller slettes. Den tager to parametre. Det ene er reservations id’et og det andet er et buildHolder objekt. Reservations id’et er essentielt, da de reserverede sæder er bundet op på dette. BuildHolder objektet bruges til at bygge det multidimensionelle array som returneres, da vi skal bruge salens bredde og højde (columns/rows).
 
 \begin{minted}{java}
 Boolean[][] resSeat = new
 Boolean[bh.getColumns()+1][bh.getRows()+1];
-\end{minted}\\
+\end{minted}
 
 Vi ligger 1 til, da sæderne starter med 1 og et array starter med index 0. På den måde undgår vi en \emph{NullPointerException}, da salen ellers vil prøve et tilgå et felt uden for vores array - også kaldet \emph{ArrayIndexOutOfBoundsException}. 
 Et optaget sæde vil returnere værdien true og et ledigt sæde false. Dette tjekker vi når vi looper igennem salens højde og bredde, som bliver gjort i vores controller, der også bygger den grafiske sal som er det vi ser. 
@@ -291,8 +312,32 @@ Både \emph{testInsertReservation} og \emph{testGetReservation} har en \emph{@Af
 \section{Resultat}
 Ud fra brugerafprøvningen kom vi frem til den konklusion at vores brugergrænseflade fungere som forventet. Vores indtryk fra brugeren er at programmets design er rimelig nemt at overskue, og simpelt at bruge. Gennem vore unit test har vi tjekket at databasen fungerer optimalt og at reservationer bliver lavet og gemt rigtigt. Konklusionen ud fra vores forskellige tests er derfor at vores program fungere som vi har tænkt det. 
 
+\chapter{Arbejdsprocessen}
+\section{Projektet}
+Vi har i løbet af udarbejdelsen af vores løsning lært at konstruere et bookingsystem der skal betjenes af en ekspedient i en mindre biograf. Vi har analyseret den givne problemstilling og kommet frem til et optimalt programdesign. 
+
+Systemets formål, opbygning og virkemåde står klart præsenteret både for brugere af systemet og eventuelle udviklere der skal videreudvikle systemet. 
+
+De forskellige metoder i systemet er blevet afprøvet i muligt omfang og metoderne fungerer efter hensigten. Det har været svært at teste brugergrænsefladen, men de brugere, der har testet den, mener at den lever op til formålet, hvilket har været hensigten, da vi udviklede den. 
+
+Vores system gør brug af en- og to-dimensionelle arrays, når vores sæder skal reserveres og rettes. Systemet gør brug af flere klasser fra Javas klassebibliotek heriblandt collections. Vi gør brug af klassehierakier i vores test af systemet, og vi har organiseret klasserne så hensigtsmæssigt og effektivt som muligt. Systemet gør brug af programløkker, men sortering sker i databaseforespørgslerne. Databasen er struktureret med gode relationer, som skaber en god rød tråd mellem tabellerne. 
+
+\section{Gruppen}
+Arbejdet med projektet er gået meget godt. Vi startede med at diskutere hvordan programmet skulle opbygges rent grafisk og hvordan det skulle repræsenteres i tabeller. Da vi fandt enighed om at fornuftigt design gik vi i gang med at udvikle det. Vi delte projektet op, således to personer stod for kodning af selve systemet og en person stod for at teste systemet og dets metoder. Vi har løbende set tilbage på arbejdsprocessen og vi har optimeret den oprindelige idé, hvis vi er kommet på mere effektive metoder eller designmæssige forbedringer.
+
 \chapter{Konklusion}
-Gennem Java har vi opbygget et simpelt program der bygger på \emph{Model View Controller}. Vores \emph{Model}, som er vores brugergrænseflade, er skabt primært i JavaFx, og der har designmæssigt \cite{oracle} være fokus på \cite{Java} brugervenlighed\cite{video}. 
+Gennem Java har vi opbygget et simpelt program der bygger på \emph{Model View Controller}. Vores \emph{Model}, som er vores brugergrænseflade, er skabt primært i JavaFx, og der har designmæssigt være fokus på brugervenlighed. 
+Systemet lever op til de stillede krav og kan nemt og effektivt udføre alle arbejdsopgaverne. Systemet er brugervenligt og designet på en rimelig intuitiv måde. Brugeren kan se en liste over de film der går i biografen og ud fra disse vælge en forestilling til en specifik film på et specifikt tidspunkt. Der er mulighed for at reservere, redigere og slette reservationer i systemet. Alt vores data er opbevaret i vores database, og styres således fra \emph{DBConnect} klassen. Vi har testet vores program og nået det resultat at programmet fungerer efter hensigten. Vores program klarer de respektive fejlmeddelelser med forskellige pop-up vinduer der fortæller brugeren hvilken fejl der er opstået. Vi har valgt at lave biografsalene relativ små, fordi det var hvad der stod i opgavebeskrivelsen, men vores program er lavet således at der ikke er begrænsning på salendes størrelse, selvfølgelig indenfor rimelighedens grænse. Skulle vi arbejde videre med programmet har vi nogle ændringer vi gerne ville lave:
+
+\begin{itemize}
+\item Mulighed for køb/salg af billetter
+\item Mulighed for køb/reservering over nettet
+\item Flere billetluger
+\item Trailer for hver film
+\item Mulighed for at oprette en bruger
+\end{itemize}
+
+Vi finder vores løsning tilfredstillende og kan ikke, udover overnævnte ændringer, tænke på implementationer eller bedre alternativer.
 
 \printbibliography
 
@@ -317,7 +362,7 @@ Gennem Java har vi opbygget et simpelt program der bygger på \emph{Model View C
 \caption{Mock-up af biografsalen}
 \end{figure}
 
-\chapter{}
+\chapter{Databasetabeller}
 
 \begin{figure}[h]
 \centering
