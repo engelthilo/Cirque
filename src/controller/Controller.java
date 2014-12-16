@@ -97,7 +97,7 @@ public class Controller {
     private String dragColorCheck;
 
     public Controller() throws SQLException {
-        db = new DBConnect();
+        db = new DBConnect("jdbc:mysql://mysql.itu.dk:3306/kaffeklubben", "kaffeklubben","kp8473moxa");
     }
 
 

@@ -2,7 +2,6 @@ package test;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import model.DBConnect;
-import model.DBConnectSub;
 import model.buildHolder;
 import org.junit.After;
 import org.junit.Test;
@@ -19,10 +18,11 @@ public class DBConnectTest {
     private ResultSet rs;
     private int lastid;
     private int lastid1;
-    private DBConnectSub dbConnectSub;
+    private DBConnect dbConnect;
 
     public DBConnectTest() throws SQLException {
-        dbConnectSub = new DBConnectSub();
+        dbConnect = new DBConnect("jdbc:mysql://mysql.itu.dk:3306/KaffeklubbenTest",
+                "Kaffekluben2", "kp8473moxa");
 
         con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/KaffeklubbenTest",
                 "Kaffekluben2", "kp8473moxa");
@@ -44,7 +44,7 @@ public class DBConnectTest {
         expected.put(5, "Mockingjay");
         expected.put(10, "Nightcrawler");
 
-        assertEquals(expected, dbConnectSub.getMovies());
+        assertEquals(expected, dbConnect.getMovies());
     }
     //denne test tjekker tidspunkterne på film nr 1 virker - 1 kan udskiftes med andre id's.
     // Virker stadig.
@@ -65,8 +65,7 @@ public class DBConnectTest {
     //denne test tjekker om et reserveret sæde for farven rød
     @Test
     public void testReservedSetColor() throws SQLException {
-        DBConnect dbcon = new DBConnect();
-        buildHolder bh = dbcon.getBuildSceneInfo(109);
+        buildHolder bh = dbConnect.getBuildSceneInfo(109);
         Boolean[][] resSeat = bh.getResSeat();
         for(int i = 1; i < 15; i++) { //hvorfor 15?
             for(int j = 1; j < 11; j++) { //hvorfor 11?
@@ -93,8 +92,8 @@ public class DBConnectTest {
     public void testInsertReservation() throws SQLException {
         ArrayList<String> seats = new ArrayList<String>();
         seats.add("1:2");
-        dbConnectSub.insertReservation(seats, 1, "Amanda", "26802103");
-        dbConnectSub.getLastReservationId();
+        dbConnect.insertReservation(seats, 1, "Amanda", "26802103");
+        dbConnect.getLastReservationId();
 
         rs = st.executeQuery("SELECT reservations.id, seat_x, seat_y FROM reservations," +
                 " reservationlines WHERE reservationlines.reservation_id" +
@@ -111,21 +110,21 @@ public class DBConnectTest {
     //sletter den reservation vi har lavet ovenfor.
     @After
     public void deleteReservationtest() throws SQLException {
-        dbConnectSub.deleteReservation(lastid);
+        dbConnect.deleteReservation(lastid);
     }
 
     //Denne test tester om der kommer en liste ud når man har reserveret for et bestemt nummer.
     @Test
     public void testGetReservation() throws SQLException {
-        Boolean reservations = dbConnectSub.getBooleanReservations("11223344");
+        Boolean reservations = dbConnect.getBooleanReservations("11223344");
 //        assertTrue(!reservations);
         ArrayList<String> seats = new ArrayList<String>();
         seats.add("2:2");
         String customerName = "Markus";
         String phoneNumber = "11223344";
         int showId = 109;
-        dbConnectSub.insertReservation(seats, showId, customerName, phoneNumber);
-        reservations = dbConnectSub.getBooleanReservations("11223344");
+        dbConnect.insertReservation(seats, showId, customerName, phoneNumber);
+        reservations = dbConnect.getBooleanReservations("11223344");
         assertTrue(reservations);
 
         rs = st.executeQuery("SELECT id FROM reservations ORDER BY id DESC LIMIT 1");
@@ -137,7 +136,7 @@ public class DBConnectTest {
     //sletter indput til databasen som blev lavet opover.
     @After
     public void deleteInputReservation() throws SQLException {
-        dbConnectSub.deleteReservation(lastid1);
+        dbConnect.deleteReservation(lastid1);
     }
 
 }

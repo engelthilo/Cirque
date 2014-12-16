@@ -13,11 +13,18 @@ public class DBConnect {
     private Connection con;
     private Statement st;
     private ResultSet rs;
+    private String host;
+    private String username;
+    private String password;
 
 
     // This is the constructor
-    public DBConnect() throws SQLException {
-        con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/kaffeklubben", "kaffeklubben", "kp8473moxa"); // sets up a connection and stores it in the variable con
+    public DBConnect(String host, String username, String password) throws SQLException {
+        //"jdbc:mysql://mysql.itu.dk:3306/kaffeklubben"
+        this.username = username;
+        this.password = password;
+        this.host = host;
+        con = DriverManager.getConnection(host, username, password); // sets up a connection and stores it in the variable con
     }
     /**
      * Input: None
@@ -26,7 +33,7 @@ public class DBConnect {
      */
     public Connection getCon() throws SQLException {
         if(!con.isValid(30)) { // isValid takes seconds to wait for timeout as parameter
-            con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/kaffeklubben", "kaffeklubben", "kp8473moxa");
+            con = DriverManager.getConnection(host, username, password);
         }
 
         return con;
