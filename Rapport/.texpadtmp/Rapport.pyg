@@ -1,0 +1,6 @@
+ @Test
+    public void testInsertReservation(){
+        ArrayList<String> seats = new ArrayList<String>();
+        seats.add("1:2");
+        dbConnect.insertReservation(seats, 120, "Amanda", "26802103");
+        dbConnect.getLastReservationId();
