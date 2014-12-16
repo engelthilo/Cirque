@@ -12,7 +12,8 @@
 \usepackage{listings}
 \usepackage{minted}
 \usepackage{color}
-
+\usepackage{natbib}
+\usepackage{babel}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -167,10 +168,6 @@ Der vises kun reservationer for forestillinger som ikke er blevet vist - gamle r
 
 De optagede sæder er røde, de ledige er grønne og de sæder som er tilknyttet til den pågældende reservation vises som blå. Brugeren kan tilføje eller slette sæder. Et valgt er blåt og markeringen fjernes ved at klikke på sædet igen. Når ændringen til reservationen er valgt, så klikker brugeren på \emph{Rediger reservation}. Skal reservationen derimod slettes helt, så klikker brugeren på \emph{Slet reservation}.
 
-\subsection{Begrænsninger}
-\subsection{Fejlmeddelelser}
-\section{Eksempel}
-
 \chapter{Teknisk Analyse}
 \section{Model View Controller}
 Vi har brugt Model-View-Controller (fork. MVC) til at adskille vores database (model), vores controller og vores buildholder (view) fra hinanden. Dette gør vores programkode mere overskuelig og nemmere at veligeholde.
@@ -194,12 +191,12 @@ private Connection getCon() {
 \end{minted}
 \linebreak
 
-En anden klasse er \emph{buildHolder}. Et \emph{buildHolder}-objekt lagrer data for en given forestilling. Der bruges getters og setters, så de data der lagres også kan hentes efterfølgende. buildHolder objektet bruges efterfølgende til at bygge reservationssalen med data som filmnavn, tidspunkt for forestillingen, størrelsen på salen (rows/columns), reserverede sæder mv. 
+En anden klasse er \emph{buildHolder}. Et \emph{buildHolder}-objekt lagrer data for en given forestilling. Der bruges getters og setters, så de data der lagres også kan hentes efterfølgende. \emph{buildHolder} objektet bruges efterfølgende til at bygge reservationssalen med data som filmnavn, tidspunkt for forestillingen, størrelsen på salen (rows/columns), reserverede sæder mv. 
 
 Det er \emph{controlleren} der gør brug af disse objekter, når data skal visualiseres og altså fremvises for brugeren.
 
 \subsection{Algoritmer}
-Når et DBConnect objekt initialiseres bliver der oprettet og gemt en connection til databasen i et felt. Funktionen \emph{getCon} tester om denne forbindelse stadig er gyldig. Hvis den ikke er gyldig, så oprettes der en ny gyldig forbindelse og denne returneres. Derved kan forbindelsen eksempelvis kaldes som \emph{getCon().createStatement();} og altid bruge en gyldig forbindelse. \emph{getMovies} tager ingen parametre og returnerer et LinkedHashMap med filmens id som key og filmens navn som value. Sorteret alfabetisk efter filmnavn (A-Z).
+Når et DBConnect objekt initialiseres bliver der oprettet og gemt en connection til databasen i et felt. Funktionen \emph{getCon} tester om denne forbindelse stadig er gyldig. Hvis den ikke er gyldig, så oprettes der en ny gyldig forbindelse og denne returneres. Derved kan forbindelsen eksempelvis kaldes som \emph{getCon().createStatement();} og altid bruge en gyldig forbindelse \cite{blueJ}. \emph{getMovies} tager ingen parametre og returnerer et LinkedHashMap med filmens id som key og filmens navn som value. Sorteret alfabetisk efter filmnavn (A-Z).
 
 \emph{getMovieSchedule} tager film id som parameter og returnerer et LinkedHashMap med show id som \emph{key} og tidspunktet for forestillingen (timestamp) som \emph{value}. Data er hentet fra databasen med en sql-query hvor film id’et er det ene \emph{where}-parameter og tiden for forestillingen er større/senere end det nuværende tidspunkt. Hele forespørgslen er sorteret med den nærmeste forestilling først - altså \emph{time} ASC. 
 
@@ -207,28 +204,29 @@ Når et DBConnect objekt initialiseres bliver der oprettet og gemt en connection
 
 \emph{insertReservation} er den metode, som sørger for at de valgte sæder og tilknyttede kundeinformationer indsættes i databasen. Der tages fire parametre: en \emph{ArrayList} af typen string med sæderne, en \emph{Integer} med forestillingens id, en \emph{String} med kundens navn og ligeledes en med kundens telefonnummer. Sæderne gemmes som string med et kolon som splitter mellem sædets \emph{x-} og \emph{y-værdi} fx 5:8.
 
-Først indsættes kundens navn, telefonnummer og forestillingens id i tabellen \emph{reservations}. Derefter køres funktionen \emph{getLastReservationId}, som returnerer senest indsatte reservations id. Dette id skal nemlig bruges til at linke de valgte sæder med reservationen. Dernæst løbes vores \emph{ArrayList} igennem for at indsætte hvert sæde i reservation ind i vores database. 
-\begin{lstlisting}
+Først indsættes kundens navn, telefonnummer og forestillingens id i tabellen \emph{reservations}. Derefter køres funktionen \emph{getLastReservationId}, som returnerer senest indsatte reservations id. Dette id skal nemlig bruges til at linke de valgte sæder med reservationen. Dernæst løbes vores \emph{ArrayList} igennem for at indsætte hvert sæde i reservation ind i vores database. \\
+\begin{minted}{java}
 for(String seat : seats) {
-    query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('" + lastid + "', '" + seatInfo[0] + "', '" + seatInfo[1] + "')";
+    query = "INSERT INTO reservationlines (reservation_id, seat_x, seat_y) VALUES ('"
+     + lastid + "', '" + seatInfo[0] + "', '" + seatInfo[1] + "')";
   
 }
-\end{lstlisting}
+\end{minted}
 
-Koden ovenfor illustrerer hvordan vi indsætter seat i databasen. Vores sæde-string skal splittes op, så vi kan indsætte en x-værdi og en y-værdi i databasen. Man splitter vores string op i et \emph{string-array} hvor index 0 er alt tekst før første kolon. Index 1 er alt tekst før andet kolon osv. 
-\begin{lstlisting}
+Koden ovenfor illustrerer hvordan vi indsætter seat i databasen. Vores sæde-string skal splittes op, så vi kan indsætte en x-værdi og en y-værdi i databasen. Man splitter vores string op i et \emph{string-array} hvor index 0 er alt tekst før første kolon. Index 1 er alt tekst før andet kolon osv. \\
+\begin{minted}{java}
 String[] seatInfo = seat.split(":");
-\end{lstlisting}
+\end{minted}\\
 Derved kan vi nu tilgå vores x-værdi som \emph{seatInfo[0]} og vores y-værdi som \emph{seatInfo[1]}. Hvis hele metoden forløber fejlfrit, så returneres der boolean true. Hvis der forekommer en \emph{exception} så returneres false. 
 
 \emph{getReservations} henter alle reservationer tilhørende et telefonnummer. Parametret er altså et telefonnummer og metoden returnerer et LinkedHashMap med reservations id som \emph{key} og en \emph{HBox} med informationer om forestillingen som \emph{value}. Databaseforespørgslen henter kun fremtidige reservationer - altså reservationer til forestillinger som endnu ikke er vist. Denne metode bliver brugt til at liste alle fremtidige reservationer op for en kunde, så de enten kan rettes eller slettes. 
 
-\emph{getResSeat} bruges til at bygge den sal, hvor en reservation kan rettes eller slettes. Den tager to parametre. Det ene er reservations id’et og det andet er et buildHolder objekt. Reservations id’et er essentielt, da de reserverede sæder er bundet op på dette. BuildHolder objektet bruges til at bygge det multidimensionelle array som returneres, da vi skal bruge salens bredde og højde (columns/rows). 
+\emph{getResSeat} bruges til at bygge den sal, hvor en reservation kan rettes eller slettes. Den tager to parametre. Det ene er reservations id’et og det andet er et buildHolder objekt. Reservations id’et er essentielt, da de reserverede sæder er bundet op på dette. BuildHolder objektet bruges til at bygge det multidimensionelle array som returneres, da vi skal bruge salens bredde og højde (columns/rows). \\
 
-\begin{lstlisting}
+\begin{minted}{java}
 Boolean[][] resSeat = new
 Boolean[bh.getColumns()+1][bh.getRows()+1];
-\end{lstlisting}
+\end{minted}\\
 
 Vi ligger 1 til, da sæderne starter med 1 og et array starter med index 0. På den måde undgår vi en \emph{NullPointerException}, da salen ellers vil prøve et tilgå et felt uden for vores array - også kaldet \emph{ArrayIndexOutOfBoundsException}. 
 Et optaget sæde vil returnere værdien true og et ledigt sæde false. Dette tjekker vi når vi looper igennem salens højde og bredde, som bliver gjort i vores controller, der også bygger den grafiske sal som er det vi ser. 
@@ -242,14 +240,15 @@ Et optaget sæde vil returnere værdien true og et ledigt sæde false. Dette tje
 
 
 \section{Brugergrænsedesign}
-\subsection{Forestillinger}
-
-\subsection{Reservation}
-
-\subsection{Ret reservation}
+Vi har valgt at opdele vores brugergrænsefalde i tre dele: \emph{Forestillinger, Reservation og Ret Reservation}. Vi diskuterede om det var mest brugervenligt at lave et vindue som skiftede mellem forskellige sider når man klikkede \emph{næste side}, men blev enig om at det var mere simpelt og brugervenligt at lave et vindue med mulighed for mauelt at skifte mellem siderne via. en \emph{tap-menu}. Siden \emph{Forestillinger} er desuden også delt op i to dele - en del der oplister de forskellige film, og en der oplister spilletiderne for den valgte film. Vi har valgt det på den måde, fordi vi syntes det var designmæssigt bedre at udfylde hele vinduet ved at opdele det i de to dele, frem for at have en stor næsten tom side. 
+En anden beslutning vi diskuterede omkring vores design, var hvorvidt man skulle kunne klikke på \emph{Reservation} uden først at have valgt en forestilling. Vi havde overvejet at have en default biografsal til hvis man ikke havde valgt forestilling, men besluttede at den løsning vi har nu, hvor der blot står \emph{Du har ikke valgt nogen forestilling! Klik "Forestillinger" og vælg en film}, var mere brugervenlig. 
+Under \emph{Reservation} diskuterede vi hvorvidt rækker og sæder skulle have navne, og valgte at kalde rækkerne ved bogstaver og sæderne ved tal. At man både kan klikke på de enkelte sæder \emph{og} trække hen over dem for at vælge sæder, er et resultat af at vi både ønskede at man skulle kunne vælge mange sæder på én gang, men også at man skulle kunne vælge sæderne til eller fra enkeltvis. Vi snakkede om at det skulle laves således at brugeren indtastede det ønskede antal sæder, og når brugeren så klikkede på ét sæde, ville det resterende antal sæder brugeren ønskede, automatisk blive valgt i form af de efterfølgende sæder. Vi valgte dog denne løsning fra, da vi syntes vores løsning var mere flexibel. 
+Vores \emph{View} er kun en klasse, nemlig \emph{Controller}. Det er et bevidst valg vi har taget, og diskuteret. Vi besluttede os for at holde os til en klasse og enkelthedens skyld. Normalt ville man inddele \emph{View} i flere klasser med hver deres funktion. Fx. kunne vi ahve tre \emph{View}-klasser, en for \emph{Forestillinger}, en for \emph{Resrvation} og en for \emph{Ret reservation}. Vi syntes dog ikke det var et problem at samle dem i én klasse pga programmets størrelse. Vi ahr således, for vores egen forståelses skyld, valgt at gøre det i én klasse.
 
 \subsection{Begrænsninger}
+Systemet er dog ikke begrænset til små biografer og kan derfor også bruges af større biografer med store sale. Det har vi valgt at gøre 
 
+\subsection{Fejlmeddelelser}
 
 \chapter{Afprøvning}
 
@@ -288,9 +287,12 @@ Både \emph{testInsertReservation} og \emph{testGetReservation} har en \emph{@Af
 Ud fra brugerafprøvningen kom vi frem til den konklusion at vores brugergrænseflade fungere som forventet. Vores indtryk fra brugeren er at programmets design er rimelig nemt at overskue, og simpelt at bruge. Gennem vore unit test har vi tjekket at databasen fungerer optimalt og at reservationer bliver lavet og gemt rigtigt. Konklusionen ud fra vores forskellige tests er derfor at vores program fungere som vi har tænkt det. 
 
 \chapter{Konklusion}
-Gennem Java har vi opbygget et simpelt program der bygger på \emph{Model View Controller}. Vores \emph{Model}, som er vores brugergrænseflade, er skabt primært i JavaFx, og der har designmæssigt være fokus på brugervenlighed. 
+Gennem Java har vi opbygget et simpelt program der bygger på \emph{Model View Controller}. Vores \emph{Model}, som er vores brugergrænseflade, er skabt primært i JavaFx, og der har designmæssigt være fokus på \cite{Java} brugervenlighed. 
 
-\chapter{Litteratur}
+
+\bibliographystyle{plain}
+\bibliography{litterature.bib}
+
 
 \listoffigures
 
