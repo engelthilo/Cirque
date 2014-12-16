@@ -246,7 +246,7 @@ Under \emph{Reservation} diskuterede vi hvorvidt rækker og sæder skulle have n
 Vores \emph{View} er kun en klasse, nemlig \emph{Controller}. Det er et bevidst valg vi har taget, og diskuteret. Vi besluttede os for at holde os til en klasse og enkelthedens skyld. Normalt ville man inddele \emph{View} i flere klasser med hver deres funktion. Fx. kunne vi ahve tre \emph{View}-klasser, en for \emph{Forestillinger}, en for \emph{Resrvation} og en for \emph{Ret reservation}. Vi syntes dog ikke det var et problem at samle dem i én klasse pga programmets størrelse. Vi ahr således, for vores egen forståelses skyld, valgt at gøre det i én klasse.
 
 \subsection{Begrænsninger}
-Systemet er dog ikke begrænset til små biografer og kan derfor også bruges af større biografer med store sale. Det har vi valgt at gøre 
+Systemet er ikke begrænset til små biografer og kan derfor også bruges af større biografer med store sale. Systemet har ikke en administration til forestillinger og betalling, men det kan implementeres rimelig simpelt i den nuværende kode, da systemet er utrolig dynamisk og baserer alt indhold fra databasen pånær de statiske elementer som textfields og almindelige button til at fuldføre, rette eller slette en reservation. Man kan forestille sig, at systemet ville være svært at benytte for en biograf med over 3000 sæder, da sæderne i salene vil blive utroligt små og svære at markere. Vores system er udviklet til mindre biografer og håndterer fint sale på op til 1000 sæder - dog skal man være god med museføringen, når vi har med så mange sæder at gøre, da størrelsen på sæderne skalerer til en statisk scene.
 
 \subsection{Fejlmeddelelser}
 
@@ -287,7 +287,7 @@ Både \emph{testInsertReservation} og \emph{testGetReservation} har en \emph{@Af
 Ud fra brugerafprøvningen kom vi frem til den konklusion at vores brugergrænseflade fungere som forventet. Vores indtryk fra brugeren er at programmets design er rimelig nemt at overskue, og simpelt at bruge. Gennem vore unit test har vi tjekket at databasen fungerer optimalt og at reservationer bliver lavet og gemt rigtigt. Konklusionen ud fra vores forskellige tests er derfor at vores program fungere som vi har tænkt det. 
 
 \chapter{Konklusion}
-Gennem Java har vi opbygget et simpelt program der bygger på \emph{Model View Controller}. Vores \emph{Model}, som er vores brugergrænseflade, er skabt primært i JavaFx, og der har designmæssigt være fokus på \cite{Java} brugervenlighed. 
+Gennem Java har vi opbygget et simpelt program der bygger på \emph{Model View Controller}. Vores \emph{Model}, som er vores brugergrænseflade, er skabt primært i JavaFx, og der har designmæssigt \cite{oracle} være fokus på \cite{Java} brugervenlighed. 
 
 
 \bibliographystyle{plain}
