@@ -4,8 +4,9 @@
 
         <modelVersion>4.0.0</modelVersion>
 
-        <groupID>itu-kaffeklubben</groupID>
-        <artifactID>biobooking</artifactID>
+
+    <groupId>itu-kaffeklubben</groupId>
+        <artifactId>biobooking</artifactId>
         <name>BioBookingMockito</name>
 
         <packaging>jar</packaging>
@@ -16,22 +17,23 @@
             <!-- mysql connector -->
             <dependency>
                 <groupId>mysql</groupId>
-                <artifact>mysql-connector-java</artifact>
+                <artifactId>mysql-connector-java</artifactId>
                 <version>5.1.33</version>
             </dependency>
 
         <!-- JUNIT -->
         <dependency>
             <groupId>junit</groupId>
-            <artifact>junit</artifact>
+            <artifactId>junit</artifactId>
             <version>4.11</version>
         </dependency>
 
         <!-- Mockito -->
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifact>mockito-all</artifact>
+            <artifactId>mockito-all</artifactId>
             <version>1.10.8</version>
         </dependency>
+    </dependencies>
 
 </project>
