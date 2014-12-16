@@ -217,6 +217,8 @@ public class DBConnect {
      * Returns: Boolean - true if inserted correctly and false if not
      */
     public void updateReservation(ArrayList<String> newSeats, int reservationId) throws SQLException {
+        st = getCon().createStatement();
+
         // first we delete the old reservated seats
         st.executeUpdate("DELETE FROM reservationlines WHERE reservation_id = '" + reservationId + "'");
 
@@ -234,6 +236,8 @@ public class DBConnect {
      * Returns: Boolean - true if deleted correctly and false if not
      */
     public Boolean deleteReservation(int reservationId) throws SQLException {
+        st = getCon().createStatement();
+        
         // deleting all the seats
         st.executeUpdate("DELETE FROM reservationlines WHERE reservation_id = '" + reservationId + "'");
         // deleting the reservation itself
