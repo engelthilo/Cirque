@@ -688,7 +688,7 @@ public class Controller {
         } else if(r.getFill().toString().contains("0x039be5ff") && dragColorCheck.equals("0x039be5ff")) {
             r.setFill(Color.web("#43A047"));
             String seatString = (x + ":" + y);
-            newSeats.remove(seatString); 
+            newSeats.remove(seatString);
         }
     }
 
@@ -756,3 +756,4 @@ public class Controller {
     }
 
 }
+//Test her
