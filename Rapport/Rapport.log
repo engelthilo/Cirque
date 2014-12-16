@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.11.26)  16 DEC 2014 14:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.11.26)  16 DEC 2014 16:47
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -950,17 +950,17 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 7.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 7.
-)
+ [3
+
+])
 \tf@toc=\write6
 \openout6 = `Rapport.toc'.
 
- [3
-
-]
+ [4]
 Kapitel 1.
-[4
+[5
 
-] [5]
+] [6]
 Kapitel 2.
 \openout3 = `Rapport.pyg'.
 
@@ -975,28 +975,28 @@ runsystem(rm Rapport.out.pyg)...executed.
 
 runsystem(rm Rapport.pyg)...executed.
 
- [6
+ [7
 
-] [7]
+] [8]
 Kapitel 3.
 
 Underfull \hbox (badness 10000) in paragraph at lines 132--133
 
  []
 
-<1.png, id=73, 684.5575pt x 519.9425pt>
+<1.png, id=76, 684.5575pt x 519.9425pt>
 File: 1.png Graphic file (type png)
  <use 1.png>
 Package pdftex.def Info: 1.png used on input line 137.
 (pdftex.def)             Requested size: 200.0pt x 151.90604pt.
 
-<2.png, id=75, 684.5575pt x 519.9425pt>
+<2.png, id=78, 684.5575pt x 519.9425pt>
 File: 2.png Graphic file (type png)
  <use 2.png>
 Package pdftex.def Info: 2.png used on input line 138.
 (pdftex.def)             Requested size: 200.0pt x 151.90604pt.
 
-<3.png, id=76, 684.5575pt x 519.9425pt>
+<3.png, id=79, 684.5575pt x 519.9425pt>
 File: 3.png Graphic file (type png)
  <use 3.png>
 Package pdftex.def Info: 3.png used on input line 150.
@@ -1005,9 +1005,9 @@ Package pdftex.def Info: 3.png used on input line 150.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8
+[9
 
- <./1.png> <./2.png>] [9 <./3.png>] <4.png, id=86, 684.5575pt x 519.9425pt>
+ <./1.png> <./2.png>] [10 <./3.png>] <4.png, id=89, 684.5575pt x 519.9425pt>
 File: 4.png Graphic file (type png)
 
 <use 4.png>
@@ -1018,7 +1018,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 166--167
 
  []
 
-<5.png, id=87, 724.7075pt x 519.9425pt>
+<5.png, id=90, 724.7075pt x 519.9425pt>
 File: 5.png Graphic file (type png)
  <use 5.png>
 Package pdftex.def Info: 5.png used on input line 170.
@@ -1029,7 +1029,7 @@ Overfull \hbox (1.3666pt too wide) in paragraph at lines 174--175
  de s^^Z-der som er til-knyt-tet til den p^^Wag^^Zldende
  []
 
-[10
+[11
 
  <./4.png> <./5.png>]
 Kapitel 4.
@@ -1057,7 +1057,7 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[11
+[12
 
 ]
 \openout3 = `Rapport.pyg'.
@@ -1102,7 +1102,7 @@ runsystem(rm Rapport.out.pyg)...executed.
 
 runsystem(rm Rapport.pyg)...executed.
 
- [12]
+ [13]
 Underfull \hbox (badness 10000) in paragraph at lines 229--230
 
  []
@@ -1128,14 +1128,14 @@ runsystem(rm Rapport.out.pyg)...executed.
 
 runsystem(rm Rapport.pyg)...executed.
 
- [13] [14]
+ [14] [15]
 Kapitel 5.
 
 Underfull \hbox (badness 10000) in paragraph at lines 265--267
 
  []
 
-[15
+[16
 
 ]
 \openout3 = `Rapport.pyg'.
@@ -1153,38 +1153,109 @@ runsystem(rm Rapport.out.pyg)...executed.
 
 runsystem(rm Rapport.pyg)...executed.
 
- [16]
+ [17]
 Kapitel 6.
-[17
+[18
 
-] [18
+] [19
 
 ] (./Rapport.lof)
 \tf@lof=\write7
 \openout7 = `Rapport.lof'.
 
- [19
+ [20
 
 ]
 Bilag A.
 runsystem(pygmentize -l java -f latex -F tokenmerge             -P "verboptions
 = " -o Rapport.out.pyg ../src/test/DBConnectTest.java)...executed.
 
-(./Rapport.out.pyg [20
+(./Rapport.out.pyg [21
 
-] [21] [22] [23])
+] [22] [23])
 runsystem(rm Rapport.out.pyg)...executed.
 
- [24] (./Rapport.aux)
+ [24]
+Bilag B.
+<aa.jpg, id=140, 790.955pt x 593.21625pt>
+File: aa.jpg Graphic file (type jpg)
+ <use aa.jpg>
+Package pdftex.def Info: aa.jpg used on input line 309.
+(pdftex.def)             Requested size: 400.0pt x 300.0018pt.
+ [25
+
+ <./aa.jpg>]
+Bilag C.
+<MOCK-UP.png, id=144, 851.18pt x 593.21625pt>
+File: MOCK-UP.png Graphic file (type png)
+ <use MOCK-UP.png>
+Package pdftex.def Info: MOCK-UP.png used on input line 316.
+(pdftex.def)             Requested size: 400.0pt x 278.77547pt.
+ [26
+
+ <./MOCK-UP.png>]
+Bilag D.
+<bilag.png, id=148, 327.2225pt x 135.50626pt>
+File: bilag.png Graphic file (type png)
+ <use bilag.png>
+Package pdftex.def Info: bilag.png used on input line 324.
+(pdftex.def)             Requested size: 400.0pt x 165.64406pt.
+
+<bilag2.png, id=149, 325.215pt x 132.495pt>
+File: bilag2.png Graphic file (type png)
+ <use bilag2.png>
+Package pdftex.def Info: bilag2.png used on input line 330.
+(pdftex.def)             Requested size: 400.0pt x 162.97594pt.
+
+<bilag3.png, id=150, 624.3325pt x 197.73875pt>
+File: bilag3.png Graphic file (type png)
+ <use bilag3.png>
+Package pdftex.def Info: bilag3.png used on input line 336.
+(pdftex.def)             Requested size: 400.0pt x 126.69116pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<bilag4.png, id=151, 328.22626pt x 134.5025pt>
+File: bilag4.png Graphic file (type png)
+ <use bilag4.png>
+Package pdftex.def Info: bilag4.png used on input line 342.
+(pdftex.def)             Requested size: 400.0pt x 163.91628pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[27
+
+ <./bilag.png> <./bilag2.png>] [28 <./bilag3.png> <./bilag4.png>]
+Bilag E.
+<o.png, id=158, 639.38875pt x 374.39874pt>
+File: o.png Graphic file (type png)
+ <use o.png>
+Package pdftex.def Info: o.png used on input line 350.
+(pdftex.def)             Requested size: 400.0pt x 234.22714pt.
+ [29
+
+ <./o.png>]
+Bilag F.
+<v.png, id=162, 616.3025pt x 384.43625pt>
+File: v.png Graphic file (type png)
+ <use v.png>
+Package pdftex.def Info: v.png used on input line 357.
+(pdftex.def)             Requested size: 400.0pt x 249.5169pt.
+ [30
+
+ <./v.png>]
+(./Rapport.aux)
 Package logreq Info: Writing requests to 'Rapport.run.xml'.
 \openout1 = `Rapport.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 12638 strings out of 493117
- 198398 string characters out of 6135432
+ 12678 strings out of 493117
+ 198882 string characters out of 6135432
  618780 words of memory out of 5000000
- 15863 multiletter control sequences out of 15000+600000
+ 15895 multiletter control sequences out of 15000+600000
  7706 words of font info for 28 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  40i,18n,72p,1156b,1344s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1196,10 +1267,10 @@ Here is how much of TeX's memory you used:
 usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></u
 sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></us
 r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on Rapport.pdf (25 pages, 16891669 bytes).
+Output written on Rapport.pdf (31 pages, 17063193 bytes).
 PDF statistics:
- 167 PDF objects out of 1000 (max. 8388607)
- 93 compressed objects within 1 object stream
+ 195 PDF objects out of 1000 (max. 8388607)
+ 106 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 106 words of extra memory for PDF output out of 10000 (max. 10000000)
 
