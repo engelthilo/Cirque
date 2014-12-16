@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.11.26)  16 DEC 2014 19:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.11.26)  16 DEC 2014 20:10
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1063,7 +1063,7 @@ runsystem(pygmentize -l java -f latex -F tokenmerge             -P "verboptions
 = " -o Rapport.out.pyg Rapport.pyg)...executed.
 
  (./Rapport.out.pyg
-Underfull \hbox (badness 10000) in paragraph at lines 231--1
+Underfull \hbox (badness 10000) in paragraph at lines 227--1
 
  []
 
@@ -1096,7 +1096,7 @@ runsystem(rm Rapport.pyg)...executed.
  [14] [15]
 Kapitel 5.
 
-Underfull \hbox (badness 10000) in paragraph at lines 286--288
+Underfull \hbox (badness 10000) in paragraph at lines 283--285
 
  []
 
@@ -1109,7 +1109,7 @@ runsystem(pygmentize -l java -f latex -F tokenmerge             -P "verboptions
 = " -o Rapport.out.pyg Rapport.pyg)...executed.
 
  (./Rapport.out.pyg
-Underfull \hbox (badness 10000) in paragraph at lines 295--1
+Underfull \hbox (badness 10000) in paragraph at lines 292--1
 
  []
 
@@ -1149,7 +1149,7 @@ Bilag B.
 <aa.jpg, id=144, 790.955pt x 593.21625pt>
 File: aa.jpg Graphic file (type jpg)
  <use aa.jpg>
-Package pdftex.def Info: aa.jpg used on input line 354.
+Package pdftex.def Info: aa.jpg used on input line 351.
 (pdftex.def)             Requested size: 400.0pt x 300.0018pt.
  [26
 
@@ -1158,7 +1158,7 @@ Bilag C.
 <MOCK-UP.png, id=148, 851.18pt x 593.21625pt>
 File: MOCK-UP.png Graphic file (type png)
  <use MOCK-UP.png>
-Package pdftex.def Info: MOCK-UP.png used on input line 361.
+Package pdftex.def Info: MOCK-UP.png used on input line 358.
 (pdftex.def)             Requested size: 400.0pt x 278.77547pt.
  [27
 
@@ -1167,19 +1167,19 @@ Bilag D.
 <bilag.png, id=152, 327.2225pt x 135.50626pt>
 File: bilag.png Graphic file (type png)
  <use bilag.png>
-Package pdftex.def Info: bilag.png used on input line 369.
+Package pdftex.def Info: bilag.png used on input line 366.
 (pdftex.def)             Requested size: 400.0pt x 165.64406pt.
 
 <bilag2.png, id=153, 325.215pt x 132.495pt>
 File: bilag2.png Graphic file (type png)
  <use bilag2.png>
-Package pdftex.def Info: bilag2.png used on input line 375.
+Package pdftex.def Info: bilag2.png used on input line 372.
 (pdftex.def)             Requested size: 400.0pt x 162.97594pt.
 
 <bilag3.png, id=154, 624.3325pt x 197.73875pt>
 File: bilag3.png Graphic file (type png)
  <use bilag3.png>
-Package pdftex.def Info: bilag3.png used on input line 381.
+Package pdftex.def Info: bilag3.png used on input line 378.
 (pdftex.def)             Requested size: 400.0pt x 126.69116pt.
 
 
@@ -1188,7 +1188,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <bilag4.png, id=155, 328.22626pt x 134.5025pt>
 File: bilag4.png Graphic file (type png)
  <use bilag4.png>
-Package pdftex.def Info: bilag4.png used on input line 387.
+Package pdftex.def Info: bilag4.png used on input line 384.
 (pdftex.def)             Requested size: 400.0pt x 163.91628pt.
 
 
@@ -1201,7 +1201,7 @@ Bilag E.
 <o.png, id=162, 639.38875pt x 374.39874pt>
 File: o.png Graphic file (type png)
  <use o.png>
-Package pdftex.def Info: o.png used on input line 395.
+Package pdftex.def Info: o.png used on input line 392.
 (pdftex.def)             Requested size: 400.0pt x 234.22714pt.
  [30
 
@@ -1210,7 +1210,7 @@ Bilag F.
 <v.png, id=167, 616.3025pt x 384.43625pt>
 File: v.png Graphic file (type png)
  <use v.png>
-Package pdftex.def Info: v.png used on input line 402.
+Package pdftex.def Info: v.png used on input line 399.
 (pdftex.def)             Requested size: 400.0pt x 249.5169pt.
  [31
 
@@ -1237,7 +1237,7 @@ usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></u
 sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
 r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr
 /local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on Rapport.pdf (32 pages, 17074704 bytes).
+Output written on Rapport.pdf (32 pages, 17076354 bytes).
 PDF statistics:
  202 PDF objects out of 1000 (max. 8388607)
  111 compressed objects within 2 object streams
