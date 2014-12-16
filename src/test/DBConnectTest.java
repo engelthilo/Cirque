@@ -21,21 +21,17 @@ public class DBConnectTest {
     private int lastid1;
     private DBConnectSub dbConnectSub;
 
-    public DBConnectTest() {
-
+    public DBConnectTest() throws SQLException {
         dbConnectSub = new DBConnectSub();
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/KaffeklubbenTest",
-                    "Kaffekluben2", "kp8473moxa");
-            st = con.createStatement();
-        } catch (Exception e) {
-            System.out.println("Error:" + e);
-        }
+
+        con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/KaffeklubbenTest",
+                "Kaffekluben2", "kp8473moxa");
+        st = con.createStatement();
     }
+
     //denne test tjekker om film og ide passer med det forventede - OG om rækkefølgen er rigtig.
     @Test
-    public void testGetMovies() {
+    public void testGetMovies() throws SQLException {
         Map<Integer, String> expected = new LinkedHashMap<>();
         expected.put(3, "Antboy");
         expected.put(7, "Bryllupskaos");
@@ -54,25 +50,21 @@ public class DBConnectTest {
     // Virker stadig.
     @Test
     public void testTimeStamp() throws SQLException {
-        try {
-            st = con.createStatement();
-            String query = "SELECT * FROM shows WHERE movie_id=1 ORDER BY time ASC";
-            rs = st.executeQuery(query);
-            Timestamp tmstmp = new Timestamp(0);
-            while (rs.next()) {
-                //System.out.println("Id eksisterer"); //id 4 eksisterer ikke
-                assertTrue(tmstmp.getTime() < rs.getTimestamp("time").getTime());
-                if (rs.getTimestamp("time").getTime() > tmstmp.getTime()) {
-                    tmstmp = rs.getTimestamp("time");
-                }
+        st = con.createStatement();
+        String query = "SELECT * FROM shows WHERE movie_id=1 ORDER BY time ASC";
+        rs = st.executeQuery(query);
+        Timestamp tmstmp = new Timestamp(0);
+        while (rs.next()) {
+            //System.out.println("Id eksisterer"); //id 4 eksisterer ikke
+            assertTrue(tmstmp.getTime() < rs.getTimestamp("time").getTime());
+            if (rs.getTimestamp("time").getTime() > tmstmp.getTime()) {
+                tmstmp = rs.getTimestamp("time");
             }
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
         }
     }
     //denne test tjekker om et reserveret sæde for farven rød
     @Test
-    public void testReservedSetColor() {
+    public void testReservedSetColor() throws SQLException {
         DBConnect dbcon = new DBConnect();
         buildHolder bh = dbcon.getBuildSceneInfo(109);
         Boolean[][] resSeat = bh.getResSeat();
@@ -98,38 +90,33 @@ public class DBConnectTest {
     }
     //tester om reservationer der bliver lavet, gemmes i databasen
     @Test
-    public void testInsertReservation(){
+    public void testInsertReservation() throws SQLException {
         ArrayList<String> seats = new ArrayList<String>();
         seats.add("1:2");
         dbConnectSub.insertReservation(seats, 1, "Amanda", "26802103");
         dbConnectSub.getLastReservationId();
 
-        try {
-            rs = st.executeQuery("SELECT reservations.id, seat_x, seat_y FROM reservations," +
-                    " reservationlines WHERE reservationlines.reservation_id" +
-                    " = reservations.id AND show_id = '1' AND customer_name = 'Amanda'" +
-                    " AND customer_phone = '26802103'");
-            while(rs.next()){
-                lastid = rs.getInt(1);
-                System.out.print(lastid);
-                //assertEquals(rs.getString("id"), (lastid));
-                //assertEquals(rs.getInt("seat_x"), 1);
-                //assertEquals(rs.getInt("seat_y"), 2);
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
+        rs = st.executeQuery("SELECT reservations.id, seat_x, seat_y FROM reservations," +
+                " reservationlines WHERE reservationlines.reservation_id" +
+                " = reservations.id AND show_id = '1' AND customer_name = 'Amanda'" +
+                " AND customer_phone = '26802103'");
+        while(rs.next()){
+            lastid = rs.getInt(1);
+            System.out.print(lastid);
+            //assertEquals(rs.getString("id"), (lastid));
+            //assertEquals(rs.getInt("seat_x"), 1);
+            //assertEquals(rs.getInt("seat_y"), 2);
         }
-
     }
     //sletter den reservation vi har lavet ovenfor.
     @After
-    public void deleteReservationtest() {
+    public void deleteReservationtest() throws SQLException {
         dbConnectSub.deleteReservation(lastid);
     }
 
     //Denne test tester om der kommer en liste ud når man har reserveret for et bestemt nummer.
     @Test
-    public void testGetReservation() {
+    public void testGetReservation() throws SQLException {
         Boolean reservations = dbConnectSub.getBooleanReservations("11223344");
 //        assertTrue(!reservations);
         ArrayList<String> seats = new ArrayList<String>();
@@ -140,19 +127,16 @@ public class DBConnectTest {
         dbConnectSub.insertReservation(seats, showId, customerName, phoneNumber);
         reservations = dbConnectSub.getBooleanReservations("11223344");
         assertTrue(reservations);
-        try {
-            rs = st.executeQuery("SELECT id FROM reservations ORDER BY id DESC LIMIT 1");
-            if (rs.next()) {
-                lastid1 = rs.getInt(1);
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
+
+        rs = st.executeQuery("SELECT id FROM reservations ORDER BY id DESC LIMIT 1");
+        if (rs.next()) {
+            lastid1 = rs.getInt(1);
         }
     }
 
     //sletter indput til databasen som blev lavet opover.
     @After
-    public void deleteInputReservation() {
+    public void deleteInputReservation() throws SQLException {
         dbConnectSub.deleteReservation(lastid1);
     }
 

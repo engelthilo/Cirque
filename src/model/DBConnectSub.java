@@ -1,10 +1,7 @@
 package model;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DBConnectSub extends DBConnect {
     private Connection con;
@@ -12,26 +9,17 @@ public class DBConnectSub extends DBConnect {
     private ResultSet rs;
 
 
-    public DBConnectSub() {
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/KaffeklubbenTest", "Kaffekluben2", "kp8473moxa");
-            st = con.createStatement();
-        } catch (Exception e) {
-            System.out.println("Error:" + e);
-        }
+    public DBConnectSub() throws SQLException {
+        con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/KaffeklubbenTest", "Kaffekluben2", "kp8473moxa");
+        st = con.createStatement();
     }
 
 
-    public Connection getCon(){
-        try {
-            if(!con.isValid(30)) {
-                con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/KaffeklubbenTest", "Kaffekluben2", "kp8473moxa");
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
+    public Connection getCon() throws SQLException {
+        if(!con.isValid(30)) {
+            con = DriverManager.getConnection("jdbc:mysql://mysql.itu.dk:3306/KaffeklubbenTest", "Kaffekluben2", "kp8473moxa");
         }
+
         return con;
     }
 
