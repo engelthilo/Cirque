@@ -172,7 +172,7 @@ public class Controller {
 
         LinkedHashMap<Integer, Timestamp> schedule = new LinkedHashMap(db.getMovieSchedule(movieId));
 
-        //puts the timestamps in 
+        //puts the timestamps in
         Timestamp[][] times = new Timestamp[14][6]; //sætter tiderne fra databsen i rækkefølge efter tid.
         int[][] showIds = new int[14][6];  //14 står for 14 dage - 6 for de 6 shows der bliver vist pr dag pr sal.
         int i = -1; //starter ved -1 fordi vi vil starte ved nr. 0. i er datoen
@@ -256,6 +256,11 @@ public class Controller {
 
     }
 
+    /**
+     * Input: int showId
+     * Action: Build the reservation scene in ''Reservation'' tab
+     * Output: No output
+     */
     @FXML
     private void buildReservationScene(int showId) { //denne metode bygger reservationScene for den pågældende film
         overfillPane.toBack();
@@ -361,6 +366,11 @@ public class Controller {
 
     }
 
+    /**
+     * Input: Rectangle, x and y coordinates for the seats
+     * Action: Creates the seats used in buildReservationScene.
+     * Output: No out put
+     */
     private void addSeatToOrder(final Rectangle r, int x, int y) {
 
         // add to current order
