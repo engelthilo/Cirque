@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.11.26)  15 DEC 2014 15:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.11.26)  15 DEC 2014 22:29
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -521,6 +521,13 @@ runsystem(which pygmentize && touch Rapport.aex)...executed.
 runsystem(rm Rapport.aex)...executed.
 
 
+(/usr/local/texlive/2014/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip48
+\bibsep=\skip49
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count121
+)
 (/usr/local/texlive/2014/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2014/03/04 1.5c listings language file
 )
@@ -534,9 +541,9 @@ Package ifvtex Info: VTeX not detected.
 (/usr/local/texlive/2014/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count121
-\Gm@cntv=\count122
-\c@Gm@tempcnt=\count123
+\Gm@cnth=\count122
+\Gm@cntv=\count123
+\c@Gm@tempcnt=\count124
 \Gm@bindingoffset=\dimen122
 \Gm@wd@mp=\dimen123
 \Gm@odd@mp=\dimen124
@@ -548,15 +555,15 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@dimlist=\toks24
 )
 (/usr/local/texlive/2014/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-\fancy@headwidth=\skip48
-\f@ncyO@elh=\skip49
-\f@ncyO@erh=\skip50
-\f@ncyO@olh=\skip51
-\f@ncyO@orh=\skip52
-\f@ncyO@elf=\skip53
-\f@ncyO@erf=\skip54
-\f@ncyO@olf=\skip55
-\f@ncyO@orf=\skip56
+\fancy@headwidth=\skip50
+\f@ncyO@elh=\skip51
+\f@ncyO@erh=\skip52
+\f@ncyO@olh=\skip53
+\f@ncyO@orh=\skip54
+\f@ncyO@elf=\skip55
+\f@ncyO@erf=\skip56
+\f@ncyO@olf=\skip57
+\f@ncyO@orf=\skip58
 )
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
@@ -566,31 +573,31 @@ Package csquotes Info: Redefining alias 'default' -> 'danish'.
 (./Rapport.aux)
 \openout1 = `Rapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
 
 (/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count124
+\scratchcounter=\count125
 \scratchdimen=\dimen130
 \scratchbox=\box36
-\nofMPsegments=\count125
-\nofMParguments=\count126
+\nofMPsegments=\count126
+\nofMParguments=\count127
 \everyMPshowfont=\toks25
-\MPscratchCnt=\count127
+\MPscratchCnt=\count128
 \MPscratchDim=\dimen131
-\MPnumerator=\count128
-\makeMPintoPDFobject=\count129
+\MPnumerator=\count129
+\makeMPintoPDFobject=\count130
 \everyMPtoPDFconversion=\toks26
 ) (/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -617,7 +624,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box37
-\c@lstlisting=\count130
+\c@lstlisting=\count131
 runsystem(pygmentize -S default -f latex > Rapport.pyg)...executed.
 
 
@@ -659,36 +666,36 @@ runsystem(pygmentize -S default -f latex > Rapport.pyg)...executed.
 <frontpage.pdf, id=1, 578.64178pt x 799.788pt>
 File: frontpage.pdf Graphic file (type pdf)
  <use frontpage.pdf>
-Package pdftex.def Info: frontpage.pdf used on input line 48.
+Package pdftex.def Info: frontpage.pdf used on input line 49.
 (pdftex.def)             Requested size: 578.64037pt x 799.78604pt.
 File: frontpage.pdf Graphic file (type pdf)
 
 <use frontpage.pdf>
-Package pdftex.def Info: frontpage.pdf used on input line 48.
+Package pdftex.def Info: frontpage.pdf used on input line 49.
 (pdftex.def)             Requested size: 578.64037pt x 799.78604pt.
  <frontpage.pdf, id=4, page=1, 578.64178pt x 799.788pt>
 File: frontpage.pdf Graphic file (type pdf)
 
 <use frontpage.pdf, page 1>
-Package pdftex.def Info: frontpage.pdf, page1 used on input line 48.
+Package pdftex.def Info: frontpage.pdf, page1 used on input line 49.
 (pdftex.def)             Requested size: 578.64037pt x 799.78604pt.
 File: frontpage.pdf Graphic file (type pdf)
  <use frontpage.pdf, page 1>
-Package pdftex.def Info: frontpage.pdf, page1 used on input line 48.
+Package pdftex.def Info: frontpage.pdf, page1 used on input line 49.
 (pdftex.def)             Requested size: 575.71785pt x 795.74658pt.
 File: frontpage.pdf Graphic file (type pdf)
 
 <use frontpage.pdf, page 1>
-Package pdftex.def Info: frontpage.pdf, page1 used on input line 48.
+Package pdftex.def Info: frontpage.pdf, page1 used on input line 49.
 (pdftex.def)             Requested size: 575.71785pt x 795.74658pt.
 File: frontpage.pdf Graphic file (type pdf)
  <use frontpage.pdf, page 1>
-Package pdftex.def Info: frontpage.pdf, page1 used on input line 48.
+Package pdftex.def Info: frontpage.pdf, page1 used on input line 49.
 (pdftex.def)             Requested size: 575.71785pt x 795.74658pt.
 File: frontpage.pdf Graphic file (type pdf)
 
 <use frontpage.pdf, page 1>
-Package pdftex.def Info: frontpage.pdf, page1 used on input line 48.
+Package pdftex.def Info: frontpage.pdf, page1 used on input line 49.
 (pdftex.def)             Requested size: 575.71785pt x 795.74658pt.
  [1
 
@@ -696,35 +703,35 @@ Package pdftex.def Info: frontpage.pdf, page1 used on input line 48.
 <forside.pdf, id=29, 597.432pt x 845.07718pt>
 File: forside.pdf Graphic file (type pdf)
  <use forside.pdf>
-Package pdftex.def Info: forside.pdf used on input line 52.
+Package pdftex.def Info: forside.pdf used on input line 53.
 (pdftex.def)             Requested size: 597.43054pt x 845.07512pt.
 File: forside.pdf Graphic file (type pdf)
 
 <use forside.pdf>
-Package pdftex.def Info: forside.pdf used on input line 52.
+Package pdftex.def Info: forside.pdf used on input line 53.
 (pdftex.def)             Requested size: 597.43054pt x 845.07512pt.
  <forside.pdf, id=32, page=1, 597.432pt x 845.07718pt>
 File: forside.pdf Graphic file (type pdf)
 
 <use forside.pdf, page 1>
-Package pdftex.def Info: forside.pdf, page1 used on input line 52.
+Package pdftex.def Info: forside.pdf, page1 used on input line 53.
 (pdftex.def)             Requested size: 400.0pt x 565.82483pt.
 File: forside.pdf Graphic file (type pdf)
  <use forside.pdf, page 1>
-Package pdftex.def Info: forside.pdf, page1 used on input line 52.
+Package pdftex.def Info: forside.pdf, page1 used on input line 53.
 (pdftex.def)             Requested size: 840.5925pt x 1189.03162pt.
 File: forside.pdf Graphic file (type pdf)
  <use forside.pdf, page 1>
-Package pdftex.def Info: forside.pdf, page1 used on input line 52.
+Package pdftex.def Info: forside.pdf, page1 used on input line 53.
 (pdftex.def)             Requested size: 840.5925pt x 1189.03162pt.
 File: forside.pdf Graphic file (type pdf)
 
 <use forside.pdf, page 1>
-Package pdftex.def Info: forside.pdf, page1 used on input line 52.
+Package pdftex.def Info: forside.pdf, page1 used on input line 53.
 (pdftex.def)             Requested size: 840.5925pt x 1189.03162pt.
 File: forside.pdf Graphic file (type pdf)
  <use forside.pdf, page 1>
-Package pdftex.def Info: forside.pdf, page1 used on input line 52.
+Package pdftex.def Info: forside.pdf, page1 used on input line 53.
 (pdftex.def)             Requested size: 840.5925pt x 1189.03162pt.
  [1 <./forside.pdf>]
 [2{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
@@ -763,26 +770,26 @@ runsystem(rm Rapport.pyg)...executed.
 ] [8]
 Kapitel 3.
 
-Underfull \hbox (badness 10000) in paragraph at lines 126--127
+Underfull \hbox (badness 10000) in paragraph at lines 127--128
 
  []
 
 <1.png, id=76, 684.5575pt x 519.9425pt>
 File: 1.png Graphic file (type png)
  <use 1.png>
-Package pdftex.def Info: 1.png used on input line 131.
+Package pdftex.def Info: 1.png used on input line 132.
 (pdftex.def)             Requested size: 200.0pt x 151.90604pt.
 
 <2.png, id=78, 684.5575pt x 519.9425pt>
 File: 2.png Graphic file (type png)
  <use 2.png>
-Package pdftex.def Info: 2.png used on input line 132.
+Package pdftex.def Info: 2.png used on input line 133.
 (pdftex.def)             Requested size: 200.0pt x 151.90604pt.
 
 <3.png, id=79, 684.5575pt x 519.9425pt>
 File: 3.png Graphic file (type png)
  <use 3.png>
-Package pdftex.def Info: 3.png used on input line 144.
+Package pdftex.def Info: 3.png used on input line 145.
 (pdftex.def)             Requested size: 250.0pt x 189.88454pt.
 
 
@@ -794,27 +801,27 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: 4.png Graphic file (type png)
 
 <use 4.png>
-Package pdftex.def Info: 4.png used on input line 155.
+Package pdftex.def Info: 4.png used on input line 156.
 (pdftex.def)             Requested size: 250.0pt x 189.88454pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 160--161
+Underfull \hbox (badness 10000) in paragraph at lines 161--162
 
  []
 
 <5.png, id=90, 724.7075pt x 519.9425pt>
 File: 5.png Graphic file (type png)
  <use 5.png>
-Package pdftex.def Info: 5.png used on input line 164.
+Package pdftex.def Info: 5.png used on input line 165.
 (pdftex.def)             Requested size: 250.0pt x 179.35655pt.
 
-Overfull \hbox (1.3666pt too wide) in paragraph at lines 168--169
+Overfull \hbox (1.3666pt too wide) in paragraph at lines 169--170
 []\OT1/cmr/m/n/10 De op-ta-ge-de s^^Z-der er r^^\de, de le-di-ge er gr^^\nne og
  de s^^Z-der som er til-knyt-tet til den p^^Wag^^Zldende
  []
 
 [11
 
- <./4.png> <./5.png>] [12]
+ <./4.png> <./5.png>]
 Kapitel 4.
 \openout3 = `Rapport.pyg'.
 
@@ -828,24 +835,93 @@ runsystem(rm Rapport.pyg)...executed.
 
 
 
-./Rapport.tex:196: LaTeX Error: There's no line here to end.
+./Rapport.tex:193: LaTeX Error: There's no line here to end.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.196 
+l.193 
       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[13
+[12
 
-] [14] [15]
+]
+\openout3 = `Rapport.pyg'.
+
+runsystem(pygmentize -l java -f latex -F tokenmerge             -P "verboptions
+= " -o Rapport.out.pyg Rapport.pyg)...executed.
+
+ (./Rapport.out.pyg
+Underfull \hbox (badness 10000) in paragraph at lines 207--1
+
+ []
+
+)
+runsystem(rm Rapport.out.pyg)...executed.
+
+runsystem(rm Rapport.pyg)...executed.
+
+\openout3 = `Rapport.pyg'.
+
+
+./Rapport.tex:219: FancyVerb Error:
+  Extraneous input `\\\end{}' between \end{minted} and line end
+.
+\FV@Error ... {FancyVerb Error:
+\space \space #1
+}
+                                                  
+l.219 \end{minted}\\
+                    
+This input will be discarded. Type <return> to continue.
+
+runsystem(pygmentize -l java -f latex -F tokenmerge             -P "verboptions
+= " -o Rapport.out.pyg Rapport.pyg)...executed.
+
+(./Rapport.out.pyg
+Underfull \hbox (badness 10000) in paragraph at lines 216--1
+
+ []
+
+)
+runsystem(rm Rapport.out.pyg)...executed.
+
+runsystem(rm Rapport.pyg)...executed.
+
+ [13]
+Underfull \hbox (badness 10000) in paragraph at lines 224--225
+
+ []
+
+\openout3 = `Rapport.pyg'.
+
+./Rapport.tex:229: FancyVerb Error:
+  Extraneous input `\\\end{}' between \end{minted} and line end
+.
+\FV@Error ... {FancyVerb Error:
+\space \space #1
+}
+                                                  
+l.229 \end{minted}\\
+                    
+This input will be discarded. Type <return> to continue.
+
+runsystem(pygmentize -l java -f latex -F tokenmerge             -P "verboptions
+= " -o Rapport.out.pyg Rapport.pyg)...executed.
+
+(./Rapport.out.pyg)
+runsystem(rm Rapport.out.pyg)...executed.
+
+runsystem(rm Rapport.pyg)...executed.
+
+ [14] [15]
 Kapitel 5.
 
-Underfull \hbox (badness 10000) in paragraph at lines 261--263
+Underfull \hbox (badness 10000) in paragraph at lines 260--262
 
  []
 
@@ -858,7 +934,7 @@ runsystem(pygmentize -l java -f latex -F tokenmerge             -P "verboptions
 = " -o Rapport.out.pyg Rapport.pyg)...executed.
 
  (./Rapport.out.pyg
-Underfull \hbox (badness 10000) in paragraph at lines 270--1
+Underfull \hbox (badness 10000) in paragraph at lines 269--1
 
  []
 
@@ -869,11 +945,13 @@ runsystem(rm Rapport.pyg)...executed.
 
  [17]
 Kapitel 6.
-[18
 
-]
-Kapitel 7.
-[19
+Package natbib Warning: Citation `Java' on page 18 undefined on input line 290.
+
+
+(./Rapport.bbl [18
+
+]) [19
 
 ] (./Rapport.lof)
 \tf@lof=\write6
@@ -891,28 +969,31 @@ runsystem(pygmentize -l java -f latex -F tokenmerge             -P "verboptions
 ] [22] [23] [24])
 runsystem(rm Rapport.out.pyg)...executed.
 
- [25] (./Rapport.aux) ) 
+
+
+Package natbib Warning: There were undefined citations.
+
+[25] (./Rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 8196 strings out of 493117
- 115028 string characters out of 6135432
- 227946 words of memory out of 5000000
- 11477 multiletter control sequences out of 15000+600000
- 7871 words of font info for 29 fonts, out of 8000000 for 9000
+ 8208 strings out of 493117
+ 116434 string characters out of 6135432
+ 225873 words of memory out of 5000000
+ 11478 multiletter control sequences out of 15000+600000
+ 7405 words of font info for 27 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,18n,72p,1156b,1167s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmitt10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsl10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmti10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmtt10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmtt9.pfb>
-Output written on Rapport.pdf (26 pages, 16893862 bytes).
+ 40i,18n,72p,1156b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmitt10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmsl10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmti10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmtt10.pfb>
+Output written on Rapport.pdf (26 pages, 16882739 bytes).
 PDF statistics:
- 170 PDF objects out of 1000 (max. 8388607)
- 95 compressed objects within 1 object stream
+ 166 PDF objects out of 1000 (max. 8388607)
+ 92 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
