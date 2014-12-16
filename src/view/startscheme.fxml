@@ -98,7 +98,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="customerName" layoutX="578.0" layoutY="589.0" onKeyPressed="#reservationCheckEnter" prefHeight="16.0" promptText="Navn" />
-                        <TextField fx:id="customerPhone" layoutX="578.0" layoutY="616.0" onKeyPressed="#reservationCheckEnter" prefHeight="16.0" promptText="Telefonnummer" />
+                        <TextField fx:id="customerPhone" layoutX="578.0" layoutY="616.0" onKeyPressed="#reservationCheckEnter" prefHeight="16.0" promptText="Telefonnummer (8 tal)" />
                         <Pane fx:id="overfillPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #f3f3f3;">
                            <children>
                               <Label layoutX="324.0" layoutY="302.0" text="Klik &quot;Forestillinger&quot; og vælg en film">

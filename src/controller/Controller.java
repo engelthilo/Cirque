@@ -257,9 +257,9 @@ public class Controller {
     }
 
     /**
-     * Input: int showId
+     * Input: int showId. Id for specific show, time and date.
      * Action: Build the reservation scene in ''Reservation'' tab
-     * Output: No output
+     * Output: Manipulated JavaFX scene
      */
     @FXML
     private void buildReservationScene(int showId) { //denne metode bygger reservationScene for den pågældende film
@@ -369,7 +369,7 @@ public class Controller {
     /**
      * Input: Rectangle, x and y coordinates for the seats
      * Action: Creates the seats used in buildReservationScene.
-     * Output: No out put
+     * Output: Seats in buildReservation
      */
     private void addSeatToOrder(final Rectangle r, int x, int y) {
 
@@ -391,6 +391,11 @@ public class Controller {
 
     }
 
+    /**
+     * Input: No input
+     * Action: Saves the current reservation in the database
+     * Output: No output
+     */
     @FXML
     private void makeReservation() throws Exception {
         // if customer name and phone has been entered and at least one seat has been chosen
@@ -437,6 +442,12 @@ public class Controller {
         }
     }
 
+    /**
+     * Input: Uses phoneNumber but takes no parameter
+     * Action: Loads the reservation(s) for a given phoneNumber (is called from ''Ret reservation'' when the button i clicked
+     * or when enter is pressed.
+     * Output: HBox(s) with reservation for the phoneNumber input.
+     */
     @FXML
     private void getReservations() {
         reservationList.getItems().clear();
@@ -464,6 +475,11 @@ public class Controller {
 
     }
 
+    /**
+     * Input: The reservationID from getReservations()
+     * Action: Build scene that show the reservations for a current showID and phoneNumber
+     * Output: popup window
+     */
     private void buildEditReservationView(int reservationID){
         editReservationView = new Stage();
         editReservationView.initStyle(StageStyle.UTILITY);
@@ -666,6 +682,7 @@ public class Controller {
         editReservationView.show();
     }
 
+    //Used to add seats to current reservations. Used in buildEditReservationView.
     private void addToEditSeatOrder(Rectangle r, int x, int y) {
         // add to current order (edit order)
         if(r.getFill().toString().contains("0x43a047ff") && dragColorCheck.equals("0x43a047ff")) { // if the seat is color code green
@@ -679,6 +696,7 @@ public class Controller {
         }
     }
 
+    //Called when ''Rediger reservations'' button in buildEditReservationView is pressed, saves the edited reservation to the database
     private void updateReservation(int reservationID) {
         if(db.updateReservation(newSeats, reservationID)) {
             newPopUp("Reservationen er rettet!");
@@ -690,6 +708,7 @@ public class Controller {
         }
     }
 
+    //Used to delete the reservation from the database
     private void deleteReservation(int reservationID) {
         if(db.deleteReservation(reservationID)) {
             newPopUp("Reservationen er slettet!");
@@ -701,7 +720,7 @@ public class Controller {
         }
     }
 
-
+    //Method used to creates warning/information popups through the program.
     private void newPopUp(String text) {
         Stage dialog = new Stage();
         dialog.initStyle(StageStyle.UTILITY);
@@ -735,6 +754,7 @@ public class Controller {
         dialog.show();
     }
 
+    //Warning popup
     public void catchPopUp(Exception e) {
         newPopUp("Der er opstået en fejl.\nFejl: " + e);
     }
