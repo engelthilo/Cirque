@@ -152,9 +152,9 @@ public class Controller {
             showsVBox.getChildren().add(button);
             button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                 @Override
-                public void handle(MouseEvent event) { //event when clicked on the created button
+                public void handle(MouseEvent event) {
                     scheduleHeader.setText("Viser forestillinger for filmen: " + movie.getValue());
-                    getMovieSchedule(movie.getKey()); //henter data om shows fra databasen
+                    getMovieSchedule(movie.getKey());
                 }
             });
         }
@@ -172,73 +172,71 @@ public class Controller {
 
         LinkedHashMap<Integer, Timestamp> schedule = new LinkedHashMap(db.getMovieSchedule(movieId));
 
-        //puts the timestamps in
-        Timestamp[][] times = new Timestamp[14][6]; //sætter tiderne fra databsen i rækkefølge efter tid.
-        int[][] showIds = new int[14][6];  //14 står for 14 dage - 6 for de 6 shows der bliver vist pr dag pr sal.
-        int i = -1; //starter ved -1 fordi vi vil starte ved nr. 0. i er datoen
-        int j = 0; //j er måned
+        Timestamp[][] times = new Timestamp[14][6];
+        int[][] showIds = new int[14][6];
+        int i = -1;
+        int j = 0;
         String lastShow = "";
 
         //Runs the schedule for the selected movie through and print out the date for them
-        //Gerne forklar skridtene lidt bedre her [[Mark]]
-        for(Map.Entry<Integer, Timestamp> show : schedule.entrySet()) { ////Loop der kører sålænge tiden er voksende - dvs at film ikke er den sidste den pågældende dag.
-            String newShow = new SimpleDateFormat("dd/MM").format(show.getValue()); //sætter tiden fra getValue til at vise dato og måned
-            if(!newShow.equals(lastShow)) { //hvis ikke de nye show er det samme som de sidste gør dette:
-                i++; //fortsæt loppet
-                j = 0; //sætter måned til 0 - dvs den samme dato som showet før.
-                times[i][j] = show.getValue(); //hent tiden på det nye show
-                showIds[i][j] = show.getKey(); //henter id på shows - dvs navn, sal mm.
-                j++; //forøg måned tilsidst.
+        for(Map.Entry<Integer, Timestamp> show : schedule.entrySet()) {
+            String newShow = new SimpleDateFormat("dd/MM").format(show.getValue());
+            if(!newShow.equals(lastShow)) {
+                i++;
+                j = 0;
+                times[i][j] = show.getValue();
+                showIds[i][j] = show.getKey();
+                j++;
             } else {
-                times[i][j] = show.getValue(); //hent tiden på film
-                showIds[i][j] = show.getKey(); //hent id på film
-                j++; //gå til næste måned
+                times[i][j] = show.getValue();
+                showIds[i][j] = show.getKey();
+                j++;
             }
             lastShow = newShow;
         }
 
         for(i = 0; i < 14; i++) {
-            // her skal oprettes ny container til en ny dag så længe vi er under de 14 dage vores skema kører.
 
-            if((times[i][0] != null) && (i<7)) { // i = dag. når det er fra dag 0-6
-                TitledPane tp = new TitledPane(); //hvad er titlepane?
-                tp.setText(new SimpleDateFormat("dd/MM").format(times[i][0])); //viser data og måned
-                VBox vb = new VBox(); //sætter en vbox ind i upper_schedule
-                vb.setSpacing(15); //sætter mellemrum mellem kolonner med tiderne
+
+            if((times[i][0] != null) && (i<7)) {
+                TitledPane tp = new TitledPane();
+                tp.setText(new SimpleDateFormat("dd/MM").format(times[i][0]));
+                VBox vb = new VBox();
+                vb.setSpacing(15);
                 for (j = 0; j < 6; j++) {
-                    // her oprettes de individuelle tider for filmen den pågældende dag. j = tidspunkt
 
-                    if (times[i][j] != null) { //hvis tid og dato ikke er nul.
-                        final int showId = showIds[i][j]; //henter showsID
-                        final Button button = new Button(new SimpleDateFormat("HH:mm").format(times[i][j])); //laver knapper med spilletidspunker
-                        button.setPrefWidth(100); //sætter størrelse på tid-knapperne
-                        button.setPadding(new Insets(10, 10, 10, 10)); //sætter padding på knapperne
-                        button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() { //laver event når man klikker på musen
+
+                    if (times[i][j] != null) {
+                        final int showId = showIds[i][j];
+                        final Button button = new Button(new SimpleDateFormat("HH:mm").format(times[i][j]));
+                        button.setPrefWidth(100);
+                        button.setPadding(new Insets(10, 10, 10, 10));
+                        button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
                                 buildReservationScene(showId);
-                            } //ved eventet bliver den pågældende resevations side bygget - alt efter hvilken film
+                            }
                         });
-                        vb.getChildren().add(button); //vb = vbox - her sættes "børn" af boksen ind på knapper - børn = de film der hører til boksen
+                        vb.getChildren().add(button);
                     }
                 }
-                tp.setContent(vb); //hvad sker der her??
-                upper_schedule.getChildren().add(tp); //henter film til upper_schedule og tiæføjer til TitledPane tp
+                tp.setContent(vb);
+                upper_schedule.getChildren().add(tp);
             }
 
-            //samme som oppe over - bare for lower_schedule og dagene fra 7-13
+
             if((times[i][0] != null) && (i>=7) && (i<14)) {
                 TitledPane tp = new TitledPane();
                 tp.setText(new SimpleDateFormat("dd/MM").format(times[i][0]));
                 VBox vb = new VBox();
                 vb.setSpacing(15);
                 for (j = 0; j < 6; j++) {
-                    // her oprettes de individuelle tider for filmen den pågældende dag
+
 
                     if (times[i][j] != null) {
                         final int showId = showIds[i][j];
                         final Button button = new Button(new SimpleDateFormat("HH:mm").format(times[i][j]));
-                        button.setPrefWidth(100); //sætter størrelse på tid-knapperne
+                        button.setPrefWidth(100);
                         button.setPadding(new Insets(15, 15, 15, 15));
                         button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                             @Override
@@ -262,34 +260,34 @@ public class Controller {
      * Output: Manipulated JavaFX scene
      */
     @FXML
-    private void buildReservationScene(int showId) { //denne metode bygger reservationScene for den pågældende film
+    private void buildReservationScene(int showId) {
         overfillPane.toBack();
         seatsInOrder = new ArrayList<String>(); // initalizing the arraylist that will contain the seat(s) that has been clicked
         intChosenSeats = 0;
 
-        //dbcall så vi kan få information om forestillingen (hvor den vises, filmtitel osv.)
-        sceneVBox.getChildren().clear(); //henter sædderne ind på sceneVBox - hvad gør clear??
-        bh = db.getBuildSceneInfo(showId); //lægger infor om den enkelte films sceneopbygning ind i buildHolder
-        movieNameLabel.setText(bh.getMovieName()); //sætter navnet på den pågældende film ind på movieNameLabel
-        movieTimeLabel.setText("Tidspunkt: " + new SimpleDateFormat("dd/MM HH:mm").format(bh.getTime())); //viser tidspunkt for det show man ahr valgt
-        cinemaNameLabel.setText(bh.getCinemaName()); //sætter navn på den pågældende sal
-        int totalSeats = (bh.getColumns() * bh.getRows()); //regner antalet af total antal sædder i salen ud.
-        int freeSeats = totalSeats - bh.getReservedNumber(); //regner antal af frie sædder ud.
-        numberOfReserved.setText("Ledige pladser: " + freeSeats + " (I alt: " + totalSeats + ")"); //viser antal frie sædder i den pågældende sal
-        numberOfSelectedSeats.setText("Valgte pladser: 0"); // viser antallet af valgte sæder
 
-        int columns = bh.getColumns(); //henter kolonner/bredden i den pågældende sal
-        int rows = bh.getRows(); //henter rækker/længden i den pågældende sal
-        GridPane gp = new GridPane(); //skaber et gridpane som kolonner og rækker kan opbevares i.
-        gp.setPrefSize(879,522); //sætter gridpane til samme str som det scenePane den ligger inden i.
-        gp.setAlignment(Pos.CENTER); // centers the gridpane to the vbox
+        sceneVBox.getChildren().clear();
+        bh = db.getBuildSceneInfo(showId);
+        movieNameLabel.setText(bh.getMovieName());
+        movieTimeLabel.setText("Tidspunkt: " + new SimpleDateFormat("dd/MM HH:mm").format(bh.getTime()));
+        cinemaNameLabel.setText(bh.getCinemaName());
+        int totalSeats = (bh.getColumns() * bh.getRows());
+        int freeSeats = totalSeats - bh.getReservedNumber();
+        numberOfReserved.setText("Ledige pladser: " + freeSeats + " (I alt: " + totalSeats + ")");
+        numberOfSelectedSeats.setText("Valgte pladser: 0");
+
+        int columns = bh.getColumns();
+        int rows = bh.getRows();
+        GridPane gp = new GridPane();
+        gp.setPrefSize(879,522);
+        gp.setAlignment(Pos.CENTER);
         Boolean[][] resSeat = bh.getResSeat();
-        for(int i = 1; i < columns+1; i++) { //laver en forloppe der kører kolonerne igennem
+        for(int i = 1; i < columns+1; i++) {
 
-            for(int j = 1; j < rows+1; j++) { //forlopp der kører rækkerne igennem
+            for(int j = 1; j < rows+1; j++) {
                 double width = 870/(bh.getColumns()+1)-5;
                 double height = 515/(bh.getRows()+1)-5;
-                final Rectangle r = new Rectangle(width,height); //laver sædderne som firkanter
+                final Rectangle r = new Rectangle(width,height);
                 r.setArcWidth(6);
                 r.setArcHeight(6);
                 int x = i;
@@ -297,8 +295,8 @@ public class Controller {
                 r.setStroke(Color.TRANSPARENT);
                 r.setStrokeWidth(5);
 
-                if(resSeat[i][j] != null) { // if current entity in array isnt null
-                    if(resSeat[i][j]) { // if a seat is reserved we made its boolean true
+                if(resSeat[i][j] != null) {
+                    if(resSeat[i][j]) {
                         r.setFill(Color.web("#E53935")); //sets the red color of a reserved seat
                     }
                 } else {
@@ -308,11 +306,11 @@ public class Controller {
                     r.setOnDragDetected(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
-                            Dragboard db = r.startDragAndDrop(TransferMode.MOVE); // start dragndrop
-                            ClipboardContent cc = new ClipboardContent(); // creates new clipboardcontent which is normally used to hold a value
-                            cc.putString(""); // this is just to obtain the dragndrop function. we do not set the value to anything since we do not transfer value between the seats
-                            db.setContent(cc); // binds the clipboardcontent to the dragboard since it's needed
-                            db.setDragView(new Image("dragndrop.png")); // normally the dragview would be a reflection of the item dragged (the seat in this case) but we just want to select seats by holding down the mousebutton
+                            Dragboard db = r.startDragAndDrop(TransferMode.MOVE);
+                            ClipboardContent cc = new ClipboardContent();
+                            cc.putString("");
+                            db.setContent(cc);
+                            db.setDragView(new Image("dragndrop.png"));
                             dragColorCheck = r.getFill().toString();
                             addSeatToOrder(r, x, y);
                         }
@@ -327,16 +325,16 @@ public class Controller {
                     });
 
 
-                    // funktion ved klik på ledigt sæde
+
                     r.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
                             dragColorCheck = r.getFill().toString();
                             addSeatToOrder(r, x, y);
-                        } // function to run when an available seat is clicked
+                        }
                     });
                 }
-                gp.add(r, i, j); //tilføj til gridpane: r= firkanterne, i=fælterne på x-aksen og j= felterne på y-aksen
+                gp.add(r, i, j);
             }
 
         }
@@ -361,9 +359,8 @@ public class Controller {
         centerFix.setMinWidth(20);
         gp.add(centerFix, bh.getColumns()+2, 1);
 
-        sceneVBox.getChildren().add(gp); //sætter gridpane ind i sceneVBox
-        tabPane.getSelectionModel().select(1); //sætter det ind under "fane" nr 2.
-
+        sceneVBox.getChildren().add(gp);
+        tabPane.getSelectionModel().select(1);
     }
 
     /**
@@ -373,20 +370,20 @@ public class Controller {
      */
     private void addSeatToOrder(final Rectangle r, int x, int y) {
 
-        // add to current order
-        if(r.getFill().toString().contains("0x43a047ff") && dragColorCheck.equals("0x43a047ff")) { // if the seat is color code green
-            r.setFill(Color.web("#039BE5")); // sets color to blue
-            String seatString = (x + ":" + y); // seatString 3:3 etc.
-            seatsInOrder.add(seatString); // adds seatString to array
-            intChosenSeats++;
-            numberOfSelectedSeats.setText("Valgte pladser: " + intChosenSeats); // viser antallet af valgte sæder
 
-        } else if(r.getFill().toString().contains("0x039be5ff") && dragColorCheck.equals("0x039be5ff")) { // if the seat is color code blue
-            r.setFill(Color.web("#43A047")); // set color to green
-            String seatString = (x + ":" + y); // seatString 3:3 etc.
-            seatsInOrder.remove(seatString); // removes seatString from array
+        if(r.getFill().toString().contains("0x43a047ff") && dragColorCheck.equals("0x43a047ff")) {
+            r.setFill(Color.web("#039BE5"));
+            String seatString = (x + ":" + y);
+            seatsInOrder.add(seatString);
+            intChosenSeats++;
+            numberOfSelectedSeats.setText("Valgte pladser: " + intChosenSeats);
+
+        } else if(r.getFill().toString().contains("0x039be5ff") && dragColorCheck.equals("0x039be5ff")) {
+            r.setFill(Color.web("#43A047"));
+            String seatString = (x + ":" + y);
+            seatsInOrder.remove(seatString);
             intChosenSeats--;
-            numberOfSelectedSeats.setText("Valgte pladser: " + intChosenSeats); // viser antallet af valgte sæder
+            numberOfSelectedSeats.setText("Valgte pladser: " + intChosenSeats);
         }
 
     }
@@ -398,19 +395,19 @@ public class Controller {
      */
     @FXML
     private void makeReservation() throws Exception {
-        // if customer name and phone has been entered and at least one seat has been chosen
+
         if(!customerName.getText().isEmpty() && !customerPhone.getText().isEmpty() && seatsInOrder.size()>0 && customerPhone.getLength() == 8) {
-            String name = customerName.getText(); // gets the name of the customer from the textfield
-            String phone = customerPhone.getText(); // gets the phonenumber of the customer from the textfield
+            String name = customerName.getText();
+            String phone = customerPhone.getText();
 
 
-            // if a reservation is completely inserted it will return true
+
             if(db.insertReservation(seatsInOrder, bh.getShowId(), customerName.getText(), customerPhone.getText())) {
                 newPopUp("Bestillingen er gennemført");
-                seatsInOrder.clear(); // removes the chosen seats from the array
-                customerName.clear(); // clears the textfield
-                customerPhone.clear(); // clears the textfield
-                buildReservationScene(bh.getShowId()); // builds an updated scene so that the new reservated seats are now available to pick
+                seatsInOrder.clear();
+                customerName.clear();
+                customerPhone.clear();
+                buildReservationScene(bh.getShowId());
             } else {
                 newPopUp("Der er sket en fejl!\nPrøv igen");
             }
@@ -528,29 +525,29 @@ public class Controller {
 
         buttonContainer.getChildren().addAll(deleteButton,editButton);
 
-        bh = db.getBuildSceneInfo(db.getShowIdFromResId(reservationID)); //lægger infor om den enkelte films sceneopbygning ind i buildHolder
+        bh = db.getBuildSceneInfo(db.getShowIdFromResId(reservationID));
 
         Label editReservationLabel = new Label(bh.getMovieName() + " - " + new SimpleDateFormat("dd/MM HH:mm").format(bh.getTime()));
         editReservationLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
         vbox.getChildren().add(editReservationLabel);
 
-        int columns = bh.getColumns(); //henter kolonner/bredden i den pågældende sal
-        int rows = bh.getRows(); //henter rækker/længden i den pågældende sal
-        GridPane gp = new GridPane(); //skaber et gridpane som kolonner og rækker kan opbevares i.
-        gp.setPrefSize(900, 500); //sætter gridpane til samme str som det scenePane den ligger inden i.
-        gp.setAlignment(Pos.CENTER); // centers the gridpane to the vbox
+        int columns = bh.getColumns();
+        int rows = bh.getRows();
+        GridPane gp = new GridPane();
+        gp.setPrefSize(900, 500);
+        gp.setAlignment(Pos.CENTER);
         Boolean[][] resSeat = bh.getResSeat();
 
-        Boolean[][] editResSeat = db.getResSeat(reservationID, bh); //Get the reserved seats for the specifik reservation id
+        Boolean[][] editResSeat = db.getResSeat(reservationID, bh);
         newSeats = new ArrayList<String>();
 
-        for(int i = 1; i < columns+1; i++) { //laver en forloppe der kører kolonerne igennem
+        for(int i = 1; i < columns+1; i++) {
 
-            for (int j = 1; j < rows + 1; j++) { //forlopp der kører rækkerne igennem
+            for (int j = 1; j < rows + 1; j++) {
                 double width = 885/(bh.getColumns()+1)-5;
                 double height = 490/(bh.getRows()+1)-5;
 
-                final Rectangle r = new Rectangle(width, height); //laver sædderne som firkanter
+                final Rectangle r = new Rectangle(width, height);
                 r.setArcWidth(6);
                 r.setArcHeight(6);
                 r.setStroke(Color.TRANSPARENT);
@@ -560,9 +557,9 @@ public class Controller {
 
                 String seatString = "";
 
-                if (resSeat[i][j] != null) { // if current entity in array isnt null
-                    if (resSeat[i][j] && editResSeat[i][j] == null) { // if a seat is reserved we made its boolean true
-                        r.setFill(Color.web("#E53935")); //sets the red color of a reserved seat
+                if (resSeat[i][j] != null) {
+                    if (resSeat[i][j] && editResSeat[i][j] == null) {
+                        r.setFill(Color.web("#E53935"));
                     } else if (editResSeat[i][j] != null){
                         if(editResSeat[i][j]) {
                             seatString = x + ":" + y;
@@ -574,11 +571,11 @@ public class Controller {
                             r.setOnDragDetected(new EventHandler<MouseEvent>() {
                                 @Override
                                 public void handle(MouseEvent event) {
-                                    Dragboard db = r.startDragAndDrop(TransferMode.MOVE); // start dragndrop
-                                    ClipboardContent cc = new ClipboardContent(); // creates new clipboardcontent which is normally used to hold a value
-                                    cc.putString(""); // this is just to obtain the dragndrop function. we do not set the value to anything since we do not transfer value between the seats
-                                    db.setContent(cc); // binds the clipboardcontent to the dragboard since it's needed
-                                    db.setDragView(new Image("dragndrop.png")); // normally the dragview would be a reflection of the item dragged (the seat in this case) but we just want to select seats by holding down the mousebutton
+                                    Dragboard db = r.startDragAndDrop(TransferMode.MOVE);
+                                    ClipboardContent cc = new ClipboardContent();
+                                    cc.putString("");
+                                    db.setContent(cc);
+                                    db.setDragView(new Image("dragndrop.png"));
                                     dragColorCheck = r.getFill().toString();
                                     addToEditSeatOrder(r, x, y);
                                 }
@@ -593,7 +590,7 @@ public class Controller {
                             });
 
 
-                            // funktion ved klik på ledigt sæde
+
                             r.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                                 @Override
                                 public void handle(MouseEvent event) {
@@ -606,18 +603,18 @@ public class Controller {
                         }
                     }
                 }  else {
-                    r.setFill(Color.web("#43A047")); //sets the green color of a available seat
+                    r.setFill(Color.web("#43A047"));
 
                     /** DRAG FUNCTION FOR GREEN SEATS STARTS HERE */
                     // when starting to drag
                     r.setOnDragDetected(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
-                            Dragboard db = r.startDragAndDrop(TransferMode.MOVE); // start dragndrop
-                            ClipboardContent cc = new ClipboardContent(); // creates new clipboardcontent which is normally used to hold a value
-                            cc.putString(""); // this is just to obtain the dragndrop function. we do not set the value to anything since we do not transfer value between the seats
-                            db.setContent(cc); // binds the clipboardcontent to the dragboard since it's needed
-                            db.setDragView(new Image("dragndrop.png")); // normally the dragview would be a reflection of the item dragged (the seat in this case) but we just want to select seats by holding down the mousebutton
+                            Dragboard db = r.startDragAndDrop(TransferMode.MOVE);
+                            ClipboardContent cc = new ClipboardContent();
+                            cc.putString("");
+                            db.setContent(cc);
+                            db.setDragView(new Image("dragndrop.png"));
                             dragColorCheck = r.getFill().toString();
                             addToEditSeatOrder(r, x, y);
                         }
@@ -632,13 +629,12 @@ public class Controller {
                     });
 
 
-                    // funktion ved klik på ledigt sæde
                     r.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
                             dragColorCheck = r.getFill().toString();
                             addToEditSeatOrder(r, x, y);
-                        } // function to run when an available seat is clicked
+                        }
                     });
 
                     /** DRAG FUNCTION FOR GREEN SEATS ENDS HERE */
@@ -671,7 +667,7 @@ public class Controller {
         centerFix.setMinWidth(20);
         gp.add(centerFix, bh.getColumns()+2, 1);
 
-        editVBox.getChildren().add(gp); //sætter gridpane ind i sceneVBox
+        editVBox.getChildren().add(gp);
 
         vbox.getChildren().addAll(editVBox, buttonContainer);
 
@@ -685,14 +681,14 @@ public class Controller {
     //Used to add seats to current reservations. Used in buildEditReservationView.
     private void addToEditSeatOrder(Rectangle r, int x, int y) {
         // add to current order (edit order)
-        if(r.getFill().toString().contains("0x43a047ff") && dragColorCheck.equals("0x43a047ff")) { // if the seat is color code green
-            r.setFill(Color.web("#039BE5")); // sets color to blue
-            String seatString = (x + ":" + y); // seatString 3:3 etc.
-            newSeats.add(seatString); // adds seatString to array
-        } else if(r.getFill().toString().contains("0x039be5ff") && dragColorCheck.equals("0x039be5ff")) { // if the seat is color code blue
-            r.setFill(Color.web("#43A047")); // set color to green
-            String seatString = (x + ":" + y); // seatString 3:3 etc.
-            newSeats.remove(seatString); // removes seatString from array
+        if(r.getFill().toString().contains("0x43a047ff") && dragColorCheck.equals("0x43a047ff")) {
+            r.setFill(Color.web("#039BE5"));
+            String seatString = (x + ":" + y);
+            newSeats.add(seatString);
+        } else if(r.getFill().toString().contains("0x039be5ff") && dragColorCheck.equals("0x039be5ff")) {
+            r.setFill(Color.web("#43A047"));
+            String seatString = (x + ":" + y);
+            newSeats.remove(seatString); 
         }
     }
 
