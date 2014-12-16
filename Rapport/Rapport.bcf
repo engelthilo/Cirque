@@ -1964,8 +1964,17 @@
     <bcf:datasource type="file" datatype="bibtex">litterature.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1">opg</bcf:citekey>
-    <bcf:citekey order="2">GRPRO8</bcf:citekey>
+    <bcf:citekey order="1">Java</bcf:citekey>
+    <bcf:citekey order="2">blueJ</bcf:citekey>
+    <bcf:citekey order="3">opg</bcf:citekey>
+    <bcf:citekey order="4">GRPRO8</bcf:citekey>
+    <bcf:citekey order="5">GRPRO</bcf:citekey>
+    <bcf:citekey order="6">MVC</bcf:citekey>
+    <bcf:citekey order="7">oracle</bcf:citekey>
+    <bcf:citekey order="8">javaFX</bcf:citekey>
+    <bcf:citekey order="9">video</bcf:citekey>
+    <bcf:citekey order="10">myAdmin</bcf:citekey>
+    <bcf:citekey order="11">javaF</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" type="entry" label="nyt">
   <bcf:sorting>

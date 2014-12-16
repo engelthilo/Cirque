@@ -64,7 +64,7 @@ right  = 3.00cm]{geometry}
 
 \title{Forord}
 Denne rapport er udarbejdet i December 2014 i et fire ugers projekt på IT-Universitetet i København under vejledning af Jesper Madsen.
-I projektet udviklede vi et softwaresystem til booking i biografer skrevet i Java. Programmet har til opgave at skulle assisterer en ekspedient i personens arbejdsopgaver der har med kundehenveldelser af gøre, f.eks: Book nye pladser eller slette en tidligere bestilling. Programmet skal ikke kunne håndtere salg.
+I projektet udviklede vi et softwaresystem til booking i biografer skrevet i Java [\cite{Java}]. Programmet har til opgave at skulle assisterer en ekspedient i personens arbejdsopgaver der har med kundehenveldelser af gøre, f.eks: Book nye pladser eller slette en tidligere bestilling. Programmet skal ikke kunne håndtere salg. Den primære kilde vi har brugt er \emph{Objects first with Java} [\cite{blueJ}]
 
 \tableofcontents
 
@@ -144,7 +144,7 @@ En af de to overordnede tabeller i vores database er \emph{cinemas} som indehold
 
 Den anden vigtige tabel er \emph{movies} som indeholder information omkring de film der går i biografen. Det eneste inforamtion denne tabel holder er navn og id. I begge tabeller er det, det pågældende id som fungerer som nøgle. Altså sal\_id og movie\_id.  
 
-De to tabeller \emph{movie} og \emph{cinema} bliver koblet sammen i tabellen \emph{show}. Her bruges deres nøgler til at sammensætte de foreskellige forestillinger som vores biograf kan vise. I \emph{shows} tilføjes så et nyt ide til de enkelte forestillinger samt et timestamp - som er det tidspunkt forestillingen skal begynde.
+De to tabeller \emph{movie} og \emph{cinema} bliver koblet sammen i tabellen \emph{show}. Her bruges deres nøgler til at sammensætte de foreskellige forestillinger som vores biograf kan vise. I \emph{shows} tilføjes så et nyt ide til de enkelte forestillinger samt et timestamp - som er det tidspunkt forestillingen skal begynde [\cite{GRPRO}].
 
 
 \chapter{Brugervejledning}
@@ -161,7 +161,7 @@ Programmet er designet med 3 tabs i toppen. \emph{Forestillinger, Reservation og
 
 
 
-Klikker ekspedienten derimod ikke på noget, vil der stå følgene tekst \emph{Klik på en film til venstre for at vise tidspunkter}, og har man ikke først valgt film og tidspunkt vil \emph{Reservation} være ubrugelige.
+Klikker ekspedienten derimod ikke på noget, vil der stå følgene tekst "\emph{Klik på en film til venstre for at vise tidspunkter}", og har man ikke først valgt film og tidspunkt vil \emph{Reservation} være ubrugelige.
 
 Efter at have valgt film, vælger brugeren tidspunktet, som kunden ønsker at reservere til. Når en forestilling vælges bliver brugeren videreført til næste tab - altså reservation. Her vises et vindue med firkanter som illustrerer sæderne i biografen. Ledige sæder er illustreret som en grøn firkant og optagede sæder er illustreret som røde sæder. Brugeren klikker på de sæder som kunden ønsker at reservere - brugeren kan desuden holde musen nede og hive musen over de sæder som skal vælges. De valgte sæder skifter farve til blå og brugeren kan se hvor mange sæder vedkommende har markeret nederst i venstre hjørne. 
 
@@ -195,11 +195,11 @@ De optagede sæder er røde, de ledige er grønne og de sæder som er tilknyttet
 
 \chapter{Teknisk Analyse}
 \section{Model View Controller}
-Vi har brugt Model-View-Controller (fork. MVC) til at adskille vores database og buildholder (model), vores controller og vores JavaFx brugergrænseflade (view) fra hinanden. Dette gør vores programkode mere overskuelig og nemmere at vedligeholde.
+Vi har brugt Model-View-Controller (fork. MVC) [\cite{MVC}] til at adskille vores database og buildholder (model), vores controller og vores JavaFx brugergrænseflade (view) fra hinanden. Dette gør vores programkode mere overskuelig og nemmere at vedligeholde.
 
 \subsection{Moduler}
 Programmet har 2 klasser: DBConnect og buildHolder.
-DBConnect foretager alt der har med databasen at gøre. Dette er eksempelvis databaseforespørgsler hvor alle film returneres i et LinkedHashMap, hvor data såsom reservationer, salstørrelse mv. for en given forestilling hentes, hvor data såsom reservationer indsættes eller opdateres i databasen. Den væsentligste del af DBConnect-klassen må være funktionen getCon, der sørger for at der er en gyldig forbindelse til databasen. 
+DBConnect foretager alt der har med databasen at gøre. Dette er eksempelvis databaseforespørgsler hvor alle film returneres i et LinkedHashMap [\cite{oracle}], hvor data såsom reservationer, salstørrelse mv. for en given forestilling hentes, hvor data såsom reservationer indsættes eller opdateres i databasen. Den væsentligste del af DBConnect-klassen må være funktionen getCon, der sørger for at der er en gyldig forbindelse til databasen. 
 
 \begin{minted}{java}
 public Connection getCon() throws SQLException {
@@ -262,16 +262,16 @@ Et optaget sæde vil returnere værdien true og et ledigt sæde false. Dette tje
 
 
 \section{Design af Brugergrænseflade}
-Vi har valgt at opdele vores brugergrænseflade i tre dele: \emph{Forestillinger, Reservation og Ret Reservation}. Vi diskuterede om det var mest brugervenligt at lave et vindue som skiftede mellem forskellige sider når man klikkede \emph{næste side}, men blev enig om at det var mere simpelt og brugervenligt at lave et vindue med mulighed for mauelt at skifte mellem siderne via. en \emph{tap-menu}. Siden \emph{Forestillinger} er desuden også delt op i to dele - en del der oplister de forskellige film, og en der oplister spilletiderne for den valgte film. Vi har valgt det på den måde, fordi vi syntes det var designmæssigt bedre at udfylde hele vinduet ved at opdele det i de to dele, frem for at have en stor næsten tom side. 
+Vores brugergrænseflade er som nævnt lavet i JavaFX [\cite{javaFX}] og er opdelt i tre dele: \emph{Forestillinger, Reservation og Ret Reservation}. Vi diskuterede om det var mest brugervenligt at lave et vindue som skiftede mellem forskellige sider når man klikkede \emph{næste side}, men blev enig om at det var mere simpelt og brugervenligt at lave et vindue med mulighed for mauelt at skifte mellem siderne via. en \emph{tap-menu}. Siden \emph{Forestillinger} er desuden også delt op i to dele - en del der oplister de forskellige film, og en der oplister spilletiderne for den valgte film. Vi har valgt det på den måde, fordi vi syntes det var designmæssigt bedre at udfylde hele vinduet ved at opdele det i de to dele, frem for at have en stor næsten tom side. 
 En anden beslutning vi diskuterede omkring vores design, var hvorvidt man skulle kunne klikke på \emph{Reservation} uden først at have valgt en forestilling. Vi havde overvejet at have en default biografsal til hvis man ikke havde valgt forestilling, men besluttede at den løsning vi har nu, hvor der blot står \emph{Du har ikke valgt nogen forestilling! Klik "Forestillinger" og vælg en film}, var mere brugervenlig. 
 Under \emph{Reservation} diskuterede vi hvorvidt rækker og sæder skulle have navne, og valgte at kalde rækkerne ved bogstaver og sæderne ved tal. At man både kan klikke på de enkelte sæder \emph{og} trække hen over dem for at vælge sæder, er et resultat af at vi både ønskede at man skulle kunne vælge mange sæder på én gang, men også at man skulle kunne vælge sæderne til eller fra enkeltvis. Vi snakkede om at det skulle laves således at brugeren indtastede det ønskede antal sæder, og når brugeren så klikkede på ét sæde, ville det resterende antal sæder brugeren ønskede, automatisk blive valgt i form af de efterfølgende sæder. Vi valgte dog denne løsning fra, da vi syntes vores løsning var mere flexibel. 
 Vores \emph{View} er kun én klasse, nemlig \emph{Controller}. Det er et bevidst valg vi har taget, og diskuteret. Vi besluttede os for at holde os til en klasse for enkelthedens skyld. Normalt ville man inddele \emph{View} i flere klasser med hver deres funktion. Fx. kunne vi have tre \emph{View}-klasser, en for \emph{Forestillinger}, en for \emph{Resrvation} og en for \emph{Ret reservation}. Vi syntes dog ikke det var et problem at samle dem i én klasse pga programmets størrelse. Vi har således, for vores egen forståelses skyld, valgt at gøre det i én klasse.
 
 \subsection{Begrænsninger}
-Systemet er ikke begrænset til små biografer og kan derfor også bruges af større biografer med store sale. Systemet har ikke en administration til forestillinger og betalling, men det kan implementeres rimelig simpelt i den nuværende kode, da systemet er lavet så dynamisk som muligt. Systemet baserer nemlig alt indhold i programmet fra databasen, pånær de statiske elementer som textfields og almindelige buttons. Man kan forestille sig, at systemet ville være svært at benytte for en biograf med over 3000 sæder, da sæderne i salene vil blive utroligt små og svære at markere. Som biografen er opbygget nu kan salene ikke være større end 25 rækker, medmindre man navngiver dem efter noget andet end alfabetet. Vores system er udviklet til mindre biografer og håndterer fint sale på op til 1000 sæder - dog skal man være god med museføringen, når vi har med så mange sæder at gøre, da størrelsen på sæderne skalerer til en statisk scene.
+Systemet er ikke begrænset til små biografer og kan derfor også bruges af større biografer med store sale. Systemet har ikke en administration til forestillinger og betalling, men det kan implementeres rimelig simpelt i den nuværende kode, da systemet er lavet så dynamisk som muligt. Systemet baserer nemlig alt indhold i programmet fra databasen, pånær de statiske elementer som textfields og almindelige buttons. Man kan forestille sig, at systemet ville være svært at benytte for en biograf med over 3000 sæder, da sæderne i salene vil blive utroligt små og svære at markere. Som biografen er opbygget nu kan salene ikke være større end 25 rækker, medmindre man navngiver dem efter noget andet end alfabetet. Vores system er udviklet til mindre biografer og håndterer fint sale på op til 1000 sæder - dog skal man være god med museføringen, når vi har med så mange sæder at gøre, da størrelsen på sæderne skalerer til en statisk scene. 
 
 \subsection{Fejlmeddelelser}
-Programmet viser exceptions ved hjælp af metoden catchPopUp, som gør brug af vores dialog boks newPopUp der tager en string som skal vises i dialogvinduet. Metoden til at vise fejlmeddelelser tager en exception som parameter og denne exception fremvises i dialogen. Systemets catchPopUp vises altid teksten “Der er opstået en fejl” efterfulgt af den pågældende exception. newPopUp-metoden derimod bruges direkte, når beskeder skal printes til brugeren. Dette indebærer beskeder som “Bestllingen er gennemført”, “Reservationen kan ikke udføres. Felterne navn og telefonnummer skal være udfyldt. Desuden skal du vælge sæder”, “Reservationen er rettet!” m.fl. Når en reservation opdateres eller indsættes returnerer metoden til dette en Boolean. Hvis den returnerer false bliver en dialog vist med enten \emph{“Der er sket en fejl. Prøv igen.”, “Der er sket en fejl! Reservationen kunne ikke rettes. Luk vinduet og prøv igen.”}. 
+Programmet viser exceptions ved hjælp af metoden catchPopUp, som gør brug af vores dialog boks newPopUp der tager en string som skal vises i dialogvinduet. Metoden til at vise fejlmeddelelser tager en exception som parameter og denne exception fremvises i dialogen. Systemets catchPopUp vises altid teksten “Der er opstået en fejl” efterfulgt af den pågældende exception. newPopUp-metoden derimod bruges direkte, når beskeder skal printes til brugeren. Dette indebærer beskeder som “Bestllingen er gennemført”, “Reservationen kan ikke udføres. Felterne navn og telefonnummer skal være udfyldt. Desuden skal du vælge sæder”, “Reservationen er rettet!” m.fl. Når en reservation opdateres eller indsættes returnerer metoden til dette en Boolean. Hvis den returnerer false bliver en dialog vist med enten \emph{“Der er sket en fejl. Prøv igen.”, “Der er sket en fejl! Reservationen kunne ikke rettes. Luk vinduet og prøv igen.”}. En enkel fejl i vores program er at når man har en reservation og ønsker at rette den. Her er det muligt at klikke alle sine reserverede sæder væk, således at der ingen sæder er valgte, og derefter tryk \emph{Ret reservation}. På den måde kan man faktisk oprette en tom reservation. 
 
 \chapter{Afprøvning}
 
@@ -280,7 +280,7 @@ Vi har valgt at lave vores testing af programmets JavaFx-baserede brugergrænsef
 Brugeren havde ingen problemer med at reservere en forestilling, og det tog heler lang tid før brugeren havde fundet ud af at rette eller slette i reservationen. Vores bruger prøvede at indtaste bogstaver istedet for sit telefonnummer, men vores system reagerede som forventet på fejlen og et popup-vindue med en fejlmeddelelse dukkede frem. Den eneste uoverenstemmelse med hvad vi havde forventet, var at brugeren ikke opdagede at man kunne trække musen hen over sæderne for at markere flere sæder.  
 
 \section{Unit test}
-Vores klasse \emph{DBConnectTest} er en testklasse og indeholdende derfor udelukkende tests. Den primære funktion for for disse test er at teste om vores programtekst snakker rigtigt sammen med databasen. vi har oprettet en testdatabase, som indeholder de samme tabeller som vores oprindelige database. Testdatabasens tabeller er dog tomme, og bruges kun til test. 
+Vores klasse \emph{DBConnectTest} er en testklasse og indeholdende derfor udelukkende tests. Den primære funktion for for disse test er at teste om vores programtekst snakker rigtigt sammen med databasen. vi har oprettet en testdatabase, som indeholder de samme tabeller som vores oprindelige database. Testdatabasens tabeller er dog tomme, og bruges kun til test[\cite{video}]. 
 Fordi vi primært tester koden i relation til databasen er det ikke rene unit test vi udfører. Faktisk er det det man kalder integration tests. Integration test er tests der bruger en database, et netwærk eller et andet eksternt system som fx en mailserver. Typisk for en integration test er også at den udfører I/O. I vores tilfælde tager vores tests input fra en database og udskriver et grafisk output til skærmen. \linebreak
 
 Testen \emph{testGetMovies()} tester om film og ide passer sammen. Dette gøres ved at vi giver testen et forventet output, som er bestemte id's tilknyttet bestemte film. Når testen kører, testes derfor om det forventede output passer overens med det faktiske uddata. 
@@ -320,7 +320,7 @@ De forskellige metoder i systemet er blevet afprøvet i muligt omfang og metoder
 Vores system gør brug af en- og to-dimensionelle arrays, når vores sæder skal reserveres og rettes. Systemet gør brug af flere klasser fra Javas klassebibliotek heriblandt collections. Vi gør brug af klassehierakier i vores test af systemet, og vi har organiseret klasserne så hensigtsmæssigt og effektivt som muligt. Systemet gør brug af programløkker, men sortering sker i databaseforespørgslerne. Databasen er struktureret med gode relationer, som skaber en god rød tråd mellem tabellerne. 
 
 \section{Gruppen}
-Arbejdet med projektet er gået meget godt. Vi startede med at diskutere hvordan programmet skulle opbygges rent grafisk og hvordan det skulle repræsenteres i tabeller. Da vi fandt enighed om at fornuftigt design gik vi i gang med at udvikle det. Vi delte projektet op, således to personer stod for kodning af selve systemet og en person stod for at teste systemet og dets metoder. Vi har løbende set tilbage på arbejdsprocessen og vi har optimeret den oprindelige idé, hvis vi er kommet på mere effektive metoder eller designmæssige forbedringer.
+Arbejdet med projektet er gået meget godt. Vi startede med at diskutere hvordan programmet skulle opbygges rent grafisk og hvordan det skulle repræsenteres i tabeller. Da vi fandt enighed om at fornuftigt design gik vi i gang med at udvikle det. Vi delte projektet op, således to personer stod for kodning af selve systemet og en person stod for at teste systemet og dets metoder. Vi har løbende set tilbage på arbejdsprocessen og vi har optimeret den oprindelige idé, hvis vi er kommet på mere effektive metoder eller designmæssige forbedringer. Til at sætte databasen op har vi brugt phpMyAdmin [\cite{myAdmin}] og MySQL [\cite{javaF}], som muliggør grafisk opsætning af tabeller og visuel datamanipulation såsom at indsætte, redigere og slette rækker og tabeller.
 
 \chapter{Konklusion}
 Gennem Java har vi opbygget et simpelt program der bygger på \emph{Model View Controller}. Vores \emph{Model}, som er vores brugergrænseflade, er skabt primært i JavaFx, og der har designmæssigt være fokus på brugervenlighed. 
@@ -334,7 +334,7 @@ Systemet lever op til de stillede krav og kan nemt og effektivt udføre alle arb
 \item Mulighed for at oprette en bruger
 \end{itemize}
 
-Vi finder vores løsning tilfredstillende og kan ikke, udover overnævnte ændringer, tænke på implementationer eller bedre alternativer.
+Vi finder vores løsning tilfredstillende og kan ikke, udover overnævnte ændringer, tænke på implementationer eller bedre alternativer. Den eneste ting vi gerne ville have rettet hvis vi havde haft mere tid, var at fjerne muligheden for at lave et tom reservation. 
 
 \printbibliography
 
