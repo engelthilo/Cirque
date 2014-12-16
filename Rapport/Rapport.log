@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.11.26)  16 DEC 2014 11:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.11.26)  16 DEC 2014 14:27
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -521,13 +521,208 @@ runsystem(which pygmentize && touch Rapport.aex)...executed.
 runsystem(rm Rapport.aex)...executed.
 
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/natbib/natbib.sty
-Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip48
-\bibsep=\skip49
-LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count121
+(/usr/local/texlive/2014/texmf-dist/tex/latex/biblatex/biblatex.sty
+Package: biblatex 2013/11/25 v2.8a programmable bibliographies (PK/JW/AB)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/biblatex/biblatex2.sty
+Package: biblatex2 2013/11/25 v2.8a programmable bibliographies (biber) (PK/JW/
+AB)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count121
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
+\c@tabx@nest=\count122
+\c@listtotal=\count123
+\c@listcount=\count124
+\c@liststart=\count125
+\c@liststop=\count126
+\c@citecount=\count127
+\c@citetotal=\count128
+\c@multicitecount=\count129
+\c@multicitetotal=\count130
+\c@instcount=\count131
+\c@maxnames=\count132
+\c@minnames=\count133
+\c@maxitems=\count134
+\c@minitems=\count135
+\c@citecounter=\count136
+\c@savedcitecounter=\count137
+\c@uniquelist=\count138
+\c@uniquename=\count139
+\c@refsection=\count140
+\c@refsegment=\count141
+\c@maxextratitle=\count142
+\c@maxextratitleyear=\count143
+\c@maxextrayear=\count144
+\c@maxextraalpha=\count145
+\c@abbrvpenalty=\count146
+\c@highnamepenalty=\count147
+\c@lownamepenalty=\count148
+\c@maxparens=\count149
+\c@parenlevel=\count150
+\blx@tempcnta=\count151
+\blx@tempcntb=\count152
+\blx@tempcntc=\count153
+\blx@maxsection=\count154
+\blx@maxsegment@0=\count155
+\blx@notetype=\count156
+\blx@parenlevel@text=\count157
+\blx@parenlevel@foot=\count158
+\blx@sectionciteorder@0=\count159
+\labelnumberwidth=\skip48
+\labelalphawidth=\skip49
+\shorthandwidth=\skip50
+\biblabelsep=\skip51
+\bibitemsep=\skip52
+\bibnamesep=\skip53
+\bibinitsep=\skip54
+\bibparsep=\skip55
+\bibhang=\skip56
+\blx@bcfin=\read2
+\blx@bcfout=\write5
+\c@mincomprange=\count160
+\c@maxcomprange=\count161
+\c@mincompwidth=\count162
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/biblatex/blx-dm.def)
+Package biblatex Info: Trying to load biblatex style data model...
+Package biblatex Info: ... file 'authoryear.dbx' not found.
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count163
+\c@savedafterword=\count164
+\c@annotator=\count165
+\c@savedannotator=\count166
+\c@author=\count167
+\c@savedauthor=\count168
+\c@bookauthor=\count169
+\c@savedbookauthor=\count170
+\c@commentator=\count171
+\c@savedcommentator=\count172
+\c@editor=\count173
+\c@savededitor=\count174
+\c@editora=\count175
+\c@savededitora=\count176
+\c@editorb=\count177
+\c@savededitorb=\count178
+\c@editorc=\count179
+\c@savededitorc=\count180
+\c@foreword=\count181
+\c@savedforeword=\count182
+\c@holder=\count183
+\c@savedholder=\count184
+\c@introduction=\count185
+\c@savedintroduction=\count186
+\c@namea=\count187
+\c@savednamea=\count188
+\c@nameb=\count189
+\c@savednameb=\count190
+\c@namec=\count191
+\c@savednamec=\count192
+\c@shortauthor=\count193
+\c@savedshortauthor=\count194
+\c@shorteditor=\count195
+\c@savedshorteditor=\count196
+\c@translator=\count197
+\c@savedtranslator=\count198
+\c@labelname=\count199
+\c@savedlabelname=\count200
+\c@institution=\count201
+\c@savedinstitution=\count202
+\c@lista=\count203
+\c@savedlista=\count204
+\c@listb=\count205
+\c@savedlistb=\count206
+\c@listc=\count207
+\c@savedlistc=\count208
+\c@listd=\count209
+\c@savedlistd=\count210
+\c@liste=\count211
+\c@savedliste=\count212
+\c@listf=\count213
+\c@savedlistf=\count214
+\c@location=\count215
+\c@savedlocation=\count216
+\c@organization=\count217
+\c@savedorganization=\count218
+\c@origlocation=\count219
+\c@savedoriglocation=\count220
+\c@origpublisher=\count221
+\c@savedorigpublisher=\count222
+\c@publisher=\count223
+\c@savedpublisher=\count224
+\c@language=\count225
+\c@savedlanguage=\count226
+\c@pageref=\count227
+\c@savedpageref=\count228
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/biblatex/blx-compat.def
+File: blx-compat.def 2013/11/25 v2.8a biblatex compatibility (PK/JW/AB)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/biblatex/biblatex.def
+File: biblatex.def 
+\c@textcitecount=\count229
+\c@textcitetotal=\count230
+\c@textcitemaxnames=\count231
+\c@biburlnumpenalty=\count232
+\c@biburlucpenalty=\count233
+Normal \count register pool exhausted, switching to extended pool.
+\c@biburllcpenalty=\count277
+\c@smartand=\count278
+)
+Package biblatex Info: Trying to load bibliography style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.bbx' found.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/biblatex/bbx/authoryear.bbx
+File: authoryear.bbx 2013/11/25 v2.8a biblatex bibliography style (PK/JW/AB)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+File: standard.bbx 2013/11/25 v2.8a biblatex bibliography style (PK/JW/AB)
+\c@bbx:relatedcount=\count279
+\c@bbx:relatedtotal=\count280
+))
+Package biblatex Info: Trying to load citation style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.cbx' found.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/biblatex/cbx/authoryear.cbx
+File: authoryear.cbx 2013/11/25 v2.8a biblatex citation style (PK/JW/AB)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/biblatex/biblatex.cfg
+File: biblatex.cfg 
+)))
 (/usr/local/texlive/2014/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2014/03/04 1.5c listings language file
 )
@@ -541,9 +736,9 @@ Package ifvtex Info: VTeX not detected.
 (/usr/local/texlive/2014/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count122
-\Gm@cntv=\count123
-\c@Gm@tempcnt=\count124
+\Gm@cnth=\count281
+\Gm@cntv=\count282
+\c@Gm@tempcnt=\count283
 \Gm@bindingoffset=\dimen122
 \Gm@wd@mp=\dimen123
 \Gm@odd@mp=\dimen124
@@ -555,49 +750,54 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@dimlist=\toks24
 )
 (/usr/local/texlive/2014/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-\fancy@headwidth=\skip50
-\f@ncyO@elh=\skip51
-\f@ncyO@erh=\skip52
-\f@ncyO@olh=\skip53
-\f@ncyO@orh=\skip54
-\f@ncyO@elf=\skip55
-\f@ncyO@erf=\skip56
-\f@ncyO@olf=\skip57
-\f@ncyO@orf=\skip58
+\fancy@headwidth=\skip57
+\f@ncyO@elh=\skip58
+\f@ncyO@erh=\skip59
+\f@ncyO@olh=\skip60
+\f@ncyO@orh=\skip61
+\f@ncyO@elf=\skip62
+\f@ncyO@erf=\skip63
+\f@ncyO@olf=\skip64
+\f@ncyO@orf=\skip65
 )
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'danish'.
+Package biblatex Info: Trying to load language 'danish'...
+Package biblatex Info: ... file 'danish.lbx' found.
 
+(/usr/local/texlive/2014/texmf-dist/tex/latex/biblatex/lbx/danish.lbx
+File: danish.lbx 2013/11/25 v2.8a biblatex localization (PK/JW/AB)
+)
 (./Rapport.aux)
 \openout1 = `Rapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
 
 (/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count125
+\scratchcounter=\count284
 \scratchdimen=\dimen130
 \scratchbox=\box36
-\nofMPsegments=\count126
-\nofMParguments=\count127
+\nofMPsegments=\count285
+\nofMParguments=\count286
 \everyMPshowfont=\toks25
-\MPscratchCnt=\count128
+\MPscratchCnt=\count287
 \MPscratchDim=\dimen131
-\MPnumerator=\count129
-\makeMPintoPDFobject=\count130
+\MPnumerator=\count288
+\makeMPintoPDFobject=\count289
 \everyMPtoPDFconversion=\toks26
 ) (/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -607,12 +807,6 @@ Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
 
 (/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
 Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
-))
-(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
-
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
 ))
 Package grfext Info: Graphics extension search list:
 (grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
@@ -624,11 +818,27 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box37
-\c@lstlisting=\count131
+\c@lstlisting=\count290
 runsystem(pygmentize -S default -f latex > Rapport.pyg)...executed.
 
 
 (./Rapport.pyg)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+\openout5 = `Rapport.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+
+
+Package biblatex Warning: File 'Rapport.bbl' is wrong format version - expected
+ 2.3.
+
+Package biblatex Info: ... file 'Rapport.bbl' found.
+(./Rapport.bbl)
+Package biblatex Info: Reference section=0 on input line 52.
+Package biblatex Info: Reference segment=0 on input line 52.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -666,36 +876,36 @@ runsystem(pygmentize -S default -f latex > Rapport.pyg)...executed.
 <frontpage.pdf, id=1, 578.64178pt x 799.788pt>
 File: frontpage.pdf Graphic file (type pdf)
  <use frontpage.pdf>
-Package pdftex.def Info: frontpage.pdf used on input line 49.
+Package pdftex.def Info: frontpage.pdf used on input line 54.
 (pdftex.def)             Requested size: 578.64037pt x 799.78604pt.
 File: frontpage.pdf Graphic file (type pdf)
 
 <use frontpage.pdf>
-Package pdftex.def Info: frontpage.pdf used on input line 49.
+Package pdftex.def Info: frontpage.pdf used on input line 54.
 (pdftex.def)             Requested size: 578.64037pt x 799.78604pt.
  <frontpage.pdf, id=4, page=1, 578.64178pt x 799.788pt>
 File: frontpage.pdf Graphic file (type pdf)
 
 <use frontpage.pdf, page 1>
-Package pdftex.def Info: frontpage.pdf, page1 used on input line 49.
+Package pdftex.def Info: frontpage.pdf, page1 used on input line 54.
 (pdftex.def)             Requested size: 578.64037pt x 799.78604pt.
 File: frontpage.pdf Graphic file (type pdf)
  <use frontpage.pdf, page 1>
-Package pdftex.def Info: frontpage.pdf, page1 used on input line 49.
+Package pdftex.def Info: frontpage.pdf, page1 used on input line 54.
 (pdftex.def)             Requested size: 575.71785pt x 795.74658pt.
 File: frontpage.pdf Graphic file (type pdf)
 
 <use frontpage.pdf, page 1>
-Package pdftex.def Info: frontpage.pdf, page1 used on input line 49.
+Package pdftex.def Info: frontpage.pdf, page1 used on input line 54.
 (pdftex.def)             Requested size: 575.71785pt x 795.74658pt.
 File: frontpage.pdf Graphic file (type pdf)
  <use frontpage.pdf, page 1>
-Package pdftex.def Info: frontpage.pdf, page1 used on input line 49.
+Package pdftex.def Info: frontpage.pdf, page1 used on input line 54.
 (pdftex.def)             Requested size: 575.71785pt x 795.74658pt.
 File: frontpage.pdf Graphic file (type pdf)
 
 <use frontpage.pdf, page 1>
-Package pdftex.def Info: frontpage.pdf, page1 used on input line 49.
+Package pdftex.def Info: frontpage.pdf, page1 used on input line 54.
 (pdftex.def)             Requested size: 575.71785pt x 795.74658pt.
  [1
 
@@ -703,54 +913,54 @@ Package pdftex.def Info: frontpage.pdf, page1 used on input line 49.
 <forside.pdf, id=29, 597.432pt x 845.07718pt>
 File: forside.pdf Graphic file (type pdf)
  <use forside.pdf>
-Package pdftex.def Info: forside.pdf used on input line 53.
+Package pdftex.def Info: forside.pdf used on input line 58.
 (pdftex.def)             Requested size: 597.43054pt x 845.07512pt.
 File: forside.pdf Graphic file (type pdf)
 
 <use forside.pdf>
-Package pdftex.def Info: forside.pdf used on input line 53.
+Package pdftex.def Info: forside.pdf used on input line 58.
 (pdftex.def)             Requested size: 597.43054pt x 845.07512pt.
  <forside.pdf, id=32, page=1, 597.432pt x 845.07718pt>
 File: forside.pdf Graphic file (type pdf)
 
 <use forside.pdf, page 1>
-Package pdftex.def Info: forside.pdf, page1 used on input line 53.
+Package pdftex.def Info: forside.pdf, page1 used on input line 58.
 (pdftex.def)             Requested size: 400.0pt x 565.82483pt.
 File: forside.pdf Graphic file (type pdf)
  <use forside.pdf, page 1>
-Package pdftex.def Info: forside.pdf, page1 used on input line 53.
+Package pdftex.def Info: forside.pdf, page1 used on input line 58.
 (pdftex.def)             Requested size: 840.5925pt x 1189.03162pt.
 File: forside.pdf Graphic file (type pdf)
  <use forside.pdf, page 1>
-Package pdftex.def Info: forside.pdf, page1 used on input line 53.
+Package pdftex.def Info: forside.pdf, page1 used on input line 58.
 (pdftex.def)             Requested size: 840.5925pt x 1189.03162pt.
 File: forside.pdf Graphic file (type pdf)
 
 <use forside.pdf, page 1>
-Package pdftex.def Info: forside.pdf, page1 used on input line 53.
+Package pdftex.def Info: forside.pdf, page1 used on input line 58.
 (pdftex.def)             Requested size: 840.5925pt x 1189.03162pt.
 File: forside.pdf Graphic file (type pdf)
  <use forside.pdf, page 1>
-Package pdftex.def Info: forside.pdf, page1 used on input line 53.
+Package pdftex.def Info: forside.pdf, page1 used on input line 58.
 (pdftex.def)             Requested size: 840.5925pt x 1189.03162pt.
  [1 <./forside.pdf>]
 [2{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 (./Rapport.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 3.
+(Font)              <7> on input line 7.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 3.
+(Font)              <5> on input line 7.
+)
+\tf@toc=\write6
+\openout6 = `Rapport.toc'.
+
  [3
 
-])
-\tf@toc=\write5
-\openout5 = `Rapport.toc'.
-
- [4]
+]
 Kapitel 1.
-[5
+[4
 
-] [6]
+] [5]
 Kapitel 2.
 \openout3 = `Rapport.pyg'.
 
@@ -765,61 +975,61 @@ runsystem(rm Rapport.out.pyg)...executed.
 
 runsystem(rm Rapport.pyg)...executed.
 
- [7
+ [6
 
-] [8]
+] [7]
 Kapitel 3.
 
-Underfull \hbox (badness 10000) in paragraph at lines 127--128
+Underfull \hbox (badness 10000) in paragraph at lines 132--133
 
  []
 
-<1.png, id=76, 684.5575pt x 519.9425pt>
+<1.png, id=73, 684.5575pt x 519.9425pt>
 File: 1.png Graphic file (type png)
  <use 1.png>
-Package pdftex.def Info: 1.png used on input line 132.
+Package pdftex.def Info: 1.png used on input line 137.
 (pdftex.def)             Requested size: 200.0pt x 151.90604pt.
 
-<2.png, id=78, 684.5575pt x 519.9425pt>
+<2.png, id=75, 684.5575pt x 519.9425pt>
 File: 2.png Graphic file (type png)
  <use 2.png>
-Package pdftex.def Info: 2.png used on input line 133.
+Package pdftex.def Info: 2.png used on input line 138.
 (pdftex.def)             Requested size: 200.0pt x 151.90604pt.
 
-<3.png, id=79, 684.5575pt x 519.9425pt>
+<3.png, id=76, 684.5575pt x 519.9425pt>
 File: 3.png Graphic file (type png)
  <use 3.png>
-Package pdftex.def Info: 3.png used on input line 145.
+Package pdftex.def Info: 3.png used on input line 150.
 (pdftex.def)             Requested size: 250.0pt x 189.88454pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[9
+[8
 
- <./1.png> <./2.png>] [10 <./3.png>] <4.png, id=89, 684.5575pt x 519.9425pt>
+ <./1.png> <./2.png>] [9 <./3.png>] <4.png, id=86, 684.5575pt x 519.9425pt>
 File: 4.png Graphic file (type png)
 
 <use 4.png>
-Package pdftex.def Info: 4.png used on input line 156.
+Package pdftex.def Info: 4.png used on input line 161.
 (pdftex.def)             Requested size: 250.0pt x 189.88454pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--162
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
 
  []
 
-<5.png, id=90, 724.7075pt x 519.9425pt>
+<5.png, id=87, 724.7075pt x 519.9425pt>
 File: 5.png Graphic file (type png)
  <use 5.png>
-Package pdftex.def Info: 5.png used on input line 165.
+Package pdftex.def Info: 5.png used on input line 170.
 (pdftex.def)             Requested size: 250.0pt x 179.35655pt.
 
-Overfull \hbox (1.3666pt too wide) in paragraph at lines 169--170
+Overfull \hbox (1.3666pt too wide) in paragraph at lines 174--175
 []\OT1/cmr/m/n/10 De op-ta-ge-de s^^Z-der er r^^\de, de le-di-ge er gr^^\nne og
  de s^^Z-der som er til-knyt-tet til den p^^Wag^^Zldende
  []
 
-[11
+[10
 
  <./4.png> <./5.png>]
 Kapitel 4.
@@ -835,19 +1045,19 @@ runsystem(rm Rapport.pyg)...executed.
 
 
 
-./Rapport.tex:193: LaTeX Error: There's no line here to end.
+./Rapport.tex:198: LaTeX Error: There's no line here to end.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.193 
+l.198 
       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[12
+[11
 
 ]
 \openout3 = `Rapport.pyg'.
@@ -856,7 +1066,7 @@ runsystem(pygmentize -l java -f latex -F tokenmerge             -P "verboptions
 = " -o Rapport.out.pyg Rapport.pyg)...executed.
 
  (./Rapport.out.pyg
-Underfull \hbox (badness 10000) in paragraph at lines 207--1
+Underfull \hbox (badness 10000) in paragraph at lines 212--1
 
  []
 
@@ -868,14 +1078,14 @@ runsystem(rm Rapport.pyg)...executed.
 \openout3 = `Rapport.pyg'.
 
 
-./Rapport.tex:219: FancyVerb Error:
+./Rapport.tex:224: FancyVerb Error:
   Extraneous input `\\\end{}' between \end{minted} and line end
 .
 \FV@Error ... {FancyVerb Error:
 \space \space #1
 }
                                                   
-l.219 \end{minted}\\
+l.224 \end{minted}\\
                     
 This input will be discarded. Type <return> to continue.
 
@@ -883,7 +1093,7 @@ runsystem(pygmentize -l java -f latex -F tokenmerge             -P "verboptions
 = " -o Rapport.out.pyg Rapport.pyg)...executed.
 
 (./Rapport.out.pyg
-Underfull \hbox (badness 10000) in paragraph at lines 216--1
+Underfull \hbox (badness 10000) in paragraph at lines 221--1
 
  []
 
@@ -892,21 +1102,21 @@ runsystem(rm Rapport.out.pyg)...executed.
 
 runsystem(rm Rapport.pyg)...executed.
 
- [13]
-Underfull \hbox (badness 10000) in paragraph at lines 224--225
+ [12]
+Underfull \hbox (badness 10000) in paragraph at lines 229--230
 
  []
 
 \openout3 = `Rapport.pyg'.
 
-./Rapport.tex:229: FancyVerb Error:
+./Rapport.tex:234: FancyVerb Error:
   Extraneous input `\\\end{}' between \end{minted} and line end
 .
 \FV@Error ... {FancyVerb Error:
 \space \space #1
 }
                                                   
-l.229 \end{minted}\\
+l.234 \end{minted}\\
                     
 This input will be discarded. Type <return> to continue.
 
@@ -918,14 +1128,14 @@ runsystem(rm Rapport.out.pyg)...executed.
 
 runsystem(rm Rapport.pyg)...executed.
 
- [14] [15]
+ [13] [14]
 Kapitel 5.
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--262
+Underfull \hbox (badness 10000) in paragraph at lines 265--267
 
  []
 
-[16
+[15
 
 ]
 \openout3 = `Rapport.pyg'.
@@ -934,7 +1144,7 @@ runsystem(pygmentize -l java -f latex -F tokenmerge             -P "verboptions
 = " -o Rapport.out.pyg Rapport.pyg)...executed.
 
  (./Rapport.out.pyg
-Underfull \hbox (badness 10000) in paragraph at lines 269--1
+Underfull \hbox (badness 10000) in paragraph at lines 274--1
 
  []
 
@@ -943,49 +1153,53 @@ runsystem(rm Rapport.out.pyg)...executed.
 
 runsystem(rm Rapport.pyg)...executed.
 
- [17]
+ [16]
 Kapitel 6.
-(./Rapport.bbl [18
+[17
 
-]) [19
+] [18
 
 ] (./Rapport.lof)
-\tf@lof=\write6
-\openout6 = `Rapport.lof'.
+\tf@lof=\write7
+\openout7 = `Rapport.lof'.
 
- [20
+ [19
 
 ]
 Bilag A.
 runsystem(pygmentize -l java -f latex -F tokenmerge             -P "verboptions
 = " -o Rapport.out.pyg ../src/test/DBConnectTest.java)...executed.
 
-(./Rapport.out.pyg [21
+(./Rapport.out.pyg [20
 
-] [22] [23] [24])
+] [21] [22] [23])
 runsystem(rm Rapport.out.pyg)...executed.
 
- [25] (./Rapport.aux) ) 
+ [24] (./Rapport.aux)
+Package logreq Info: Writing requests to 'Rapport.run.xml'.
+\openout1 = `Rapport.run.xml'.
+
+ ) 
 Here is how much of TeX's memory you used:
- 8213 strings out of 493117
- 116506 string characters out of 6135432
- 225873 words of memory out of 5000000
- 11483 multiletter control sequences out of 15000+600000
- 7405 words of font info for 27 fonts, out of 8000000 for 9000
+ 12638 strings out of 493117
+ 198398 string characters out of 6135432
+ 618780 words of memory out of 5000000
+ 15863 multiletter control sequences out of 15000+600000
+ 7706 words of font info for 28 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,18n,72p,1156b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmitt10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsl10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmti10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmtt10.pfb>
-Output written on Rapport.pdf (26 pages, 16883799 bytes).
+ 40i,18n,72p,1156b,1344s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
+usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></u
+sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></us
+r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on Rapport.pdf (25 pages, 16891669 bytes).
 PDF statistics:
- 166 PDF objects out of 1000 (max. 8388607)
- 92 compressed objects within 1 object stream
+ 167 PDF objects out of 1000 (max. 8388607)
+ 93 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

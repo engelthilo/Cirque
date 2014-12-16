@@ -12,11 +12,16 @@
 \usepackage{listings}
 \usepackage{minted}
 \usepackage{color}
-\usepackage{natbib}
 \usepackage{babel}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\usepackage[
+    backend=biber,
+    style=authoryear
+]{biblatex}
+\bibliography{litterature}
 
 \lstset{frame=tb,
   language=Java,
@@ -287,12 +292,9 @@ Både \emph{testInsertReservation} og \emph{testGetReservation} har en \emph{@Af
 Ud fra brugerafprøvningen kom vi frem til den konklusion at vores brugergrænseflade fungere som forventet. Vores indtryk fra brugeren er at programmets design er rimelig nemt at overskue, og simpelt at bruge. Gennem vore unit test har vi tjekket at databasen fungerer optimalt og at reservationer bliver lavet og gemt rigtigt. Konklusionen ud fra vores forskellige tests er derfor at vores program fungere som vi har tænkt det. 
 
 \chapter{Konklusion}
-Gennem Java har vi opbygget et simpelt program der bygger på \emph{Model View Controller}. Vores \emph{Model}, som er vores brugergrænseflade, er skabt primært i JavaFx, og der har designmæssigt \cite{oracle} være fokus på \cite{Java} brugervenlighed. 
+Gennem Java har vi opbygget et simpelt program der bygger på \emph{Model View Controller}. Vores \emph{Model}, som er vores brugergrænseflade, er skabt primært i JavaFx, og der har designmæssigt \cite{oracle} være fokus på \cite{Java} brugervenlighed\cite{video}. 
 
-
-\bibliographystyle{plain}
-\bibliography{litterature.bib}
-
+\printbibliography
 
 \listoffigures
 

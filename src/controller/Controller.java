@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.DBConnect;
 import model.buildHolder;
+
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -94,16 +96,15 @@ public class Controller {
 
     private String dragColorCheck;
 
-    public Controller() {
+    public Controller() throws SQLException {
         db = new DBConnect();
     }
 
 
     @FXML
-    private void initialize() {
+    private void initialize() throws Exception {
         requestPhoneNumber();
         getMovies();
-
     }
 
     /**
@@ -142,7 +143,7 @@ public class Controller {
      * Output: Buttons with movie names
      */
     @FXML
-    protected void getMovies() {
+    protected void getMovies() throws SQLException {
         LinkedHashMap<Integer, String> curMovies = new LinkedHashMap(db.getMovies());
 
         //For loop that finds and creates a button for every movie in the database [[MARK]]
@@ -154,7 +155,12 @@ public class Controller {
                 @Override
                 public void handle(MouseEvent event) { //event when clicked on the created button
                     scheduleHeader.setText("Viser forestillinger for filmen: " + movie.getValue());
-                    getMovieSchedule(movie.getKey()); //henter data om shows fra databasen
+
+                    try {
+                        getMovieSchedule(movie.getKey()); //henter data om shows fra databasen
+                    } catch (SQLException ex) {
+                        newPopUp("Der skete en fejl. Prøv igen!");
+                    }
                 }
             });
         }
@@ -166,7 +172,7 @@ public class Controller {
      * Output:
      */
     @FXML
-    private void getMovieSchedule(int movieId) {
+    private void getMovieSchedule(int movieId) throws SQLException {
         upper_schedule.getChildren().clear();
         lower_schedule.getChildren().clear();
 
@@ -216,7 +222,11 @@ public class Controller {
                         button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() { //laver event når man klikker på musen
                             @Override
                             public void handle(MouseEvent event) {
-                                buildReservationScene(showId);
+                                try {
+                                    buildReservationScene(showId);
+                                } catch (SQLException ex) {
+                                    newPopUp("Der skete en fejl. Prøv igen!");
+                                }
                             } //ved eventet bliver den pågældende resevations side bygget - alt efter hvilken film
                         });
                         vb.getChildren().add(button); //vb = vbox - her sættes "børn" af boksen ind på knapper - børn = de film der hører til boksen
@@ -243,7 +253,11 @@ public class Controller {
                         button.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
-                                buildReservationScene(showId);
+                                try {
+                                    buildReservationScene(showId);
+                                } catch (SQLException ex) {
+                                    newPopUp("Der skete en fejl. Prøv igen!");
+                                }
                             }
                         });
                         vb.getChildren().add(button);
@@ -257,7 +271,7 @@ public class Controller {
     }
 
     @FXML
-    private void buildReservationScene(int showId) { //denne metode bygger reservationScene for den pågældende film
+    private void buildReservationScene(int showId) throws SQLException { //denne metode bygger reservationScene for den pågældende film
         overfillPane.toBack();
         seatsInOrder = new ArrayList<String>(); // initalizing the arraylist that will contain the seat(s) that has been clicked
         intChosenSeats = 0;
@@ -388,15 +402,16 @@ public class Controller {
             String name = customerName.getText(); // gets the name of the customer from the textfield
             String phone = customerPhone.getText(); // gets the phonenumber of the customer from the textfield
 
-
             // if a reservation is completely inserted it will return true
-            if(db.insertReservation(seatsInOrder, bh.getShowId(), customerName.getText(), customerPhone.getText())) {
+            try {
+                db.insertReservation(seatsInOrder, bh.getShowId(), customerName.getText(), customerPhone.getText());
+
                 newPopUp("Bestillingen er gennemført");
                 seatsInOrder.clear(); // removes the chosen seats from the array
                 customerName.clear(); // clears the textfield
                 customerPhone.clear(); // clears the textfield
                 buildReservationScene(bh.getShowId()); // builds an updated scene so that the new reservated seats are now available to pick
-            } else {
+            } catch (SQLException ex) {
                 newPopUp("Der er sket en fejl!\nPrøv igen");
             }
         }
@@ -421,14 +436,14 @@ public class Controller {
 
     //Method to call getReservations() when pressed enter in phone number textfield
     @FXML
-    public void editCheckEnter(KeyEvent event){
+    public void editCheckEnter(KeyEvent event) throws SQLException {
         if (event.getCode() == KeyCode.ENTER) {
             getReservations();
         }
     }
 
     @FXML
-    private void getReservations() {
+    private void getReservations() throws SQLException {
         reservationList.getItems().clear();
         editReservationTopPane.setOpacity(1);
 
@@ -440,7 +455,11 @@ public class Controller {
                 @Override
                 public void handle(MouseEvent event) {
                     if (event.getClickCount() == 2) {
-                        buildEditReservationView(reservation.getKey());
+                        try {
+                            buildEditReservationView(reservation.getKey());
+                        } catch (SQLException ex) {
+                            newPopUp("Der skete en fejl. Prøv igen!");
+                        }
                     }
                 }
             });
@@ -454,7 +473,7 @@ public class Controller {
 
     }
 
-    private void buildEditReservationView(int reservationID){
+    private void buildEditReservationView(int reservationID) throws SQLException {
         editReservationView = new Stage();
         editReservationView.initStyle(StageStyle.UTILITY);
         editReservationView.setResizable(false);
@@ -670,23 +689,27 @@ public class Controller {
     }
 
     private void updateReservation(int reservationID) {
-        if(db.updateReservation(newSeats, reservationID)) {
+        try {
+            db.updateReservation(newSeats, reservationID);
+
             newPopUp("Reservationen er rettet!");
             editReservationView.close();
             getReservations();
             overfillPane.toFront();
-        } else {
+        } catch (SQLException ex) {
             newPopUp("Der er sket en fejl!\nReservationen kunne ikke rettes. \nLuk vinduet og prøv igen.");
         }
     }
 
     private void deleteReservation(int reservationID) {
-        if(db.deleteReservation(reservationID)) {
+        try {
+            db.deleteReservation(reservationID);
+
             newPopUp("Reservationen er slettet!");
             editReservationView.close();
             getReservations();
             overfillPane.toFront();
-        } else {
+        } catch (SQLException ex) {
             newPopUp("Der er sket en fejl!\nReservationen kunne ikke slettes. \nLuk vinduet og prøv igen.");
         }
     }
